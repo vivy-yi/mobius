@@ -1,5 +1,90 @@
 // nav.js
-// 通用导航栏注入、点击与移动端菜单切换逻辑 + 滑动隐藏/显示行为 + PJAX 局部导航
+// 通用导航栏注入、点击与移动端菜单切换逻辑 + 滑动隐藏/显示行为 + PJAX 局部导航 + i18n 国际化支持
+
+// i18n System
+let currentLanguage = localStorage.getItem('preferred-language') || 'zh';
+let translations = {};
+
+// Load language files
+async function loadTranslations(lang) {
+    if (translations[lang]) return translations[lang];
+
+    try {
+        const response = await fetch(`i18n/${lang}.json`);
+        if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
+        translations[lang] = await response.json();
+        return translations[lang];
+    } catch (error) {
+        console.warn(`Could not load language file for ${lang}:`, error);
+        // Fallback to Chinese if available
+        if (lang !== 'zh' && translations['zh']) {
+            return translations['zh'];
+        }
+        return {};
+    }
+}
+
+// Get translation text
+function t(key, fallback = '') {
+    const keys = key.split('.');
+    let value = translations[currentLanguage];
+
+    for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+        } else {
+            return fallback;
+        }
+    }
+
+    return value || fallback;
+}
+
+// Update all elements with data-lang attributes
+function updateLanguage() {
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        const translation = t(key, element.textContent);
+        element.textContent = translation;
+    });
+
+    // Update page title
+    const pageKey = getPageTranslationKey();
+    const titleKey = `pages.${pageKey}.title`;
+    const titleTranslation = t(titleKey);
+    if (titleTranslation) {
+        document.title = titleTranslation;
+    }
+
+    // Update language switcher buttons
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === currentLanguage);
+    });
+}
+
+// Get current page translation key based on URL
+function getPageTranslationKey() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop().replace('.html', '') || 'index';
+    return page;
+}
+
+// Switch language
+async function switchLanguage(lang) {
+    if (lang === currentLanguage) return;
+
+    currentLanguage = lang;
+    localStorage.setItem('preferred-language', lang);
+
+    await loadTranslations(lang);
+    updateLanguage();
+}
+
+// Initialize i18n system
+async function initI18n() {
+    await loadTranslations(currentLanguage);
+    updateLanguage();
+}
 
 // canonical nav HTML (single source). Keep this small and stable — updates here will reflect across pages.
 const NAV_TEMPLATE = `
@@ -31,6 +116,7 @@ const NAV_TEMPLATE = `
     </ul>
     <div class="language-switcher">
         <button data-lang-btn="zh" class="active">中文</button>
+        <button data-lang-btn="ja">日本語</button>
         <button data-lang-btn="en">English</button>
     </div>
 </nav>
@@ -62,6 +148,9 @@ function injectNav() {
 
     // attach behavior
     setupNavBehavior();
+
+    // Initialize i18n system
+    initI18n();
 }
 
 // Utility: check if a link is same-origin and internal (not external or mailto)
@@ -166,6 +255,9 @@ async function pjaxLoad(url, addToHistory = true) {
         // Update active link classes
         updateActiveLink();
 
+        // Update language after page content is loaded
+        updateLanguage();
+
         // Optionally update history
         if (addToHistory) {
             history.pushState({ pjax: true }, '', url);
@@ -252,15 +344,13 @@ function setupNavBehavior() {
     // Language switcher - use event delegation to avoid duplicate listeners
     const languageSwitcher = document.querySelector('.language-switcher');
     if (languageSwitcher) {
-        languageSwitcher.addEventListener('click', function (e) {
+        languageSwitcher.addEventListener('click', async function (e) {
             if (!e.target.hasAttribute('data-lang-btn')) return;
             const newButton = e.target;
-            document.querySelectorAll('.language-switcher button[data-lang-btn]').forEach(btn => btn.classList.remove('active'));
-            newButton.classList.add('active');
-            // trigger optional global switchLanguage if present
-            if (typeof switchLanguage === 'function') {
-                switchLanguage(newButton.getAttribute('data-lang-btn'));
-            }
+            const selectedLang = newButton.getAttribute('data-lang-btn');
+
+            // Use the new switchLanguage function
+            await switchLanguage(selectedLang);
         });
     }
 
