@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务页面 - 日本商务通</title>
+    <meta name="description" content="日本商务通服务页面">
+    <link rel="stylesheet" href="styles/navigation.css">
+    <link rel="stylesheet" href="styles/content.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- JSON内容将被动态注入到这里 -->
+        <div class="loading-placeholder" style="padding: 120px 20px 40px; text-align: center;">
+            <h2>正在加载服务内容...</h2>
+            <p>请稍候，服务内容正在从JSON数据文件中加载。</p>
+        </div>
+    </main>
+
+    <script src="nav.js"></script>
+    <script>
+        // 页面加载完成后移除加载占位符
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const placeholder = document.querySelector('.loading-placeholder');
+                const main = document.querySelector('main');
+
+                // 如果已经有JSON内容，移除占位符
+                if (main.querySelector('.hero-section') && placeholder) {
+                    placeholder.remove();
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
