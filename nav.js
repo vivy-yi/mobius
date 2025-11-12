@@ -116,6 +116,130 @@ async function switchLanguage(lang) {
     }
 }
 
+// Add Content Security Policy via meta tag
+function addCSPMeta() {
+    // Check if CSP meta tag already exists
+    if (document.querySelector('meta[http-equiv="Content-Security-Policy"]')) {
+        return;
+    }
+
+    const cspMeta = document.createElement('meta');
+    cspMeta.httpEquiv = 'Content-Security-Policy';
+    cspMeta.content = [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline'", // 'unsafe-inline' needed for navigation scripts
+        "style-src 'self' 'unsafe-inline'",   // 'unsafe-inline' needed for inline CSS
+        "img-src 'self' data: https:",
+        "font-src 'self' data:",
+        "connect-src 'self'",
+        "frame-src 'none'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'"
+    ].join('; ');
+
+    document.head.appendChild(cspMeta);
+}
+
+// Add other security headers via meta tags
+function addSecurityHeaders() {
+    // Prevent clickjacking
+    const frameOptionsMeta = document.createElement('meta');
+    frameOptionsMeta.httpEquiv = 'X-Frame-Options';
+    frameOptionsMeta.content = 'DENY';
+    document.head.appendChild(frameOptionsMeta);
+
+    // Prevent MIME type sniffing
+    const contentTypeMeta = document.createElement('meta');
+    contentTypeMeta.httpEquiv = 'X-Content-Type-Options';
+    contentTypeMeta.content = 'nosniff';
+    document.head.appendChild(contentTypeMeta);
+
+    // Enable XSS protection
+    const xssProtectionMeta = document.createElement('meta');
+    xssProtectionMeta.httpEquiv = 'X-XSS-Protection';
+    xssProtectionMeta.content = '1; mode=block';
+    document.head.appendChild(xssProtectionMeta);
+
+    // Strict transport security (only on HTTPS)
+    if (window.location.protocol === 'https:') {
+        const hstsMeta = document.createElement('meta');
+        hstsMeta.httpEquiv = 'Strict-Transport-Security';
+        hstsMeta.content = 'max-age=31536000; includeSubDomains';
+        document.head.appendChild(hstsMeta);
+    }
+}
+
+// Lazy loading for images
+function initLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+
+                    // Load the image
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+
+                    // Load srcset if available
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                        img.removeAttribute('data-srcset');
+                    }
+
+                    // Add fade-in effect
+                    img.style.opacity = '0';
+                    img.onload = function() {
+                        img.style.transition = 'opacity 0.3s ease-in-out';
+                        img.style.opacity = '1';
+                    };
+
+                    // Stop observing this image
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        });
+
+        // Observe all images with data-src attribute
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        return imageObserver;
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+        return null;
+    }
+}
+
+// Preload critical resources
+function preloadCriticalResources() {
+    const criticalResources = [
+        'i18n/zh.json',
+        'i18n/ja.json',
+        'i18n/en.json'
+    ];
+
+    criticalResources.forEach(resource => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = resource;
+        document.head.appendChild(link);
+    });
+}
+
 // Initialize i18n system
 async function initI18n() {
     await loadTranslations(currentLanguage);
@@ -185,104 +309,63 @@ function injectNav() {
     // Insert before placeholder and remove placeholder
     placeholder.parentNode.replaceChild(wrapper, placeholder);
 
-    // add minimal CSS for hide/show on scroll if not already present
-    if (!document.getElementById('nav-behavior-styles')) {
+    // Load external navigation CSS if not already present
+    function loadNavigationCSS() {
+        const cssId = 'navigation-styles';
+        if (document.getElementById(cssId)) return;
+
+        const link = document.createElement('link');
+        link.id = cssId;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'styles/navigation.css';
+
+        // Fallback if CSS file fails to load
+        link.onerror = function() {
+            console.warn('Navigation CSS failed to load, using fallback styles');
+            addFallbackStyles();
+        };
+
+        document.head.appendChild(link);
+    }
+
+    // Fallback styles for when CSS file fails to load
+    function addFallbackStyles() {
         const style = document.createElement('style');
-        style.id = 'nav-behavior-styles';
+        style.id = 'nav-fallback-styles';
         style.textContent = `
             header { transition: transform 0.25s ease, box-shadow 0.25s ease; will-change: transform; }
             header.nav-hidden { transform: translateY(-100%); }
-            .mobile-menu-toggle { cursor: pointer; }
-            .mobile-menu-toggle span { display:block; width:22px; height:3px; background:#fff; margin:4px 0; }
-            .nav-menu { display:flex; gap:16px; align-items:center; }
-            .nav-menu.active { /* used when mobile menu opened */ }
-
-            /* Dropdown menu styles */
+            .mobile-menu-toggle { cursor: pointer; display: none; flex-direction: column; gap: 4px; }
+            .mobile-menu-toggle span { display:block; width:22px; height:3px; background:#fff; margin:4px 0; border-radius: 2px; }
+            .nav-menu { display:flex; gap:16px; align-items:center; list-style: none; margin: 0; padding: 0; }
+            .nav-menu a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; }
+            .nav-menu a:hover { background: rgba(255,255,255,0.1); }
             .nav-dropdown { position: relative; }
-            .dropdown-toggle { text-decoration: none; color: white; padding: 8px 12px; display: flex; align-items: center; gap: 4px; }
-            .dropdown-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: var(--secondary, #2c5282);
-                min-width: 180px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-10px);
-                transition: all 0.3s ease;
-                z-index: 1001;
-                padding: 8px 0;
-                margin: 0;
-                list-style: none;
-            }
-            .nav-dropdown:hover .dropdown-menu {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-            }
-            .dropdown-menu li { margin: 0; }
-            .dropdown-menu a {
-                display: block;
-                padding: 12px 20px;
-                color: white;
-                text-decoration: none;
-                transition: background-color 0.2s ease;
-                font-size: 0.95em;
-            }
-            .dropdown-menu a:hover { background-color: var(--primary, #1e3a5f); }
-
-            /* Language selector styles */
-            .language-selector {
-                position: relative;
-                margin-left: 16px;
-            }
-            .language-select {
-                background: var(--secondary, #2c5282);
-                color: white;
-                border: 1px solid rgba(255,255,255,0.2);
-                border-radius: 6px;
-                padding: 8px 12px;
-                font-size: 14px;
-                cursor: pointer;
-                outline: none;
-                transition: all 0.2s ease;
-            }
-            .language-select:hover {
-                background: var(--primary, #1e3a5f);
-                border-color: rgba(255,255,255,0.4);
-            }
-            .language-select:focus {
-                border-color: var(--gold, #d69e2e);
-                box-shadow: 0 0 0 2px rgba(214, 158, 46, 0.2);
-            }
-            .language-select option {
-                background: var(--secondary, #2c5282);
-                color: white;
-            }
-
-            /* Screen reader support */
-            .sr-only {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border: 0;
-            }
+            .dropdown-menu { position: absolute; background: #2c5282; min-width: 180px; opacity: 0; visibility: hidden; }
+            .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
+            .language-select { background: #2c5282; color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px 12px; }
+            .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+            @media (max-width: 768px) { .mobile-menu-toggle { display: flex; } .nav-menu { position: fixed; flex-direction: column; transform: translateX(-100%); opacity: 0; } .nav-menu.active { transform: translateX(0); opacity: 1; } }
         `;
         document.head.appendChild(style);
     }
 
+    loadNavigationCSS();
+
     // attach behavior
     setupNavBehavior();
 
+    // Add security headers
+    addCSPMeta();
+    addSecurityHeaders();
+
     // Initialize i18n system
     initI18n();
+
+    // Initialize performance optimizations
+    preloadCriticalResources();
+    initLazyLoading();
 }
 
 // Utility: check if a link is same-origin and internal (not external or mailto)
@@ -576,31 +659,62 @@ function setupNavBehavior() {
     // Highlight active link now
     updateActiveLink();
 
-    // Scroll hide/show - use a single global handler with RAF throttling
+    // Scroll hide/show - use a single global handler with RAF throttling and memory management
     if (!window._navScrollHandler) {
         let lastScroll = window.scrollY || 0;
         let ticking = false;
+
         window._navScrollHandler = function () {
             const current = window.scrollY || 0;
             const header = document.querySelector('header');
-            if (!header) return;
-            if (current > lastScroll && current > 60) {
-                // scroll down -> hide
-                header.classList.add('nav-hidden');
-            } else {
-                // scroll up -> show
-                header.classList.remove('nav-hidden');
+
+            if (header) {
+                if (current > lastScroll && current > 60) {
+                    // scroll down -> hide
+                    header.classList.add('nav-hidden');
+                } else {
+                    // scroll up -> show
+                    header.classList.remove('nav-hidden');
+                }
             }
+
             lastScroll = current;
             ticking = false;
         };
-        
-        window.addEventListener('scroll', function () {
+
+        window._navScrollEvent = function () {
             if (!ticking) {
                 window.requestAnimationFrame(window._navScrollHandler);
                 ticking = true;
             }
-        });
+        };
+
+        // Use passive event listener for better performance
+        window.addEventListener('scroll', window._navScrollEvent, { passive: true });
+    }
+}
+
+// Global cleanup function for memory management
+function cleanupGlobalHandlers() {
+    // Clean up scroll event listener if it exists
+    if (window._navScrollEvent) {
+        window.removeEventListener('scroll', window._navScrollEvent);
+        window._navScrollEvent = null;
+    }
+    if (window._navScrollHandler) {
+        window._navScrollHandler = null;
+    }
+}
+
+// Performance monitoring
+function logPerformanceMetrics() {
+    // Log navigation performance metrics in development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('🔧 Performance Metrics:');
+        console.log('- Active DOM nodes:', document.querySelectorAll('*').length);
+        console.log('- Event listeners count:', (window.getEventListeners ? Object.keys(window.getEventListeners(window)).length : 'N/A'));
+        console.log('- Memory usage:', performance.memory ?
+            `${Math.round(performance.memory.usedJSHeapSize / 1024 / 1024)}MB` : 'N/A');
     }
 }
 
@@ -608,6 +722,11 @@ function setupNavBehavior() {
 window.addEventListener('popstate', function (e) {
     // When user navigates via back/forward, load the URL without pushing new history
     pjaxLoad(window.location.href, false);
+});
+
+// Log performance metrics on page load
+window.addEventListener('load', function() {
+    setTimeout(logPerformanceMetrics, 1000);
 });
 
 // Ensure nav is injected whether DOMContentLoaded has already fired or not
