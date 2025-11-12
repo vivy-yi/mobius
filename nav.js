@@ -56,10 +56,11 @@ function updateLanguage() {
         document.title = titleTranslation;
     }
 
-    // Update language switcher buttons
-    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === currentLanguage);
-    });
+    // Update language selector
+    const languageSelector = document.getElementById('language-select');
+    if (languageSelector) {
+        languageSelector.value = currentLanguage;
+    }
 }
 
 // Get current page translation key based on URL
@@ -105,19 +106,26 @@ const NAV_TEMPLATE = `
         <li><a href="ai-crm.html" data-lang="nav-ai-crm">🤖 AI CRM</a></li>
         <li><a href="knowledge.html" data-lang="nav-knowledge">知识库</a></li>
         <li><a href="professionals.html" data-lang="nav-professionals">专业人才</a></li>
-        <li><a href="lifestyle.html" data-lang="nav-lifestyle">生活帮忙</a></li>
         <li><a href="community.html" data-lang="nav-community">社群网络</a></li>
         <li><a href="education.html" data-lang="nav-education">留学教育</a></li>
-        <li><a href="tourism.html" data-lang="nav-tourism">旅游服务</a></li>
-        <li><a href="pet.html" data-lang="nav-pet">宠物帮帮忙</a></li>
-        <li><a href="labor.html" data-lang="nav-labor">劳务派遣</a></li>
+        <li class="nav-dropdown">
+            <a href="#" class="dropdown-toggle" data-lang="nav-other-services">其他服务 ▼</a>
+            <ul class="dropdown-menu">
+                <li><a href="lifestyle.html" data-lang="nav-lifestyle">生活帮忙</a></li>
+                <li><a href="labor.html" data-lang="nav-labor">劳务派遣</a></li>
+                <li><a href="pet.html" data-lang="nav-pet">宠物帮帮忙</a></li>
+                <li><a href="tourism.html" data-lang="nav-tourism">旅游服务</a></li>
+            </ul>
+        </li>
         <li><a href="index.html#stats" data-lang="nav-stats">成功案例</a></li>
         <li><a href="index.html#quick-consultation" data-lang="nav-contact">联系我们</a></li>
     </ul>
-    <div class="language-switcher">
-        <button data-lang-btn="zh" class="active">中文</button>
-        <button data-lang-btn="ja">日本語</button>
-        <button data-lang-btn="en">English</button>
+    <div class="language-selector">
+        <select id="language-select" class="language-select">
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="en">English</option>
+        </select>
     </div>
 </nav>
 `;
@@ -142,6 +150,71 @@ function injectNav() {
             .mobile-menu-toggle span { display:block; width:22px; height:3px; background:#fff; margin:4px 0; }
             .nav-menu { display:flex; gap:16px; align-items:center; }
             .nav-menu.active { /* used when mobile menu opened */ }
+
+            /* Dropdown menu styles */
+            .nav-dropdown { position: relative; }
+            .dropdown-toggle { text-decoration: none; color: white; padding: 8px 12px; display: flex; align-items: center; gap: 4px; }
+            .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: var(--secondary, #2c5282);
+                min-width: 180px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                z-index: 1001;
+                padding: 8px 0;
+                margin: 0;
+                list-style: none;
+            }
+            .nav-dropdown:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            .dropdown-menu li { margin: 0; }
+            .dropdown-menu a {
+                display: block;
+                padding: 12px 20px;
+                color: white;
+                text-decoration: none;
+                transition: background-color 0.2s ease;
+                font-size: 0.95em;
+            }
+            .dropdown-menu a:hover { background-color: var(--primary, #1e3a5f); }
+
+            /* Language selector styles */
+            .language-selector {
+                position: relative;
+                margin-left: 16px;
+            }
+            .language-select {
+                background: var(--secondary, #2c5282);
+                color: white;
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 6px;
+                padding: 8px 12px;
+                font-size: 14px;
+                cursor: pointer;
+                outline: none;
+                transition: all 0.2s ease;
+            }
+            .language-select:hover {
+                background: var(--primary, #1e3a5f);
+                border-color: rgba(255,255,255,0.4);
+            }
+            .language-select:focus {
+                border-color: var(--gold, #d69e2e);
+                box-shadow: 0 0 0 2px rgba(214, 158, 46, 0.2);
+            }
+            .language-select option {
+                background: var(--secondary, #2c5282);
+                color: white;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -302,11 +375,12 @@ function cleanupNavBehavior() {
             oldNavMenu.parentNode.replaceChild(newMenu, oldNavMenu);
         }
 
-        // Clone language switcher buttons to remove old listeners
-        document.querySelectorAll('.language-switcher button[data-lang-btn]').forEach(button => {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-        });
+        // Clone language selector to remove old listeners
+        const oldLanguageSelector = document.getElementById('language-select');
+        if (oldLanguageSelector) {
+            const newSelector = oldLanguageSelector.cloneNode(true);
+            oldLanguageSelector.parentNode.replaceChild(newSelector, oldLanguageSelector);
+        }
 
         // Clone nav links to remove old PJAX listeners
         document.querySelectorAll('.nav-menu a').forEach(a => {
@@ -341,15 +415,14 @@ function setupNavBehavior() {
         });
     }
 
-    // Language switcher - use event delegation to avoid duplicate listeners
-    const languageSwitcher = document.querySelector('.language-switcher');
-    if (languageSwitcher) {
-        languageSwitcher.addEventListener('click', async function (e) {
-            if (!e.target.hasAttribute('data-lang-btn')) return;
-            const newButton = e.target;
-            const selectedLang = newButton.getAttribute('data-lang-btn');
+    // Language selector - handle change events
+    const languageSelector = document.getElementById('language-select');
+    if (languageSelector) {
+        // Set initial value
+        languageSelector.value = currentLanguage;
 
-            // Use the new switchLanguage function
+        languageSelector.addEventListener('change', async function (e) {
+            const selectedLang = e.target.value;
             await switchLanguage(selectedLang);
         });
     }
