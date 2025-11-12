@@ -40,12 +40,27 @@ function t(key, fallback = '') {
     return value || fallback;
 }
 
+// Sanitize text content to prevent XSS
+function sanitizeText(text) {
+    if (typeof text !== 'string') return '';
+
+    // Remove potentially dangerous HTML tags and scripts
+    return text
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+        .replace(/<[^>]*>/g, '') // Remove all HTML tags
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+\s*=/gi, '') // Remove event handlers
+        .trim();
+}
+
 // Update all elements with data-lang attributes
 function updateLanguage() {
     document.querySelectorAll('[data-lang]').forEach(element => {
         const key = element.getAttribute('data-lang');
         const translation = t(key, element.textContent);
-        element.textContent = translation;
+
+        // Use textContent for security (no HTML injection)
+        element.textContent = sanitizeText(translation);
     });
 
     // Update page title
@@ -70,15 +85,35 @@ function getPageTranslationKey() {
     return page;
 }
 
+// Race condition protection
+let isLanguageSwitching = false;
+
 // Switch language
 async function switchLanguage(lang) {
     if (lang === currentLanguage) return;
 
-    currentLanguage = lang;
-    localStorage.setItem('preferred-language', lang);
+    // Prevent race conditions
+    if (isLanguageSwitching) {
+        console.log('Language switch already in progress, ignoring request');
+        return;
+    }
 
-    await loadTranslations(lang);
-    updateLanguage();
+    isLanguageSwitching = true;
+
+    try {
+        currentLanguage = lang;
+        localStorage.setItem('preferred-language', lang);
+
+        await loadTranslations(lang);
+        updateLanguage();
+    } catch (error) {
+        console.error('Language switch failed:', error);
+        // Revert to previous language on error
+        const previousLang = localStorage.getItem('preferred-language') || 'zh';
+        currentLanguage = previousLang;
+    } finally {
+        isLanguageSwitching = false;
+    }
 }
 
 // Initialize i18n system
@@ -109,19 +144,21 @@ const NAV_TEMPLATE = `
         <li><a href="community.html" data-lang="nav-community">社群网络</a></li>
         <li><a href="education.html" data-lang="nav-education">留学教育</a></li>
         <li class="nav-dropdown">
-            <a href="#" class="dropdown-toggle" data-lang="nav-other-services">其他服务 ▼</a>
-            <ul class="dropdown-menu">
-                <li><a href="lifestyle.html" data-lang="nav-lifestyle">生活帮忙</a></li>
-                <li><a href="labor.html" data-lang="nav-labor">劳务派遣</a></li>
-                <li><a href="pet.html" data-lang="nav-pet">宠物帮帮忙</a></li>
-                <li><a href="tourism.html" data-lang="nav-tourism">旅游服务</a></li>
+            <a href="#" class="dropdown-toggle" data-lang="nav-other-services"
+               role="button" aria-haspopup="true" aria-expanded="false">其他服务 ▼</a>
+            <ul class="dropdown-menu" role="menu" aria-label="Other services">
+                <li role="none"><a href="lifestyle.html" data-lang="nav-lifestyle" role="menuitem">生活帮忙</a></li>
+                <li role="none"><a href="labor.html" data-lang="nav-labor" role="menuitem">劳务派遣</a></li>
+                <li role="none"><a href="pet.html" data-lang="nav-pet" role="menuitem">宠物帮帮忙</a></li>
+                <li role="none"><a href="tourism.html" data-lang="nav-tourism" role="menuitem">旅游服务</a></li>
             </ul>
         </li>
         <li><a href="index.html#stats" data-lang="nav-stats">成功案例</a></li>
         <li><a href="index.html#quick-consultation" data-lang="nav-contact">联系我们</a></li>
     </ul>
     <div class="language-selector">
-        <select id="language-select" class="language-select">
+        <label for="language-select" class="sr-only">Language selection</label>
+        <select id="language-select" class="language-select" aria-label="Select language">
             <option value="zh">中文</option>
             <option value="ja">日本語</option>
             <option value="en">English</option>
@@ -133,9 +170,18 @@ const NAV_TEMPLATE = `
 function injectNav() {
     const placeholder = document.getElementById('main-navbar');
     if (!placeholder) return;
-    // Replace placeholder with actual nav
+    // Create navigation container safely
     const wrapper = document.createElement('div');
-    wrapper.innerHTML = NAV_TEMPLATE;
+
+    // Use DOMParser for safe HTML parsing (prevents script execution)
+    const parser = new DOMParser();
+    const parsedNav = parser.parseFromString(NAV_TEMPLATE, 'text/html');
+    const navElement = parsedNav.querySelector('.navbar');
+
+    if (navElement) {
+        wrapper.appendChild(document.importNode(navElement, true));
+    }
+
     // Insert before placeholder and remove placeholder
     placeholder.parentNode.replaceChild(wrapper, placeholder);
 
@@ -214,6 +260,19 @@ function injectNav() {
             .language-select option {
                 background: var(--secondary, #2c5282);
                 color: white;
+            }
+
+            /* Screen reader support */
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
             }
         `;
         document.head.appendChild(style);
@@ -294,12 +353,24 @@ async function pjaxLoad(url, addToHistory = true) {
         let curMain = document.querySelector('main.main-content') || document.querySelector('main') || document.body;
 
         if (newMain && curMain) {
-            // Import the node into current document
+            // Import the node into current document (safe)
             const imported = document.importNode(newMain, true);
             curMain.parentNode.replaceChild(imported, curMain);
         } else {
-            // as a last resort, replace body (be careful)
-            document.body.innerHTML = doc.body.innerHTML;
+            // as a last resort, replace body content safely
+            // Remove all existing content to prevent script execution
+            while (document.body.firstChild) {
+                document.body.removeChild(document.body.firstChild);
+            }
+
+            // Clone nodes safely without executing scripts
+            const newBodyNodes = doc.body.cloneNode(true);
+            Array.from(newBodyNodes.childNodes).forEach(node => {
+                // Remove script elements to prevent XSS
+                if (node.nodeName.toLowerCase() !== 'script') {
+                    document.body.appendChild(document.importNode(node, true));
+                }
+            });
         }
 
         // CRITICAL: Clean up old nav behavior to prevent cached event listeners from interfering
@@ -309,19 +380,62 @@ async function pjaxLoad(url, addToHistory = true) {
         setupNavBehavior();
 
         // Execute scripts from fetched document, but avoid re-executing nav.js
+        // Only execute scripts from same origin to prevent XSS
         const scripts = Array.from(doc.querySelectorAll('script'));
         for (const s of scripts) {
             const src = s.getAttribute('src');
             if (src && src.includes('nav.js')) continue; // nav already present
-            const script = document.createElement('script');
+
+            // Security check: only execute same-origin scripts or inline scripts
+            let isSafeScript = true;
+
             if (src) {
-                // respect relative URLs
-                script.src = new URL(src, url).toString();
-                script.async = false;
-                document.body.appendChild(script);
+                try {
+                    const scriptUrl = new URL(src, url);
+                    // Only allow same-origin scripts
+                    if (scriptUrl.origin !== window.location.origin) {
+                        console.warn('Blocked external script:', src);
+                        isSafeScript = false;
+                    }
+                } catch (e) {
+                    console.warn('Invalid script URL:', src);
+                    isSafeScript = false;
+                }
             } else {
-                script.textContent = s.textContent;
-                document.body.appendChild(script);
+                // For inline scripts, check for potentially dangerous content
+                const scriptContent = s.textContent;
+                const dangerousPatterns = [
+                    /eval\s*\(/,
+                    /Function\s*\(/,
+                    /setTimeout\s*\(/,
+                    /setInterval\s*\(/,
+                    /document\.write/,
+                    /innerHTML\s*=/,
+                    /outerHTML\s*=/,
+                    /insertAdjacentHTML/,
+                ];
+
+                if (dangerousPatterns.some(pattern => pattern.test(scriptContent))) {
+                    console.warn('Blocked potentially dangerous inline script');
+                    isSafeScript = false;
+                }
+            }
+
+            if (isSafeScript) {
+                try {
+                    const script = document.createElement('script');
+                    if (src) {
+                        script.src = new URL(src, url).toString();
+                        script.async = false;
+                        document.body.appendChild(script);
+                    } else {
+                        // Use textContent for inline scripts (safer than innerHTML)
+                        script.textContent = s.textContent;
+                        document.body.appendChild(script);
+                    }
+                } catch (e) {
+                    console.error('Failed to execute script:', e);
+                }
             }
         }
 
