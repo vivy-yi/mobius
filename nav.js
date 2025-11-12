@@ -293,21 +293,62 @@ const NAV_TEMPLATE = `
 
 function injectNav() {
     const placeholder = document.getElementById('main-navbar');
-    if (!placeholder) return;
-    // Create navigation container safely
-    const wrapper = document.createElement('div');
-
-    // Use DOMParser for safe HTML parsing (prevents script execution)
-    const parser = new DOMParser();
-    const parsedNav = parser.parseFromString(NAV_TEMPLATE, 'text/html');
-    const navElement = parsedNav.querySelector('.navbar');
-
-    if (navElement) {
-        wrapper.appendChild(document.importNode(navElement, true));
+    if (!placeholder) {
+        console.error('Navigation placeholder not found!');
+        return;
     }
 
-    // Insert before placeholder and remove placeholder
-    placeholder.parentNode.replaceChild(wrapper, placeholder);
+    console.log('Injecting navigation...');
+
+    try {
+        // Create navigation container safely
+        const wrapper = document.createElement('div');
+
+        // Use DOMParser for safe HTML parsing (prevents script execution)
+        const parser = new DOMParser();
+        const parsedNav = parser.parseFromString(NAV_TEMPLATE, 'text/html');
+        const navElement = parsedNav.querySelector('.navbar');
+
+        if (navElement) {
+            // Import the navigation element
+            const importedNav = document.importNode(navElement, true);
+            wrapper.appendChild(importedNav);
+            console.log('Navigation element created and imported');
+        } else {
+            console.error('Failed to parse navigation template');
+            return;
+        }
+
+        // Verify the wrapper has content
+        if (!wrapper.querySelector('.navbar')) {
+            console.error('Navigation wrapper is empty');
+            return;
+        }
+
+        // Replace placeholder with navigation
+        if (placeholder.parentNode) {
+            placeholder.parentNode.replaceChild(wrapper, placeholder);
+            console.log('Navigation injected successfully');
+        } else {
+            console.error('Placeholder has no parent node');
+            return;
+        }
+
+        // Verify navigation exists in DOM
+        setTimeout(() => {
+            const injectedNav = document.querySelector('.navbar');
+            if (injectedNav) {
+                console.log('Navigation verified in DOM');
+            } else {
+                console.error('Navigation not found in DOM after injection');
+            }
+        }, 100);
+
+    } catch (error) {
+        console.error('Error injecting navigation:', error);
+        // Fallback: try to create navigation directly
+        tryDirectFallback();
+    }
 
     // Load external navigation CSS if not already present
     function loadNavigationCSS() {
@@ -322,11 +363,24 @@ function injectNav() {
 
         // Fallback if CSS file fails to load
         link.onerror = function() {
-            console.warn('Navigation CSS failed to load, using fallback styles');
+            console.error('Navigation CSS failed to load, using fallback styles');
             addFallbackStyles();
         };
 
+        // Success callback
+        link.onload = function() {
+            console.log('Navigation CSS loaded successfully');
+        };
+
         document.head.appendChild(link);
+
+        // Add fallback styles immediately as backup
+        setTimeout(() => {
+            if (!document.querySelector('link[href="styles/navigation.css"][rel="stylesheet"]')) {
+                console.warn('CSS not loaded after timeout, applying fallback');
+                addFallbackStyles();
+            }
+        }, 1000);
     }
 
     // Fallback styles for when CSS file fails to load
@@ -334,24 +388,257 @@ function injectNav() {
         const style = document.createElement('style');
         style.id = 'nav-fallback-styles';
         style.textContent = `
-            header { transition: transform 0.25s ease, box-shadow 0.25s ease; will-change: transform; }
-            header.nav-hidden { transform: translateY(-100%); }
-            .mobile-menu-toggle { cursor: pointer; display: none; flex-direction: column; gap: 4px; }
-            .mobile-menu-toggle span { display:block; width:22px; height:3px; background:#fff; margin:4px 0; border-radius: 2px; }
-            .nav-menu { display:flex; gap:16px; align-items:center; list-style: none; margin: 0; padding: 0; }
-            .nav-menu a { color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; }
-            .nav-menu a:hover { background: rgba(255,255,255,0.1); }
-            .nav-dropdown { position: relative; }
-            .dropdown-menu { position: absolute; background: #2c5282; min-width: 180px; opacity: 0; visibility: hidden; }
-            .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
-            .language-select { background: #2c5282; color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px 12px; }
-            .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
-            @media (max-width: 768px) { .mobile-menu-toggle { display: flex; } .nav-menu { position: fixed; flex-direction: column; transform: translateX(-100%); opacity: 0; } .nav-menu.active { transform: translateX(0); opacity: 1; } }
+            /* CRITICAL: Ensure header is visible */
+            header {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                z-index: 1000 !important;
+                background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%) !important;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+                transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+                will-change: transform !important;
+            }
+
+            header.nav-hidden { transform: translateY(-100%) !important; }
+
+            /* Navigation container */
+            .navbar {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                width: 100% !important;
+                padding: 1rem 2rem !important;
+                background: transparent !important;
+                position: relative !important;
+                z-index: 1000 !important;
+            }
+
+            /* Logo styles */
+            .navbar .logo {
+                display: flex !important;
+                align-items: center !important;
+                color: #ffffff !important;
+                font-size: 1.8rem !important;
+                font-weight: 700 !important;
+                text-decoration: none !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .navbar .logo-icon {
+                width: 40px !important;
+                height: 40px !important;
+                background: #d69e2e !important;
+                border-radius: 10px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin-right: 12px !important;
+                font-size: 1.5rem !important;
+            }
+
+            /* Mobile menu toggle */
+            .mobile-menu-toggle {
+                cursor: pointer !important;
+                display: none !important;
+                flex-direction: column !important;
+                gap: 4px !important;
+                background: none !important;
+                border: none !important;
+                padding: 5px !important;
+            }
+
+            .mobile-menu-toggle span {
+                display:block !important;
+                width:22px !important;
+                height:3px !important;
+                background:#fff !important;
+                margin:0 !important;
+                border-radius: 2px !important;
+                transition: all 0.3s ease !important;
+            }
+
+            /* Navigation menu */
+            .nav-menu {
+                display:flex !important;
+                gap:16px !important;
+                align-items:center !important;
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: transparent !important;
+            }
+
+            .nav-menu a {
+                color: #ffffff !important;
+                text-decoration: none !important;
+                padding: 8px 12px !important;
+                border-radius: 6px !important;
+                font-weight: 500 !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .nav-menu a:hover,
+            .nav-menu a.active {
+                background: rgba(255,255,255,0.1) !important;
+                color: #d69e2e !important;
+            }
+
+            /* Dropdown menu */
+            .nav-dropdown { position: relative !important; }
+
+            .dropdown-toggle {
+                text-decoration: none !important;
+                color: #ffffff !important;
+                padding: 8px 12px !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 4px !important;
+                border-radius: 6px !important;
+                cursor: pointer !important;
+                border: none !important;
+                background: transparent !important;
+                font-size: inherit !important;
+                font-family: inherit !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .dropdown-toggle:hover {
+                background: rgba(255,255,255,0.1) !important;
+                color: #d69e2e !important;
+            }
+
+            .dropdown-menu {
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                background: #2c5282 !important;
+                min-width: 180px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transform: translateY(-10px) !important;
+                transition: all 0.3s ease !important;
+                z-index: 1001 !important;
+                padding: 8px 0 !important;
+                margin: 0 !important;
+                list-style: none !important;
+                border: 1px solid rgba(255,255,255,0.1) !important;
+            }
+
+            .nav-dropdown:hover .dropdown-menu {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: translateY(0) !important;
+            }
+
+            .dropdown-menu li {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .dropdown-menu a {
+                display: block !important;
+                padding: 12px 20px !important;
+                color: #ffffff !important;
+                text-decoration: none !important;
+                transition: background-color 0.2s ease !important;
+                font-size: 0.95em !important;
+                border-radius: 0 !important;
+            }
+
+            .dropdown-menu a:hover {
+                background: #1e3a5f !important;
+                color: #d69e2e !important;
+            }
+
+            /* Language selector */
+            .language-selector {
+                position: relative !important;
+                margin-left: 16px !important;
+            }
+
+            .language-select {
+                background: #2c5282 !important;
+                color: #ffffff !important;
+                border: 1px solid rgba(255,255,255,0.2) !important;
+                border-radius: 6px !important;
+                padding: 8px 12px !important;
+                font-size: 14px !important;
+                cursor: pointer !important;
+                outline: none !important;
+                transition: all 0.3s ease !important;
+                min-width: 120px !important;
+            }
+
+            .language-select:hover {
+                background: #1e3a5f !important;
+                border-color: rgba(255,255,255,0.4) !important;
+            }
+
+            .language-select:focus {
+                border-color: #d69e2e !important;
+                box-shadow: 0 0 0 2px rgba(214, 158, 46, 0.2) !important;
+            }
+
+            .language-select option {
+                background: #2c5282 !important;
+                color: #ffffff !important;
+            }
+
+            /* Screen reader support */
+            .sr-only {
+                position: absolute !important;
+                width: 1px !important;
+                height: 1px !important;
+                overflow: hidden !important;
+                clip: rect(0,0,0,0) !important;
+                white-space: nowrap !important;
+                border: 0 !important;
+            }
+
+            /* Mobile responsiveness */
+            @media (max-width: 768px) {
+                .mobile-menu-toggle { display: flex !important; }
+                .nav-menu {
+                    position: fixed !important;
+                    top: 70px !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    background: #2c5282 !important;
+                    flex-direction: column !important;
+                    gap: 0 !important;
+                    padding: 1rem !important;
+                    transform: translateX(-100%) !important;
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    transition: all 0.3s ease !important;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+                    max-height: calc(100vh - 70px) !important;
+                    overflow-y: auto !important;
+                }
+                .nav-menu.active {
+                    transform: translateX(0) !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
+                .nav-menu li { width: 100% !important; }
+                .nav-menu a { display: block !important; padding: 12px 16px !important; border-radius: 4px !important; margin-bottom: 4px !important; }
+                .dropdown-menu { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none !important; background: rgba(0,0,0,0.1) !important; margin-top: 8px !important; margin-left: 16px !important; min-width: auto !important; }
+                .language-selector { margin-top: 1rem !important; margin-left: 0 !important; width: 100% !important; }
+                .language-select { width: 100% !important; }
+            }
         `;
         document.head.appendChild(style);
+        console.log('Fallback navigation styles applied');
     }
 
     loadNavigationCSS();
+
+    // Immediately apply fallback styles for guaranteed visibility
+    addFallbackStyles();
 
     // attach behavior
     setupNavBehavior();
@@ -728,6 +1015,98 @@ window.addEventListener('popstate', function (e) {
 window.addEventListener('load', function() {
     setTimeout(logPerformanceMetrics, 1000);
 });
+
+// Direct fallback function for emergencies (using safe DOM methods)
+function tryDirectFallback() {
+    console.warn('Attempting direct navigation fallback...');
+
+    const placeholder = document.getElementById('main-navbar');
+    if (!placeholder || !placeholder.parentNode) {
+        console.error('Cannot apply fallback - placeholder unavailable');
+        return;
+    }
+
+    // Create minimal navigation safely
+    const minimalNav = document.createElement('div');
+    const navbar = document.createElement('nav');
+    navbar.className = 'navbar';
+
+    // Set styles directly (safe)
+    navbar.style.cssText = 'display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1rem 2rem; background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; position: fixed; top: 0; left: 0; z-index: 1000;';
+
+    // Create logo
+    const logo = document.createElement('a');
+    logo.href = 'index.html';
+    logo.style.cssText = 'color: white; text-decoration: none; font-size: 1.8rem; font-weight: 700; display: flex; align-items: center;';
+
+    const logoIcon = document.createElement('span');
+    logoIcon.style.cssText = 'width: 40px; height: 40px; background: #d69e2e; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.5rem;';
+    logoIcon.textContent = '🏢';
+
+    const logoText = document.createElement('span');
+    logoText.textContent = '日本商务通';
+
+    logo.appendChild(logoIcon);
+    logo.appendChild(logoText);
+
+    // Create nav menu
+    const navMenu = document.createElement('div');
+    navMenu.style.cssText = 'display: flex; gap: 16px; align-items: center; list-style: none; margin: 0; padding: 0;';
+
+    // Create nav links
+    const links = [
+        { href: 'index.html', text: '首页' },
+        { href: 'ai-legal.html', text: 'AI法律' },
+        { href: 'ai-crm.html', text: 'AI CRM' }
+    ];
+
+    links.forEach(linkData => {
+        const link = document.createElement('a');
+        link.href = linkData.href;
+        link.style.cssText = 'color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px;';
+        link.textContent = linkData.text;
+        navMenu.appendChild(link);
+    });
+
+    // Create language selector
+    const languageSelect = document.createElement('select');
+    languageSelect.id = 'language-select';
+    languageSelect.style.cssText = 'background: #2c5282; color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px 12px;';
+
+    const options = [
+        { value: 'zh', text: '中文' },
+        { value: 'ja', text: '日本語' },
+        { value: 'en', text: 'English' }
+    ];
+
+    options.forEach(optionData => {
+        const option = document.createElement('option');
+        option.value = optionData.value;
+        option.textContent = optionData.text;
+        languageSelect.appendChild(option);
+    });
+
+    navMenu.appendChild(languageSelect);
+
+    // Assemble navigation
+    navbar.appendChild(logo);
+    navbar.appendChild(navMenu);
+    minimalNav.appendChild(navbar);
+
+    placeholder.parentNode.replaceChild(minimalNav, placeholder);
+    console.log('Direct fallback navigation applied safely');
+
+    // Re-attach basic behavior
+    setTimeout(() => {
+        const languageSelectEl = document.getElementById('language-select');
+        if (languageSelectEl) {
+            languageSelectEl.value = currentLanguage;
+            languageSelectEl.addEventListener('change', function(e) {
+                switchLanguage(e.target.value);
+            });
+        }
+    }, 100);
+}
 
 // Ensure nav is injected whether DOMContentLoaded has already fired or not
 if (document.readyState === 'loading') {
