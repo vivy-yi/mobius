@@ -1,0 +1,3324 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本商务通 - 一站式日本商业服务平台</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Use nav.js injected navigation, no custom header styles needed */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* 轮播Banner */
+        .hero-section {
+            position: relative;
+            margin-top: 80px;
+            height: 700px;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            flex: 1;
+            padding: 0 60px;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .slide-1 {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.95) 0%, rgba(44, 82, 130, 0.95) 100%), url('https://images.unsplash.com/photo-1554224155-6af6b9a52d55?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-2 {
+            background: linear-gradient(135deg, rgba(55, 130, 206, 0.95) 0%, rgba(44, 82, 130, 0.95) 100%), url('https://images.unsplash.com/photo-1589829545856-d10d932e0364?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, rgba(214, 158, 46, 0.95) 0%, rgba(221, 107, 32, 0.95) 100%), url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(214, 158, 46, 0.3);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* 轮播控制 */
+        .carousel-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .carousel-dot.active {
+            background: var(--gold);
+            width: 40px;
+            border-radius: 6px;
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 10;
+        }
+
+        .carousel-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* 服务区域 */
+        .services-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--warning) 100%);
+        }
+
+        .service-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+
+        .service-content {
+            padding: 35px 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--dark);
+        }
+
+        .service-features li::before {
+            content: '⚖️';
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.4);
+        }
+
+        /* CRM特性区域 */
+        .crm-features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .crm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .crm-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: var(--light);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .crm-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(214, 158, 46, 0.2);
+        }
+
+        .crm-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--warning) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .crm-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* 数据统计 */
+        .stats-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* CTA区域 */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--warning) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section .section-title {
+            color: white;
+            font-size: 3rem;
+        }
+
+        .cta-section .section-title::after {
+            background: white;
+        }
+
+        .cta-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+        }
+
+        .cta-buttons {
+            margin-top: 50px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .btn-dark {
+            background: var(--primary);
+            color: white;
+            padding: 20px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(30, 58, 95, 0.4);
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            padding: 20px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .slide-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .carousel-controls {
+                bottom: 20px;
+            }
+
+            .slide-content {
+                padding: 0 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            .hero-section {
+                height: 600px;
+            }
+
+            .slide-title {
+                font-size: 2.2rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .carousel-arrows {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* 客户分层服务样式 */
+        .customer-layers-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+        }
+
+        .layers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .layer-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .layer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .layer-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .layer-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .layer-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .layer-card p {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .layer-features {
+            text-align: left;
+            margin-bottom: 30px;
+            list-style: none;
+        }
+
+        .layer-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .layer-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .layer-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .layer-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .personal-layer {
+            border-top: 5px solid #22c55e;
+        }
+
+        .sme-layer {
+            border-top: 5px solid #3b82f6;
+        }
+
+        .enterprise-layer {
+            border-top: 5px solid #8b5cf6;
+        }
+
+        .layer-subcategories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .subcategory {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .subcategory h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .subcategory ul {
+            list-style: none;
+        }
+
+        .subcategory ul li {
+            padding: 6px 0;
+            position: relative;
+            padding-left: 20px;
+            color: var(--dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 8px 12px 8px 28px;
+            margin-bottom: 4px;
+        }
+
+        .subcategory ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 8px;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* 咨询区域样式 */
+        .consultation-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .consultation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .consultation-features {
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--gold);
+        }
+
+        .consultation-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+  
+    
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .consultation-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .layers-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* AI模块样式 */
+        .ai-panel {
+            background: linear-gradient(135deg, var(--light) 0%, #e8f0fe 100%);
+            padding: 60px 0;
+            border-radius: 30px;
+            margin: 40px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .panel-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .panel-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .panel-close:hover {
+            background: #c53030;
+            transform: rotate(90deg);
+        }
+
+        /* AI法律模块样式 */
+        .ai-stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--gold);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-box .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-box .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .ai-feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent);
+        }
+
+        .ai-feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .ai-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .ai-feature-item h4 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .ai-feature-item p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .ai-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .ai-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 58, 95, 0.3);
+        }
+
+        /* AI工作台样式 */
+        .ai-workspace {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .workspace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .workspace-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .upload-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+
+        .analysis-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .analysis-input, .analysis-output {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .analysis-input h4, .analysis-output h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .analysis-input textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .analysis-input textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 58, 95, 0.3);
+        }
+
+        .results-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            min-height: 250px;
+            border-left: 4px solid var(--success);
+        }
+
+        .results-placeholder {
+            color: var(--gray);
+            text-align: center;
+            padding: 40px 0;
+            font-style: italic;
+        }
+
+        /* AI CRM模块样式 */
+        .crm-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .crm-tab {
+            background: white;
+            border: 3px solid transparent;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .crm-tab:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .crm-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .tab-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .tab-count {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .crm-dashboard {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dash-stat {
+            background: linear-gradient(135deg, var(--light) 0%, #e8f0fe 100%);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--gold);
+        }
+
+        .dash-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .dash-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .dash-label {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .dash-change {
+            font-size: 0.9rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .crm-table-container {
+            margin-bottom: 40px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .table-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .table-actions .search-input {
+            padding: 10px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .table-actions .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .add-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: #2f855a;
+            transform: translateY(-2px);
+        }
+
+        .crm-table {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .crm-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .crm-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .crm-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .crm-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: var(--secondary);
+        }
+
+        .edit-btn {
+            background: var(--warning);
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #c05621;
+        }
+
+        .quick-actions-section h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-action-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 58, 95, 0.3);
+        }
+
+        /* CRM功能展示样式 */
+        .crm-features-section {
+            margin-bottom: 40px;
+        }
+
+        .crm-features-section h3 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .crm-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .crm-feature-card {
+            background: linear-gradient(135deg, var(--light) 0%, #f8fafc 100%);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--gold);
+            position: relative;
+        }
+
+        .crm-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .crm-feature-card .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .crm-feature-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .crm-feature-card p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .feature-status {
+            background: var(--success);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* AI模块响应式设计 */
+        @media (max-width: 768px) {
+            .ai-panel {
+                padding: 30px 0;
+                margin: 20px 0;
+            }
+
+            .panel-title {
+                font-size: 1.8rem;
+            }
+
+            .ai-stats-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ai-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-container {
+                grid-template-columns: 1fr;
+            }
+
+            .crm-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .table-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .table-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .crm-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workspace-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <!-- 轮播Banner区域 -->
+    <section class="hero-section">
+        <div class="carousel-container">
+            <!-- 轮播Slide 1 -->
+            <div class="carousel-slide slide-1 active">
+                <div class="slide-content slide-in-left">
+                    <h1 class="slide-title" data-lang="slide1-title">智能法律服务<br>引领未来</h1>
+                    <p class="slide-subtitle" data-lang="slide1-subtitle">AI驱动的法律服务平台，为您提供智能化、专业化、高效率的法律解决方案</p>
+                    <button class="btn-primary" data-lang="slide1-cta">立即体验</button>
+                    <button class="btn-outline" data-lang="slide1-demo">预约演示</button>
+                </div>
+            </div>
+
+            <!-- 轮播Slide 2 -->
+            <div class="carousel-slide slide-2">
+                <div class="slide-content slide-in-right">
+                    <h1 class="slide-title" data-lang="slide2-title">专业法律团队<br>值得信赖</h1>
+                    <p class="slide-subtitle" data-lang="slide2-subtitle">资深律师团队为您提供全方位法律服务，让法律不再是难题</p>
+                    <button class="btn-primary" data-lang="slide2-cta">咨询律师</button>
+                    <button class="btn-outline" data-lang="slide2-team">了解团队</button>
+                </div>
+            </div>
+
+            <!-- 轮播Slide 3 -->
+            <div class="carousel-slide slide-3">
+                <div class="slide-content slide-in-left">
+                    <h1 class="slide-title" data-lang="slide3-title">CRM管理系统<br>提升效率</h1>
+                    <p class="slide-subtitle" data-lang="slide3-subtitle">智能化客户关系管理，让法律服务更高效、更专业、更贴心</p>
+                    <button class="btn-primary" data-lang="slide3-cta">免费试用</button>
+                    <button class="btn-outline" data-lang="slide3-features">功能特性</button>
+                </div>
+            </div>
+
+            <!-- 轮播控制 -->
+            <div class="carousel-controls">
+                <button class="carousel-dot active" onclick="showSlide(0)"></button>
+                <button class="carousel-dot" onclick="showSlide(1)"></button>
+                <button class="carousel-dot" onclick="showSlide(2)"></button>
+            </div>
+
+            <!-- 轮播箭头 -->
+            <div class="carousel-arrows">
+                <button class="carousel-arrow" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-arrow" onclick="changeSlide(1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+<!-- CTA区域 -->
+<section class="cta-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-lang="cta-title">开启智能化法律服务新时代</h2>
+            <p class="section-subtitle" data-lang="cta-subtitle">专业团队为您提供一对一演示，定制最适合您的法律服务解决方案</p>
+        </div>
+        <div class="cta-buttons">
+            <button class="btn-dark" data-lang="cta-demo">预约演示</button>
+            <button class="btn-light" onclick="window.location.href='#quick-consultation'" data-lang="cta-contact">联系我们</button>
+        </div>
+    </div>
+</section>
+
+    <!-- 客户分层服务区域 -->
+    <section id="customer-layers" class="customer-layers-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang="layers-title">客户分层服务</h2>
+                <p class="section-subtitle" data-lang="layers-subtitle">基于用户画像和需求，提供精准的个性化服务方案</p>
+            </div>
+
+            <div class="layers-container">
+                <!-- 第一层：个人用户 -->
+                <div class="layer-card personal-layer">
+                    <div class="layer-icon">👤</div>
+                    <h3 data-lang="layer-personal-title">个人用户服务</h3>
+                    <p data-lang="layer-personal-desc">面向留学生、游客、宠物主人和个人创业者</p>
+                    <div class="layer-subcategories">
+                        <div class="subcategory">
+                            <h4 data-lang="layer-personal-student">🎓 留学生群体</h4>
+                            <ul>
+                                <li data-lang="layer-personal-student-f1">留学申请指导</li>
+                                <li data-lang="layer-personal-student-f2">学生签证办理</li>
+                                <li data-lang="layer-personal-student-f3">学校申请协助</li>
+                                <li data-lang="layer-personal-student-f4">住宿安排服务</li>
+                            </ul>
+                        </div>
+                        <div class="subcategory">
+                            <h4 data-lang="layer-personal-tourist">✈️ 游客群体</h4>
+                            <ul>
+                                <li data-lang="layer-personal-tourist-f1">定制旅游服务</li>
+                                <li data-lang="layer-personal-tourist-f2">文化体验活动</li>
+                                <li data-lang="layer-personal-tourist-f3">购物指导</li>
+                                <li data-lang="layer-personal-tourist-f4">交通接送</li>
+                            </ul>
+                        </div>
+                        <div class="subcategory">
+                            <h4 data-lang="layer-personal-pet">🐾 宠物主人</h4>
+                            <ul>
+                                <li data-lang="layer-personal-pet-f1">宠物入境协助</li>
+                                <li data-lang="layer-personal-pet-f2">医疗美容服务</li>
+                                <li data-lang="layer-personal-pet-f3">宠物用品配送</li>
+                                <li data-lang="layer-personal-pet-f4">紧急医疗响应</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="layer-btn" onclick="showLayerDetails('personal')">了解详情</button>
+                </div>
+
+                <!-- 第二层：小型企业主 -->
+                <div class="layer-card sme-layer">
+                    <div class="layer-icon">🏢</div>
+                    <h3 data-lang="layer-sme-title">小型企业服务</h3>
+                    <p data-lang="layer-sme-desc">面向1-50人规模的初创和小微企业</p>
+                    <div class="layer-subcategories">
+                        <div class="subcategory">
+                            <h4 data-lang="layer-sme-startup">🚀 初创企业 (1-10人)</h4>
+                            <ul>
+                                <li data-lang="layer-sme-startup-f1">公司设立服务</li>
+                                <li data-lang="layer-sme-startup-f2">基础合规指导</li>
+                                <li data-lang="layer-sme-startup-f3">成本控制咨询</li>
+                                <li data-lang="layer-sme-startup-f4">办公空间租赁</li>
+                            </ul>
+                        </div>
+                        <div class="subcategory">
+                            <h4 data-lang="layer-sme-micro">🏪 小微企业 (11-50人)</h4>
+                            <ul>
+                                <li data-lang="layer-sme-micro-f1">运营流程优化</li>
+                                <li data-lang="layer-sme-micro-f2">税务筹划服务</li>
+                                <li data-lang="layer-sme-micro-f3">人力资源管理</li>
+                                <li data-lang="layer-sme-micro-f4">数字化升级</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="layer-btn" onclick="showLayerDetails('sme')">了解详情</button>
+                </div>
+
+                <!-- 第三层：中大型企业 -->
+                <div class="layer-card enterprise-layer">
+                    <div class="layer-icon">🏭</div>
+                    <h3 data-lang="layer-enterprise-title">中大型企业服务</h3>
+                    <p data-lang="layer-enterprise-desc">面向50+人规模的中型和大型企业</p>
+                    <div class="layer-subcategories">
+                        <div class="subcategory">
+                            <h4 data-lang="layer-enterprise-medium">📈 中型企业 (51-200人)</h4>
+                            <ul>
+                                <li data-lang="layer-enterprise-medium-f1">业务扩展咨询</li>
+                                <li data-lang="layer-enterprise-medium-f2">融资协助服务</li>
+                                <li data-lang="layer-enterprise-medium-f3">并购重组顾问</li>
+                                <li data-lang="layer-enterprise-medium-f4">品牌建设支持</li>
+                            </ul>
+                        </div>
+                        <div class="subcategory">
+                            <h4 data-lang="layer-enterprise-large">🌐 大型企业 (200+人)</h4>
+                            <ul>
+                                <li data-lang="layer-enterprise-large-f1">战略规划咨询</li>
+                                <li data-lang="layer-enterprise-large-f2">国际化布局</li>
+                                <li data-lang="layer-enterprise-large-f3">合规管理体系</li>
+                                <li data-lang="layer-enterprise-large-f4">数字化转型</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="layer-btn" onclick="showLayerDetails('enterprise')">了解详情</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+          <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang="services-title">专业法律服务产品</h2>
+                <p class="section-subtitle" data-lang="services-subtitle">为律师事务所、企业法务部门提供全方位的法律服务解决方案</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- 智能合同审查 -->
+                <div class="service-card" onclick="showServiceDetails('contract')">
+                    <div class="service-icon">📋</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-contract-title">智能合同审查</h3>
+                        <p data-lang="service-contract-desc">AI驱动的合同审查系统，快速识别法律风险，提供专业修改建议</p>
+                        <ul class="service-features">
+                            <li data-lang="service-contract-feature1">智能风险识别</li>
+                            <li data-lang="service-contract-feature2">条款合规检查</li>
+                            <li data-lang="service-contract-feature3">批量处理能力</li>
+                            <li data-lang="service-contract-feature4">审查报告生成</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 案件管理系统 -->
+                <div class="service-card" onclick="showServiceDetails('case')">
+                    <div class="service-icon">📁</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-case-title">案件管理系统</h3>
+                        <p data-lang="service-case-desc">全流程案件管理，从立案到结案，让案件管理更高效、更规范</p>
+                        <ul class="service-features">
+                            <li data-lang="service-case-feature1">案件进度跟踪</li>
+                            <li data-lang="service-case-feature2">文档自动归档</li>
+                            <li data-lang="service-case-feature3">团队协作平台</li>
+                            <li data-lang="service-case-feature4">统计分析报表</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 法律法规库 -->
+                <div class="service-card" onclick="showServiceDetails('lawlib')">
+                    <div class="service-icon">⚖️</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-lawlib-title">法律法规库</h3>
+                        <p data-lang="service-lawlib-desc">实时更新的法律法规数据库，智能检索，让法律研究更高效</p>
+                        <ul class="service-features">
+                            <li data-lang="service-lawlib-feature1">实时更新推送</li>
+                            <li data-lang="service-lawlib-feature2">智能语义检索</li>
+                            <li data-lang="service-lawlib-feature3">案例关联分析</li>
+                            <li data-lang="service-lawlib-feature4">专业解读文章</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 客户关系管理 -->
+                <div class="service-card" onclick="showServiceDetails('crm')">
+                    <div class="service-icon">👥</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-crm-title">客户关系管理</h3>
+                        <p data-lang="service-crm-desc">专为法律行业定制的CRM系统，提升客户服务质量和业务转化率</p>
+                        <ul class="service-features">
+                            <li data-lang="service-crm-feature1">客户信息管理</li>
+                            <li data-lang="service-crm-feature2">销售线索跟踪</li>
+                            <li data-lang="service-crm-feature3">服务工单系统</li>
+                            <li data-lang="service-crm-feature4">客户满意度调研</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 财务管理系统 -->
+                <div class="service-card" onclick="showServiceDetails('finance')">
+                    <div class="service-icon">💰</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-finance-title">财务管理系统</h3>
+                        <p data-lang="service-finance-desc">专为律所设计的财务管理，费用计算、账单管理、财务分析一站式解决</p>
+                        <ul class="service-features">
+                            <li data-lang="service-finance-feature1">智能费用计算</li>
+                            <li data-lang="service-finance-feature2">账单自动生成</li>
+                            <li data-lang="service-finance-feature3">成本效益分析</li>
+                            <li data-lang="service-finance-feature4">财务报表导出</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 法律咨询平台 -->
+                <div class="service-card" onclick="showServiceDetails('consulting')">
+                    <div class="service-icon">💬</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-consulting-title">在线法律咨询</h3>
+                        <p data-lang="service-consulting-desc">连接客户与律师的在线咨询平台，让法律服务触手可及</p>
+                        <ul class="service-features">
+                            <li data-lang="service-consulting-feature1">即时在线咨询</li>
+                            <li data-lang="service-consulting-feature2">专业律师匹配</li>
+                            <li data-lang="service-consulting-feature3">咨询服务评价</li>
+                            <li data-lang="service-consulting-feature4">法律知识库查询</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 法律顾问 -->
+                <div class="service-card" onclick="showServiceDetails('legalAdvisor')">
+                    <div class="service-icon">⚖️</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-legalAdvisor-title">法律顾问</h3>
+                        <p data-lang="service-legalAdvisor-desc">专业法律顾问服务，为企业及个人提供全面法律咨询</p>
+                        <ul class="service-features">
+                            <li data-lang="service-legalAdvisor-feature1">企业法律顾问</li>
+                            <li data-lang="service-legalAdvisor-feature2">个人法律咨询</li>
+                            <li data-lang="service-legalAdvisor-feature3">合同审查</li>
+                            <li data-lang="service-legalAdvisor-feature4">风险评估</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 法务助理 -->
+                <div class="service-card" onclick="showServiceDetails('legalAssistant')">
+                    <div class="service-icon">📝</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-legalAssistant-title">法务助理</h3>
+                        <p data-lang="service-legalAssistant-desc">专业法务助理服务，协助处理日常法律事务</p>
+                        <ul class="service-features">
+                            <li data-lang="service-legalAssistant-feature1">文书起草</li>
+                            <li data-lang="service-legalAssistant-feature2">案件整理</li>
+                            <li data-lang="service-legalAssistant-feature3">法律研究</li>
+                            <li data-lang="service-legalAssistant-feature4">事务协调</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 企业法务 -->
+                <div class="service-card" onclick="showServiceDetails('corporateLegal')">
+                    <div class="service-icon">🏢</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-corporateLegal-title">企业法务</h3>
+                        <p data-lang="service-corporateLegal-desc">企业法务外包服务，为企业提供全方位法律支持</p>
+                        <ul class="service-features">
+                            <li data-lang="service-corporateLegal-feature1">公司治理</li>
+                            <li data-lang="service-corporateLegal-feature2">合规管理</li>
+                            <li data-lang="service-corporateLegal-feature3">股权设计</li>
+                            <li data-lang="service-corporateLegal-feature4">并购重组</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 诉讼融资 -->
+                <div class="service-card" onclick="showServiceDetails('litigationFinancing')">
+                    <div class="service-icon">💵</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-litigationFinancing-title">诉讼融资</h3>
+                        <p data-lang="service-litigationFinancing-desc">专业诉讼融资服务，为当事人提供诉讼资金支持</p>
+                        <ul class="service-features">
+                            <li data-lang="service-litigationFinancing-feature1">案件评估</li>
+                            <li data-lang="service-litigationFinancing-feature2">资金支持</li>
+                            <li data-lang="service-litigationFinancing-feature3">风险分担</li>
+                            <li data-lang="service-litigationFinancing-feature4">回款分成</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 知识产权 -->
+                <div class="service-card" onclick="showServiceDetails('intellectualProperty')">
+                    <div class="service-icon">🔐</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-intellectualProperty-title">知识产权</h3>
+                        <p data-lang="service-intellectualProperty-desc">全方位知识产权保护服务，维护创新成果</p>
+                        <ul class="service-features">
+                            <li data-lang="service-intellectualProperty-feature1">专利申请</li>
+                            <li data-lang="service-intellectualProperty-feature2">商标注册</li>
+                            <li data-lang="service-intellectualProperty-feature3">版权保护</li>
+                            <li data-lang="service-intellectualProperty-feature4">技术转让</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- 法律培训 -->
+                <div class="service-card" onclick="showServiceDetails('legalTraining')">
+                    <div class="service-icon">🎓</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-legalTraining-title">法律培训</h3>
+                        <p data-lang="service-legalTraining-desc">专业法律培训服务，提升法律素养和实务能力</p>
+                        <ul class="service-features">
+                            <li data-lang="service-legalTraining-feature1">企业内训</li>
+                            <li data-lang="service-legalTraining-feature2">法律讲座</li>
+                            <li data-lang="service-legalTraining-feature3">技能培训</li>
+                            <li data-lang="service-legalTraining-feature4">案例分析</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <!-- AI法律分析平台 -->
+                <div class="service-card ai-legal-card" onclick="toggleAILegalPanel()">
+                    <div class="service-icon">🤖</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-ai-legal-title">AI法律分析平台</h3>
+                        <p data-lang="service-ai-legal-desc">新一代智能法律分析引擎，结合AI与法律专业知识，提供高效、准确、可靠的法律服务</p>
+                        <ul class="service-features">
+                            <li data-lang="service-ai-legal-feature1">智能合同审查与风险识别</li>
+                            <li data-lang="service-ai-legal-feature2">法律文档智能搜索</li>
+                            <li data-lang="service-ai-legal-feature3">案例结果AI预测</li>
+                            <li data-lang="service-ai-legal-feature4">7x24小时法律咨询助手</li>
+                        </ul>
+                        <button class="service-btn" data-lang="service-ai-learn-more">立即体验</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRM功能特性 -->
+    <section id="crm" class="crm-features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-lang="crm-title">CRM核心功能</h2>
+                <p class="section-subtitle" data-lang="crm-subtitle">强大的CRM功能，助力法律服务机构数字化转型</p>
+            </div>
+
+            <div class="crm-grid">
+                <div class="crm-card">
+                    <div class="crm-icon">🎯</div>
+                    <h3 data-lang="crm-feature-1-title">精准营销</h3>
+                    <p data-lang="crm-feature-1-desc">智能客户画像分析，精准定位潜在客户，提升获客效率</p>
+                </div>
+
+                <div class="crm-card">
+                    <div class="crm-icon">📊</div>
+                    <h3 data-lang="crm-feature-2-title">数据分析</h3>
+                    <p data-lang="crm-feature-2-desc">全面的业务数据分析，帮助管理者做出更明智的决策</p>
+                </div>
+
+                <div class="crm-card">
+                    <div class="crm-icon">🔄</div>
+                    <h3 data-lang="crm-feature-3-title">流程自动化</h3>
+                    <p data-lang="crm-feature-3-desc">自动化工作流程，减少重复性工作，提升团队工作效率</p>
+                </div>
+
+                <div class="crm-card">
+                    <div class="crm-icon">🔒</div>
+                    <h3 data-lang="crm-feature-4-title">安全合规</h3>
+                    <p data-lang="crm-feature-4-desc">银行级数据加密，符合法律行业数据保护合规要求</p>
+                </div>
+
+                <div class="crm-card">
+                    <div class="crm-icon">📱</div>
+                    <h3 data-lang="crm-feature-5-title">移动办公</h3>
+                    <p data-lang="crm-feature-5-desc">支持多终端访问，随时随地处理业务，提升工作灵活性</p>
+                </div>
+
+                <div class="crm-card">
+                    <div class="crm-icon">🤝</div>
+                    <h3 data-lang="crm-feature-6-title">团队协作</h3>
+                    <p data-lang="crm-feature-6-desc">强大的团队协作功能，让团队成员配合更加默契高效</p>
+                </div>
+
+                <!-- AI CRM管理系统 -->
+                <div class="crm-card ai-crm-card" onclick="toggleAICRMPanel()">
+                    <div class="crm-icon">🤖</div>
+                    <h3 data-lang="crm-ai-title">AI智能CRM</h3>
+                    <p data-lang="crm-ai-desc">AI驱动的专业客户关系管理平台，集成法律、生活、教育、劳务、财务全方位管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI法律分析面板 -->
+    <section id="ai-legal-panel" class="ai-panel" style="display: none;">
+        <div class="container">
+            <div class="panel-header">
+                <h2 class="panel-title">🤖 AI法律分析平台</h2>
+                <button class="panel-close" onclick="toggleAILegalPanel()">&times;</button>
+            </div>
+
+            <div class="ai-stats-overview">
+                <div class="stat-box">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">分析准确率</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">处理案例数</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">< 100s</div>
+                    <div class="stat-label">响应时间</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">在线服务</div>
+                </div>
+            </div>
+
+            <div class="ai-features-grid">
+                <!-- AI核心功能 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">🤖</div>
+                    <h4>AI智能合同审查</h4>
+                    <p>AI驱动的合同分析，识别风险条款、缺失要素、法律合规性问题，提供专业修改建议</p>
+                    <button class="ai-btn" onclick="startContractAnalysis()">开始分析</button>
+                </div>
+
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">🔍</div>
+                    <h4>智能法律文档搜索</h4>
+                    <p>智能检索法律法规、判例、学术论文，支持自然语言查询，实时更新推送</p>
+                    <button class="ai-btn" onclick="startLegalSearch()">开始搜索</button>
+                </div>
+
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">⚠️</div>
+                    <h4>AI风险评估分析</h4>
+                    <p>全方位法律风险识别与评估，多维度分析商业、合规风险，生成专业评估报告</p>
+                    <button class="ai-btn" onclick="startRiskAssessment()">评估风险</button>
+                </div>
+
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">📊</div>
+                    <h4>AI案例结果预测</h4>
+                    <p>基于历史案例数据和机器学习算法，预测案件可能结果和成功率</p>
+                    <button class="ai-btn" onclick="startCasePrediction()">预测结果</button>
+                </div>
+
+                <!-- 案件管理系统 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">📁</div>
+                    <h4>智能案件管理系统</h4>
+                    <p>全流程AI辅助案件管理，从立案到结案，智能进度跟踪和文档自动归档</p>
+                    <button class="ai-btn" onclick="startCaseManagement()">案件管理</button>
+                </div>
+
+                <!-- 法律法规库 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">⚖️</div>
+                    <h4>智能法律法规库</h4>
+                    <p>实时更新的法律法规数据库，AI智能语义检索，案例关联分析和专业解读</p>
+                    <button class="ai-btn" onclick="startLawLibrary()">法规库</button>
+                </div>
+
+                <!-- 财务管理系统 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">💰</div>
+                    <h4>AI财务管理系统</h4>
+                    <p>专为律所设计的智能财务管理，AI费用计算、账单自动生成、成本效益分析</p>
+                    <button class="ai-btn" onclick="startFinanceManagement()">财务管理</button>
+                </div>
+
+                <!-- 在线法律咨询 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">💬</div>
+                    <h4>AI法律咨询助手</h4>
+                    <p>7x24小时AI法律咨询，智能律师匹配，咨询服务评价和法律知识库查询</p>
+                    <button class="ai-btn" onclick="startLegalConsulting()">法律咨询</button>
+                </div>
+
+                <!-- 法律顾问服务 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">👨‍⚖️</div>
+                    <h4>专业法律顾问</h4>
+                    <p>AI辅助法律顾问服务，为企业及个人提供全面法律咨询和风险评估</p>
+                    <button class="ai-btn" onclick="startLegalAdvisor()">法律顾问</button>
+                </div>
+
+                <!-- 法务助理 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">📝</div>
+                    <h4>AI法务助理</h4>
+                    <p>智能法务助理服务，AI辅助文书起草、案件整理、法律研究和事务协调</p>
+                    <button class="ai-btn" onclick="startLegalAssistant()">法务助理</button>
+                </div>
+
+                <!-- 企业法务 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">🏢</div>
+                    <h4>AI企业法务</h4>
+                    <p>全面的企业法务解决方案，AI辅助公司治理、合规管理、知识产权保护</p>
+                    <button class="ai-btn" onclick="startCorporateLegal()">企业法务</button>
+                </div>
+
+                <!-- 法律培训 -->
+                <div class="ai-feature-item">
+                    <div class="ai-feature-icon">🎓</div>
+                    <h4>AI法律培训</h4>
+                    <p>个性化法律培训服务，AI定制培训内容，企业内训、法律讲座和案例分析</p>
+                    <button class="ai-btn" onclick="startLegalTraining()">法律培训</button>
+                </div>
+            </div>
+
+            <div class="ai-workspace">
+                <div class="workspace-header">
+                    <h3>AI分析工作台</h3>
+                    <div class="workspace-actions">
+                        <button class="upload-btn" onclick="document.getElementById('legalFileInput').click()">
+                            📁 上传文档
+                        </button>
+                        <input type="file" id="legalFileInput" accept=".pdf,.doc,.docx" style="display: none;" onchange="handleLegalFileUpload(event)">
+                    </div>
+                </div>
+
+                <div class="analysis-container">
+                    <div class="analysis-input">
+                        <h4>输入法律文本</h4>
+                        <textarea id="legalTextInput" placeholder="请输入需要分析的法律文本内容..."></textarea>
+                        <button class="analyze-btn" onclick="performAILegalAnalysis()">
+                            🚀 开始分析
+                        </button>
+                    </div>
+
+                    <div class="analysis-output">
+                        <h4>分析结果</h4>
+                        <div id="legalAnalysisResults" class="results-box">
+                            <div class="results-placeholder">
+                                分析结果将在这里显示
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI CRM管理面板 -->
+    <section id="ai-crm-panel" class="ai-panel" style="display: none;">
+        <div class="container">
+            <div class="panel-header">
+                <h2 class="panel-title">🤖 AI智能CRM管理系统</h2>
+                <button class="panel-close" onclick="toggleAICRMPanel()">&times;</button>
+            </div>
+
+            <div class="crm-tabs">
+                <div class="crm-tab active" onclick="switchCRMTab('legal')">
+                    <div class="tab-icon">⚖️</div>
+                    <div class="tab-title">法律CRM</div>
+                    <div class="tab-count">1,245 客户</div>
+                </div>
+                <div class="crm-tab" onclick="switchCRMTab('lifestyle')">
+                    <div class="tab-icon">🏠</div>
+                    <div class="tab-title">帮帮忙CRM</div>
+                    <div class="tab-count">3,821 客户</div>
+                </div>
+                <div class="crm-tab" onclick="switchCRMTab('education')">
+                    <div class="tab-icon">🎓</div>
+                    <div class="tab-title">留学教育CRM</div>
+                    <div class="tab-count">892 客户</div>
+                </div>
+                <div class="crm-tab" onclick="switchCRMTab('labor')">
+                    <div class="tab-icon">👷</div>
+                    <div class="tab-title">劳务CRM</div>
+                    <div class="tab-count">2,156 客户</div>
+                </div>
+                <div class="crm-tab" onclick="switchCRMTab('finance')">
+                    <div class="tab-icon">💰</div>
+                    <div class="tab-title">财务CRM</div>
+                    <div class="tab-count">567 客户</div>
+                </div>
+            </div>
+
+            <div class="crm-dashboard">
+                <div class="dashboard-stats">
+                    <div class="dash-stat">
+                        <div class="dash-number">8,681</div>
+                        <div class="dash-label">总客户数</div>
+                        <div class="dash-change">↑ 12.5% 本月新增</div>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-number">92%</div>
+                        <div class="dash-label">客户满意度</div>
+                        <div class="dash-change">↑ 3.2% 提升</div>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-number">456</div>
+                        <div class="dash-label">本月新增案例</div>
+                        <div class="dash-change">↑ 18.7% 增长</div>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-number">2,876</div>
+                        <div class="dash-label">完成服务</div>
+                        <div class="dash-change">↑ 9.3% 提升</div>
+                    </div>
+                </div>
+
+                <div class="crm-table-container">
+                    <div class="table-header">
+                        <h3 id="crmTableTitle">法律客户管理</h3>
+                        <div class="table-actions">
+                            <input type="text" class="search-input" placeholder="搜索客户..." id="crmSearchInput">
+                            <button class="add-btn" onclick="addNewCRMCustomer()">+ 新增客户</button>
+                        </div>
+                    </div>
+
+                    <div class="crm-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>客户姓名</th>
+                                    <th>联系方式</th>
+                                    <th>服务类型</th>
+                                    <th>负责人</th>
+                                    <th>状态</th>
+                                    <th>下次跟进</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crmTableBody">
+                                <tr>
+                                    <td>张伟</td>
+                                    <td>138****5678</td>
+                                    <td>合同纠纷</td>
+                                    <td>李律师</td>
+                                    <td><span class="status-badge status-active">进行中</span></td>
+                                    <td>2024-01-15</td>
+                                    <td>
+                                        <button class="action-btn view-btn" onclick="viewCRMCustomer(1)">查看</button>
+                                        <button class="action-btn edit-btn" onclick="editCRMCustomer(1)">编辑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>李娜</td>
+                                    <td>139****9012</td>
+                                    <td>劳动仲裁</td>
+                                    <td>王律师</td>
+                                    <td><span class="status-badge status-pending">待处理</span></td>
+                                    <td>2024-01-12</td>
+                                    <td>
+                                        <button class="action-btn view-btn" onclick="viewCRMCustomer(2)">查看</button>
+                                        <button class="action-btn edit-btn" onclick="editCRMCustomer(2)">编辑</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CRM核心功能展示 -->
+                <div class="crm-features-section">
+                    <h3>🚀 CRM核心功能特性</h3>
+                    <div class="crm-features-grid">
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h4>AI精准营销</h4>
+                            <p>智能客户画像分析，精准定位潜在客户，AI驱动的营销策略优化</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h4>智能数据分析</h4>
+                            <p>全面的业务数据分析，AI预测模型，帮助管理者做出更明智的决策</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h4>流程自动化</h4>
+                            <p>自动化工作流程，AI流程优化，减少重复性工作，提升团队工作效率</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h4>安全合规</h4>
+                            <p>银行级数据加密，符合法律行业数据保护合规要求，AI安全监控</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h4>移动办公</h4>
+                            <p>支持多终端访问，随时随地处理业务，移动端AI助手功能</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">🤝</div>
+                            <h4>智能团队协作</h4>
+                            <p>强大的团队协作功能，AI智能任务分配，让团队成员配合更加默契高效</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">💬</div>
+                            <h4>AI客户服务</h4>
+                            <p>智能客服机器人，自动回复常见问题，提升客户服务质量和响应速度</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+
+                        <div class="crm-feature-card">
+                            <div class="feature-icon">📈</div>
+                            <h4>业绩预测</h4>
+                            <p>基于历史数据的AI业绩预测模型，精准预测销售趋势和目标达成率</p>
+                            <div class="feature-status">已集成</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions-section">
+                    <h3>⚡ 快速操作</h3>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn" onclick="generateCRMReport()">📊 生成报表</button>
+                        <button class="quick-action-btn" onclick="scheduleCRMFollowUp()">📅 安排跟进</button>
+                        <button class="quick-action-btn" onclick="sendCRMEmail()">📧 发送邮件</button>
+                        <button class="quick-action-btn" onclick="createCRMTask()">✅ 创建任务</button>
+                        <button class="quick-action-btn" onclick="backupCRMData()">💾 备份数据</button>
+                        <button class="quick-action-btn" onclick="performCRMAnalysis()">🤖 AI分析</button>
+                        <button class="quick-action-btn" onclick="performCRMSegmentation()">👥 客户分层</button>
+                        <button class="quick-action-btn" onclick="performCRMReview()">📈 业绩审核</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据统计 -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;" data-lang="stats-title">值得信赖的成绩</h2>
+                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);" data-lang="stats-subtitle">数字见证我们的专业实力</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="5000">0</div>
+                    <div class="stat-label" data-lang="stat-clients">服务客户</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="50000">0</div>
+                    <div class="stat-label" data-lang="stat-cases">处理案件</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="99">0</div>
+                    <div class="stat-label" data-lang="stat-satisfaction">客户满意度(%)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="24">0</div>
+                    <div class="stat-label" data-lang="stat-support">服务响应(h)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 一键咨询区域 -->
+<section id="quick-consultation" class="consultation-section">
+    <div class="container">
+        <div class="consultation-content">
+            <div class="consultation-info">
+                <h2 data-lang="consultation-title">一键咨询</h2>
+                <p data-lang="consultation-desc">填写需求表单，我们将在24小时内为您提供专业咨询</p>
+                <div class="consultation-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span data-lang="consultation-feature1">快速响应</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span data-lang="consultation-feature2">精准匹配</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <span data-lang="consultation-feature3">微信推送</span>
+                    </div>
+                </div>
+            </div>
+            <div class="consultation-form">
+                <form id="consultationForm" onsubmit="submitConsultation(event)">
+                    <div class="form-group">
+                        <label data-lang="form-name">姓名</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-phone">联系电话</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-email">邮箱</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-service">服务类型</label>
+                        <select name="service" required>
+                            <option value="">请选择服务类型</option>
+                            <option value="startup">创业设立</option>
+                            <option value="operation">运营支持</option>
+                            <option value="expansion">业务拓展</option>
+                            <option value="legal">法律服务</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-message">需求描述</label>
+                        <textarea name="message" rows="3" placeholder="请详细描述您的需求..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang="form-submit">提交咨询</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="nav.js"></script>
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'nav-layers': '客户分层',
+                'nav-ai-legal': '⚖️ AI法律',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-knowledge': '知识库',
+                // AI法律服务翻译
+                'service-ai-legal-title': 'AI法律分析平台',
+                'service-ai-legal-desc': '新一代智能法律分析引擎，结合AI与法律专业知识，提供高效、准确、可靠的法律服务',
+                'service-ai-legal-feature1': '智能合同审查与风险识别',
+                'service-ai-legal-feature2': '法律文档智能搜索',
+                'service-ai-legal-feature3': '案例结果AI预测',
+                'service-ai-legal-feature4': '7x24小时法律咨询助手',
+                'service-ai-learn-more': '立即体验',
+                // AI CRM翻译
+                'crm-ai-title': 'AI智能CRM',
+                'crm-ai-desc': 'AI驱动的专业客户关系管理平台，集成法律、生活、教育、劳务、财务全方位管理',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-education': '留学教育',
+                'nav-tourism': '旅游服务',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-services': '法律服务',
+                'nav-crm': 'CRM功能',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'slide1-title': '智能法律服务<br>引领未来',
+                'slide1-subtitle': 'AI驱动的法律服务平台，为您提供智能化、专业化、高效率的法律解决方案',
+                'slide1-cta': '立即体验',
+                'slide1-demo': '预约演示',
+                'slide2-title': '专业法律团队<br>值得信赖',
+                'slide2-subtitle': '资深律师团队为您提供全方位法律服务，让法律不再是难题',
+                'slide2-cta': '咨询律师',
+                'slide2-team': '了解团队',
+                'slide3-title': 'CRM管理系统<br>提升效率',
+                'slide3-subtitle': '智能化客户关系管理，让法律服务更高效、更专业、更贴心',
+                'slide3-cta': '免费试用',
+                'slide3-features': '功能特性',
+                'services-title': '专业法律服务产品',
+                'services-subtitle': '为律师事务所、企业法务部门提供全方位的法律服务解决方案',
+                'service-contract-title': '智能合同审查',
+                'service-contract-desc': 'AI驱动的合同审查系统，快速识别法律风险，提供专业修改建议',
+                'service-contract-feature1': '智能风险识别',
+                'service-contract-feature2': '条款合规检查',
+                'service-contract-feature3': '批量处理能力',
+                'service-contract-feature4': '审查报告生成',
+                'service-case-title': '案件管理系统',
+                'service-case-desc': '全流程案件管理，从立案到结案，让案件管理更高效、更规范',
+                'service-case-feature1': '案件进度跟踪',
+                'service-case-feature2': '文档自动归档',
+                'service-case-feature3': '团队协作平台',
+                'service-case-feature4': '统计分析报表',
+                'service-lawlib-title': '法律法规库',
+                'service-lawlib-desc': '实时更新的法律法规数据库，智能检索，让法律研究更高效',
+                'service-lawlib-feature1': '实时更新推送',
+                'service-lawlib-feature2': '智能语义检索',
+                'service-lawlib-feature3': '案例关联分析',
+                'service-lawlib-feature4': '专业解读文章',
+                'service-crm-title': '客户关系管理',
+                'service-crm-desc': '专为法律行业定制的CRM系统，提升客户服务质量和业务转化率',
+                'service-crm-feature1': '客户信息管理',
+                'service-crm-feature2': '销售线索跟踪',
+                'service-crm-feature3': '服务工单系统',
+                'service-crm-feature4': '客户满意度调研',
+                'service-finance-title': '财务管理系统',
+                'service-finance-desc': '专为律所设计的财务管理，费用计算、账单管理、财务分析一站式解决',
+                'service-finance-feature1': '智能费用计算',
+                'service-finance-feature2': '账单自动生成',
+                'service-finance-feature3': '成本效益分析',
+                'service-finance-feature4': '财务报表导出',
+                'service-consulting-title': '在线法律咨询',
+                'service-consulting-desc': '连接客户与律师的在线咨询平台，让法律服务触手可及',
+                'service-consulting-feature1': '即时在线咨询',
+                'service-consulting-feature2': '专业律师匹配',
+                'service-consulting-feature3': '咨询服务评价',
+                'service-consulting-feature4': '法律知识库查询',
+                'service-learn-more': '了解详情',
+                'crm-title': 'CRM核心功能',
+                'crm-subtitle': '强大的CRM功能，助力法律服务机构数字化转型',
+                'crm-feature-1-title': '精准营销',
+                'crm-feature-1-desc': '智能客户画像分析，精准定位潜在客户，提升获客效率',
+                'crm-feature-2-title': '数据分析',
+                'crm-feature-2-desc': '全面的业务数据分析，帮助管理者做出更明智的决策',
+                'crm-feature-3-title': '流程自动化',
+                'crm-feature-3-desc': '自动化工作流程，减少重复性工作，提升团队工作效率',
+                'crm-feature-4-title': '安全合规',
+                'crm-feature-4-desc': '银行级数据加密，符合法律行业数据保护合规要求',
+                'crm-feature-5-title': '移动办公',
+                'crm-feature-5-desc': '支持多终端访问，随时随地处理业务，提升工作灵活性',
+                'crm-feature-6-title': '团队协作',
+                'crm-feature-6-desc': '强大的团队协作功能，让团队成员配合更加默契高效',
+                'stats-title': '值得信赖的成绩',
+                'stats-subtitle': '数字见证我们的专业实力',
+                'stat-clients': '服务客户',
+                'stat-cases': '处理案件',
+                'stat-satisfaction': '客户满意度(%)',
+                'stat-support': '服务响应(h)',
+                'service-legalAdvisor-title': '法律顾问',
+                'service-legalAdvisor-desc': '专业法律顾问服务，为企业及个人提供全面法律咨询',
+                'service-legalAdvisor-feature1': '企业法律顾问',
+                'service-legalAdvisor-feature2': '个人法律咨询',
+                'service-legalAdvisor-feature3': '合同审查',
+                'service-legalAdvisor-feature4': '风险评估',
+                'service-legalAssistant-title': '法务助理',
+                'service-legalAssistant-desc': '专业法务助理服务，协助处理日常法律事务',
+                'service-legalAssistant-feature1': '文书起草',
+                'service-legalAssistant-feature2': '案件整理',
+                'service-legalAssistant-feature3': '法律研究',
+                'service-legalAssistant-feature4': '事务协调',
+                'service-corporateLegal-title': '企业法务',
+                'service-corporateLegal-desc': '企业法务外包服务，为企业提供全方位法律支持',
+                'service-corporateLegal-feature1': '公司治理',
+                'service-corporateLegal-feature2': '合规管理',
+                'service-corporateLegal-feature3': '股权设计',
+                'service-corporateLegal-feature4': '并购重组',
+                'service-litigationFinancing-title': '诉讼融资',
+                'service-litigationFinancing-desc': '专业诉讼融资服务，为当事人提供诉讼资金支持',
+                'service-litigationFinancing-feature1': '案件评估',
+                'service-litigationFinancing-feature2': '资金支持',
+                'service-litigationFinancing-feature3': '风险分担',
+                'service-litigationFinancing-feature4': '回款分成',
+                'service-intellectualProperty-title': '知识产权',
+                'service-intellectualProperty-desc': '全方位知识产权保护服务，维护创新成果',
+                'service-intellectualProperty-feature1': '专利申请',
+                'service-intellectualProperty-feature2': '商标注册',
+                'service-intellectualProperty-feature3': '版权保护',
+                'service-intellectualProperty-feature4': '技术转让',
+                'service-legalTraining-title': '法律培训',
+                'service-legalTraining-desc': '专业法律培训服务，提升法律素养和实务能力',
+                'service-legalTraining-feature1': '企业内训',
+                'service-legalTraining-feature2': '法律讲座',
+                'service-legalTraining-feature3': '技能培训',
+                'service-legalTraining-feature4': '案例分析',
+                'cta-title': '开启智能化法律服务新时代',
+                'cta-subtitle': '专业团队为您提供一对一演示，定制最适合您的法律服务解决方案',
+                'cta-demo': '预约演示',
+                'cta-contact': '联系我们',
+                'layers-title': '客户分层服务',
+                'layers-subtitle': '基于用户画像和需求，提供精准的个性化服务方案',
+                'layer-personal-title': '个人用户服务',
+                'layer-personal-desc': '面向留学生、游客、宠物主人和个人创业者',
+                'layer-personal-student': '留学生群体',
+                'layer-personal-student-f1': '留学申请指导',
+                'layer-personal-student-f2': '学生签证办理',
+                'layer-personal-student-f3': '学校申请协助',
+                'layer-personal-student-f4': '住宿安排服务',
+                'layer-personal-tourist': '游客群体',
+                'layer-personal-tourist-f1': '定制旅游服务',
+                'layer-personal-tourist-f2': '文化体验活动',
+                'layer-personal-tourist-f3': '购物指导',
+                'layer-personal-tourist-f4': '交通接送',
+                'layer-personal-pet': '宠物主人',
+                'layer-personal-pet-f1': '宠物入境协助',
+                'layer-personal-pet-f2': '医疗美容服务',
+                'layer-personal-pet-f3': '宠物用品配送',
+                'layer-personal-pet-f4': '紧急医疗响应',
+                'layer-sme-title': '小型企业服务',
+                'layer-sme-desc': '面向1-50人规模的初创和小微企业',
+                'layer-sme-startup': '初创企业 (1-10人)',
+                'layer-sme-startup-f1': '公司设立服务',
+                'layer-sme-startup-f2': '基础合规指导',
+                'layer-sme-startup-f3': '成本控制咨询',
+                'layer-sme-startup-f4': '办公空间租赁',
+                'layer-sme-micro': '小微企业 (11-50人)',
+                'layer-sme-micro-f1': '运营流程优化',
+                'layer-sme-micro-f2': '税务筹划服务',
+                'layer-sme-micro-f3': '人力资源管理',
+                'layer-sme-micro-f4': '数字化升级',
+                'layer-enterprise-title': '中大型企业服务',
+                'layer-enterprise-desc': '面向50+人规模的中型和大型企业',
+                'layer-enterprise-medium': '中型企业 (51-200人)',
+                'layer-enterprise-medium-f1': '业务扩展咨询',
+                'layer-enterprise-medium-f2': '融资协助服务',
+                'layer-enterprise-medium-f3': '并购重组顾问',
+                'layer-enterprise-medium-f4': '品牌建设支持',
+                'layer-enterprise-large': '大型企业 (200+人)',
+                'layer-enterprise-large-f1': '战略规划咨询',
+                'layer-enterprise-large-f2': '国际化布局',
+                'layer-enterprise-large-f3': '合规管理体系',
+                'layer-enterprise-large-f4': '数字化转型',
+                'consultation-title': '一键咨询',
+                'consultation-desc': '填写需求表单，我们将在24小时内为您提供专业咨询',
+                'consultation-feature1': '快速响应',
+                'consultation-feature2': '精准匹配',
+                'consultation-feature3': '微信推送',
+                'form-name': '姓名',
+                'form-phone': '联系电话',
+                'form-email': '邮箱',
+                'form-service': '服务类型',
+                'form-message': '需求描述',
+                'form-submit': '提交咨询',
+                'knowledge-title': '知识库',
+                'knowledge-subtitle': '签证知识、设立流程等实用信息',
+                'knowledge-visa-title': '签证指南',
+                'knowledge-visa-desc': '日本各类签证申请流程和注意事项',
+                'knowledge-company-title': '公司设立',
+                'knowledge-company-desc': '日本公司注册流程和所需材料',
+                'knowledge-tax-title': '税务知识',
+                'knowledge-tax-desc': '日本税务制度和优惠政策',
+                'knowledge-labor-title': '劳务社保',
+                'knowledge-labor-desc': '日本雇佣制度和社保体系',
+                'professionals-title': '专业人才',
+                'professionals-subtitle': '律师、行政书士、翻译等专业服务',
+                'cat-lawyer-title': '律师',
+                'cat-lawyer-desc': '专业法律服务',
+                'cat-gyosei-title': '行政书士',
+                'cat-gyosei-desc': '签证、行政手续',
+                'cat-translator-title': '翻译',
+                'cat-translator-desc': '多语种翻译服务',
+                'cat-consultant-title': '顾问',
+                'cat-consultant-desc': '商业咨询服务',
+                'lifestyle-title': '生活帮忙',
+                'lifestyle-subtitle': '翻译、代跑、维修、陪同等生活服务',
+                'lifestyle-translate': '翻译服务',
+                'lifestyle-translate-desc': '文件翻译、口译服务',
+                'lifestyle-errand': '代跑服务',
+                'lifestyle-errand-desc': '办事、购物代跑',
+                'lifestyle-repair': '维修服务',
+                'lifestyle-repair-desc': '家电、水电维修',
+                'lifestyle-medical': '陪同就诊',
+                'lifestyle-medical-desc': '医院翻译陪同',
+                'lifestyle-housing': '住房帮忙',
+                'lifestyle-housing-desc': '租房、买房协助',
+                'lifestyle-transport': '交通协助',
+                'lifestyle-transport-desc': '驾照办理、车辆相关',
+                'community-title': '社群网络',
+                'community-subtitle': '全日本商业合作社群',
+                'community-join-title': '加入我们的社群',
+                'community-join-desc': '与全日本的企业家和专业人士建立联系，分享经验，寻求合作机会',
+                'community-benefit1': '商业合作机会',
+                'community-benefit2': '活动优先参与',
+                'community-benefit3': '经验分享交流',
+                'community-benefit4': '资源对接服务',
+                'community-form-title': '申请加入社群',
+                'community-form-name': '姓名',
+                'community-form-company': '公司/机构',
+                'community-form-position': '职位',
+                'community-form-wechat': '微信号',
+                'community-form-submit': '申请加入'
+            },
+            en: {
+                'nav-layers': 'Customer Tiers',
+                'nav-ai-legal': '⚖️ AI Legal',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-knowledge': 'Knowledge Base',
+                // AI Legal Service Translations
+                'service-ai-legal-title': 'AI Legal Analysis Platform',
+                'service-ai-legal-desc': 'Next-generation intelligent legal analysis engine combining AI with legal expertise for efficient, accurate, and reliable legal services',
+                'service-ai-legal-feature1': 'Smart Contract Review & Risk Identification',
+                'service-ai-legal-feature2': 'Intelligent Legal Document Search',
+                'service-ai-legal-feature3': 'AI-powered Case Outcome Prediction',
+                'service-ai-legal-feature4': '24/7 Legal Consultation Assistant',
+                'service-ai-learn-more': 'Try Now',
+                // AI CRM Translations
+                'crm-ai-title': 'AI Smart CRM',
+                'crm-ai-desc': 'AI-driven professional CRM platform integrating legal, lifestyle, education, labor, and financial services management',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-education': 'Study Abroad',
+                'nav-tourism': 'Tourism',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-services': 'Legal Services',
+                'nav-crm': 'CRM Features',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'slide1-title': 'Smart Legal Services<br>Leading the Future',
+                'slide1-subtitle': 'AI-driven legal service platform providing intelligent, professional, and efficient legal solutions',
+                'slide1-cta': 'Try Now',
+                'slide1-demo': 'Book Demo',
+                'slide2-title': 'Professional Legal Team<br>Trustworthy',
+                'slide2-subtitle': 'Experienced lawyer team providing comprehensive legal services',
+                'slide2-cta': 'Consult Lawyer',
+                'slide2-team': 'Meet Team',
+                'slide3-title': 'CRM Management System<br>Boost Efficiency',
+                'slide3-subtitle': 'Intelligent customer relationship management for more efficient legal services',
+                'slide3-cta': 'Free Trial',
+                'slide3-features': 'Features',
+                'services-title': 'Professional Legal Service Products',
+                'services-subtitle': 'Comprehensive legal service solutions for law firms and corporate legal departments',
+                'service-contract-title': 'Smart Contract Review',
+                'service-contract-desc': 'AI-powered contract review system for quick risk identification and professional suggestions',
+                'service-contract-feature1': 'Intelligent Risk Detection',
+                'service-contract-feature2': 'Clause Compliance Check',
+                'service-contract-feature3': 'Batch Processing Capability',
+                'service-contract-feature4': 'Review Report Generation',
+                'service-case-title': 'Case Management System',
+                'service-case-desc': 'End-to-end case management from filing to resolution',
+                'service-case-feature1': 'Case Progress Tracking',
+                'service-case-feature2': 'Automatic Document Archiving',
+                'service-case-feature3': 'Team Collaboration Platform',
+                'service-case-feature4': 'Statistical Analysis Reports',
+                'service-lawlib-title': 'Legal Database',
+                'service-lawlib-desc': 'Real-time updated legal database with intelligent search',
+                'service-lawlib-feature1': 'Real-time Updates',
+                'service-lawlib-feature2': 'Smart Semantic Search',
+                'service-lawlib-feature3': 'Case Correlation Analysis',
+                'service-lawlib-feature4': 'Professional Analysis Articles',
+                'service-crm-title': 'Customer Relationship Management',
+                'service-crm-desc': 'Industry-specific CRM system for improved customer service and conversion',
+                'service-crm-feature1': 'Customer Information Management',
+                'service-crm-feature2': 'Lead Tracking',
+                'service-crm-feature3': 'Service Ticket System',
+                'service-crm-feature4': 'Customer Satisfaction Survey',
+                'service-finance-title': 'Financial Management',
+                'service-finance-desc': 'Law firm specific financial management with fee calculation and reporting',
+                'service-finance-feature1': 'Smart Fee Calculation',
+                'service-finance-feature2': 'Automatic Bill Generation',
+                'service-finance-feature3': 'Cost-Benefit Analysis',
+                'service-finance-feature4': 'Financial Report Export',
+                'service-consulting-title': 'Online Legal Consultation',
+                'service-consulting-desc': 'Online platform connecting clients with lawyers for accessible legal services',
+                'service-consulting-feature1': 'Instant Online Consultation',
+                'service-consulting-feature2': 'Professional Lawyer Matching',
+                'service-consulting-feature3': 'Service Evaluation System',
+                'service-consulting-feature4': 'Legal Knowledge Base',
+                'service-learn-more': 'Learn More',
+                'crm-title': 'Core CRM Features',
+                'crm-subtitle': 'Powerful CRM features driving digital transformation in legal services',
+                'crm-feature-1-title': 'Precision Marketing',
+                'crm-feature-1-desc': 'Smart customer profiling for targeted potential client acquisition',
+                'crm-feature-2-title': 'Data Analytics',
+                'crm-feature-2-desc': 'Comprehensive business data analytics for better decision-making',
+                'crm-feature-3-title': 'Process Automation',
+                'crm-feature-3-desc': 'Automated workflows to reduce repetitive tasks and improve efficiency',
+                'crm-feature-4-title': 'Security & Compliance',
+                'crm-feature-4-desc': 'Bank-level data encryption meeting legal industry compliance requirements',
+                'crm-feature-5-title': 'Mobile Office',
+                'crm-feature-5-desc': 'Multi-device access for business flexibility',
+                'crm-feature-6-title': 'Team Collaboration',
+                'crm-feature-6-desc': 'Powerful team collaboration features for improved coordination',
+                'stats-title': 'Trusted Results',
+                'stats-subtitle': 'Numbers showcase our professional expertise',
+                'stat-clients': 'Clients Served',
+                'stat-cases': 'Cases Handled',
+                'stat-satisfaction': 'Customer Satisfaction(%)',
+                'stat-support': 'Response Time(h)',
+                'service-legalAdvisor-title': 'Legal Advisor',
+                'service-legalAdvisor-desc': 'Professional legal advisory services providing comprehensive legal consultation for businesses and individuals',
+                'service-legalAdvisor-feature1': 'Corporate Legal Counsel',
+                'service-legalAdvisor-feature2': 'Personal Legal Consultation',
+                'service-legalAdvisor-feature3': 'Contract Review',
+                'service-legalAdvisor-feature4': 'Risk Assessment',
+                'service-legalAssistant-title': 'Legal Assistant',
+                'service-legalAssistant-desc': 'Professional legal assistant services to help with daily legal affairs and documentation',
+                'service-legalAssistant-feature1': 'Document Drafting',
+                'service-legalAssistant-feature2': 'Case Organization',
+                'service-legalAssistant-feature3': 'Legal Research',
+                'service-legalAssistant-feature4': 'Affair Coordination',
+                'service-corporateLegal-title': 'Corporate Legal',
+                'service-corporateLegal-desc': 'Outsourced corporate legal services providing comprehensive legal support for businesses',
+                'service-corporateLegal-feature1': 'Corporate Governance',
+                'service-corporateLegal-feature2': 'Compliance Management',
+                'service-corporateLegal-feature3': 'Equity Structure Design',
+                'service-corporateLegal-feature4': 'M&A and Restructuring',
+                'service-litigationFinancing-title': 'Litigation Financing',
+                'service-litigationFinancing-desc': 'Professional litigation financing services providing financial support for legal proceedings',
+                'service-litigationFinancing-feature1': 'Case Evaluation',
+                'service-litigationFinancing-feature2': 'Financial Support',
+                'service-litigationFinancing-feature3': 'Risk Sharing',
+                'service-litigationFinancing-feature4': 'Revenue Sharing',
+                'service-intellectualProperty-title': 'Intellectual Property',
+                'service-intellectualProperty-desc': 'Comprehensive IP protection services safeguarding your innovations and creative works',
+                'service-intellectualProperty-feature1': 'Patent Application',
+                'service-intellectualProperty-feature2': 'Trademark Registration',
+                'service-intellectualProperty-feature3': 'Copyright Protection',
+                'service-intellectualProperty-feature4': 'Technology Transfer',
+                'service-legalTraining-title': 'Legal Training',
+                'service-legalTraining-desc': 'Professional legal training services enhancing legal literacy and practical skills',
+                'service-legalTraining-feature1': 'Corporate Training',
+                'service-legalTraining-feature2': 'Legal Seminars',
+                'service-legalTraining-feature3': 'Skills Development',
+                'service-legalTraining-feature4': 'Case Studies',
+                'cta-title': 'Start the New Era of Intelligent Legal Services',
+                'cta-subtitle': 'Professional team providing personalized demos and customized legal solutions',
+                'cta-demo': 'Book Demo',
+                'cta-contact': 'Contact Us',
+                'layers-title': 'Customer Segmented Services',
+                'layers-subtitle': 'Personalized solutions based on user profiles and needs',
+                'layer-personal-title': 'Personal User Services',
+                'layer-personal-desc': 'For international students, tourists, pet owners, and individual entrepreneurs',
+                'layer-personal-student': 'Student Group',
+                'layer-personal-student-f1': 'Study Application Guidance',
+                'layer-personal-student-f2': 'Student Visa Processing',
+                'layer-personal-student-f3': 'School Application Assistance',
+                'layer-personal-student-f4': 'Accommodation Arrangement',
+                'layer-personal-tourist': 'Tourist Group',
+                'layer-personal-tourist-f1': 'Customized Tour Services',
+                'layer-personal-tourist-f2': 'Cultural Experience Activities',
+                'layer-personal-tourist-f3': 'Shopping Guidance',
+                'layer-personal-tourist-f4': 'Transportation Transfer',
+                'layer-personal-pet': 'Pet Owners',
+                'layer-personal-pet-f1': 'Pet Immigration Assistance',
+                'layer-personal-pet-f2': 'Medical & Beauty Services',
+                'layer-personal-pet-f3': 'Pet Supplies Delivery',
+                'layer-personal-pet-f4': 'Emergency Medical Response',
+                'layer-sme-title': 'Small Business Services',
+                'layer-sme-desc': 'For startups and micro-enterprises with 1-50 employees',
+                'layer-sme-startup': 'Startups (1-10 people)',
+                'layer-sme-startup-f1': 'Company Registration Services',
+                'layer-sme-startup-f2': 'Basic Compliance Guidance',
+                'layer-sme-startup-f3': 'Cost Control Consulting',
+                'layer-sme-startup-f4': 'Office Space Rental',
+                'layer-sme-micro': 'Micro-enterprises (11-50 people)',
+                'layer-sme-micro-f1': 'Operational Process Optimization',
+                'layer-sme-micro-f2': 'Tax Planning Services',
+                'layer-sme-micro-f3': 'Human Resource Management',
+                'layer-sme-micro-f4': 'Digital Transformation',
+                'layer-enterprise-title': 'Medium & Large Enterprise Services',
+                'layer-enterprise-desc': 'For medium and large enterprises with 50+ employees',
+                'layer-enterprise-medium': 'Medium Enterprises (51-200 people)',
+                'layer-enterprise-medium-f1': 'Business Expansion Consulting',
+                'layer-enterprise-medium-f2': 'Financing Assistance',
+                'layer-enterprise-medium-f3': 'M&A Advisory Services',
+                'layer-enterprise-medium-f4': 'Brand Building Support',
+                'layer-enterprise-large': 'Large Enterprises (200+ people)',
+                'layer-enterprise-large-f1': 'Strategic Planning Consulting',
+                'layer-enterprise-large-f2': 'International Layout',
+                'layer-enterprise-large-f3': 'Compliance Management Systems',
+                'layer-enterprise-large-f4': 'Digital Transformation',
+                'consultation-title': 'Quick Consultation',
+                'consultation-desc': 'Fill in the requirements form, we will provide professional consultation within 24 hours',
+                'consultation-feature1': 'Fast Response',
+                'consultation-feature2': 'Precise Matching',
+                'consultation-feature3': 'WeChat Notification',
+                'form-name': 'Name',
+                'form-phone': 'Phone',
+                'form-email': 'Email',
+                'form-service': 'Service Type',
+                'form-message': 'Requirements',
+                'form-submit': 'Submit',
+                'knowledge-title': 'Knowledge Base',
+                'knowledge-subtitle': 'Visa guides, company setup processes and practical information',
+                'knowledge-visa-title': 'Visa Guide',
+                'knowledge-visa-desc': 'Japan visa application processes and important notes',
+                'knowledge-company-title': 'Company Setup',
+                'knowledge-company-desc': 'Japan company registration procedures and required documents',
+                'knowledge-tax-title': 'Tax Knowledge',
+                'knowledge-tax-desc': 'Japan tax system and preferential policies',
+                'knowledge-labor-title': 'Labor & Social Security',
+                'knowledge-labor-desc': 'Japan employment system and social security framework',
+                'professionals-title': 'Professional Services',
+                'professionals-subtitle': 'Lawyers, administrative scriveners, translators and other professionals',
+                'cat-lawyer-title': 'Lawyers',
+                'cat-lawyer-desc': 'Professional legal services',
+                'cat-gyosei-title': 'Administrative Scriveners',
+                'cat-gyosei-desc': 'Visa and administrative procedures',
+                'cat-translator-title': 'Translators',
+                'cat-translator-desc': 'Multi-language translation services',
+                'cat-consultant-title': 'Consultants',
+                'cat-consultant-desc': 'Business consulting services',
+                'lifestyle-title': 'Lifestyle Support',
+                'lifestyle-subtitle': 'Translation, errands, repairs, medical accompaniment and other services',
+                'lifestyle-translate': 'Translation Service',
+                'lifestyle-translate-desc': 'Document translation, interpretation services',
+                'lifestyle-errand': 'Errand Service',
+                'lifestyle-errand-desc': 'Paperwork, shopping assistance',
+                'lifestyle-repair': 'Repair Service',
+                'lifestyle-repair-desc': 'Home appliance, maintenance services',
+                'lifestyle-medical': 'Medical Accompaniment',
+                'lifestyle-medical-desc': 'Hospital translation and accompaniment',
+                'lifestyle-housing': 'Housing Support',
+                'lifestyle-housing-desc': 'Rental and property purchase assistance',
+                'lifestyle-transport': 'Transportation Support',
+                'lifestyle-transport-desc': 'Driver license, vehicle related services',
+                'community-title': 'Community Network',
+                'community-subtitle': 'Japan-wide business cooperation community',
+                'community-join-title': 'Join Our Community',
+                'community-join-desc': 'Connect with entrepreneurs and professionals across Japan, share experiences, seek cooperation opportunities',
+                'community-benefit1': 'Business Cooperation',
+                'community-benefit2': 'Event Priority Access',
+                'community-benefit3': 'Experience Sharing',
+                'community-benefit4': 'Resource Matching',
+                'community-form-title': 'Apply to Join Community',
+                'community-form-name': 'Name',
+                'community-form-company': 'Company/Organization',
+                'community-form-position': 'Position',
+                'community-form-wechat': 'WeChat ID',
+                'community-form-submit': 'Apply to Join'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        // 语言切换功能
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', function() {
+                const lang = this.dataset.langBtn;
+                switchLanguage(lang);
+            });
+        });
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+
+            document.documentElement.lang = lang;
+            currentLanguage = lang;
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.dataset.lang;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 轮播功能
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            // 添加动画类
+            slides[index].querySelector('.slide-content').className = 'slide-content slide-in-left';
+
+            currentSlide = index;
+        }
+
+        function changeSlide(direction) {
+            const totalSlides = slides.length;
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // 自动轮播
+        function startAutoSlide() {
+            setInterval(() => {
+                changeSlide(1);
+            }, 5000);
+        }
+
+        // 服务详情模态框
+        function showServiceDetails(serviceType) {
+            // console.log('Service details for:', serviceType);
+            // 这里可以添加模态框显示逻辑
+        }
+
+        // 数字计数动画
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-counter]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.counter);
+                const increment = target / 100;
+                let current = 0;
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // 检测元素是否在视口内
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // 滚动时触发计数动画
+        let countersAnimated = false;
+        function handleScroll() {
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection && isElementInViewport(statsSection) && !countersAnimated) {
+                animateCounters();
+                countersAnimated = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 新功能JavaScript函数
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+
+            // 点击菜单项后自动关闭菜单
+            if (navMenu.classList.contains('active')) {
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        // 点击页面其他地方关闭移动菜单
+        document.addEventListener('click', function(event) {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // 客户分层详情展示
+        function showLayerDetails(layerType) {
+            const layerDetails = {
+                personal: {
+                    title: currentLanguage === 'zh' ? '个人用户服务详情' : 'Personal User Services Details',
+                    services: [
+                        currentLanguage === 'zh' ? '留学申请全程指导' : 'Complete Study Application Guidance',
+                        currentLanguage === 'zh' ? '定制旅游服务' : 'Customized Tour Services',
+                        currentLanguage === 'zh' ? '宠物入境医疗美容' : 'Pet Immigration, Medical & Beauty',
+                        currentLanguage === 'zh' ? '个人创业者支持' : 'Individual Entrepreneur Support',
+                        currentLanguage === 'zh' ? '24小时紧急服务' : '24-hour Emergency Services'
+                    ]
+                },
+                sme: {
+                    title: currentLanguage === 'zh' ? '小型企业服务详情' : 'Small Business Services Details',
+                    services: [
+                        currentLanguage === 'zh' ? '公司设立与合规' : 'Company Registration & Compliance',
+                        currentLanguage === 'zh' ? '税务筹划与优化' : 'Tax Planning & Optimization',
+                        currentLanguage === 'zh' ? '人力资源管理' : 'Human Resource Management',
+                        currentLanguage === 'zh' ? '数字化转型咨询' : 'Digital Transformation Consulting',
+                        currentLanguage === 'zh' ? '成本控制分析' : 'Cost Control Analysis'
+                    ]
+                },
+                enterprise: {
+                    title: currentLanguage === 'zh' ? '中大型企业服务详情' : 'Enterprise Services Details',
+                    services: [
+                        currentLanguage === 'zh' ? '战略规划咨询' : 'Strategic Planning Consulting',
+                        currentLanguage === 'zh' ? '国际化布局支持' : 'International Layout Support',
+                        currentLanguage === 'zh' ? '合规管理体系' : 'Compliance Management Systems',
+                        currentLanguage === 'zh' ? '并购重组顾问' : 'M&A Advisory Services',
+                        currentLanguage === 'zh' ? '数字化转型实施' : 'Digital Transformation Implementation'
+                    ]
+                }
+            };
+
+            const details = layerDetails[layerType];
+            if (details) {
+                // 创建模态框显示详情
+                const modal = document.createElement('div');
+                modal.className = 'layer-modal';
+                modal.innerHTML = `
+                    <div class="layer-modal-content">
+                        <div class="layer-modal-header">
+                            <h3>${details.title}</h3>
+                            <span class="layer-modal-close" onclick="closeLayerModal()">&times;</span>
+                        </div>
+                        <div class="layer-modal-body">
+                            <ul class="layer-services-list">
+                                ${details.services.map(service => `<li>${service}</li>`).join('')}
+                            </ul>
+                            <button class="layer-contact-btn" onclick="startConsultation('${layerType}')">
+                                ${currentLanguage === 'zh' ? '立即咨询' : 'Consult Now'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+        }
+
+        // 关闭分层模态框
+        function closeLayerModal() {
+            const modal = document.querySelector('.layer-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // 咨询表单提交
+        function submitConsultation(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const consultationData = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                service: formData.get('service'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+
+            // 这里可以集成CRM系统或微信推送API
+            // console.log('Consultation submitted:', consultationData);
+
+            // 模拟发送到CRM/微信
+            simulateCRMIntegration(consultationData);
+
+            // 显示成功消息
+            alert(currentLanguage === 'zh' ?
+                '咨询已提交！我们将在24小时内联系您。' :
+                'Consultation submitted! We will contact you within 24 hours.'
+            );
+
+            // 重置表单
+            event.target.reset();
+        }
+
+        
+        // 模拟CRM系统集成
+        function simulateCRMIntegration(data) {
+            // 这里可以集成实际的CRM API
+            // 例如：发送到微信、邮件系统、或CRM数据库
+
+            // 模拟微信推送
+            if (typeof WechatAPI !== 'undefined') {
+                WechatAPI.sendNotification({
+                    title: '新咨询请求',
+                    content: `来自${data.name}的${data.service}咨询`,
+                    contact: data.phone
+                });
+            }
+
+            // 模拟CRM数据库存储
+            // console.log('CRM Integration - Data would be sent to:');
+            // console.log('- CRM Database');
+            // console.log('- Email Notification System');
+            // console.log('- WeChat Business Account');
+            // console.log('- Sales Team Dashboard');
+        }
+
+        
+        // 添加模态框样式
+        const modalStyles = `
+            <style>
+                .layer-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+
+                .layer-modal-content {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    position: relative;
+                }
+
+                .layer-modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    border-bottom: 2px solid var(--light);
+                    padding-bottom: 15px;
+                }
+
+                .layer-modal-close {
+                    font-size: 28px;
+                    cursor: pointer;
+                    color: var(--gray);
+                    transition: color 0.3s ease;
+                }
+
+                .layer-modal-close:hover {
+                    color: var(--danger);
+                }
+
+                .layer-services-list {
+                    list-style: none;
+                    margin-bottom: 25px;
+                }
+
+                .layer-services-list li {
+                    padding: 12px 0;
+                    border-bottom: 1px solid #f0f0f0;
+                    position: relative;
+                    padding-left: 30px;
+                }
+
+                .layer-services-list li:before {
+                    content: "✓";
+                    position: absolute;
+                    left: 0;
+                    color: var(--success);
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+
+                .layer-contact-btn {
+                    background: var(--gold);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    width: 100%;
+                    transition: all 0.3s ease;
+                }
+
+                .layer-contact-btn:hover {
+                    background: #f4c430;
+                    transform: scale(1.02);
+                }
+            </style>
+        `;
+
+        // 将模态框样式添加到页面头部
+        document.head.insertAdjacentHTML('beforeend', modalStyles);
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 启动自动轮播
+            startAutoSlide();
+
+            // console.log('Japan Business Platform Loaded Successfully');
+        });
+    </script>
+</body>
+
+</html>

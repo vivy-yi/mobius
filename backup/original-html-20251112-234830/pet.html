@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物帮帮忙 - 日本商务通</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Use nav.js injected navigation, no custom header styles needed */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a.active {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* 主要内容 */
+        main {
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.9) 0%, rgba(44, 82, 130, 0.9) 100%),
+                       url('https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        /* 服务分类 */
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .service-content {
+            padding: 35px 30px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--dark);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.4);
+        }
+
+        /* 宠物类型 */
+        .pets-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pet-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .pet-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .pet-content {
+            padding: 25px;
+        }
+
+        .pet-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .pet-type {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .pet-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .pet-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .pet-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 服务流程 */
+        .process-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--warning) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+        }
+
+        .step-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--success);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* 价格套餐 */
+        .pricing-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .pricing-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .pricing-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .pricing-price small {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .pricing-content {
+            padding: 35px 30px;
+        }
+
+        .pricing-includes {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-includes li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--dark);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .pricing-includes li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .pricing-btn {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        /* 联系表单 */
+        .contact-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-lang="hero-title">日本宠物服务专业平台</h1>
+                    <p data-lang="hero-subtitle">提供全方位的宠物服务，包括宠物入境、医疗、美容、寄养等专业服务，让您的爱宠在日本得到最好的照顾</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务分类 -->
+        <section class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="services-title">宠物服务项目</h2>
+                    <p class="section-subtitle" data-lang="services-subtitle">专业团队提供一站式宠物服务</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- 宠物入境 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🛃</span>
+                            <h3 class="service-title" data-lang="service-immigration-title">宠物入境</h3>
+                            <p class="service-subtitle" data-lang="service-immigration-subtitle">专业通关指导</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-immigration-f1">入境手续办理</li>
+                                <li data-lang="service-immigration-f2">疫苗接种证明</li>
+                                <li data-lang="service-immigration-f3">健康检查安排</li>
+                                <li data-lang="service-immigration-f4">隔离检疫协助</li>
+                                <li data-lang="service-immigration-f5">文件准备指导</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('immigration')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 宠物医疗 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🏥</span>
+                            <h3 class="service-title" data-lang="service-medical-title">宠物医疗</h3>
+                            <p class="service-subtitle" data-lang="service-medical-subtitle">专业医疗保障</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-medical-f1">24小时急诊</li>
+                                <li data-lang="service-medical-f2">专科医生预约</li>
+                                <li data-lang="service-medical-f3">定期体检服务</li>
+                                <li data-lang="service-medical-f4">疫苗接种安排</li>
+                                <li data-lang="service-medical-f5">手术康复护理</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('medical')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 宠物美容 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">✂️</span>
+                            <h3 class="service-title" data-lang="service-grooming-title">宠物美容</h3>
+                            <p class="service-subtitle" data-lang="service-grooming-subtitle">专业美容服务</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-grooming-f1">基础洗护服务</li>
+                                <li data-lang="service-grooming-f2">专业造型设计</li>
+                                <li data-lang="service-grooming-f3">指甲修剪</li>
+                                <li data-lang="service-grooming-f4">耳朵清洁护理</li>
+                                <li data-lang="service-grooming-f5">上门美容服务</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('grooming')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 宠物寄养 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🏠</span>
+                            <h3 class="service-title" data-lang="service-boarding-title">宠物寄养</h3>
+                            <p class="service-subtitle" data-lang="service-boarding-subtitle">安全温馨环境</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-boarding-f1">专业寄养家庭</li>
+                                <li data-lang="service-boarding-f2">24小时监护</li>
+                                <li data-lang="service-boarding-f3">定制化饮食</li>
+                                <li data-lang="service-boarding-f4">日常遛弯服务</li>
+                                <li data-lang="service-boarding-f5">视频实时查看</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('boarding')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 宠物训练 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🎓</span>
+                            <h3 class="service-title" data-lang="service-training-title">宠物训练</h3>
+                            <p class="service-subtitle" data-lang="service-training-subtitle">专业训练指导</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-training-f1">基础行为训练</li>
+                                <li data-lang="service-training-f2">社交能力培养</li>
+                                <li data-lang="service-training-f3">问题行为矫正</li>
+                                <li data-lang="service-training-f4">专项技能训练</li>
+                                <li data-lang="service-training-f5">家庭训练课程</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('training')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 宠物用品 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🛍️</span>
+                            <h3 class="service-title" data-lang="service-supplies-title">宠物用品</h3>
+                            <p class="service-subtitle" data-lang="service-supplies-subtitle">优质用品配送</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-supplies-f1">进口宠物食品</li>
+                                <li data-lang="service-supplies-f2">营养保健品</li>
+                                <li data-lang="service-supplies-f3">玩具用品推荐</li>
+                                <li data-lang="service-supplies-f4">生活用品采购</li>
+                                <li data-lang="service-supplies-f5">定期配送服务</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('supplies')" data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 支持的宠物类型 -->
+        <section class="pets-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="pets-title">服务宠物类型</h2>
+                    <p class="section-subtitle" data-lang="pets-subtitle">为各种爱宠提供专业服务</p>
+                </div>
+
+                <div class="pets-grid">
+                    <div class="pet-card">
+                        <div class="pet-image">🐕</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-dog-name">犬类服务</h3>
+                            <div class="pet-type" data-lang="pet-dog-type">全犬种专业护理</div>
+                            <p class="pet-description" data-lang="pet-dog-desc">为各种犬类提供专业服务，包括大型犬、小型犬、特殊犬种的定制化护理方案。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag1">行为训练</span>
+                                <span class="pet-tag" data-lang="pet-tag2">美容护理</span>
+                                <span class="pet-tag" data-lang="pet-tag3">健康检查</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pet-card">
+                        <div class="pet-image">🐱</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-cat-name">猫咪服务</h3>
+                            <div class="pet-type" data-lang="pet-cat-type">猫咪专业护理</div>
+                            <p class="pet-description" data-lang="pet-cat-desc">针对猫咪的特性和需求，提供专业的医疗服务、美容护理和日常照护。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag4">室内环境</span>
+                                <span class="pet-tag" data-lang="pet-tag5">疾病预防</span>
+                                <span class="pet-tag" data-lang="pet-tag6">营养搭配</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pet-card">
+                        <div class="pet-image">🐰</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-rabbit-name">兔类服务</h3>
+                            <div class="pet-type" data-lang="pet-rabbit-type">兔子专业护理</div>
+                            <p class="pet-description" data-lang="pet-rabbit-desc">为兔类宠物提供专业的日常护理、疾病预防和营养指导服务。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag7">牙齿护理</span>
+                                <span class="pet-tag" data-lang="pet-tag8">毛发护理</span>
+                                <span class="pet-tag" data-lang="pet-tag9">环境布置</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pet-card">
+                        <div class="pet-image">🦜</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-bird-name">鸟类服务</h3>
+                            <div class="pet-type" data-lang="pet-bird-type">鸟类专业护理</div>
+                            <p class="pet-description" data-lang="pet-bird-desc">为各种鸟类宠物提供专业的医疗服务、营养搭配和环境指导。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag10">飞行训练</span>
+                                <span class="pet-tag" data-lang="pet-tag11">声音训练</span>
+                                <span class="pet-tag" data-lang="pet-tag12">健康监测</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pet-card">
+                        <div class="pet-image">🐹</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-rodent-name">啮齿类服务</h3>
+                            <div class="pet-type" data-lang="pet-rodent-type">仓鼠龙猫等</div>
+                            <p class="pet-description" data-lang="pet-rodent-desc">为仓鼠、龙猫、豚鼠等小型啮齿类宠物提供专业护理服务。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag13">环境设计</span>
+                                <span class="pet-tag" data-lang="pet-tag14">饮食指导</span>
+                                <span class="pet-tag" data-lang="pet-tag15">疾病预防</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pet-card">
+                        <div class="pet-image">🐠</div>
+                        <div class="pet-content">
+                            <h3 class="pet-name" data-lang="pet-fish-name">水族服务</h3>
+                            <div class="pet-type" data-lang="pet-fish-type">观赏鱼水族箱</div>
+                            <p class="pet-description" data-lang="pet-fish-desc">为水族宠物提供专业的养护指导、水质管理和疾病治疗服务。</p>
+                            <div class="pet-features">
+                                <span class="pet-tag" data-lang="pet-tag16">水质检测</span>
+                                <span class="pet-tag" data-lang="pet-tag17">设备维护</span>
+                                <span class="pet-tag" data-lang="pet-tag18">鱼类健康</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务流程 -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="process-title">服务流程</h2>
+                    <p class="section-subtitle" data-lang="process-subtitle">专业、便捷、可靠的服务流程</p>
+                </div>
+
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title" data-lang="process-step1-title">咨询评估</h3>
+                        <p class="step-description" data-lang="process-step1-desc">了解您的宠物情况和需求，制定个性化的服务方案。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title" data-lang="process-step2-title">方案确认</h3>
+                        <p class="step-description" data-lang="process-step2-desc">确认服务内容和时间安排，签订服务协议。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title" data-lang="process-step3-title">专业服务</h3>
+                        <p class="step-description" data-lang="process-step3-desc">专业团队按照约定提供高质量的宠物服务。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title" data-lang="process-step4-title">跟踪反馈</h3>
+                        <p class="step-description" data-lang="process-step4-desc">定期反馈宠物状况，及时调整服务方案。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title" data-lang="process-step5-title">后续支持</h3>
+                        <p class="step-description" data-lang="process-step5-desc">提供持续的健康咨询和后续服务支持。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title" data-lang="process-step6-title">满意度调查</h3>
+                        <p class="step-description" data-lang="process-step6-desc">收集反馈意见，不断改进服务质量。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 价格套餐 -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="pricing-title">服务套餐</h2>
+                    <p class="section-subtitle" data-lang="pricing-subtitle">灵活的套餐选择，满足不同需求</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- 基础套餐 -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name" data-lang="package-basic-name">基础服务套餐</h3>
+                            <div class="pricing-price">
+                                ¥3,999
+                                <small data-lang="package-price-unit">/月</small>
+                            </div>
+                        </div>
+                        <div class="pricing-content">
+                            <ul class="pricing-includes">
+                                <li data-lang="package-basic-f1">基础健康检查</li>
+                                <li data-lang="package-basic-f2">每月美容护理</li>
+                                <li data-lang="package-basic-f3">疫苗接种提醒</li>
+                                <li data-lang="package-basic-f4">24小时在线咨询</li>
+                                <li data-lang="package-basic-f5">基础用品配送</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="showPackageDetails('basic')" data-lang="package-select">选择套餐</button>
+                        </div>
+                    </div>
+
+                    <!-- 专业套餐 -->
+                    <div class="pricing-card">
+                        <div class="pricing-badge" data-lang="package-badge-popular">热门推荐</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-name" data-lang="package-professional-name">专业服务套餐</h3>
+                            <div class="pricing-price">
+                                ¥7,999
+                                <small data-lang="package-price-unit">/月</small>
+                            </div>
+                        </div>
+                        <div class="pricing-content">
+                            <ul class="pricing-includes">
+                                <li data-lang="package-professional-f1">全面健康体检</li>
+                                <li data-lang="package-professional-f2">每两周美容护理</li>
+                                <li data-lang="package-professional-f3">专科医生预约</li>
+                                <li data-lang="package-professional-f4">24小时紧急响应</li>
+                                <li data-lang="package-professional-f5">行为训练指导</li>
+                                <li data-lang="package-professional-f6">寄养服务折扣</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="showPackageDetails('professional')" data-lang="package-select">选择套餐</button>
+                        </div>
+                    </div>
+
+                    <!-- VIP套餐 -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name" data-lang="package-vip-name">VIP尊享套餐</h3>
+                            <div class="pricing-price">
+                                ¥15,999
+                                <small data-lang="package-price-unit">/月</small>
+                            </div>
+                        </div>
+                        <div class="pricing-content">
+                            <ul class="pricing-includes">
+                                <li data-lang="package-vip-f1">专属宠物医生</li>
+                                <li data-lang="package-vip-f2">每周美容护理</li>
+                                <li data-lang="package-vip-f3">上门医疗服务</li>
+                                <li data-lang="package-vip-f4">24小时专人值守</li>
+                                <li data-lang="package-vip-f5">高级训练课程</li>
+                                <li data-lang="package-vip-f6">免费寄养服务</li>
+                                <li data-lang="package-vip-f7">进口用品专供</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="showPackageDetails('vip')" data-lang="package-select">选择套餐</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系表单 -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: white;" data-lang="contact-title">宠物服务咨询</h2>
+                    <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);" data-lang="contact-subtitle">专业宠物顾问为您提供贴心服务</p>
+                </div>
+
+                <form class="contact-form" onsubmit="submitContact(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="form-name">姓名</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-phone">联系电话</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-email">邮箱</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-pet-type">宠物类型</label>
+                            <select name="pet_type" required>
+                                <option value="">请选择宠物类型</option>
+                                <option value="dog" data-lang="pet-type-dog">犬类</option>
+                                <option value="cat" data-lang="pet-type-cat">猫咪</option>
+                                <option value="rabbit" data-lang="pet-type-rabbit">兔类</option>
+                                <option value="bird" data-lang="pet-type-bird">鸟类</option>
+                                <option value="rodent" data-lang="pet-type-rodent">啮齿类</option>
+                                <option value="fish" data-lang="pet-type-fish">水族</option>
+                                <option value="other" data-lang="pet-type-other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-service">服务需求</label>
+                            <select name="service" required>
+                                <option value="">请选择服务类型</option>
+                                <option value="immigration" data-lang="service-immigration">宠物入境</option>
+                                <option value="medical" data-lang="service-medical">宠物医疗</option>
+                                <option value="grooming" data-lang="service-grooming">宠物美容</option>
+                                <option value="boarding" data-lang="service-boarding">宠物寄养</option>
+                                <option value="training" data-lang="service-training">宠物训练</option>
+                                <option value="supplies" data-lang="service-supplies">宠物用品</option>
+                                <option value="package" data-lang="service-package">套餐服务</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-urgency">紧急程度</label>
+                            <select name="urgency" required>
+                                <option value="">请选择紧急程度</option>
+                                <option value="normal" data-lang="urgency-normal">一般</option>
+                                <option value="urgent" data-lang="urgency-urgent">紧急</option>
+                                <option value="emergency" data-lang="urgency-emergency">非常紧急</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-message">详细描述</label>
+                        <textarea name="message" placeholder="请详细描述您的宠物情况和具体需求..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang="form-submit">立即咨询</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'page-title': '宠物帮帮忙',
+                'nav-home': '首页',
+                'nav-layers': '客户分层',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-education': '留学教育',
+                'nav-tourism': '旅游服务',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-services': '法律服务',
+                'nav-crm': 'CRM功能',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'hero-title': '日本宠物服务专业平台',
+                'hero-subtitle': '提供全方位的宠物服务，包括宠物入境、医疗、美容、寄养等专业服务，让您的爱宠在日本得到最好的照顾',
+                'services-title': '宠物服务项目',
+                'services-subtitle': '专业团队提供一站式宠物服务',
+                'service-immigration-title': '宠物入境',
+                'service-immigration-subtitle': '专业通关指导',
+                'service-immigration-f1': '入境手续办理',
+                'service-immigration-f2': '疫苗接种证明',
+                'service-immigration-f3': '健康检查安排',
+                'service-immigration-f4': '隔离检疫协助',
+                'service-immigration-f5': '文件准备指导',
+                'service-medical-title': '宠物医疗',
+                'service-medical-subtitle': '专业医疗保障',
+                'service-medical-f1': '24小时急诊',
+                'service-medical-f2': '专科医生预约',
+                'service-medical-f3': '定期体检服务',
+                'service-medical-f4': '疫苗接种安排',
+                'service-medical-f5': '手术康复护理',
+                'service-grooming-title': '宠物美容',
+                'service-grooming-subtitle': '专业美容服务',
+                'service-grooming-f1': '基础洗护服务',
+                'service-grooming-f2': '专业造型设计',
+                'service-grooming-f3': '指甲修剪',
+                'service-grooming-f4': '耳朵清洁护理',
+                'service-grooming-f5': '上门美容服务',
+                'service-boarding-title': '宠物寄养',
+                'service-boarding-subtitle': '安全温馨环境',
+                'service-boarding-f1': '专业寄养家庭',
+                'service-boarding-f2': '24小时监护',
+                'service-boarding-f3': '定制化饮食',
+                'service-boarding-f4': '日常遛弯服务',
+                'service-boarding-f5': '视频实时查看',
+                'service-training-title': '宠物训练',
+                'service-training-subtitle': '专业训练指导',
+                'service-training-f1': '基础行为训练',
+                'service-training-f2': '社交能力培养',
+                'service-training-f3': '问题行为矫正',
+                'service-training-f4': '专项技能训练',
+                'service-training-f5': '家庭训练课程',
+                'service-supplies-title': '宠物用品',
+                'service-supplies-subtitle': '优质用品配送',
+                'service-supplies-f1': '进口宠物食品',
+                'service-supplies-f2': '营养保健品',
+                'service-supplies-f3': '玩具用品推荐',
+                'service-supplies-f4': '生活用品采购',
+                'service-supplies-f5': '定期配送服务',
+                'service-learn-more': '了解详情',
+                'pets-title': '服务宠物类型',
+                'pets-subtitle': '为各种爱宠提供专业服务',
+                'pet-dog-name': '犬类服务',
+                'pet-dog-type': '全犬种专业护理',
+                'pet-dog-desc': '为各种犬类提供专业服务，包括大型犬、小型犬、特殊犬种的定制化护理方案。',
+                'pet-cat-name': '猫咪服务',
+                'pet-cat-type': '猫咪专业护理',
+                'pet-cat-desc': '针对猫咪的特性和需求，提供专业的医疗服务、美容护理和日常照护。',
+                'pet-rabbit-name': '兔类服务',
+                'pet-rabbit-type': '兔子专业护理',
+                'pet-rabbit-desc': '为兔类宠物提供专业的日常护理、疾病预防和营养指导服务。',
+                'pet-bird-name': '鸟类服务',
+                'pet-bird-type': '鸟类专业护理',
+                'pet-bird-desc': '为各种鸟类宠物提供专业的医疗服务、营养搭配和环境指导。',
+                'pet-rodent-name': '啮齿类服务',
+                'pet-rodent-type': '仓鼠龙猫等',
+                'pet-rodent-desc': '为仓鼠、龙猫、豚鼠等小型啮齿类宠物提供专业护理服务。',
+                'pet-fish-name': '水族服务',
+                'pet-fish-type': '观赏鱼水族箱',
+                'pet-fish-desc': '为水族宠物提供专业的养护指导、水质管理和疾病治疗服务。',
+                'process-title': '服务流程',
+                'process-subtitle': '专业、便捷、可靠的服务流程',
+                'process-step1-title': '咨询评估',
+                'process-step1-desc': '了解您的宠物情况和需求，制定个性化的服务方案。',
+                'process-step2-title': '方案确认',
+                'process-step2-desc': '确认服务内容和时间安排，签订服务协议。',
+                'process-step3-title': '专业服务',
+                'process-step3-desc': '专业团队按照约定提供高质量的宠物服务。',
+                'process-step4-title': '跟踪反馈',
+                'process-step4-desc': '定期反馈宠物状况，及时调整服务方案。',
+                'process-step5-title': '后续支持',
+                'process-step5-desc': '提供持续的健康咨询和后续服务支持。',
+                'process-step6-title': '满意度调查',
+                'process-step6-desc': '收集反馈意见，不断改进服务质量。',
+                'pricing-title': '服务套餐',
+                'pricing-subtitle': '灵活的套餐选择，满足不同需求',
+                'package-badge-popular': '热门推荐',
+                'package-basic-name': '基础服务套餐',
+                'package-basic-f1': '基础健康检查',
+                'package-basic-f2': '每月美容护理',
+                'package-basic-f3': '疫苗接种提醒',
+                'package-basic-f4': '24小时在线咨询',
+                'package-basic-f5': '基础用品配送',
+                'package-professional-name': '专业服务套餐',
+                'package-professional-f1': '全面健康体检',
+                'package-professional-f2': '每两周美容护理',
+                'package-professional-f3': '专科医生预约',
+                'package-professional-f4': '24小时紧急响应',
+                'package-professional-f5': '行为训练指导',
+                'package-professional-f6': '寄养服务折扣',
+                'package-vip-name': 'VIP尊享套餐',
+                'package-vip-f1': '专属宠物医生',
+                'package-vip-f2': '每周美容护理',
+                'package-vip-f3': '上门医疗服务',
+                'package-vip-f4': '24小时专人值守',
+                'package-vip-f5': '高级训练课程',
+                'package-vip-f6': '免费寄养服务',
+                'package-vip-f7': '进口用品专供',
+                'package-price-unit': '/月',
+                'package-select': '选择套餐',
+                'contact-title': '宠物服务咨询',
+                'contact-subtitle': '专业宠物顾问为您提供贴心服务',
+                'form-name': '姓名',
+                'form-phone': '联系电话',
+                'form-email': '邮箱',
+                'form-pet-type': '宠物类型',
+                'form-service': '服务需求',
+                'form-urgency': '紧急程度',
+                'form-message': '详细描述',
+                'form-submit': '立即咨询',
+                'pet-type-dog': '犬类',
+                'pet-type-cat': '猫咪',
+                'pet-type-rabbit': '兔类',
+                'pet-type-bird': '鸟类',
+                'pet-type-rodent': '啮齿类',
+                'pet-type-fish': '水族',
+                'pet-type-other': '其他',
+                'urgency-normal': '一般',
+                'urgency-urgent': '紧急',
+                'urgency-emergency': '非常紧急',
+                'pet-tag1': '行为训练',
+                'pet-tag2': '美容护理',
+                'pet-tag3': '健康检查',
+                'pet-tag4': '室内环境',
+                'pet-tag5': '疾病预防',
+                'pet-tag6': '营养搭配',
+                'pet-tag7': '牙齿护理',
+                'pet-tag8': '毛发护理',
+                'pet-tag9': '环境布置',
+                'pet-tag10': '飞行训练',
+                'pet-tag11': '声音训练',
+                'pet-tag12': '健康监测',
+                'pet-tag13': '环境设计',
+                'pet-tag14': '饮食指导',
+                'pet-tag15': '疾病预防',
+                'pet-tag16': '水质检测',
+                'pet-tag17': '设备维护',
+                'pet-tag18': '鱼类健康'
+            },
+            en: {
+                'page-title': 'Pet Services',
+                'nav-home': 'Home',
+                'nav-layers': 'Customer Tiers',
+                'nav-knowledge': 'Knowledge Base',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-education': 'Study Abroad',
+                'nav-tourism': 'Tourism',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-services': 'Legal Services',
+                'nav-crm': 'CRM Features',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'hero-title': 'Professional Japan Pet Services Platform',
+                'hero-subtitle': 'Comprehensive pet services including immigration, medical care, grooming, boarding, ensuring your beloved pets receive the best care in Japan',
+                'services-title': 'Pet Service Projects',
+                'services-subtitle': 'Professional team providing one-stop pet services',
+                'service-immigration-title': 'Pet Immigration',
+                'service-immigration-subtitle': 'Professional Clearance Guidance',
+                'service-immigration-f1': 'Immigration Procedure',
+                'service-immigration-f2': 'Vaccination Certificate',
+                'service-immigration-f3': 'Health Check Arrangement',
+                'service-immigration-f4': 'Quarantine Assistance',
+                'service-immigration-f5': 'Document Preparation Guide',
+                'service-medical-title': 'Pet Medical',
+                'service-medical-subtitle': 'Professional Medical Care',
+                'service-medical-f1': '24-hour Emergency',
+                'service-medical-f2': 'Specialist Appointment',
+                'service-medical-f3': 'Regular Health Check',
+                'service-medical-f4': 'Vaccination Arrangement',
+                'service-medical-f5': 'Surgery Recovery Care',
+                'service-grooming-title': 'Pet Grooming',
+                'service-grooming-subtitle': 'Professional Grooming Service',
+                'service-grooming-f1': 'Basic Wash & Care',
+                'service-grooming-f2': 'Professional Styling',
+                'service-grooming-f3': 'Nail Trimming',
+                'service-grooming-f4': 'Ear Cleaning Care',
+                'service-grooming-f5': 'Home Grooming Service',
+                'service-boarding-title': 'Pet Boarding',
+                'service-boarding-subtitle': 'Safe & Comfortable Environment',
+                'service-boarding-f1': 'Professional Boarding Home',
+                'service-boarding-f2': '24-hour Supervision',
+                'service-boarding-f3': 'Customized Diet',
+                'service-boarding-f4': 'Daily Walking Service',
+                'service-boarding-f5': 'Real-time Video Viewing',
+                'service-training-title': 'Pet Training',
+                'service-training-subtitle': 'Professional Training Guidance',
+                'service-training-f1': 'Basic Behavior Training',
+                'service-training-f2': 'Social Skills Development',
+                'service-training-f3': 'Problem Behavior Correction',
+                'service-training-f4': 'Special Skills Training',
+                'service-training-f5': 'Home Training Courses',
+                'service-supplies-title': 'Pet Supplies',
+                'service-supplies-subtitle': 'Quality Supplies Delivery',
+                'service-supplies-f1': 'Imported Pet Food',
+                'service-supplies-f2': 'Nutritional Supplements',
+                'service-supplies-f3': 'Toy & Product Recommendations',
+                'service-supplies-f4': 'Daily Necessities Purchasing',
+                'service-supplies-f5': 'Regular Delivery Service',
+                'service-learn-more': 'Learn More',
+                'pets-title': 'Service Pet Types',
+                'pets-subtitle': 'Professional services for all kinds of beloved pets',
+                'pet-dog-name': 'Dog Services',
+                'pet-dog-type': 'All Breed Professional Care',
+                'pet-dog-desc': 'Professional services for all dog breeds, including customized care plans for large dogs, small dogs, and special breeds.',
+                'pet-cat-name': 'Cat Services',
+                'pet-cat-type': 'Cat Professional Care',
+                'pet-cat-desc': 'Professional medical services, grooming care, and daily care tailored to cat characteristics and needs.',
+                'pet-rabbit-name': 'Rabbit Services',
+                'pet-rabbit-type': 'Rabbit Professional Care',
+                'pet-rabbit-desc': 'Professional daily care, disease prevention, and nutrition guidance services for rabbit pets.',
+                'pet-bird-name': 'Bird Services',
+                'pet-bird-type': 'Bird Professional Care',
+                'pet-bird-desc': 'Professional medical services, nutrition matching, and environmental guidance for various bird pets.',
+                'pet-rodent-name': 'Rodent Services',
+                'pet-rodent-type': 'Hamsters, Chinchillas, etc.',
+                'pet-rodent-desc': 'Professional care services for small rodents such as hamsters, chinchillas, guinea pigs.',
+                'pet-fish-name': 'Aquarium Services',
+                'pet-fish-type': 'Ornamental Fish & Aquariums',
+                'pet-fish-desc': 'Professional care guidance, water quality management, and disease treatment services for aquarium pets.',
+                'process-title': 'Service Process',
+                'process-subtitle': 'Professional, convenient, reliable service process',
+                'process-step1-title': 'Consultation & Assessment',
+                'process-step1-desc': 'Understand your pet situation and needs, create personalized service plan.',
+                'process-step2-title': 'Plan Confirmation',
+                'process-step2-desc': 'Confirm service content and schedule, sign service agreement.',
+                'process-step3-title': 'Professional Service',
+                'process-step3-desc': 'Professional team provides high-quality pet services as agreed.',
+                'process-step4-title': 'Tracking & Feedback',
+                'process-step4-desc': 'Regular feedback on pet status, timely adjustment of service plan.',
+                'process-step5-title': 'Follow-up Support',
+                'process-step5-desc': 'Provide continuous health consultation and follow-up service support.',
+                'process-step6-title': 'Satisfaction Survey',
+                'process-step6-desc': 'Collect feedback to continuously improve service quality.',
+                'pricing-title': 'Service Packages',
+                'pricing-subtitle': 'Flexible package options to meet different needs',
+                'package-badge-popular': 'Popular Choice',
+                'package-basic-name': 'Basic Service Package',
+                'package-basic-f1': 'Basic Health Check',
+                'package-basic-f2': 'Monthly Grooming Care',
+                'package-basic-f3': 'Vaccination Reminder',
+                'package-basic-f4': '24-hour Online Consultation',
+                'package-basic-f5': 'Basic Supplies Delivery',
+                'package-professional-name': 'Professional Service Package',
+                'package-professional-f1': 'Comprehensive Health Check',
+                'package-professional-f2': 'Bi-weekly Grooming Care',
+                'package-professional-f3': 'Specialist Appointment',
+                'package-professional-f4': '24-hour Emergency Response',
+                'package-professional-f5': 'Behavior Training Guidance',
+                'package-professional-f6': 'Boarding Service Discount',
+                'package-vip-name': 'VIP Premium Package',
+                'package-vip-f1': 'Exclusive Pet Doctor',
+                'package-vip-f2': 'Weekly Grooming Care',
+                'package-vip-f3': 'Home Medical Service',
+                'package-vip-f4': '24-hour Dedicated Staff',
+                'package-vip-f5': 'Advanced Training Courses',
+                'package-vip-f6': 'Free Boarding Service',
+                'package-vip-f7': 'Exclusive Imported Supplies',
+                'package-price-unit': '/month',
+                'package-select': 'Select Package',
+                'contact-title': 'Pet Service Consultation',
+                'contact-subtitle': 'Professional pet consultants provide attentive service',
+                'form-name': 'Name',
+                'form-phone': 'Phone',
+                'form-email': 'Email',
+                'form-pet-type': 'Pet Type',
+                'form-service': 'Service Needs',
+                'form-urgency': 'Urgency Level',
+                'form-message': 'Detailed Description',
+                'form-submit': 'Consult Now',
+                'pet-type-dog': 'Dog',
+                'pet-type-cat': 'Cat',
+                'pet-type-rabbit': 'Rabbit',
+                'pet-type-bird': 'Bird',
+                'pet-type-rodent': 'Rodent',
+                'pet-type-fish': 'Aquarium',
+                'pet-type-other': 'Other',
+                'urgency-normal': 'Normal',
+                'urgency-urgent': 'Urgent',
+                'urgency-emergency': 'Emergency',
+                'pet-tag1': 'Behavior Training',
+                'pet-tag2': 'Grooming Care',
+                'pet-tag3': 'Health Check',
+                'pet-tag4': 'Indoor Environment',
+                'pet-tag5': 'Disease Prevention',
+                'pet-tag6': 'Nutrition Matching',
+                'pet-tag7': 'Dental Care',
+                'pet-tag8': 'Hair Care',
+                'pet-tag9': 'Environment Setup',
+                'pet-tag10': 'Flight Training',
+                'pet-tag11': 'Sound Training',
+                'pet-tag12': 'Health Monitoring',
+                'pet-tag13': 'Environment Design',
+                'pet-tag14': 'Diet Guidance',
+                'pet-tag15': 'Disease Prevention',
+                'pet-tag16': 'Water Quality Testing',
+                'pet-tag17': 'Equipment Maintenance',
+                'pet-tag18': 'Fish Health'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+
+        // 语言切换功能
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', function() {
+                const lang = this.dataset.langBtn;
+                switchLanguage(lang);
+            });
+        });
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+
+            document.documentElement.lang = lang;
+            currentLanguage = lang;
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.dataset.lang;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+
+            // 点击菜单项后自动关闭菜单
+            if (navMenu.classList.contains('active')) {
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        // 点击页面其他地方关闭移动菜单
+        document.addEventListener('click', function(event) {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // 服务详情展示
+        function showServiceDetails(serviceType) {
+            // 这里可以添加模态框显示逻辑
+            // console.log('Service details for:', serviceType);
+        }
+
+        // 套餐详情展示
+        function showPackageDetails(packageType) {
+            // 这里可以添加模态框显示逻辑
+            // console.log('Package details for:', packageType);
+        }
+
+        // 表单提交
+        function submitContact(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const contactData = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                pet_type: formData.get('pet_type'),
+                service: formData.get('service'),
+                urgency: formData.get('urgency'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+
+            // 这里可以集成CRM系统或API
+            // console.log('Pet service consultation submitted:', contactData);
+
+            // 显示成功消息
+            alert(currentLanguage === 'zh' ?
+                '咨询已提交！我们将在2小时内联系您并提供专业的宠物服务建议。' :
+                'Consultation submitted! We will contact you within 2 hours with professional pet service recommendations.'
+            );
+
+            // 重置表单
+            event.target.reset();
+        }
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage('zh');
+            // console.log('Pet Services Page Loaded Successfully');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留学教育 - 日本商务通</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Use nav.js injected navigation, no custom header styles needed */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a.active {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* 主要内容 */
+        main {
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.95) 0%, rgba(44, 82, 130, 0.95) 100%),
+                url('https://images.unsplash.com/photo-1589073176325-86c899feea5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        /* 服务分类 */
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .service-content {
+            padding: 35px 30px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--dark);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.4);
+        }
+
+        /* 学校推荐 */
+        .schools-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .schools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .school-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .school-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .school-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .school-content {
+            padding: 25px;
+        }
+
+        .school-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .school-type {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .school-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .school-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .school-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 申请流程 */
+        .process-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--warning) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+        }
+
+        .step-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--success);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* 咨询表单 */
+        .consultation-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .consultation-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-lang="hero-title">日本留学教育专业服务</h1>
+                    <p data-lang="hero-subtitle">为您提供全方位的日本留学解决方案，从学校申请到生活适应，全程保驾护航</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务分类 -->
+        <section class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="services-title">留学服务项目</h2>
+                    <p class="section-subtitle" data-lang="services-subtitle">专业团队为您提供一站式留学服务</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- 学校申请 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🏫</span>
+                            <h3 class="service-title" data-lang="service-application-title">学校申请</h3>
+                            <p class="service-subtitle" data-lang="service-application-subtitle">专业申请指导</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-application-f1">学校筛选与推荐</li>
+                                <li data-lang="service-application-f2">申请材料准备</li>
+                                <li data-lang="service-application-f3">面试辅导与培训</li>
+                                <li data-lang="service-application-f4">申请进度跟踪</li>
+                                <li data-lang="service-application-f5">录取结果确认</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('application')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 签证办理 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">📋</span>
+                            <h3 class="service-title" data-lang="service-visa-title">签证办理</h3>
+                            <p class="service-subtitle" data-lang="service-visa-subtitle">签证全程指导</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-visa-f1">签证材料清单</li>
+                                <li data-lang="service-visa-f2">材料审核与完善</li>
+                                <li data-lang="service-visa-f3">签证申请表格填写</li>
+                                <li data-lang="service-visa-f4">面试预约与指导</li>
+                                <li data-lang="service-visa-f5">签证进度跟踪</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('visa')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 语言培训 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🗣️</span>
+                            <h3 class="service-title" data-lang="service-language-title">语言培训</h3>
+                            <p class="service-subtitle" data-lang="service-language-subtitle">日语能力提升</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-language-f1">日语基础课程</li>
+                                <li data-lang="service-language-f2">JLPT考试辅导</li>
+                                <li data-lang="service-language-f3">口语交流训练</li>
+                                <li data-lang="service-language-f4">学术日语培训</li>
+                                <li data-lang="service-language-f5">一对一VIP辅导</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('language')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 住宿安排 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🏠</span>
+                            <h3 class="service-title" data-lang="service-accommodation-title">住宿安排</h3>
+                            <p class="service-subtitle" data-lang="service-accommodation-subtitle">安全舒适的居住环境</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-accommodation-f1">学生公寓推荐</li>
+                                <li data-lang="service-accommodation-f2">寄宿家庭安排</li>
+                                <li data-lang="service-accommodation-f3">租房协助服务</li>
+                                <li data-lang="service-accommodation-f4">住宿合同审核</li>
+                                <li data-lang="service-accommodation-f5">入住手续办理</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('accommodation')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 生活适应 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🛡️</span>
+                            <h3 class="service-title" data-lang="service-life-title">生活适应</h3>
+                            <p class="service-subtitle" data-lang="service-life-subtitle">全方位生活支持</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-life-f1">机场接机服务</li>
+                                <li data-lang="service-life-f2">银行账户开户</li>
+                                <li data-lang="service-life-f3">手机办理协助</li>
+                                <li data-lang="service-life-f4">国民健康保险</li>
+                                <li data-lang="service-life-f5">生活指导培训</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('life')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 升学指导 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">📈</span>
+                            <h3 class="service-title" data-lang="service-advancement-title">升学指导</h3>
+                            <p class="service-subtitle" data-lang="service-advancement-subtitle">规划未来发展</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-advancement-f1">升学路径规划</li>
+                                <li data-lang="service-advancement-f2">专业选择指导</li>
+                                <li data-lang="service-advancement-f3">研究生申请辅导</li>
+                                <li data-lang="service-advancement-f4">职业规划咨询</li>
+                                <li data-lang="service-advancement-f5">就业指导服务</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('advancement')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学校推荐 -->
+        <section class="schools-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="schools-title">合作院校推荐</h2>
+                    <p class="section-subtitle" data-lang="schools-subtitle">与日本知名院校建立合作关系</p>
+                </div>
+
+                <div class="schools-grid">
+                    <div class="school-card">
+                        <div class="school-image">🏛️</div>
+                        <div class="school-content">
+                            <h3 class="school-name" data-lang="school-university-name">东京大学</h3>
+                            <div class="school-type" data-lang="school-university-type">国立综合大学</div>
+                            <p class="school-description" data-lang="school-university-desc">
+                                日本顶尖综合性大学，世界一流学府，在各学科领域都有卓越成就。</p>
+                            <div class="school-features">
+                                <span class="school-tag" data-lang="school-tag1">世界排名前50</span>
+                                <span class="school-tag" data-lang="school-tag2">研究实力强</span>
+                                <span class="school-tag" data-lang="school-tag3">国际交流多</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="school-card">
+                        <div class="school-image">🏫</div>
+                        <div class="school-content">
+                            <h3 class="school-name" data-lang="school-language-name">东京语言学校</h3>
+                            <div class="school-type" data-lang="school-language-type">专业日语教育</div>
+                            <p class="school-description" data-lang="school-language-desc">
+                                专注于日语教育的专业语言学校，提供全面的日语培训和升学指导。</p>
+                            <div class="school-features">
+                                <span class="school-tag" data-lang="school-tag4">小班教学</span>
+                                <span class="school-tag" data-lang="school-tag5">升学率高</span>
+                                <span class="school-tag" data-lang="school-tag6">住宿提供</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="school-card">
+                        <div class="school-image">🎨</div>
+                        <div class="school-content">
+                            <h3 class="school-name" data-lang="school-art-name">多摩美术大学</h3>
+                            <div class="school-type" data-lang="school-art-type">私立艺术大学</div>
+                            <p class="school-description" data-lang="school-art-desc">日本顶尖的艺术类大学，培养众多艺术家和设计师，在创意领域享有盛誉。
+                            </p>
+                            <div class="school-features">
+                                <span class="school-tag" data-lang="school-tag7">艺术专业强</span>
+                                <span class="school-tag" data-lang="school-tag8">设施完善</span>
+                                <span class="school-tag" data-lang="school-tag9">国际认可度高</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 申请流程 -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="process-title">留学申请流程</h2>
+                    <p class="section-subtitle" data-lang="process-subtitle">清晰的步骤，专业的指导</p>
+                </div>
+
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title" data-lang="process-step1-title">初步咨询</h3>
+                        <p class="step-description" data-lang="process-step1-desc">了解学生背景和需求，制定个性化的留学方案和学校推荐。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title" data-lang="process-step2-title">学校选择</h3>
+                        <p class="step-description" data-lang="process-step2-desc">根据学生条件和目标，筛选合适的学校和专业，确定申请方案。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title" data-lang="process-step3-title">材料准备</h3>
+                        <p class="step-description" data-lang="process-step3-desc">指导准备申请材料，包括成绩单、推荐信、个人陈述等必要文件。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title" data-lang="process-step4-title">提交申请</h3>
+                        <p class="step-description" data-lang="process-step4-desc">协助填写申请表格，提交完整的申请材料，跟踪申请进度。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title" data-lang="process-step5-title">签证办理</h3>
+                        <p class="step-description" data-lang="process-step5-desc">获得录取后协助办理留学签证，准备签证材料和面试指导。</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title" data-lang="process-step6-title">行前准备</h3>
+                        <p class="step-description" data-lang="process-step6-desc">安排住宿、接机、入学注册等行前事宜，确保顺利入学。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 咨询表单 -->
+        <section class="consultation-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: white;" data-lang="consultation-title">免费留学评估</h2>
+                    <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);"
+                        data-lang="consultation-subtitle">专业顾问为您提供一对一留学规划</p>
+                </div>
+
+                <form class="consultation-form" onsubmit="submitConsultation(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="form-name">姓名</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-phone">联系电话</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-email">邮箱</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-age">年龄</label>
+                            <input type="number" name="age" min="15" max="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-education">当前学历</label>
+                            <select name="education" required>
+                                <option value="">请选择学历</option>
+                                <option value="highschool" data-lang="education-highschool">高中</option>
+                                <option value="college" data-lang="education-college">大专</option>
+                                <option value="bachelor" data-lang="education-bachelor">本科</option>
+                                <option value="master" data-lang="education-master">硕士</option>
+                                <option value="other" data-lang="education-other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-target">留学目标</label>
+                            <select name="target" required>
+                                <option value="">请选择目标</option>
+                                <option value="language" data-lang="target-language">语言学习</option>
+                                <option value="undergraduate" data-lang="target-undergraduate">本科</option>
+                                <option value="graduate" data-lang="target-graduate">研究生</option>
+                                <option value="phd" data-lang="target-phd">博士</option>
+                                <option value="exchange" data-lang="target-exchange">交换生</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-message">详细需求</label>
+                        <textarea name="message" placeholder="请描述您的留学目标和具体需求..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang="form-submit">获取免费评估</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'page-title': '留学教育',
+                'nav-home': '首页',
+                'nav-layers': '客户分层',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-education': '留学教育',
+                'nav-tourism': '旅游服务',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-services': '法律服务',
+                'nav-crm': 'CRM功能',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'hero-title': '日本留学教育专业服务',
+                'hero-subtitle': '为您提供全方位的日本留学解决方案，从学校申请到生活适应，全程保驾护航',
+                'services-title': '留学服务项目',
+                'services-subtitle': '专业团队为您提供一站式留学服务',
+                'service-application-title': '学校申请',
+                'service-application-subtitle': '专业申请指导',
+                'service-application-f1': '学校筛选与推荐',
+                'service-application-f2': '申请材料准备',
+                'service-application-f3': '面试辅导与培训',
+                'service-application-f4': '申请进度跟踪',
+                'service-application-f5': '录取结果确认',
+                'service-visa-title': '签证办理',
+                'service-visa-subtitle': '签证全程指导',
+                'service-visa-f1': '签证材料清单',
+                'service-visa-f2': '材料审核与完善',
+                'service-visa-f3': '签证申请表格填写',
+                'service-visa-f4': '面试预约与指导',
+                'service-visa-f5': '签证进度跟踪',
+                'service-language-title': '语言培训',
+                'service-language-subtitle': '日语能力提升',
+                'service-language-f1': '日语基础课程',
+                'service-language-f2': 'JLPT考试辅导',
+                'service-language-f3': '口语交流训练',
+                'service-language-f4': '学术日语培训',
+                'service-language-f5': '一对一VIP辅导',
+                'service-accommodation-title': '住宿安排',
+                'service-accommodation-subtitle': '安全舒适的居住环境',
+                'service-accommodation-f1': '学生公寓推荐',
+                'service-accommodation-f2': '寄宿家庭安排',
+                'service-accommodation-f3': '租房协助服务',
+                'service-accommodation-f4': '住宿合同审核',
+                'service-accommodation-f5': '入住手续办理',
+                'service-life-title': '生活适应',
+                'service-life-subtitle': '全方位生活支持',
+                'service-life-f1': '机场接机服务',
+                'service-life-f2': '银行账户开户',
+                'service-life-f3': '手机办理协助',
+                'service-life-f4': '国民健康保险',
+                'service-life-f5': '生活指导培训',
+                'service-advancement-title': '升学指导',
+                'service-advancement-subtitle': '规划未来发展',
+                'service-advancement-f1': '升学路径规划',
+                'service-advancement-f2': '专业选择指导',
+                'service-advancement-f3': '研究生申请辅导',
+                'service-advancement-f4': '职业规划咨询',
+                'service-advancement-f5': '就业指导服务',
+                'service-learn-more': '了解详情',
+                'schools-title': '合作院校推荐',
+                'schools-subtitle': '与日本知名院校建立合作关系',
+                'school-university-name': '东京大学',
+                'school-university-type': '国立综合大学',
+                'school-university-desc': '日本顶尖综合性大学，世界一流学府，在各学科领域都有卓越成就。',
+                'school-language-name': '东京语言学校',
+                'school-language-type': '专业日语教育',
+                'school-language-desc': '专注于日语教育的专业语言学校，提供全面的日语培训和升学指导。',
+                'school-art-name': '多摩美术大学',
+                'school-art-type': '私立艺术大学',
+                'school-art-desc': '日本顶尖的艺术类大学，培养众多艺术家和设计师，在创意领域享有盛誉。',
+                'school-tag1': '世界排名前50',
+                'school-tag2': '研究实力强',
+                'school-tag3': '国际交流多',
+                'school-tag4': '小班教学',
+                'school-tag5': '升学率高',
+                'school-tag6': '住宿提供',
+                'school-tag7': '艺术专业强',
+                'school-tag8': '设施完善',
+                'school-tag9': '国际认可度高',
+                'process-title': '留学申请流程',
+                'process-subtitle': '清晰的步骤，专业的指导',
+                'process-step1-title': '初步咨询',
+                'process-step1-desc': '了解学生背景和需求，制定个性化的留学方案和学校推荐。',
+                'process-step2-title': '学校选择',
+                'process-step2-desc': '根据学生条件和目标，筛选合适的学校和专业，确定申请方案。',
+                'process-step3-title': '材料准备',
+                'process-step3-desc': '指导准备申请材料，包括成绩单、推荐信、个人陈述等必要文件。',
+                'process-step4-title': '提交申请',
+                'process-step4-desc': '协助填写申请表格，提交完整的申请材料，跟踪申请进度。',
+                'process-step5-title': '签证办理',
+                'process-step5-desc': '获得录取后协助办理留学签证，准备签证材料和面试指导。',
+                'process-step6-title': '行前准备',
+                'process-step6-desc': '安排住宿、接机、入学注册等行前事宜，确保顺利入学。',
+                'consultation-title': '免费留学评估',
+                'consultation-subtitle': '专业顾问为您提供一对一留学规划',
+                'form-name': '姓名',
+                'form-phone': '联系电话',
+                'form-email': '邮箱',
+                'form-age': '年龄',
+                'form-education': '当前学历',
+                'form-target': '留学目标',
+                'form-message': '详细需求',
+                'form-submit': '获取免费评估',
+                'education-highschool': '高中',
+                'education-college': '大专',
+                'education-bachelor': '本科',
+                'education-master': '硕士',
+                'education-other': '其他',
+                'target-language': '语言学习',
+                'target-undergraduate': '本科',
+                'target-graduate': '研究生',
+                'target-phd': '博士',
+                'target-exchange': '交换生'
+            },
+            en: {
+                'page-title': 'Education',
+                'nav-home': 'Home',
+                'nav-layers': 'Customer Tiers',
+                'nav-knowledge': 'Knowledge Base',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-education': 'Study Abroad',
+                'nav-tourism': 'Tourism',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-services': 'Legal Services',
+                'nav-crm': 'CRM Features',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'hero-title': 'Professional Japan Study Abroad Services',
+                'hero-subtitle': 'Comprehensive study abroad solutions from school application to life adaptation',
+                'services-title': 'Study Abroad Services',
+                'services-subtitle': 'Professional team providing one-stop study abroad services',
+                'service-application-title': 'School Application',
+                'service-application-subtitle': 'Professional Application Guidance',
+                'service-application-f1': 'School Screening & Recommendation',
+                'service-application-f2': 'Application Material Preparation',
+                'service-application-f3': 'Interview Coaching & Training',
+                'service-application-f4': 'Application Progress Tracking',
+                'service-application-f5': 'Admission Result Confirmation',
+                'service-visa-title': 'Visa Processing',
+                'service-visa-subtitle': 'Full Visa Guidance',
+                'service-visa-f1': 'Visa Document Checklist',
+                'service-visa-f2': 'Document Review & Enhancement',
+                'service-visa-f3': 'Visa Application Form Completion',
+                'service-visa-f4': 'Interview Appointment & Guidance',
+                'service-visa-f5': 'Visa Progress Tracking',
+                'service-language-title': 'Language Training',
+                'service-language-subtitle': 'Japanese Language Improvement',
+                'service-language-f1': 'Basic Japanese Courses',
+                'service-language-f2': 'JLPT Exam Preparation',
+                'service-language-f3': 'Speaking & Communication Practice',
+                'service-language-f4': 'Academic Japanese Training',
+                'service-language-f5': 'One-on-One VIP Tutoring',
+                'service-accommodation-title': 'Accommodation',
+                'service-accommodation-subtitle': 'Safe & Comfortable Living Environment',
+                'service-accommodation-f1': 'Student Apartment Recommendations',
+                'service-accommodation-f2': 'Homestay Arrangement',
+                'service-accommodation-f3': 'Rental Assistance Service',
+                'service-accommodation-f4': 'Lease Agreement Review',
+                'service-accommodation-f5': 'Check-in Procedures',
+                'service-life-title': 'Life Adaptation',
+                'service-life-subtitle': 'Comprehensive Life Support',
+                'service-life-f1': 'Airport Pickup Service',
+                'service-life-f2': 'Bank Account Opening',
+                'service-life-f3': 'Phone Setup Assistance',
+                'service-life-f4': 'National Health Insurance',
+                'service-life-f5': 'Life Guidance Training',
+                'service-advancement-title': 'Academic Guidance',
+                'service-advancement-subtitle': 'Future Career Planning',
+                'service-advancement-f1': 'Academic Path Planning',
+                'service-advancement-f2': 'Major Selection Guidance',
+                'service-advancement-f3': 'Graduate School Application',
+                'service-advancement-f4': 'Career Planning Consulting',
+                'service-advancement-f5': 'Employment Guidance Service',
+                'service-learn-more': 'Learn More',
+                'schools-title': 'Partner School Recommendations',
+                'schools-subtitle': 'Cooperating with renowned Japanese institutions',
+                'school-university-name': 'University of Tokyo',
+                'school-university-type': 'National Comprehensive University',
+                'school-university-desc': 'Top comprehensive university in Japan, world-class institution with excellence in all academic fields.',
+                'school-language-name': 'Tokyo Language School',
+                'school-language-type': 'Professional Japanese Education',
+                'school-language-desc': 'Specialized language school focusing on Japanese education with comprehensive training and advancement guidance.',
+                'school-art-name': 'Tama Art University',
+                'school-art-type': 'Private Art University',
+                'school-art-desc': 'Top art university in Japan, nurturing numerous artists and designers with high reputation in creative fields.',
+                'school-tag1': 'Top 50 World Ranking',
+                'school-tag2': 'Strong Research',
+                'school-tag3': 'International Exchange',
+                'school-tag4': 'Small Class Teaching',
+                'school-tag5': 'High Advancement Rate',
+                'school-tag6': 'Accommodation Provided',
+                'school-tag7': 'Strong Art Programs',
+                'school-tag8': 'Complete Facilities',
+                'school-tag9': 'International Recognition',
+                'process-title': 'Application Process',
+                'process-subtitle': 'Clear steps with professional guidance',
+                'process-step1-title': 'Initial Consultation',
+                'process-step1-desc': 'Understand student background and needs, create personalized study abroad plan and school recommendations.',
+                'process-step2-title': 'School Selection',
+                'process-step2-desc': 'Screen suitable schools and majors based on student conditions and goals, confirm application plan.',
+                'process-step3-title': 'Document Preparation',
+                'process-step3-desc': 'Guide preparation of application materials including transcripts, recommendation letters, personal statements.',
+                'process-step4-title': 'Application Submission',
+                'process-step4-desc': 'Assist with application forms, submit complete materials, track application progress.',
+                'process-step5-title': 'Visa Processing',
+                'process-step5-desc': 'Assist with student visa after admission, prepare visa materials and interview guidance.',
+                'process-step6-title': 'Pre-departure Preparation',
+                'process-step6-desc': 'Arrange accommodation, airport pickup, enrollment registration for smooth school entry.',
+                'consultation-title': 'Free Study Abroad Assessment',
+                'consultation-subtitle': 'Professional consultants provide one-on-one study abroad planning',
+                'form-name': 'Name',
+                'form-phone': 'Phone',
+                'form-email': 'Email',
+                'form-age': 'Age',
+                'form-education': 'Current Education',
+                'form-target': 'Study Goal',
+                'form-message': 'Detailed Requirements',
+                'form-submit': 'Get Free Assessment',
+                'education-highschool': 'High School',
+                'education-college': 'College',
+                'education-bachelor': 'Bachelor',
+                'education-master': 'Master',
+                'education-other': 'Other',
+                'target-language': 'Language Learning',
+                'target-undergraduate': 'Undergraduate',
+                'target-graduate': 'Graduate',
+                'target-phd': 'PhD',
+                'target-exchange': 'Exchange Student'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+
+    // 其他业务相关JS（如有）
+    // ...existing code...
+        
+    // 引入通用导航栏逻辑
+    // <script src="nav.js"></script> 会在下方引入
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.dataset.lang;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+
+            // 点击菜单项后自动关闭菜单
+            if (navMenu.classList.contains('active')) {
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        }
+
+        // 点击页面其他地方关闭移动菜单
+        document.addEventListener('click', function (event) {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // 服务详情展示
+        function showServiceDetails(serviceType) {
+            // 这里可以添加模态框显示逻辑
+            // console.log('Service details for:', serviceType);
+        }
+
+        // 表单提交
+        function submitConsultation(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const consultationData = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                age: formData.get('age'),
+                education: formData.get('education'),
+                target: formData.get('target'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+
+            // 这里可以集成CRM系统或API
+            // console.log('Education consultation submitted:', consultationData);
+
+            // 显示成功消息
+            alert(currentLanguage === 'zh' ?
+                '评估请求已提交！我们将在24小时内联系您进行详细咨询。' :
+                'Assessment request submitted! We will contact you within 24 hours for detailed consultation.'
+            );
+
+            // 重置表单
+            event.target.reset();
+        }
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            switchLanguage('zh');
+            // console.log('Education Page Loaded Successfully');
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

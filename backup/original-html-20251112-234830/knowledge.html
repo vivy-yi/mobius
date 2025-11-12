@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库 - 日本商务通</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Use nav.js injected navigation, no custom header styles needed */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-switcher button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* 页面标题区域 */
+        .page-header {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, var(--light) 0%, white 100%);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 知识库内容区域 */
+        .knowledge-content {
+            padding: 80px 0;
+        }
+
+        .search-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 60px 20px 25px;
+            border: 3px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(30, 58, 95, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* 知识分类标签 */
+        .knowledge-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .tag {
+            background: white;
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tag:hover,
+        .tag.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 知识卡片网格 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .knowledge-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .knowledge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+        }
+
+        .knowledge-icon {
+            font-size: 60px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .knowledge-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .knowledge-card p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .knowledge-points {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .knowledge-points li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .knowledge-points li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .knowledge-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                gap: 4px;
+                z-index: 1001;
+            }
+
+            .mobile-menu-toggle span {
+                width: 25px;
+                height: 3px;
+                background: white;
+                transition: all 0.3s ease;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .knowledge-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+    <body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <!-- 页面标题区域 -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title" data-lang="knowledge-title">知识库</h1>
+                <p class="page-subtitle" data-lang="knowledge-subtitle">签证知识、设立流程、税务法规等实用信息</p>
+            </div>
+        </section>
+
+        <!-- 知识库内容区域 -->
+        <section class="knowledge-content">
+            <div class="container">
+                <!-- 搜索功能 -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <input type="text" class="search-input" data-lang-placeholder="search-placeholder"
+                            placeholder="搜索知识文章...">
+                        <button class="search-btn" onclick="searchKnowledge()">🔍</button>
+                    </div>
+                </div>
+
+                <!-- 知识分类标签 -->
+                <div class="knowledge-tags">
+                    <div class="tag active" onclick="filterKnowledge('all')" data-lang="tag-all">全部</div>
+                    <div class="tag" onclick="filterKnowledge('visa')" data-lang="tag-visa">签证</div>
+                    <div class="tag" onclick="filterKnowledge('company')" data-lang="tag-company">公司设立</div>
+                    <div class="tag" onclick="filterKnowledge('tax')" data-lang="tag-tax">税务</div>
+                    <div class="tag" onclick="filterKnowledge('labor')" data-lang="tag-labor">劳务</div>
+                    <div class="tag" onclick="filterKnowledge('business')" data-lang="tag-business">商业</div>
+                </div>
+
+                <!-- 知识卡片网格 -->
+                <div class="knowledge-grid">
+                    <!-- 签证指南卡片 -->
+                    <div class="knowledge-card" data-category="visa">
+                        <div class="knowledge-icon">📝</div>
+                        <h3 data-lang="knowledge-visa-title">签证指南</h3>
+                        <p data-lang="knowledge-visa-desc">日本各类签证申请流程和注意事项，助您顺利获得在日资格</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="visa-point1">投资经营签证详解</li>
+                            <li data-lang="visa-point2">工作签证申请攻略</li>
+                            <li data-lang="visa-point3">家属签证办理指南</li>
+                            <li data-lang="visa-point4">永住权申请条件</li>
+                            <li data-lang="visa-point5">签证更新续签流程</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+
+                    <!-- 公司设立卡片 -->
+                    <div class="knowledge-card" data-category="company">
+                        <div class="knowledge-icon">🏢</div>
+                        <h3 data-lang="knowledge-company-title">公司设立</h3>
+                        <p data-lang="knowledge-company-desc">日本公司注册流程和所需材料，创业必读指南</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="company-point1">株式会社设立流程</li>
+                            <li data-lang="company-point2">合同会社注册指南</li>
+                            <li data-lang="company-point3">资本金要求说明</li>
+                            <li data-lang="company-point4">经营范围选择建议</li>
+                            <li data-lang="company-point5">设立时间与费用</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+
+                    <!-- 税务知识卡片 -->
+                    <div class="knowledge-card" data-category="tax">
+                        <div class="knowledge-icon">💰</div>
+                        <h3 data-lang="knowledge-tax-title">税务知识</h3>
+                        <p data-lang="knowledge-tax-desc">日本税务制度和优惠政策，合理规划税务支出</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="tax-point1">法人税申报指南</li>
+                            <li data-lang="tax-point2">消费税详解</li>
+                            <li data-lang="tax-point3">税收优惠政策</li>
+                            <li data-lang="tax-point4">税务筹划建议</li>
+                            <li data-lang="tax-point5">税务合规要求</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+
+                    <!-- 劳务社保卡片 -->
+                    <div class="knowledge-card" data-category="labor">
+                        <div class="knowledge-icon">👥</div>
+                        <h3 data-lang="knowledge-labor-title">劳务社保</h3>
+                        <p data-lang="knowledge-labor-desc">日本雇佣制度和社保体系，合规经营的重要保障</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="labor-point1">员工雇佣流程</li>
+                            <li data-lang="labor-point2">社会保险加入</li>
+                            <li data-lang="labor-point3">劳动合同要点</li>
+                            <li data-lang="labor-point4">劳动法规须知</li>
+                            <li data-lang="labor-point5">社保费用计算</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+
+                    <!-- 商业运营卡片 -->
+                    <div class="knowledge-card" data-category="business">
+                        <div class="knowledge-icon">💼</div>
+                        <h3 data-lang="knowledge-business-title">商业运营</h3>
+                        <p data-lang="knowledge-business-desc">日本商业环境与运营管理实用指南</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="business-point1">商业选址策略</li>
+                            <li data-lang="business-point2">银行开户指南</li>
+                            <li data-lang="business-point3">办公室租赁流程</li>
+                            <li data-lang="business-point4">商业许可申请</li>
+                            <li data-lang="business-point5">市场营销策略</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+
+                    <!-- 法律合规卡片 -->
+                    <div class="knowledge-card" data-category="business">
+                        <div class="knowledge-icon">⚖️</div>
+                        <h3 data-lang="knowledge-legal-title">法律合规</h3>
+                        <p data-lang="knowledge-legal-desc">日本法律法规体系，确保企业经营合法合规</p>
+                        <ul class="knowledge-points">
+                            <li data-lang="legal-point1">商业法基础</li>
+                            <li data-lang="legal-point2">知识产权保护</li>
+                            <li data-lang="legal-point3">合规管理要点</li>
+                            <li data-lang="legal-point4">争议解决机制</li>
+                            <li data-lang="legal-point5">法律风险防范</li>
+                        </ul>
+                        <a href="#" class="knowledge-link" data-lang="read-more">阅读更多 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'nav-home': '首页',
+                'nav-layers': '客户分层',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-ai-legal': '⚖️ AI法律',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'page-title': '知识库',
+                'knowledge-title': '知识库',
+                'knowledge-subtitle': '签证知识、设立流程、税务法规等实用信息',
+                'search-placeholder': '搜索知识文章...',
+                'tag-all': '全部',
+                'tag-visa': '签证',
+                'tag-company': '公司设立',
+                'tag-tax': '税务',
+                'tag-labor': '劳务',
+                'tag-business': '商业',
+                'knowledge-visa-title': '签证指南',
+                'knowledge-visa-desc': '日本各类签证申请流程和注意事项，助您顺利获得在日资格',
+                'visa-point1': '投资经营签证详解',
+                'visa-point2': '工作签证申请攻略',
+                'visa-point3': '家属签证办理指南',
+                'visa-point4': '永住权申请条件',
+                'visa-point5': '签证更新续签流程',
+                'knowledge-company-title': '公司设立',
+                'knowledge-company-desc': '日本公司注册流程和所需材料，创业必读指南',
+                'company-point1': '株式会社设立流程',
+                'company-point2': '合同会社注册指南',
+                'company-point3': '资本金要求说明',
+                'company-point4': '经营范围选择建议',
+                'company-point5': '设立时间与费用',
+                'knowledge-tax-title': '税务知识',
+                'knowledge-tax-desc': '日本税务制度和优惠政策，合理规划税务支出',
+                'tax-point1': '法人税申报指南',
+                'tax-point2': '消费税详解',
+                'tax-point3': '税收优惠政策',
+                'tax-point4': '税务筹划建议',
+                'tax-point5': '税务合规要求',
+                'knowledge-labor-title': '劳务社保',
+                'knowledge-labor-desc': '日本雇佣制度和社保体系，合规经营的重要保障',
+                'labor-point1': '员工雇佣流程',
+                'labor-point2': '社会保险加入',
+                'labor-point3': '劳动合同要点',
+                'labor-point4': '劳动法规须知',
+                'labor-point5': '社保费用计算',
+                'knowledge-business-title': '商业运营',
+                'knowledge-business-desc': '日本商业环境与运营管理实用指南',
+                'business-point1': '商业选址策略',
+                'business-point2': '银行开户指南',
+                'business-point3': '办公室租赁流程',
+                'business-point4': '商业许可申请',
+                'business-point5': '市场营销策略',
+                'knowledge-legal-title': '法律合规',
+                'knowledge-legal-desc': '日本法律法规体系，确保企业经营合法合规',
+                'legal-point1': '商业法基础',
+                'legal-point2': '知识产权保护',
+                'legal-point3': '合规管理要点',
+                'legal-point4': '争议解决机制',
+                'legal-point5': '法律风险防范',
+                'read-more': '阅读更多'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-layers': 'Customer Tiers',
+                'nav-knowledge': 'Knowledge Base',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-ai-legal': '⚖️ AI Legal',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'page-title': 'Knowledge Base',
+                'knowledge-title': 'Knowledge Base',
+                'knowledge-subtitle': 'Visa guides, company setup, tax regulations and practical information',
+                'search-placeholder': 'Search knowledge articles...',
+                'tag-all': 'All',
+                'tag-visa': 'Visa',
+                'tag-company': 'Company Setup',
+                'tag-tax': 'Tax',
+                'tag-labor': 'Labor',
+                'tag-business': 'Business',
+                'knowledge-visa-title': 'Visa Guide',
+                'knowledge-visa-desc': 'Japan visa application processes and important notes for smooth qualification',
+                'visa-point1': 'Investment Visa Details',
+                'visa-point2': 'Work Visa Application Guide',
+                'visa-point3': 'Family Visa Application',
+                'visa-point4': 'Permanent Residency Requirements',
+                'visa-point5': 'Visa Renewal Process',
+                'knowledge-company-title': 'Company Setup',
+                'knowledge-company-desc': 'Japan company registration procedures and required materials',
+                'company-point1': 'Joint-stock Company Setup',
+                'company-point2': 'LLC Registration Guide',
+                'company-point3': 'Capital Requirements',
+                'company-point4': 'Business Scope Selection',
+                'company-point5': 'Setup Time and Costs',
+                'knowledge-tax-title': 'Tax Knowledge',
+                'knowledge-tax-desc': 'Japan tax system and preferential policies for proper tax planning',
+                'tax-point1': 'Corporate Tax Filing Guide',
+                'tax-point2': 'Consumption Tax Details',
+                'tax-point3': 'Tax Incentive Policies',
+                'tax-point4': 'Tax Planning Suggestions',
+                'tax-point5': 'Tax Compliance Requirements',
+                'knowledge-labor-title': 'Labor & Social Security',
+                'knowledge-labor-desc': 'Japan employment system and social security framework',
+                'labor-point1': 'Employee Hiring Process',
+                'labor-point2': 'Social Security Enrollment',
+                'labor-point3': 'Employment Contract Essentials',
+                'labor-point4': 'Labor Regulations',
+                'labor-point5': 'Social Insurance Calculation',
+                'knowledge-business-title': 'Business Operations',
+                'knowledge-business-desc': 'Japan business environment and operational management guide',
+                'business-point1': 'Location Selection Strategy',
+                'business-point2': 'Bank Account Opening Guide',
+                'business-point3': 'Office Rental Process',
+                'business-point4': 'Business License Application',
+                'business-point5': 'Marketing Strategies',
+                'knowledge-legal-title': 'Legal Compliance',
+                'knowledge-legal-desc': 'Japan legal framework system for legal business operations',
+                'legal-point1': 'Commercial Law Basics',
+                'legal-point2': 'Intellectual Property Protection',
+                'legal-point3': 'Compliance Management',
+                'legal-point4': 'Dispute Resolution',
+                'legal-point5': 'Legal Risk Prevention',
+                'read-more': 'Read More'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+
+        // 语言切换
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+        }
+
+        // 移动端菜单切换
+        // 其他业务相关JS（如有）
+
+        // 知识筛选
+        function filterKnowledge(category) {
+            const cards = document.querySelectorAll('.knowledge-card');
+            const tags = document.querySelectorAll('.tag');
+
+            // 更新标签状态
+            tags.forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 显示/隐藏卡片
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 搜索功能
+        function searchKnowledge() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.knowledge-card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 语言切换按钮事件
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', (e) => {
+                switchLanguage(e.target.getAttribute('data-lang-btn'));
+            });
+        });
+
+        // 搜索框回车事件
+        document.querySelector('.search-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchKnowledge();
+            }
+        });
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            switchLanguage('zh');
+            // console.log('Knowledge Base Page Loaded Successfully');
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>
