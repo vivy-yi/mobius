@@ -7,20 +7,68 @@ let translations = {};
 
 // Load language files
 async function loadTranslations(lang) {
-    if (translations[lang]) return translations[lang];
+    if (translations[lang]) {
+        console.log(`Translations for ${lang} already cached`);
+        return translations[lang];
+    }
+
+    console.log(`Loading translations for ${lang}...`);
 
     try {
         const response = await fetch(`i18n/${lang}.json`);
-        if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
-        translations[lang] = await response.json();
+        console.log(`Fetch response for ${lang}.json:`, response.status, response.statusText);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Failed to load ${lang}.json`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error(`Invalid content type: ${contentType}`);
+        }
+
+        const data = await response.json();
+        console.log(`Successfully loaded ${lang}.json with ${Object.keys(data).length} keys`);
+
+        // Validate the structure
+        if (!data.navigation || !data.navigation['nav-home']) {
+            throw new Error(`Invalid translation file structure for ${lang}`);
+        }
+
+        translations[lang] = data;
+        console.log(`Translations for ${lang} cached successfully`);
         return translations[lang];
+
     } catch (error) {
-        console.warn(`Could not load language file for ${lang}:`, error);
+        console.error(`Failed to load language file for ${lang}:`, error);
+
         // Fallback to Chinese if available
         if (lang !== 'zh' && translations['zh']) {
+            console.log(`Falling back to Chinese translations`);
             return translations['zh'];
         }
-        return {};
+
+        // Return minimal fallback if Chinese also fails
+        console.log(`Using minimal fallback translations`);
+        return {
+            navigation: {
+                'page-title': '日本商务通',
+                'nav-home': '首页',
+                'nav-ai-legal': '⚖️ AI法律',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-education': '留学教育',
+                'nav-other-services': '其他服务',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-labor': '劳务派遣',
+                'nav-pet': '宠物帮帮忙',
+                'nav-tourism': '旅游服务',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们'
+            }
+        };
     }
 }
 
@@ -271,8 +319,29 @@ function preloadCriticalResources() {
 
 // Initialize i18n system
 async function initI18n() {
+    console.log('Initializing i18n system with language:', currentLanguage);
+
+    // Load current language first
     await loadTranslations(currentLanguage);
+    console.log('Current language loaded');
+
+    // Preload other languages in background
+    const otherLanguages = ['zh', 'ja', 'en'].filter(lang => lang !== currentLanguage);
+    const preloadPromises = otherLanguages.map(async (lang) => {
+        try {
+            await loadTranslations(lang);
+            console.log(`Preloaded language: ${lang}`);
+        } catch (error) {
+            console.warn(`Failed to preload language ${lang}:`, error);
+        }
+    });
+
+    // Don't wait for preloading to complete
+    Promise.allSettled(preloadPromises);
+
+    // Apply initial language update
     updateLanguage();
+    console.log('Initial i18n setup completed');
 }
 
 // canonical nav HTML (single source). Keep this small and stable — updates here will reflect across pages.
@@ -928,35 +997,59 @@ function setupNavBehavior() {
     }
 
     // Language selector - handle change events
-    const languageSelector = document.getElementById('language-select');
-    if (languageSelector) {
-        // Set initial value
-        languageSelector.value = currentLanguage;
+    function setupLanguageSelector() {
+        const languageSelector = document.getElementById('language-select');
+        if (languageSelector) {
+            console.log('Setting up language selector, current language:', currentLanguage);
 
-        languageSelector.addEventListener('change', async function (e) {
-            const selectedLang = e.target.value;
-            console.log('Language selector changed to:', selectedLang);
+            // Set initial value
+            languageSelector.value = currentLanguage;
 
-            // Prevent multiple simultaneous switches
-            if (isLanguageSwitching) {
-                console.log('Language switch already in progress, ignoring');
-                return;
-            }
+            // Remove any existing listeners to prevent duplicates
+            const newSelector = languageSelector.cloneNode(true);
+            languageSelector.parentNode.replaceChild(newSelector, languageSelector);
 
-            try {
-                await switchLanguage(selectedLang);
+            // Add the change listener
+            newSelector.addEventListener('change', async function (e) {
+                const selectedLang = e.target.value;
+                console.log('Language selector changed to:', selectedLang);
 
-                // Force immediate update after language switch completes
-                setTimeout(() => {
-                    console.log('Forcing immediate language update after switch');
-                    updateLanguage();
-                }, 100);
+                // Prevent multiple simultaneous switches
+                if (isLanguageSwitching) {
+                    console.log('Language switch already in progress, ignoring');
+                    return;
+                }
 
-            } catch (error) {
-                console.error('Error during language switch:', error);
-            }
-        });
+                try {
+                    // Show immediate feedback
+                    e.target.disabled = true;
+                    console.log('Language selector disabled during switch');
+
+                    await switchLanguage(selectedLang);
+
+                    // Force immediate update after language switch completes
+                    setTimeout(() => {
+                        console.log('Forcing immediate language update after switch');
+                        updateLanguage();
+                        e.target.disabled = false;
+                        console.log('Language selector re-enabled');
+                    }, 200);
+
+                } catch (error) {
+                    console.error('Error during language switch:', error);
+                    e.target.disabled = false;
+                    e.target.value = currentLanguage; // Reset on error
+                }
+            });
+
+            console.log('Language selector setup completed');
+        } else {
+            console.error('Language selector element not found!');
+        }
     }
+
+    // Call the setup function
+    setupLanguageSelector();
 
     // Nav link handling: support fragments and PJAX for internal pages - use event delegation
     const navbar = document.querySelector('.navbar');
@@ -1184,9 +1277,31 @@ function tryDirectFallback() {
     setTimeout(() => {
         const languageSelectEl = document.getElementById('language-select');
         if (languageSelectEl) {
+            console.log('Setting up fallback language selector');
             languageSelectEl.value = currentLanguage;
-            languageSelectEl.addEventListener('change', function(e) {
-                switchLanguage(e.target.value);
+
+            // Add change listener for fallback
+            languageSelectEl.addEventListener('change', async function (e) {
+                const selectedLang = e.target.value;
+                console.log('Fallback language selector changed to:', selectedLang);
+
+                if (isLanguageSwitching) {
+                    console.log('Language switch already in progress, ignoring');
+                    return;
+                }
+
+                try {
+                    e.target.disabled = true;
+                    await switchLanguage(selectedLang);
+                    setTimeout(() => {
+                        updateLanguage();
+                        e.target.disabled = false;
+                    }, 200);
+                } catch (error) {
+                    console.error('Fallback language switch error:', error);
+                    e.target.disabled = false;
+                    e.target.value = currentLanguage;
+                }
             });
         }
     }, 100);
