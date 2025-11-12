@@ -112,16 +112,25 @@ function updateLanguage() {
 
     elements.forEach((element, index) => {
         const key = element.getAttribute('data-lang');
+
+        // Skip dropdown toggle as it needs special handling to preserve ▼ arrow
+        if (element.classList.contains('dropdown-toggle')) {
+            return;
+        }
+
         const originalText = element.textContent;
-        const translation = t(key, element.textContent);
+
+        // Prefix navigation keys with 'navigation.' for proper JSON lookup
+        const translationKey = key.startsWith('nav-') ? `navigation.${key}` : key;
+        const translation = t(translationKey, element.textContent);
 
         // Only update if translation is different from current text
         if (translation && translation !== originalText) {
             // Use textContent for security (no HTML injection)
             element.textContent = sanitizeText(translation);
-            console.log(`Updated element ${index + 1}/${elements.length}: ${key} = "${translation}"`);
+            console.log(`Updated element ${index + 1}/${elements.length}: ${translationKey} = "${translation}"`);
         } else if (!translation) {
-            console.warn(`No translation found for key: ${key}`);
+            console.warn(`No translation found for key: ${translationKey}`);
         }
     });
 
@@ -141,14 +150,16 @@ function updateLanguage() {
         console.log(`Updated language selector to: ${currentLanguage}`);
     }
 
-    // Also update dropdown toggle text if it exists
+    // Special handling for dropdown toggle to preserve the ▼ arrow
     const dropdownToggle = document.querySelector('.dropdown-toggle[data-lang="nav-other-services"]');
     if (dropdownToggle) {
-        const dropdownTranslation = t('nav-other-services', '其他服务');
-        if (dropdownTranslation) {
+        const translationKey = 'navigation.nav-other-services';
+        const translation = t(translationKey, '其他服务');
+        console.log(`Dropdown translation lookup for '${translationKey}':`, translation);
+        if (translation) {
             // Keep the ▼ arrow
-            dropdownToggle.innerHTML = sanitizeText(dropdownTranslation) + ' ▼';
-            console.log(`Updated dropdown toggle to: ${dropdownTranslation}`);
+            dropdownToggle.innerHTML = sanitizeText(translation) + ' ▼';
+            console.log(`Updated dropdown toggle to: ${translation}`);
         }
     }
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Switching</title>
+    <link rel="stylesheet" href="styles/navigation.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <main style="padding: 120px 20px 40px;">
+        <h1>Language Switching Test Page</h1>
+        <p>This page is used to test the language switching functionality.</p>
+        <p>Current status:
+            <span id="test-status">Testing...</span>
+        </p>
+        <p>Try switching languages using the dropdown in the navigation bar.</p>
+    </main>
+
+    <script src="nav.js"></script>
+    <script>
+        // Test script to monitor language changes
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusElement = document.getElementById('test-status');
+            const languageSelector = document.getElementById('language-select');
+
+            if (languageSelector) {
+                statusElement.textContent = 'Language selector found - ready for testing';
+
+                // Listen for language changes
+                languageSelector.addEventListener('change', function() {
+                    console.log('Language selector changed to:', this.value);
+                    statusElement.textContent = `Language changed to: ${this.value}`;
+                });
+            } else {
+                statusElement.textContent = 'Error: Language selector not found';
+            }
+        });
+    </script>
+</body>
+</html>
