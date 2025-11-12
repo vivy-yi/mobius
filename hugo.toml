@@ -1,0 +1,72 @@
+baseURL = 'https://vivy-yi.github.io/japan-lawyer/'
+languageCode = 'zh-cn'
+title = '日本商务通'
+theme = 'japan-business'
+
+[params]
+  description = "面向在日本创业、生活人群的一站式服务平台"
+  author = "日本商务通团队"
+  keywords = ["日本创业", "经营管理签证", "在留资格", "日本生活", "商务服务"]
+
+[languages]
+  [languages.zh]
+    languageName = "中文"
+    weight = 1
+  [languages.en]
+    languageName = "English"
+    weight = 2
+
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "客户分层"
+    url = "/#customer-layers"
+    weight = 2
+  [[menu.main]]
+    name = "⚖️ AI法律"
+    url = "/ai-legal/"
+    weight = 3
+  [[menu.main]]
+    name = "🤖 AI CRM"
+    url = "/ai-crm/"
+    weight = 4
+  [[menu.main]]
+    name = "知识库"
+    url = "/knowledge/"
+    weight = 5
+  [[menu.main]]
+    name = "专业人才"
+    url = "/professionals/"
+    weight = 6
+  [[menu.main]]
+    name = "生活帮忙"
+    url = "/lifestyle/"
+    weight = 7
+  [[menu.main]]
+    name = "社群网络"
+    url = "/community/"
+    weight = 8
+  [[menu.main]]
+    name = "留学教育"
+    url = "/education/"
+    weight = 9
+  [[menu.main]]
+    name = "旅游服务"
+    url = "/tourism/"
+    weight = 10
+  [[menu.main]]
+    name = "宠物帮帮忙"
+    url = "/pet/"
+    weight = 11
+  [[menu.main]]
+    name = "劳务派遣"
+    url = "/labor/"
+    weight = 12
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

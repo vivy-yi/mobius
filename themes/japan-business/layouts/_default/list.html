@@ -1,0 +1,55 @@
+{{ define "main" }}
+
+<div class="page-header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 120px 0 60px;">
+    <div class="container">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ .Title }}</h1>
+        {{ if .Params.description }}
+        <p style="font-size: 1.2rem; opacity: 0.9;">{{ .Params.description }}</p>
+        {{ end }}
+    </div>
+</div>
+
+<div class="container" style="padding: 60px 20px;">
+    {{ if .Content }}
+    <div class="content" style="margin-bottom: 3rem;">
+        {{ .Content }}
+    </div>
+    {{ end }}
+
+    {{ $pages := .Pages }}
+    {{ if .IsHome }}
+        {{ $pages = .Site.RegularPages }}
+    {{ end }}
+
+    {{ if $pages }}
+    <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        {{ range $pages }}
+        <article class="post-card" style="background: white; border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s ease;">
+            {{ if .Params.banner }}
+            <div style="height: 200px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                {{ .Params.banner }}
+            </div>
+            {{ end }}
+
+            <div style="padding: 2rem;">
+                <h3 style="margin-bottom: 1rem;"><a href="{{ .RelPermalink }}" style="text-decoration: none; color: var(--primary);">{{ .Title }}</a></h3>
+
+                {{ if .Params.description }}
+                <p style="color: var(--gray); margin-bottom: 1rem;">{{ .Params.description }}</p>
+                {{ end }}
+
+                {{ if .Date }}
+                <time style="color: var(--gray); font-size: 0.9rem;">{{ .Date.Format "2006-01-02" }}</time>
+                {{ end }}
+
+                <div style="margin-top: 1rem;">
+                    <a href="{{ .RelPermalink }}" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">阅读更多 →</a>
+                </div>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+
+{{ end }}

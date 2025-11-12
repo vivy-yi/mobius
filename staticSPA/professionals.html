@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业人才 - 日本商务通</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-switcher button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* 页面标题区域 */
+        .page-header {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, var(--light) 0%, white 100%);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 专业人才介绍区域 */
+        .intro-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .intro-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-content h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .intro-content p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .intro-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* 专业分类区域 */
+        .categories-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .categories-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .categories-header h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* 筛选区域 */
+        .filter-section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .filter-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-tag {
+            background: white;
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 25px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* 专业人才网格 */
+        .professionals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .professional-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .professional-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .professional-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--primary));
+        }
+
+        .professional-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .professional-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .professional-info h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            flex: 1;
+        }
+
+        .professional-info .title {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .professional-info .rating {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .professional-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .professional-bio {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .professional-expertise {
+            margin-bottom: 20px;
+        }
+
+        .expertise-title {
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .expertise-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .expertise-item {
+            background: rgba(30, 58, 95, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .professional-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 15px 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .stat-card-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .professional-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 联系咨询区域 */
+        .contact-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #f4c430;
+            transform: scale(1.02);
+        }
+
+        /* 成功案例区域 */
+        .success-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .success-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .success-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .success-header-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-header-content h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .success-header-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .success-content {
+            color: var(--gray);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .success-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .success-rating {
+            color: var(--gold);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                gap: 4px;
+                z-index: 1001;
+            }
+
+            .mobile-menu-toggle span {
+                width: 25px;
+                height: 3px;
+                background: white;
+                transition: all 0.3s ease;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .professionals-grid,
+            .intro-stats,
+            .success-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .professional-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .professional-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <!-- 页面标题区域 -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title" data-lang="professionals-title">专业人才</h1>
+                <p class="page-subtitle" data-lang="professionals-subtitle">汇聚顶尖律师、行政书士、翻译、顾问等专业人士</p>
+            </div>
+        </section>
+
+        <!-- 专业人才介绍区域 -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <h2 data-lang="intro-title">值得信赖的专业团队</h2>
+                    <p data-lang="intro-description">
+                        我们严选各领域顶尖专业人士，为您提供高质量的服务。每位人才都经过严格审核，
+                        具备丰富的实战经验和专业资质，确保为您提供最优质的服务体验。
+                    </p>
+
+                    <div class="intro-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label" data-lang="stat-professionals">专业人才</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label" data-lang="stat-areas">专业领域</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label" data-lang="stat-satisfaction">客户满意度</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label" data-lang="stat-response">响应时间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 专业分类和搜索区域 -->
+        <section class="categories-section">
+            <div class="container">
+                <div class="categories-header">
+                    <h2 data-lang="categories-title">寻找专业人才</h2>
+                    <p data-lang="categories-subtitle">按专业领域筛选，找到最适合您的专业人才</p>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-tags">
+                        <div class="filter-tag active" onclick="filterProfessionals('all')" data-lang="filter-all">全部</div>
+                        <div class="filter-tag" onclick="filterProfessionals('lawyer')" data-lang="filter-lawyer">律师</div>
+                        <div class="filter-tag" onclick="filterProfessionals('gyosei')" data-lang="filter-gyosei">行政书士</div>
+                        <div class="filter-tag" onclick="filterProfessionals('translator')" data-lang="filter-translator">翻译</div>
+                        <div class="filter-tag" onclick="filterProfessionals('consultant')" data-lang="filter-consultant">顾问</div>
+                        <div class="filter-tag" onclick="filterProfessionals('accountant')" data-lang="filter-accountant">会计师</div>
+                        <div class="filter-tag" onclick="filterProfessionals('other')" data-lang="filter-other">其他</div>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" class="search-input" data-lang-placeholder="search-placeholder" placeholder="搜索专业人才...">
+                        <button class="search-btn" onclick="searchProfessionals()">🔍</button>
+                    </div>
+                </div>
+
+                <!-- 专业人才网格 -->
+                <div class="professionals-grid">
+                    <!-- 律师卡片 -->
+                    <div class="professional-card" data-category="lawyer">
+                        <div class="professional-header">
+                            <div class="professional-avatar">⚖️</div>
+                            <div class="professional-info">
+                                <h3 data-lang="lawyer1-name">张律师</h3>
+                                <span class="title" data-lang="lawyer1-title">高级合伙人律师</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-corporate">企业法务</span>
+                            <span class="tag" data-lang="tag-immigration">移民签证</span>
+                            <span class="tag" data-lang="tag-intellectual">知识产权</span>
+                            <span class="tag" data-lang="tag-contract">合同纠纷</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="lawyer1-bio">
+                            拥有15年执业经验，专注企业法务和知识产权保护，成功处理数百起企业法律案件，为众多日企提供专业法律支持...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">专业领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise1">公司法</span>
+                                <span class="expertise-item" data-lang="expertise2">合同法</span>
+                                <span class="expertise-item" data-lang="expertise3">知识产权</span>
+                                <span class="expertise-item" data-lang="expertise4">投资移民</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-cases">处理案件</div>
+                                <div class="stat-card-value">500+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">15年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-rate">收费标准</div>
+                                <div class="stat-card-value">2万/小时起</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('张律师')">
+                                <span data-lang="btn-contact">联系律师</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('lawyer1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 行政书士卡片 -->
+                    <div class="professional-card" data-category="gyosei">
+                        <div class="professional-header">
+                            <div class="professional-avatar">📋</div>
+                            <div class="professional-info">
+                                <h3 data-lang="gyosei1-name">王行政书士</h3>
+                                <span class="title" data-lang="gyosei1-title">资深行政书士</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-visa">签证申请</span>
+                            <span class="tag" data-lang="tag-company">公司设立</span>
+                            <span class="tag" data-lang="tag-permit">许可申请</span>
+                            <span class="tag" data-lang="tag-status">在留资格</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="gyosei1-bio">
+                            专业从事在留资格申请、公司设立、许可申请等行政手续办理12年，熟悉日本各类行政流程，成功帮助超过200家企业完成在日合法经营...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">专业领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise5">投资经营签证</span>
+                                <span class="expertise-item" data-lang="expertise6">工作签证</span>
+                                <span class="expertise-item" data-lang="expertise7">永住权申请</span>
+                                <span class="expertise-item" data-lang="expertise8">公司设立</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-cases">处理案件</div>
+                                <div class="stat-card-value">300+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">12年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-rate">收费标准</div>
+                                <div class="stat-card-value">5千起</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('王行政书士')">
+                                <span data-lang="btn-contact">联系行政书士</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('gyosei1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 翻译卡片 -->
+                    <div class="professional-card" data-category="translator">
+                        <div class="professional-header">
+                            <div class="professional-avatar">🌐</div>
+                            <div class="professional-info">
+                                <h3 data-lang="translator1-name">李翻译</h3>
+                                <span class="title" data-lang="translator1-title">高级翻译师</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-business">商务翻译</span>
+                            <span class="tag" data-lang="tag-legal">法律翻译</span>
+                            <span class="tag" data-lang="tag-technical">技术翻译</span>
+                            <span class="tag" data-lang="tag-medical">医疗翻译</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="translator1-bio">
+                            资深中英日三语翻译，专业从事商务、法律、技术等领域的翻译工作10年，曾为多家世界500强企业提供服务，翻译字数超过千万字...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">翻译领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise9">商业计划书</span>
+                                <span class="expertise-item" data-lang="expertise10">法律合同</span>
+                                <span class="expertise-item" data-lang="expertise11">技术文档</span>
+                                <span class="expertise-item" data-lang="expertise12">医疗报告</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-words">翻译字数</div>
+                                <div class="stat-card-value">1000万+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">10年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-rate">收费标准</div>
+                                <div class="stat-card-value">0.3/字符</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('李翻译')">
+                                <span data-lang="btn-contact">联系翻译</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('translator1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 顾问卡片 -->
+                    <div class="professional-card" data-category="consultant">
+                        <div class="professional-header">
+                            <div class="professional-avatar">💼</div>
+                            <div class="professional-info">
+                                <h3 data-lang="consultant1-name">陈顾问</h3>
+                                <span class="title" data-lang="consultant1-title">商业咨询顾问</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-business">商业策略</span>
+                            <span class="tag" data-lang="tag-market">市场分析</span>
+                            <span class="tag" data-lang="tag-finance">财务咨询</span>
+                            <span class="tag" data-lang="tag-management">管理咨询</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="consultant1-bio">
+                            曾任世界500强企业高管，拥有丰富的企业管理经验和国际视野，专注于为中小企业提供战略规划、市场分析、财务管理等专业咨询服务...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">咨询领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise13">企业战略</span>
+                                <span class="expertise-item" data-lang="expertise14">市场营销</span>
+                                <span class="expertise-item" data-lang="expertise15">财务管理</span>
+                                <span class="expertise-item" data-lang="expertise16">运营优化</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-companies">服务企业</div>
+                                <div class="stat-card-value">100+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">20年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-rate">收费标准</div>
+                <div class="stat-card-value">1万/天起</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('陈顾问')">
+                                <span data-lang="btn-contact">联系顾问</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('consultant1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 会计师卡片 -->
+                    <div class="professional-card" data-category="accountant">
+                        <div class="professional-header">
+                            <div class="professional-avatar">💰</div>
+                            <div class="professional-info">
+                                <h3 data-lang="accountant1-name">赵会计师</h3>
+                                <span class="title" data-lang="accountant1-title">注册会计师</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-tax">税务咨询</span>
+                            <span class="tag" data-lang="tag-audit">财务审计</span>
+                            <span class="tag" data-lang="tag-report">财务报告</span>
+                            <span class="tag" data-lang="tag-planning">税务筹划</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="accountant1-bio">
+                            日本注册会计师，精通日本税务法规，为企业提供专业的税务筹划、财务审计和会计服务，帮助企业合法合规经营，优化税务成本...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">专业领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise17">税务筹划</span>
+                                <span class="expertise-item" data-lang="expertise18">财务审计</span>
+                                <span class="expertise-item" data-lang="expertise19">财务报表</span>
+                                <span class="expertise-item" data-lang="expertise20">内部控制</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-companies">服务企业</div>
+                                <div class="stat-card-value">80+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">8年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-cert">持有证书</div>
+                            <div class="stat-card-value">CPA</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('赵会计师')">
+                                <span data-lang="btn-contact">联系会计师</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('accountant1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 其他专业人才卡片（这里可以继续添加更多） -->
+                    <div class="professional-card" data-category="other">
+                        <div class="professional-header">
+                            <div class="professional-avatar">👨</div>
+                            <div class="professional-info">
+                                <h3 data-lang="other1-name">刘专家</h3>
+                                <span class="title" data-lang="other1-title">行业专家</span>
+                                <span class="rating">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-tags">
+                            <span class="tag" data-lang="tag-education">教育培训</span>
+                            <span class="tag" data-lang="tag-consulting">专业咨询</span>
+                            <span class="tag" data-lang="tag-research">研究分析</span>
+                            <span class="tag" data-lang="tag-training">培训指导</span>
+                        </div>
+
+                        <div class="professional-bio" data-lang="other1-bio">
+                            在日20年，深度了解日本商业环境和行业趋势，为进入日本市场的企业提供专业的市场分析和进入策略建议...
+                        </div>
+
+                        <div class="professional-expertise">
+                            <div class="expertise-title" data-lang="expertise-title">专业领域</div>
+                            <div class="expertise-list">
+                                <span class="expertise-item" data-lang="expertise21">市场调研</span>
+                                <span class="expertise-item" data-lang="expertise22">行业分析</span>
+                                <span class="expertise-item" data-lang="expertise23">进入策略</span>
+                                <span class="expertise-item" data-lang="expertise24">培训指导</span>
+                            </div>
+                        </div>
+
+                        <div class="professional-stats">
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-projects">项目经验</div>
+                                <div class="stat-card-value">200+</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-experience">从业年限</div>
+                                <div class="stat-card-value">20年</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label" data-lang="stat-success">成功率</div>
+                                <div class="stat-card-value">95%</div>
+                            </div>
+                        </div>
+
+                        <div class="professional-actions">
+                            <button class="action-btn btn-primary" onclick="contactProfessional('刘专家')">
+                                <span data-lang="btn-contact">联系专家</span>
+                            </button>
+                            <button class="action-btn btn-secondary" onclick="viewProfile('other1')">
+                                <span data-lang="btn-profile">查看详情</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成功案例区域 -->
+        <section class="success-section">
+            <div class="container">
+                <div class="success-header">
+                    <h2 data-lang="success-title">成功案例</h2>
+                    <p data-lang="success-subtitle">专业人才的优质服务获得客户高度认可</p>
+                </div>
+
+                <div class="success-grid">
+                    <!-- 成功案例1 -->
+                    <div class="success-card">
+                        <div class="success-header-content">
+                            <h4 data-lang="success1-project">制造业企业设立项目</h4>
+                            <p data-lang="success1-client">某制造业企业</p>
+                        </div>
+                        <div class="success-content" data-lang="success1-content">
+                            "通过行政书士的专业服务，我们在3个月内完成了公司设立、银行开户、社会保险加入等全部流程，
+                            比预期时间缩短了40%，为企业顺利在日开展业务奠定了基础。服务非常专业，响应迅速！"
+                        </div>
+                        <div class="success-meta">
+                            <span data-lang="success-date">2024年1月</span>
+                            <span class="success-rating">⭐⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+
+                    <!-- 成功案例2 -->
+                    <div class="success-card">
+                        <div class="success-header-content">
+                            <h4 data-lang="success2-project">知识产权保护</h4>
+                            <p data-lang="success2-client">某科技公司</p>
+                        </div>
+                        <div class="success-content" data-lang="success2-content">
+                            "在知识产权律师的帮助下，我们成功获得了核心专利保护，并在后续的商务谈判中占据了有利地位。
+                            律师不仅专业能力强，而且商务意识很好，为我们的技术创新提供了有力保障。"
+                        </div>
+                        <div class="success-meta">
+                            <span data-lang="success-date">2023年11月</span>
+                            <span class="success-rating">⭐⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+
+                    <!-- 成功案例3 -->
+                    <div class="success-card">
+                        <div class="success-header-content">
+                            <h4 data-lang="success3-project">商业文件翻译</h4>
+                            <p data-lang="success3-client">某跨国企业</p>
+                        </div>
+                        <div class="success-content" data-lang="success3-content">
+                            "翻译团队为我们的重要商业文件提供了高质量的翻译服务，准确传达了原文的含义和语气，
+                            为商务谈判的顺利进行提供了重要支持。翻译速度快，质量高，专业术语准确无误。"
+                        </div>
+                        <div class="success-meta">
+                            <span data-lang="success-date">2023年10月</span>
+                            <span class="success-rating">⭐⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系咨询区域 -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 data-lang="contact-title">寻找专业人才</h2>
+                    <p data-lang="contact-subtitle">告诉我们您的需求，我们为您匹配最合适的专业人才</p>
+
+                    <form id="professionalContactForm" onsubmit="submitContactForm(event)">
+                        <div class="contact-form">
+                            <div class="form-group">
+                                <label data-lang="form-name">姓名</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang="form-company">公司名称</label>
+                                <input type="text" name="company" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang="form-email">邮箱</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang="form-phone">联系电话</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang="form-category">所需专业类型</label>
+                                <select name="category" required>
+                                    <option value="">请选择专业类型</option>
+                                    <option value="lawyer" data-lang="option-lawyer">律师</option>
+                                    <option value="gyosei" data-lang="option-gyosei">行政书士</option>
+                                    <option value="translator" data-lang="option-translator">翻译</option>
+                                    <option value="consultant" data-lang="option-consultant">顾问</option>
+                                    <option value="accountant" data-lang="option-accountant">会计师</option>
+                                    <option value="other" data-lang="option-other">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang="form-message">需求描述</label>
+                                <textarea name="message" rows="4" placeholder="请详细描述您的具体需求..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn" data-lang="form-submit">提交需求</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'nav-home': '首页',
+                'nav-layers': '客户分层',
+                'nav-ai-legal': '⚖️ AI法律',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-education': '留学教育',
+                'nav-tourism': '旅游服务',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-ai-legal': '⚖️ AI法律',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'page-title': '专业人才',
+                'professionals-title': '专业人才',
+                'professionals-subtitle': '汇聚顶尖律师、行政书士、翻译、顾问等专业人士',
+                'intro-title': '值得信赖的专业团队',
+                'intro-description': '我们严选各领域顶尖专业人士，为您提供高质量的服务。每位人才都经过严格审核，具备丰富的实战经验和专业资质，确保为您提供最优质的服务体验。',
+                'stat-professionals': '专业人才',
+                'stat-areas': '专业领域',
+                'stat-satisfaction': '客户满意度',
+                'stat-response': '响应时间',
+                'categories-title': '寻找专业人才',
+                'categories-subtitle': '按专业领域筛选，找到最适合您的专业人才',
+                'filter-all': '全部',
+                'filter-lawyer': '律师',
+                'filter-gyosei': '行政书士',
+                'filter-translator': '翻译',
+                'filter-consultant': '顾问',
+                'filter-accountant': '会计师',
+                'filter-other': '其他',
+                'search-placeholder': '搜索专业人才...',
+                'lawyer1-name': '张律师',
+                'lawyer1-title': '高级合伙人律师',
+                'tag-corporate': '企业法务',
+                'tag-immigration': '移民签证',
+                'tag-intellectual': '知识产权',
+                'tag-contract': '合同纠纷',
+                'lawyer1-bio': '拥有15年执业经验，专注企业法务和知识产权保护，成功处理数百起企业法律案件，为众多日企提供专业法律支持...',
+                'expertise-title': '专业领域',
+                'expertise1': '公司法',
+                'expertise2': '合同法',
+                'expertise3': '知识产权',
+                'expertise4': 'investment-immigration',
+                'stat-cases': '处理案件',
+                'stat-experience': '从业年限',
+                'stat-rate': '收费标准',
+                'btn-contact': '联系律师',
+                'btn-profile': '查看详情',
+                'gyosei1-name': '王行政书士',
+                'gyosei1-title': '资深行政书士',
+                'tag-visa': '签证申请',
+                'tag-company': '公司设立',
+                'tag-permit': '许可申请',
+                'tag-status': '在留资格',
+                'gyosei1-bio': '专业从事在留资格申请、公司设立、许可申请等行政手续办理12年，熟悉日本各类行政流程，成功帮助超过200家企业完成在日合法经营...',
+                'expertise5': '投资经营签证',
+                'expertise6': '工作签证',
+                'expertise7': '永住权申请',
+                'expertise8': '公司设立',
+                'translator1-name': '李翻译',
+                'translator1-title': '高级翻译师',
+                'tag-business': '商务翻译',
+                'tag-legal': 'legal翻译',
+                'tag-technical': '技术翻译',
+                'tag-medical': 'medical翻译',
+                'translator1-bio': '资深中英日三语翻译，专业从事商务、法律、技术等领域的翻译工作10年，曾为多家世界500强企业提供服务，翻译字数超过千万字...',
+                'expertise9': '商业计划书',
+                'expertise10': '法律合同',
+                'expertise11': '技术文档',
+                'expertise12': '医疗报告',
+                'stat-words': '翻译字数',
+                'consultant1-name': '陈顾问',
+                'consultant1-title': '商业咨询顾问',
+                'tag-business': '商业策略',
+                'tag-market': '市场分析',
+                'tag-finance': '财务咨询',
+                'tag-management': '管理咨询',
+                'consultant1-bio': '曾任世界500强企业高管，拥有丰富的企业管理经验和国际视野，专注于为中小企业提供战略规划、市场分析、财务管理等专业咨询服务...',
+                'expertise13': '企业战略',
+                'expertise14': '市场营销',
+                'expertise15': '财务管理',
+                'expertise16': '运营优化',
+                'stat-companies': '服务企业',
+                'stat-experience': '从业年限',
+                'stat-rate': '收费标准',
+                'accountant1-name': '赵会计师',
+                'accountant1-title': '注册会计师',
+                'tag-tax': '税务咨询',
+                'tag-audit': '财务审计',
+                'tag-report': '财务报告',
+                'tag-planning': '税务筹划',
+                'accountant1-bio': '日本注册会计师，精通日本税务法规，为企业提供专业的税务筹划、财务审计和会计服务，帮助企业合法合规经营，优化税务成本...',
+                'expertise17': '税务筹划',
+                'expertise18': '财务审计',
+                'expertise19': '财务报表',
+                'expertise20': '内部控制',
+                'other1-name': '刘专家',
+                'other1-title': '行业专家',
+                'tag-education': '教育培训',
+                'tag-consulting': '专业咨询',
+                'tag-research': '研究分析',
+                'tag-training': '培训指导',
+                'other1-bio': '在日20年，深度了解日本商业环境和行业趋势，为进入日本市场的企业提供专业的市场分析和进入策略建议...',
+                'expertise21': '市场调研',
+                'expertise22': '行业分析',
+                'expertise23': '进入策略',
+                'expertise24': '培训指导',
+                'stat-projects': '项目经验',
+                'stat-experience': '从业年限',
+                'stat-success': '成功率',
+                'success-title': '成功案例',
+                'success-subtitle': '专业人才的优质服务获得客户高度认可',
+                'success1-project': '制造业企业设立项目',
+                'success1-client': '某制造业企业',
+                'success1-content': '通过行政书士的专业服务，我们在3个月内完成了公司设立、银行开户、社会保险加入等全部流程，比预期时间缩短了40%，为企业顺利在日开展业务奠定了基础。服务非常专业，响应迅速！',
+                'success1-date': '2024年1月',
+                'success2-project': '知识产权保护',
+                'success2-client': '某科技公司',
+                'success2-content': '在知识产权律师的帮助下，我们成功获得了核心专利保护，并在后续的商务谈判中占据了有利地位。律师不仅专业能力强，而且商务意识很好，为我们的技术创新提供了有力保障。',
+                'success2-date': '2023年11月',
+                'success3-project': '商业文件翻译',
+                'success3-client': '某跨国企业',
+                'success3-content': '翻译团队为我们的重要商业文件提供了高质量的翻译服务，准确传达了原文的含义和语气，为商务谈判的顺利进行提供了重要支持。翻译速度快，质量高，专业术语准确无误。',
+                'success3-date': '2023年10月',
+                'contact-title': '寻找专业人才',
+                'contact-subtitle': '告诉我们您的需求，我们为您匹配最合适的专业人才',
+                'form-name': '姓名',
+                'form-company': '公司名称',
+                'form-email': '邮箱',
+                'form-phone': '联系电话',
+                'form-category': '所需专业类型',
+                'form-message': '需求描述',
+                'form-submit': '提交需求',
+                'option-lawyer': '律师',
+                'option-gyosei': '行政书士',
+                'option-translator': '翻译',
+                'option-consultant': '顾问',
+                'option-accountant': '会计师',
+                'option-other': '其他',
+                'btn-contact': '联系专业',
+                'btn-profile': '查看详情'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-layers': 'Customer Tiers',
+                'nav-ai-legal': '⚖️ AI Legal',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-knowledge': 'Knowledge Base',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-education': 'Study Abroad',
+                'nav-tourism': 'Tourism',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-ai-legal': '⚖️ AI Legal',
+                'nav-ai-crm': '🤖 AI CRM',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'page-title': 'Professionals',
+                'professionals-title': 'Professional Services',
+                'professionals-subtitle': 'Connecting top lawyers, administrative scriveners, translators, consultants and other professionals',
+                'intro-title': 'Trusted Professional Team',
+                'intro-description': 'We carefully select top professionals in various fields to provide high-quality services. Each professional has undergone rigorous screening, possesses rich practical experience and professional qualifications, ensuring the best service experience for you.',
+                'stat-professionals': 'Professionals',
+                'stat-areas': 'Expertise Areas',
+                'stat-satisfaction': 'Satisfaction Rate',
+                'stat-response': 'Response Time',
+                'categories-title': 'Find Professional Services',
+                'categories-subtitle': 'Filter by expertise area to find the right professional for your needs',
+                'filter-all': 'All',
+                'filter-lawyer': 'Lawyers',
+                'filter-gyosei': 'Administrative Scriveners',
+                'filter-translator': 'Translators',
+                'filter-consultant': 'Consultants',
+                'filter-accountant': 'Accountants',
+                'filter-other': 'Others',
+                'search-placeholder': 'Search professionals...',
+                'lawyer1-name': 'Attorney Zhang',
+                'lawyer1-title': 'Senior Partner',
+                'tag-corporate': 'Corporate Law',
+                'tag-immigration': 'Immigration Visa',
+                'tag-intellectual': 'Intellectual Property',
+                'tag-contract': 'Contract Disputes',
+                'lawyer1-bio': 'With 15 years of practice experience, focusing on corporate law and IP protection, successfully handled hundreds of corporate legal cases, providing professional legal support for many Japanese companies...',
+                'expertise-title': 'Expertise Areas',
+                'expertise1': 'Corporate Law',
+                'expertise2': 'Contract Law',
+                'expertise3': 'Intellectual Property',
+                'expertise4': 'Investment Immigration',
+                'stat-cases': 'Cases Handled',
+                'stat-experience': 'Years Experience',
+                'stat-rate': 'Hourly Rate',
+                'btn-contact': 'Contact Lawyer',
+                'btn-profile': 'View Profile',
+                'gyosei1-name': 'Administrative Scrivener Wang',
+                'gyosei1-title': 'Senior Administrative Scrivener',
+                'tag-visa': 'Visa Applications',
+                'tag-company': 'Company Setup',
+                'tag-permit': 'License Applications',
+                'tag-status': 'Residence Status',
+                'gyosei1-bio': 'Specializing in residence status applications, company setup, and license applications for 12 years, familiar with various Japanese administrative procedures, successfully helping over 200 companies achieve legal operations...',
+                'expertise5': 'Investment Visa',
+                'expertise6': 'Work Visa',
+                'expertise7': 'Permanent Residency',
+                'expertise8': 'Company Setup',
+                'translator1-name': 'Translator Li',
+                'translator1-title': 'Senior Translator',
+                'tag-business': 'Business Translation',
+                'tag-legal': 'Legal Translation',
+                'tag-technical': 'Technical Translation',
+                'tag-medical': 'Medical Translation',
+                'translator1-bio': 'Senior trilingual Chinese-Japanese-English translator with 10 years of experience in business, legal, and technical translations, having served multiple Fortune 500 companies, translating over 10 million characters...',
+                'expertise9': 'Business Plans',
+                'expertise10': 'Legal Contracts',
+                'expertise11': 'Technical Documents',
+                'expertise12': 'Medical Reports',
+                'stat-words': 'Words Translated',
+                'consultant1-name': 'Consultant Chen',
+                'consultant1-title': 'Business Consultant',
+                'tag-business': 'Business Strategy',
+                'tag-market': 'Market Analysis',
+                'tag-finance': 'Financial Consulting',
+                'tag-management': 'Management Consulting',
+                'consultant1-bio': 'Former Fortune 500 executive with rich management experience and international vision, focusing on strategic planning, market analysis, financial management for SMEs...',
+                'expertise13': 'Business Strategy',
+                'expertise14': 'Marketing',
+                'expertise15': 'Financial Management',
+                'expertise16': 'Operations Optimization',
+                'stat-companies': 'Served Companies',
+                'stat-experience': 'Years Experience',
+                'stat-rate': 'Daily Rate',
+                'accountant1-name': 'Accountant Zhao',
+                'accountant1-title': 'Certified Public Accountant',
+                'tag-tax': 'Tax Consulting',
+                'tag-audit': 'Financial Audit',
+                'tag-report': 'Financial Reporting',
+                'tag-planning': 'Tax Planning',
+                'accountant1-bio': 'Japanese CPA with deep expertise in Japanese tax regulations, providing professional tax planning, financial auditing and accounting services to help businesses comply with regulations and optimize costs...',
+                'expertise17': 'Tax Planning',
+                'expertise18': 'Financial Audit',
+                'expertise19': 'Financial Reports',
+                'expertise20': 'Internal Controls',
+                'other1-name': 'Expert Liu',
+                'other1-title': 'Industry Expert',
+                'tag-education': 'Education & Training',
+                'tag-consulting': 'Professional Consulting',
+                'tag-research': 'Research & Analysis',
+                'tag-training': 'Training & Guidance',
+                'other1-bio': '20 years in Japan with deep understanding of Japanese business environment and industry trends, providing professional market analysis and entry strategy for companies entering the Japanese market...',
+                'expertise21': 'Market Research',
+                'expertise22': 'Industry Analysis',
+                'expertise23': 'Entry Strategy',
+                'expertise24': 'Training Guidance',
+                'stat-projects': 'Project Experience',
+                'stat-experience': 'Years Experience',
+                'stat-success': 'Success Rate',
+                'success-title': 'Success Stories',
+                'success-subtitle': 'High-quality services from professionals recognized by clients',
+                'success1-project': 'Manufacturing Company Setup Project',
+                'success1-client': 'A Manufacturing Company',
+                'success1-content': 'Through professional administrative scrivener services, we completed company setup, bank account opening, and social insurance enrollment in 3 months, 40% faster than expected, establishing a solid foundation for business operations in Japan. Very professional service with fast response!',
+                'success1-date': 'January 2024',
+                'success2-project': 'Intellectual Property Protection',
+                'success2-client': 'A Technology Company',
+                'success2-content': 'With the help of IP lawyers, we successfully obtained core patent protection and gained advantages in subsequent business negotiations. The lawyer not only has strong professional abilities but also good business awareness, providing powerful support for our technological innovation.',
+                'success2-date': 'November 2023',
+                'success3-project': 'Business Document Translation',
+                'success3-client': 'A Multinational Enterprise',
+                'success3-content': 'The translation team provided high-quality translation for our important business documents, accurately conveying the original meaning and tone, providing important support for smooth business negotiations. Fast translation speed and accurate terminology.',
+                'success3-date': 'October 2023',
+                'contact-title': 'Find Professional Services',
+                'contact-subtitle': 'Tell us your needs, we will match you with the most suitable professionals',
+                'form-name': 'Name',
+                'form-company': 'Company Name',
+                'form-email': 'Email',
+                'form-phone': 'Phone Number',
+                'form-category': 'Service Type',
+                'form-message': 'Detailed Requirements',
+                'form-submit': 'Submit Request',
+                'option-lawyer': 'Lawyer',
+                'option-gyosei': 'Administrative Scrivener',
+                'option-translator': 'Translator',
+                'option-consultant': 'Consultant',
+                'option-accountant': 'Accountant',
+                'option-other': 'Other',
+                'btn-contact': 'Contact Professional',
+                'btn-profile': 'View Profile'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+
+        // 语言切换
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+
+            // 更新html标签的语言属性
+            document.documentElement.lang = lang;
+
+            // 更新所有带data-lang属性的元素
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // 更新语言切换按钮状态
+            document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.querySelector(`[data-lang-btn="${lang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        // 移动端菜单切换
+        // 其他业务相关JS（如有）
+
+        // 专业人才筛选
+        function filterProfessionals(category) {
+            const cards = document.querySelectorAll('.professional-card');
+            const tags = document.querySelectorAll('.filter-tag');
+
+            // 更新标签状态
+            tags.forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 显示/隐藏卡片
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 搜索功能
+        function searchProfessionals() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.professional-card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 联系专业人才
+        function contactProfessional(professionalName) {
+            alert(currentLanguage === 'zh' ?
+                `正在为您联系${professionalName}，我们的客服将在1小时内与您联系。` :
+                `We are connecting you with ${professionalName}. Our customer service will contact you within 1 hour.`
+            );
+        }
+
+        // 查看详情
+        function viewProfile(profileId) {
+            alert(currentLanguage === 'zh' ?
+                '详细页面正在开发中，敬请期待！' :
+                'Detailed profile page is under development. Stay tuned!'
+            );
+        }
+
+        // 提交联系表单
+        function submitContactForm(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const contactData = {
+                name: formData.get('name'),
+                company: formData.get('company'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                category: formData.get('category'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+
+            // console.log('Contact form submitted:', contactData);
+
+            alert(currentLanguage === 'zh' ?
+                '需求已提交！我们将在24小时内联系您并匹配最合适的专业人才。' :
+                'Request submitted! We will contact you within 24 hours and match the most suitable professionals.'
+            );
+
+            // 重置表单
+            event.target.reset();
+        }
+
+        // 语言切换按钮事件
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', (e) => {
+                switchLanguage(e.target.getAttribute('data-lang-btn'));
+            });
+        });
+
+        // 搜索框回车事件
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProfessionals();
+            }
+        });
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保初始化为中文
+            switchLanguage('zh');
+
+            // 添加一些调试信息（如果需要的话，可以取消注释）
+            // console.log('Professionals Page Loaded Successfully');
+            // console.log('Current language:', currentLanguage);
+            // console.log('Translation keys available:', Object.keys(translations.zh));
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

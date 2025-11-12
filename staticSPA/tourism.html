@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅游服务 - 日本商务通</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a.active {
+            color: var(--gold);
+        }
+
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            color: white;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* 主要内容 */
+        main {
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.85) 0%, rgba(44, 82, 130, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        /* 服务分类 */
+        .services-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .service-content {
+            padding: 35px 30px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--dark);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.4);
+        }
+
+        /* 热门景点 */
+        .destinations-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .destination-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .destination-content {
+            padding: 25px;
+        }
+
+        .destination-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .destination-region {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .destination-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .destination-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .destination-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 旅游套餐 */
+        .packages-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .package-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .package-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .package-duration {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .package-price small {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .package-content {
+            padding: 35px 30px;
+        }
+
+        .package-includes {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .package-includes li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--dark);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .package-includes li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .package-btn {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .package-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        /* 旅游攻略 */
+        .guides-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .guide-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .guide-icon {
+            height: 120px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--warning) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .guide-content {
+            padding: 25px;
+        }
+
+        .guide-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .guide-description {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .guide-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .guide-link:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        /* 咨询表单 */
+        .consultation-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .consultation-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(214, 158, 46, 0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 20px 20px;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-lang="hero-title">日本旅游专业服务</h1>
+                    <p data-lang="hero-subtitle">深度体验日本文化，定制专属旅游路线，让您的日本之旅更加完美</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务分类 -->
+        <section class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="services-title">旅游服务项目</h2>
+                    <p class="section-subtitle" data-lang="services-subtitle">全方位的旅游服务，满足不同需求</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- 定制旅游 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🗺️</span>
+                            <h3 class="service-title" data-lang="service-custom-title">定制旅游</h3>
+                            <p class="service-subtitle" data-lang="service-custom-subtitle">个性化行程规划</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-custom-f1">需求分析评估</li>
+                                <li data-lang="service-custom-f2">个性化路线设计</li>
+                                <li data-lang="service-custom-f3">酒店餐厅预订</li>
+                                <li data-lang="service-custom-f4">交通票务办理</li>
+                                <li data-lang="service-custom-f5">24小时行程支持</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('custom')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 商务考察 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">💼</span>
+                            <h3 class="service-title" data-lang="service-business-title">商务考察</h3>
+                            <p class="service-subtitle" data-lang="service-business-subtitle">专业商务安排</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-business-f1">企业对接安排</li>
+                                <li data-lang="service-business-f2">商务会议翻译</li>
+                                <li data-lang="service-business-f3">工厂参观安排</li>
+                                <li data-lang="service-business-f4">商务晚宴预订</li>
+                                <li data-lang="service-business-f5">专业陪同人员</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('business')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 文化体验 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🎭</span>
+                            <h3 class="service-title" data-lang="service-culture-title">文化体验</h3>
+                            <p class="service-subtitle" data-lang="service-culture-subtitle">深度文化之旅</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-culture-f1">传统文化体验</li>
+                                <li data-lang="service-culture-f2">和服体验与拍摄</li>
+                                <li data-lang="service-culture-f3">茶道花道学习</li>
+                                <li data-lang="service-culture-f4">寺庙神社参拜</li>
+                                <li data-lang="service-culture-f5">季节性活动参与</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('culture')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 美食之旅 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🍱</span>
+                            <h3 class="service-title" data-lang="service-food-title">美食之旅</h3>
+                            <p class="service-subtitle" data-lang="service-food-subtitle">品尝日本美味</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-food-f1">米其林餐厅预订</li>
+                                <li data-lang="service-food-f2">当地特色美食</li>
+                                <li data-lang="service-food-f3">料理制作体验</li>
+                                <li data-lang="service-food-f4">清酒品鉴活动</li>
+                                <li data-lang="service-food-f5">美食街探索之旅</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('food')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 购物指导 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🛍️</span>
+                            <h3 class="service-title" data-lang="service-shopping-title">购物指导</h3>
+                            <p class="service-subtitle" data-lang="service-shopping-subtitle">专业购物顾问</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-shopping-f1">热门购物地推荐</li>
+                                <li data-lang="service-shopping-f2">免税店优惠信息</li>
+                                <li data-lang="service-shopping-f3">特色商品推荐</li>
+                                <li data-lang="service-shopping-f4">砍价技巧指导</li>
+                                <li data-lang="service-shopping-f5">退税协助办理</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('shopping')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 交通接送 -->
+                    <div class="service-card">
+                        <div class="service-header">
+                            <span class="service-icon">🚗</span>
+                            <h3 class="service-title" data-lang="service-transport-title">交通接送</h3>
+                            <p class="service-subtitle" data-lang="service-transport-subtitle">便捷交通服务</p>
+                        </div>
+                        <div class="service-content">
+                            <ul class="service-features">
+                                <li data-lang="service-transport-f1">机场接送服务</li>
+                                <li data-lang="service-transport-f2">包车旅游服务</li>
+                                <li data-lang="service-transport-f3">轨道交通指导</li>
+                                <li data-lang="service-transport-f4">停车位预订服务</li>
+                                <li data-lang="service-transport-f5">多语言司机服务</li>
+                            </ul>
+                            <button class="service-btn" onclick="showServiceDetails('transport')"
+                                data-lang="service-learn-more">了解详情</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门景点 -->
+        <section class="destinations-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="destinations-title">热门旅游目的地</h2>
+                    <p class="section-subtitle" data-lang="destinations-subtitle">精选日本最受欢迎的旅游胜地</p>
+                </div>
+
+                <div class="destinations-grid">
+                    <div class="destination-card">
+                        <div class="destination-image">🗾</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-tokyo-name">东京</h3>
+                            <div class="destination-region" data-lang="dest-tokyo-region">关东地区</div>
+                            <p class="destination-description" data-lang="dest-tokyo-desc">
+                                日本首都，现代与传统完美融合的大都市，购物、美食、文化体验的天堂。</p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag1">现代都市</span>
+                                <span class="destination-tag" data-lang="dest-tag2">购物天堂</span>
+                                <span class="destination-tag" data-lang="dest-tag3">美食之都</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="destination-image">⛩️</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-kyoto-name">京都</h3>
+                            <div class="destination-region" data-lang="dest-kyoto-region">关西地区</div>
+                            <p class="destination-description" data-lang="dest-kyoto-desc">日本古都，传统文化胜地，拥有众多寺庙、神社和传统建筑。
+                            </p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag4">历史文化</span>
+                                <span class="destination-tag" data-lang="dest-tag5">传统建筑</span>
+                                <span class="destination-tag" data-lang="dest-tag6">四季美景</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="destination-image">🗻</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-hokkaido-name">北海道</h3>
+                            <div class="destination-region" data-lang="dest-hokkaido-region">北海道地区</div>
+                            <p class="destination-description" data-lang="dest-hokkaido-desc">
+                                日本最北端，以雪景、温泉、海鲜闻名，是冬季旅游的热门选择。</p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag7">雪国风光</span>
+                                <span class="destination-tag" data-lang="dest-tag8">温泉圣地</span>
+                                <span class="destination-tag" data-lang="dest-tag9">海鲜美食</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="destination-image">🏔️</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-fuji-name">富士山</h3>
+                            <div class="destination-region" data-lang="dest-fuji-region">中部地区</div>
+                            <p class="destination-description" data-lang="dest-fuji-desc">日本最高峰，世界文化遗产，登山、观光的热门目的地。</p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag10">世界遗产</span>
+                                <span class="destination-tag" data-lang="dest-tag11">登山圣地</span>
+                                <span class="destination-tag" data-lang="dest-tag12">绝美风景</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="destination-image">🏮</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-osaka-name">大阪</h3>
+                            <div class="destination-region" data-lang="dest-osaka-region">关西地区</div>
+                            <p class="destination-description" data-lang="dest-osaka-desc">
+                                日本第三大城市，以美食、购物、娱乐闻名，被称为"日本的厨房"。</p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag13">美食之都</span>
+                                <span class="destination-tag" data-lang="dest-tag14">购物天堂</span>
+                                <span class="destination-tag" data-lang="dest-tag15">娱乐中心</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="destination-image">🏖️</div>
+                        <div class="destination-content">
+                            <h3 class="destination-name" data-lang="dest-okinawa-name">冲绳</h3>
+                            <div class="destination-region" data-lang="dest-okinawa-region">冲绳地区</div>
+                            <p class="destination-description" data-lang="dest-okinawa-desc">日本最南端，以美丽海滩、潜水、独特文化闻名的度假胜地。
+                            </p>
+                            <div class="destination-features">
+                                <span class="destination-tag" data-lang="dest-tag16">海滩度假</span>
+                                <span class="destination-tag" data-lang="dest-tag17">潜水天堂</span>
+                                <span class="destination-tag" data-lang="dest-tag18">独特文化</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 旅游套餐 -->
+        <section class="packages-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="packages-title">精选旅游套餐</h2>
+                    <p class="section-subtitle" data-lang="packages-subtitle">精心设计的旅游套餐，让您的旅行更加省心</p>
+                </div>
+
+                <div class="packages-grid">
+                    <!-- 精品5日游 -->
+                    <div class="package-card">
+                        <div class="package-badge" data-lang="package-badge-hot">热门推荐</div>
+                        <div class="package-header">
+                            <h3 class="package-name" data-lang="package-classic-name">经典关东5日游</h3>
+                            <div class="package-duration" data-lang="package-classic-duration">5天4晚</div>
+                            <div class="package-price">
+                                ¥8,999
+                                <small data-lang="package-price-unit">起</small>
+                            </div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-includes">
+                                <li data-lang="package-classic-f1">东京迪士尼乐园</li>
+                                <li data-lang="package-classic-f2">浅草寺雷门参观</li>
+                                <li data-lang="package-classic-f3">银座购物体验</li>
+                                <li data-lang="package-classic-f4">富士山一日游</li>
+                                <li data-lang="package-classic-f5">温泉酒店体验</li>
+                                <li data-lang="package-classic-f6">全程中文导游</li>
+                            </ul>
+                            <button class="package-btn" onclick="showPackageDetails('classic')"
+                                data-lang="package-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 文化7日游 -->
+                    <div class="package-card">
+                        <div class="package-header">
+                            <h3 class="package-name" data-lang="package-culture-name">古都文化7日游</h3>
+                            <div class="package-duration" data-lang="package-culture-duration">7天6晚</div>
+                            <div class="package-price">
+                                ¥12,999
+                                <small data-lang="package-price-unit">起</small>
+                            </div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-includes">
+                                <li data-lang="package-culture-f1">京都和服体验</li>
+                                <li data-lang="package-culture-f2">奈良鹿公园</li>
+                                <li data-lang="package-culture-f3">金阁寺银阁寺</li>
+                                <li data-lang="package-culture-f4">茶道体验课程</li>
+                                <li data-lang="package-culture-f5">大阪城游览</li>
+                                <li data-lang="package-culture-f6">神户牛肉晚餐</li>
+                            </ul>
+                            <button class="package-btn" onclick="showPackageDetails('culture')"
+                                data-lang="package-learn-more">了解详情</button>
+                        </div>
+                    </div>
+
+                    <!-- 商务考察套餐 -->
+                    <div class="package-card">
+                        <div class="package-badge" data-lang="package-badge-business">商务专属</div>
+                        <div class="package-header">
+                            <h3 class="package-name" data-lang="package-business-name">商务考察5日游</h3>
+                            <div class="package-duration" data-lang="package-business-duration">5天4晚</div>
+                            <div class="package-price">
+                                ¥15,999
+                                <small data-lang="package-price-unit">起</small>
+                            </div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-includes">
+                                <li data-lang="package-business-f1">企业对接安排</li>
+                                <li data-lang="package-business-f2">商务会议翻译</li>
+                                <li data-lang="package-business-f3">东京商展参观</li>
+                                <li data-lang="package-business-f4">商务晚宴安排</li>
+                                <li data-lang="package-business-f5">商业区考察</li>
+                                <li data-lang="package-business-f6">全程商务车辆</li>
+                            </ul>
+                            <button class="package-btn" onclick="showPackageDetails('business')"
+                                data-lang="package-learn-more">了解详情</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 旅游攻略 -->
+        <section class="guides-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-lang="guides-title">实用旅游攻略</h2>
+                    <p class="section-subtitle" data-lang="guides-subtitle">让您的日本旅行更加顺利</p>
+                </div>
+
+                <div class="guides-grid">
+                    <div class="guide-card">
+                        <div class="guide-icon">📱</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-app-title">必备APP推荐</h3>
+                            <p class="guide-description" data-lang="guide-app-desc">推荐在日本旅行时必备的手机应用，包括交通、翻译、美食等实用工具。</p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon">💳</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-payment-title">支付方式指南</h3>
+                            <p class="guide-description" data-lang="guide-payment-desc">详细介绍日本的支付方式，包括现金、信用卡、电子支付等使用建议。
+                            </p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon">🚊</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-transport-title">交通出行指南</h3>
+                            <p class="guide-description" data-lang="guide-transport-desc">日本交通系统使用指南，包括JR
+                                Pass、地铁、公交等详细说明。</p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon">🏨</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-hotel-title">住宿预订攻略</h3>
+                            <p class="guide-description" data-lang="guide-hotel-desc">日本各类住宿选择指南，包括酒店、民宿、温泉旅馆的预订技巧。</p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon">🍜</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-food-title">美食就餐指南</h3>
+                            <p class="guide-description" data-lang="guide-food-desc">日本餐厅用餐礼仪、推荐美食、预订方法等实用信息。</p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-icon">🛍️</div>
+                        <div class="guide-content">
+                            <h3 class="guide-title" data-lang="guide-shopping-title">购物退税攻略</h3>
+                            <p class="guide-description" data-lang="guide-shopping-desc">日本购物退税流程、免税店推荐、商品限制等详细信息。</p>
+                            <a href="#" class="guide-link" data-lang="guide-learn-more">了解更多 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 咨询表单 -->
+        <section class="consultation-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" style="color: white;" data-lang="consultation-title">定制旅游咨询</h2>
+                    <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);"
+                        data-lang="consultation-subtitle">专业旅游顾问为您提供专属旅游方案</p>
+                </div>
+
+                <form class="consultation-form" onsubmit="submitConsultation(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="form-name">姓名</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-phone">联系电话</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-email">邮箱</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-travelers">旅行人数</label>
+                            <select name="travelers" required>
+                                <option value="">请选择人数</option>
+                                <option value="1">1人</option>
+                                <option value="2">2人</option>
+                                <option value="3-5">3-5人</option>
+                                <option value="6-10">6-10人</option>
+                                <option value="10+">10人以上</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-duration">旅行天数</label>
+                            <select name="duration" required>
+                                <option value="">请选择天数</option>
+                                <option value="1-3">1-3天</option>
+                                <option value="4-7">4-7天</option>
+                                <option value="8-14">8-14天</option>
+                                <option value="15+">15天以上</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-budget">预算范围</label>
+                            <select name="budget" required>
+                                <option value="">请选择预算</option>
+                                <option value="5000-10000">¥5,000-10,000</option>
+                                <option value="10000-20000">¥10,000-20,000</option>
+                                <option value="20000-50000">¥20,000-50,000</option>
+                                <option value="50000+">¥50,000以上</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="form-message">旅行需求</label>
+                        <textarea name="message" placeholder="请描述您的旅行偏好、目的地、兴趣等..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang="form-submit">获取定制方案</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            zh: {
+                'page-title': '旅游服务',
+                'nav-home': '首页',
+                'nav-layers': '客户分层',
+                'nav-knowledge': '知识库',
+                'nav-professionals': '专业人才',
+                'nav-lifestyle': '生活帮忙',
+                'nav-community': '社群网络',
+                'nav-education': '留学教育',
+                'nav-tourism': '旅游服务',
+                'nav-pet': '宠物帮帮忙',
+                'nav-labor': '劳务派遣',
+                'nav-services': '法律服务',
+                'nav-crm': 'CRM功能',
+                'nav-stats': '成功案例',
+                'nav-contact': '联系我们',
+                'hero-title': '日本旅游专业服务',
+                'hero-subtitle': '深度体验日本文化，定制专属旅游路线，让您的日本之旅更加完美',
+                'services-title': '旅游服务项目',
+                'services-subtitle': '全方位的旅游服务，满足不同需求',
+                'service-custom-title': '定制旅游',
+                'service-custom-subtitle': '个性化行程规划',
+                'service-custom-f1': '需求分析评估',
+                'service-custom-f2': '个性化路线设计',
+                'service-custom-f3': '酒店餐厅预订',
+                'service-custom-f4': '交通票务办理',
+                'service-custom-f5': '24小时行程支持',
+                'service-business-title': '商务考察',
+                'service-business-subtitle': '专业商务安排',
+                'service-business-f1': '企业对接安排',
+                'service-business-f2': '商务会议翻译',
+                'service-business-f3': '工厂参观安排',
+                'service-business-f4': '商务晚宴预订',
+                'service-business-f5': '专业陪同人员',
+                'service-culture-title': '文化体验',
+                'service-culture-subtitle': '深度文化之旅',
+                'service-culture-f1': '传统文化体验',
+                'service-culture-f2': '和服体验与拍摄',
+                'service-culture-f3': '茶道花道学习',
+                'service-culture-f4': '寺庙神社参拜',
+                'service-culture-f5': '季节性活动参与',
+                'service-food-title': '美食之旅',
+                'service-food-subtitle': '品尝日本美味',
+                'service-food-f1': '米其林餐厅预订',
+                'service-food-f2': '当地特色美食',
+                'service-food-f3': '料理制作体验',
+                'service-food-f4': '清酒品鉴活动',
+                'service-food-f5': '美食街探索之旅',
+                'service-shopping-title': '购物指导',
+                'service-shopping-subtitle': '专业购物顾问',
+                'service-shopping-f1': '热门购物地推荐',
+                'service-shopping-f2': '免税店优惠信息',
+                'service-shopping-f3': '特色商品推荐',
+                'service-shopping-f4': '砍价技巧指导',
+                'service-shopping-f5': '退税协助办理',
+                'service-transport-title': '交通接送',
+                'service-transport-subtitle': '便捷交通服务',
+                'service-transport-f1': '机场接送服务',
+                'service-transport-f2': '包车旅游服务',
+                'service-transport-f3': '轨道交通指导',
+                'service-transport-f4': '停车位预订服务',
+                'service-transport-f5': '多语言司机服务',
+                'service-learn-more': '了解详情',
+                'destinations-title': '热门旅游目的地',
+                'destinations-subtitle': '精选日本最受欢迎的旅游胜地',
+                'dest-tokyo-name': '东京',
+                'dest-tokyo-region': '关东地区',
+                'dest-tokyo-desc': '日本首都，现代与传统完美融合的大都市，购物、美食、文化体验的天堂。',
+                'dest-kyoto-name': '京都',
+                'dest-kyoto-region': '关西地区',
+                'dest-kyoto-desc': '日本古都，传统文化胜地，拥有众多寺庙、神社和传统建筑。',
+                'dest-hokkaido-name': '北海道',
+                'dest-hokkaido-region': '北海道地区',
+                'dest-hokkaido-desc': '日本最北端，以雪景、温泉、海鲜闻名，是冬季旅游的热门选择。',
+                'dest-fuji-name': '富士山',
+                'dest-fuji-region': '中部地区',
+                'dest-fuji-desc': '日本最高峰，世界文化遗产，登山、观光的热门目的地。',
+                'dest-osaka-name': '大阪',
+                'dest-osaka-region': '关西地区',
+                'dest-osaka-desc': '日本第三大城市，以美食、购物、娱乐闻名，被称为"日本的厨房"。',
+                'dest-okinawa-name': '冲绳',
+                'dest-okinawa-region': '冲绳地区',
+                'dest-okinawa-desc': '日本最南端，以美丽海滩、潜水、独特文化闻名的度假胜地。',
+                'packages-title': '精选旅游套餐',
+                'packages-subtitle': '精心设计的旅游套餐，让您的旅行更加省心',
+                'package-badge-hot': '热门推荐',
+                'package-badge-business': '商务专属',
+                'package-classic-name': '经典关东5日游',
+                'package-classic-duration': '5天4晚',
+                'package-classic-f1': '东京迪士尼乐园',
+                'package-classic-f2': '浅草寺雷门参观',
+                'package-classic-f3': '银座购物体验',
+                'package-classic-f4': '富士山一日游',
+                'package-classic-f5': '温泉酒店体验',
+                'package-classic-f6': '全程中文导游',
+                'package-culture-name': '古都文化7日游',
+                'package-culture-duration': '7天6晚',
+                'package-culture-f1': '京都和服体验',
+                'package-culture-f2': '奈良鹿公园',
+                'package-culture-f3': '金阁寺银阁寺',
+                'package-culture-f4': '茶道体验课程',
+                'package-culture-f5': '大阪城游览',
+                'package-culture-f6': '神户牛肉晚餐',
+                'package-business-name': '商务考察5日游',
+                'package-business-duration': '5天4晚',
+                'package-business-f1': '企业对接安排',
+                'package-business-f2': '商务会议翻译',
+                'package-business-f3': '东京商展参观',
+                'package-business-f4': '商务晚宴安排',
+                'package-business-f5': '商业区考察',
+                'package-business-f6': '全程商务车辆',
+                'package-price-unit': '起',
+                'package-learn-more': '了解详情',
+                'guides-title': '实用旅游攻略',
+                'guides-subtitle': '让您的日本旅行更加顺利',
+                'guide-app-title': '必备APP推荐',
+                'guide-app-desc': '推荐在日本旅行时必备的手机应用，包括交通、翻译、美食等实用工具。',
+                'guide-payment-title': '支付方式指南',
+                'guide-payment-desc': '详细介绍日本的支付方式，包括现金、信用卡、电子支付等使用建议。',
+                'guide-transport-title': '交通出行指南',
+                'guide-transport-desc': '日本交通系统使用指南，包括JR Pass、地铁、公交等详细说明。',
+                'guide-hotel-title': '住宿预订攻略',
+                'guide-hotel-desc': '日本各类住宿选择指南，包括酒店、民宿、温泉旅馆的预订技巧。',
+                'guide-food-title': '美食就餐指南',
+                'guide-food-desc': '日本餐厅用餐礼仪、推荐美食、预订方法等实用信息。',
+                'guide-shopping-title': '购物退税攻略',
+                'guide-shopping-desc': '日本购物退税流程、免税店推荐、商品限制等详细信息。',
+                'guide-learn-more': '了解更多 →',
+                'consultation-title': '定制旅游咨询',
+                'consultation-subtitle': '专业旅游顾问为您提供专属旅游方案',
+                'form-name': '姓名',
+                'form-phone': '联系电话',
+                'form-email': '邮箱',
+                'form-travelers': '旅行人数',
+                'form-duration': '旅行天数',
+                'form-budget': '预算范围',
+                'form-message': '旅行需求',
+                'form-submit': '获取定制方案',
+                'dest-tag1': '现代都市',
+                'dest-tag2': '购物天堂',
+                'dest-tag3': '美食之都',
+                'dest-tag4': '历史文化',
+                'dest-tag5': '传统建筑',
+                'dest-tag6': '四季美景',
+                'dest-tag7': '雪国风光',
+                'dest-tag8': '温泉圣地',
+                'dest-tag9': '海鲜美食',
+                'dest-tag10': '世界遗产',
+                'dest-tag11': '登山圣地',
+                'dest-tag12': '绝美风景',
+                'dest-tag13': '美食之都',
+                'dest-tag14': '购物天堂',
+                'dest-tag15': '娱乐中心',
+                'dest-tag16': '海滩度假',
+                'dest-tag17': '潜水天堂',
+                'dest-tag18': '独特文化'
+            },
+            en: {
+                'page-title': 'Tourism',
+                'nav-home': 'Home',
+                'nav-layers': 'Customer Tiers',
+                'nav-knowledge': 'Knowledge Base',
+                'nav-professionals': 'Professionals',
+                'nav-lifestyle': 'Lifestyle Support',
+                'nav-community': 'Community',
+                'nav-education': 'Study Abroad',
+                'nav-tourism': 'Tourism',
+                'nav-pet': 'Pet Services',
+                'nav-labor': 'Labor Dispatch',
+                'nav-services': 'Legal Services',
+                'nav-crm': 'CRM Features',
+                'nav-stats': 'Success Stories',
+                'nav-contact': 'Contact',
+                'hero-title': 'Professional Japan Tourism Services',
+                'hero-subtitle': 'Experience Japanese culture deeply with customized travel routes for a perfect journey',
+                'services-title': 'Tourism Services',
+                'services-subtitle': 'Comprehensive tourism services to meet different needs',
+                'service-custom-title': 'Custom Tours',
+                'service-custom-subtitle': 'Personalized Itinerary Planning',
+                'service-custom-f1': 'Needs Analysis & Assessment',
+                'service-custom-f2': 'Personalized Route Design',
+                'service-custom-f3': 'Hotel & Restaurant Booking',
+                'service-custom-f4': 'Transportation Ticketing',
+                'service-custom-f5': '24-hour Travel Support',
+                'service-business-title': 'Business Tours',
+                'service-business-subtitle': 'Professional Business Arrangements',
+                'service-business-f1': 'Company Matching',
+                'service-business-f2': 'Business Meeting Translation',
+                'service-business-f3': 'Factory Visit Arrangement',
+                'service-business-f4': 'Business Dinner Booking',
+                'service-business-f5': 'Professional Accompaniment',
+                'service-culture-title': 'Cultural Experience',
+                'service-culture-subtitle': 'Deep Cultural Journey',
+                'service-culture-f1': 'Traditional Cultural Experience',
+                'service-culture-f2': 'Kimono Experience & Photos',
+                'service-culture-f3': 'Tea Ceremony & Flower Arrangement',
+                'service-culture-f4': 'Temple & Shrine Visits',
+                'service-culture-f5': 'Seasonal Activities',
+                'service-food-title': 'Food Tours',
+                'service-food-subtitle': 'Taste Japanese Cuisine',
+                'service-food-f1': 'Michelin Restaurant Booking',
+                'service-food-f2': 'Local Specialty Foods',
+                'service-food-f3': 'Cooking Experience',
+                'service-food-f4': 'Sake Tasting Events',
+                'service-food-f5': 'Food Street Exploration',
+                'service-shopping-title': 'Shopping Guide',
+                'service-shopping-subtitle': 'Professional Shopping Advisor',
+                'service-shopping-f1': 'Popular Shopping Destinations',
+                'service-shopping-f2': 'Duty-free Shop Deals',
+                'service-shopping-f3': 'Specialty Product Recommendations',
+                'service-shopping-f4': 'Bargaining Tips',
+                'service-shopping-f5': 'Tax Refund Assistance',
+                'service-transport-title': 'Transportation',
+                'service-transport-subtitle': 'Convenient Transport Services',
+                'service-transport-f1': 'Airport Pickup Service',
+                'service-transport-f2': 'Chartered Car Tours',
+                'service-transport-f3': 'Rail Transport Guidance',
+                'service-transport-f4': 'Parking Reservation Service',
+                'service-transport-f5': 'Multilingual Driver Service',
+                'service-learn-more': 'Learn More',
+                'destinations-title': 'Popular Destinations',
+                'destinations-subtitle': 'Selected most popular tourist destinations in Japan',
+                'dest-tokyo-name': 'Tokyo',
+                'dest-tokyo-region': 'Kanto Region',
+                'dest-tokyo-desc': 'Japan\'s capital, a metropolis where modern and traditional perfectly blend, paradise for shopping, food, and cultural experiences.',
+                'dest-kyoto-name': 'Kyoto',
+                'dest-kyoto-region': 'Kansai Region',
+                'dest-kyoto-desc': 'Japan\'s ancient capital, cultural treasure with numerous temples, shrines, and traditional architecture.',
+                'dest-hokkaido-name': 'Hokkaido',
+                'dest-hokkaido-region': 'Hokkaido Region',
+                'dest-hokkaido-desc': 'Japan\'s northernmost island, famous for snow scenes, hot springs, and seafood, a popular winter destination.',
+                'dest-fuji-name': 'Mount Fuji',
+                'dest-fuji-region': 'Central Region',
+                'dest-fuji-desc': 'Japan\'s highest peak, World Heritage Site, popular destination for climbing and sightseeing.',
+                'dest-osaka-name': 'Osaka',
+                'dest-osaka-region': 'Kansai Region',
+                'dest-osaka-desc': 'Japan\'s third largest city, famous for food, shopping, and entertainment, known as "Japan\'s Kitchen".',
+                'dest-okinawa-name': 'Okinawa',
+                'dest-okinawa-region': 'Okinawa Region',
+                'dest-okinawa-desc': 'Japan\'s southernmost prefecture, a resort destination famous for beautiful beaches, diving, and unique culture.',
+                'packages-title': 'Selected Tour Packages',
+                'packages-subtitle': 'Carefully designed tour packages to make your trip worry-free',
+                'package-badge-hot': 'Hot Recommendation',
+                'package-badge-business': 'Business Exclusive',
+                'package-classic-name': 'Classic Kanto 5-Day Tour',
+                'package-classic-duration': '5 Days 4 Nights',
+                'package-classic-f1': 'Tokyo Disneyland',
+                'package-classic-f2': 'Senso-ji Temple & Kaminarimon',
+                'package-classic-f3': 'Ginza Shopping Experience',
+                'package-classic-f4': 'Mount Fuji Day Trip',
+                'package-classic-f5': 'Hot Spring Hotel Experience',
+                'package-classic-f6': 'Chinese Guide Throughout',
+                'package-culture-name': 'Ancient Capital 7-Day Culture Tour',
+                'package-culture-duration': '7 Days 6 Nights',
+                'package-culture-f1': 'Kyoto Kimono Experience',
+                'package-culture-f2': 'Nara Deer Park',
+                'package-culture-f3': 'Kinkaku-ji & Ginkaku-ji',
+                'package-culture-f4': 'Tea Ceremony Experience',
+                'package-culture-f5': 'Osaka Castle Tour',
+                'package-culture-f6': 'Kobe Beef Dinner',
+                'package-business-name': 'Business Inspection 5-Day Tour',
+                'package-business-duration': '5 Days 4 Nights',
+                'package-business-f1': 'Company Matching',
+                'package-business-f2': 'Business Meeting Translation',
+                'package-business-f3': 'Tokyo Business Exhibition',
+                'package-business-f4': 'Business Dinner Arrangement',
+                'package-business-f5': 'Business District Tour',
+                'package-business-f6': 'Business Vehicle Throughout',
+                'package-price-unit': 'Starting from',
+                'package-learn-more': 'Learn More',
+                'guides-title': 'Practical Travel Guides',
+                'guides-subtitle': 'Make your Japan trip smoother',
+                'guide-app-title': 'Essential Apps',
+                'guide-app-desc': 'Recommended essential mobile apps for Japan travel, including transportation, translation, and food tools.',
+                'guide-payment-title': 'Payment Methods Guide',
+                'guide-payment-desc': 'Detailed introduction to payment methods in Japan, including cash, credit cards, and electronic payments.',
+                'guide-transport-title': 'Transportation Guide',
+                'guide-transport-desc': 'Japan transportation system guide, including JR Pass, subway, and bus detailed instructions.',
+                'guide-hotel-title': 'Accommodation Booking Guide',
+                'guide-hotel-desc': 'Japan accommodation selection guide, including booking tips for hotels,民宿, and ryokans.',
+                'guide-food-title': 'Dining Guide',
+                'guide-food-desc': 'Japanese restaurant etiquette, recommended foods, reservation methods, and practical information.',
+                'guide-shopping-title': 'Shopping Tax Refund Guide',
+                'guide-shopping-desc': 'Japan shopping tax refund process, duty-free shop recommendations, and product restrictions.',
+                'guide-learn-more': 'Learn More →',
+                'consultation-title': 'Custom Tour Consultation',
+                'consultation-subtitle': 'Professional travel consultants provide exclusive tour plans',
+                'form-name': 'Name',
+                'form-phone': 'Phone',
+                'form-email': 'Email',
+                'form-travelers': 'Number of Travelers',
+                'form-duration': 'Travel Duration',
+                'form-budget': 'Budget Range',
+                'form-message': 'Travel Requirements',
+                'form-submit': 'Get Custom Plan',
+                'dest-tag1': 'Modern City',
+                'dest-tag2': 'Shopping Paradise',
+                'dest-tag3': 'Food Capital',
+                'dest-tag4': 'History & Culture',
+                'dest-tag5': 'Traditional Architecture',
+                'dest-tag6': 'Four Seasons Beauty',
+                'dest-tag7': 'Snow Country',
+                'dest-tag8': 'Hot Spring Resort',
+                'dest-tag9': 'Seafood Cuisine',
+                'dest-tag10': 'World Heritage',
+                'dest-tag11': 'Climbing Sacred Place',
+                'dest-tag12': 'Beautiful Scenery',
+                'dest-tag13': 'Food Capital',
+                'dest-tag14': 'Shopping Paradise',
+                'dest-tag15': 'Entertainment Center',
+                'dest-tag16': 'Beach Resort',
+                'dest-tag17': 'Diving Paradise',
+                'dest-tag18': 'Unique Culture'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'zh';
+
+        // 语言切换功能
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', function () {
+                const lang = this.dataset.langBtn;
+                switchLanguage(lang);
+            });
+        });
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+
+            document.documentElement.lang = lang;
+            currentLanguage = lang;
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.dataset.lang;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 移动端菜单切换
+        // 其他业务相关JS（如有）
+
+        // 服务详情展示
+        function showServiceDetails(serviceType) {
+            // 这里可以添加模态框显示逻辑
+            // console.log('Service details for:', serviceType);
+        }
+
+        // 套餐详情展示
+        function showPackageDetails(packageType) {
+            // 这里可以添加模态框显示逻辑
+            // console.log('Package details for:', packageType);
+        }
+
+        // 表单提交
+        function submitConsultation(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const consultationData = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                travelers: formData.get('travelers'),
+                duration: formData.get('duration'),
+                budget: formData.get('budget'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+
+            // 这里可以集成CRM系统或API
+            // console.log('Tourism consultation submitted:', consultationData);
+
+            // 显示成功消息
+            alert(currentLanguage === 'zh' ?
+                '定制需求已提交！我们将在24小时内联系您并提供专属旅游方案。' :
+                'Custom requirements submitted! We will contact you within 24 hours with a custom tour plan.'
+            );
+
+            // 重置表单
+            event.target.reset();
+        }
+
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            switchLanguage('zh');
+            // console.log('Tourism Page Loaded Successfully');
+        });
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

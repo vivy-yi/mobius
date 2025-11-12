@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能法律服务平台 | 专业AI法律解决方案</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --gold: #d69e2e;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --dark: #1a202c;
+            /* Legacy aliases for compatibility */
+            --primary-color: #1e3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #d69e2e;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f7fafc;
+            --bg-dark: #1a1a1a;
+            --success-color: #38a169;
+            --warning-color: #dd6b20;
+            --error-color: #e53e3e;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        
+        /* Main Content */
+        .ai-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+            margin: 100px 0 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .ai-hero h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .ai-feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .ai-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .ai-feature-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .ai-feature-description {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-feature-button {
+            background: var(--primary);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .ai-feature-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* AI Analysis Section */
+        .ai-analysis-section {
+            background: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .analysis-input, .analysis-output {
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+        }
+
+        .analysis-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .analysis-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .analysis-button {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        #analysisResults {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #e8f5e8;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--success-color);
+            display: none;
+        }
+
+        .analysis-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        /* Statistics */
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-dark);
+            margin-top: 0.5rem;
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 3px dashed #ddd;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary);
+            background: var(--bg-light);
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(26, 35, 126, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .analysis-container {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            border-left: 5px solid;
+        }
+
+        .alert-success {
+            background: #e8f5e8;
+            border-color: var(--success-color);
+            color: #2e7d32;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: var(--warning-color);
+            color: #f57c00;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            border-color: var(--error-color);
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav id="main-navbar"></nav>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <section class="ai-hero">
+            <h2>新一代智能法律分析引擎</h2>
+            <p>结合人工智能与法律专业知识，为您提供高效、准确、可靠的法律服务体验</p>
+
+            <div class="ai-stats">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">分析准确率%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="50000">0</div>
+                    <div class="stat-label">处理案例数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">响应时间(秒)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">7x24服务</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-features">
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">📄</div>
+                <h3 class="ai-feature-title">智能合同审查</h3>
+                <p class="ai-feature-description">AI驱动的合同分析，识别风险条款、缺失要素、法律合规性问题，提供专业修改建议</p>
+                <button class="ai-feature-button" onclick="scrollToAnalysis('contract')">开始合同审查</button>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">🔍</div>
+                <h3 class="ai-feature-title">法律文档搜索</h3>
+                <p class="ai-feature-description">智能检索法律法规、判例、学术论文，支持自然语言查询，精准定位相关法律依据</p>
+                <button class="ai-feature-button" onclick="scrollToAnalysis('search')">搜索法律文档</button>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">⚠️</div>
+                <h3 class="ai-feature-title">风险评估分析</h3>
+                <p class="ai-feature-description">全方位法律风险识别与评估，包括商业风险、合规风险、诉讼风险等多维度分析</p>
+                <button class="ai-feature-button" onclick="scrollToAnalysis('risk')">进行风险评估</button>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">📊</div>
+                <h3 class="ai-feature-title">案例结果预测</h3>
+                <p class="ai-feature-description">基于历史案例数据和机器学习算法，预测案件可能结果和成功率</p>
+                <button class="ai-feature-button" onclick="scrollToAnalysis('predict')">预测案例结果</button>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">💬</div>
+                <h3 class="ai-feature-title">法律咨询助手</h3>
+                <p class="ai-feature-description">7x24小时在线法律咨询，智能问答系统能够回答各类法律问题</p>
+                <button class="ai-feature-button" onclick="startChat()">开始咨询</button>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-feature-icon">📋</div>
+                <h3 class="ai-feature-title">文书生成工具</h3>
+                <p class="ai-feature-description">自动生成各类法律文书，包括起诉状、答辩状、合同模板等</p>
+                <button class="ai-feature-button" onclick="generateDocument()">生成文书</button>
+            </div>
+        </section>
+
+        <section class="ai-analysis-section" id="analysisSection">
+            <h2>智能法律分析工作台</h2>
+
+            <div class="file-upload-area" id="fileUploadArea">
+                <div class="ai-feature-icon">📁</div>
+                <h3>拖拽文件到此处或点击上传</h3>
+                <p>支持 PDF、DOC、DOCX 格式，最大文件大小 10MB</p>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx" style="display: none;">
+            </div>
+
+            <div class="analysis-container">
+                <div class="analysis-input">
+                    <h3 id="inputTitle">输入法律文本</h3>
+                    <textarea
+                        id="legalTextInput"
+                        class="analysis-textarea"
+                        placeholder="请输入需要分析的法律文本内容..."
+                    ></textarea>
+                    <button class="analysis-button" id="analyzeButton" onclick="analyzeText()">
+                        开始分析
+                    </button>
+                </div>
+
+                <div class="analysis-output">
+                    <h3>分析结果</h3>
+                    <div id="analysisResults">
+                        <div class="analysis-content">
+                            <!-- 分析结果将在这里显示 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 智能法律服务平台. 保留所有权利.</p>
+            <p>🔒 保护您的隐私与数据安全是我们的首要责任</p>
+        </div>
+    </footer>
+
+    <script>
+        // 其他业务相关JS（如有）
+        // 安全的DOM操作函数
+        function safeCreateElement(tag, content, attributes = {}) {
+            const element = document.createElement(tag);
+            if (content) {
+                element.textContent = content; // 使用textContent而不是innerHTML
+            }
+            Object.keys(attributes).forEach(key => {
+                element.setAttribute(key, attributes[key]);
+            });
+            return element;
+        }
+
+        function safeAppendContent(parent, content) {
+            const tempDiv = document.createElement('div');
+            tempDiv.textContent = content; // 文本内容，防止HTML注入
+            parent.appendChild(tempDiv);
+        }
+
+        // 文件上传处理
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        fileUploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.add('dragover');
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.classList.remove('dragover');
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.size > 10 * 1024 * 1024) {
+                    showAlert('文件大小不能超过10MB', 'error');
+                    return;
+                }
+
+                showAlert(`文件 "${file.name}" 上传成功，开始分析...`, 'success');
+                // 模拟文件处理
+                setTimeout(() => {
+                    document.getElementById('legalTextInput').value = `[已上传文件: ${file.name}]\n\n文件内容正在处理中...\n\n模拟的合同条款：\n1. 本合同自双方签字盖章之日起生效\n2. 合同期限为一年，自动续约\n3. 任何一方违反合同条款，应承担相应法律责任`;
+                    showAlert('文件处理完成，可以开始分析', 'success');
+                }, 2000);
+            }
+        }
+
+        // 滚动到分析区域
+        function scrollToAnalysis(type) {
+            const section = document.getElementById('analysisSection');
+            section.scrollIntoView({ behavior: 'smooth' });
+
+            const titles = {
+                'contract': '智能合同审查',
+                'search': '法律文档搜索',
+                'risk': '风险评估分析',
+                'predict': '案例结果预测'
+            };
+
+            const placeholders = {
+                'contract': '请粘贴需要审查的合同内容...',
+                'search': '请输入您要搜索的法律问题或关键词...',
+                'risk': '请描述需要评估的法律风险情况...',
+                'predict': '请输入案件基本情况，包括当事人、争议焦点等...'
+            };
+
+            document.getElementById('inputTitle').textContent = titles[type] || '输入法律文本';
+            document.getElementById('legalTextInput').placeholder = placeholders[type] || '请输入需要分析的法律文本内容...';
+
+            currentAnalysisType = type;
+        }
+
+        let currentAnalysisType = 'contract';
+
+        // AI分析功能
+        function analyzeText() {
+            const input = document.getElementById('legalTextInput').value.trim();
+            if (!input) {
+                showAlert('请输入需要分析的法律文本', 'warning');
+                return;
+            }
+
+            const button = document.getElementById('analyzeButton');
+            button.innerHTML = '<span class="loading"></span> 分析中...';
+            button.disabled = true;
+
+            // 模拟AI分析过程
+            setTimeout(() => {
+                const result = performAIAnalysis(input, currentAnalysisType);
+                showAnalysisResult(currentAnalysisType, result);
+                button.innerHTML = '开始分析';
+                button.disabled = false;
+            }, 2000);
+        }
+
+        function performAIAnalysis(input, type) {
+            // 模拟AI分析结果
+            const results = {
+                'contract': {
+                    status: 'completed',
+                    risks: ['第3条违约责任不明确', '第5条缺少争议解决条款', '第8条违反相关法律'],
+                    suggestions: ['建议明确违约金计算方式', '补充仲裁或诉讼条款', '修订第8条以符合《合同法》规定'],
+                    score: 75
+                },
+                'search': {
+                    status: 'completed',
+                    results: [
+                        '《中华人民共和国合同法》第52条',
+                        '《最高人民法院关于适用<合同法>若干问题的解释》第7条',
+                        '相关案例：北京市某公司合同纠纷案 (2023)京01民终1234号'
+                    ],
+                    relevance: 92
+                },
+                'risk': {
+                    status: 'completed',
+                    risks: [
+                        { type: '法律风险', level: '高', description: '合同条款可能违反强制性法律规定' },
+                        { type: '商业风险', level: '中', description: '付款条件过于苛刻，影响合作意愿' },
+                        { type: '履约风险', level: '低', description: '总体履约风险可控' }
+                    ],
+                    overallRisk: '中等'
+                },
+                'predict': {
+                    status: 'completed',
+                    successRate: 78,
+                    factors: ['证据充分', '法律依据明确', ' similar cases support'],
+                    timeline: '3-6个月',
+                    confidence: 85
+                }
+            };
+
+            return results[type] || results['contract'];
+        }
+
+        function showAnalysisResult(type, result) {
+            const resultsDiv = document.getElementById('analysisResults');
+            const contentDiv = resultsDiv.querySelector('.analysis-content');
+
+            // 清空现有内容
+            while (contentDiv.firstChild) {
+                contentDiv.removeChild(contentDiv.firstChild);
+            }
+
+            let title = '';
+            let content = '';
+
+            switch(type) {
+                case 'contract':
+                    title = '📄 合同审查结果';
+                    content = `
+                        <p><strong>分析状态：</strong> ${result.status === 'completed' ? '✅ 完成' : '⏳ 进行中'}</p>
+                        <p><strong>综合评分：</strong> ${result.score}/100</p>
+                        <p><strong>发现风险：</strong></p>
+                        <ul>${result.risks.map(risk => `<li>⚠️ ${risk}</li>`).join('')}</ul>
+                        <p><strong>修改建议：</strong></p>
+                        <ul>${result.suggestions.map(suggestion => `<li>💡 ${suggestion}</li>`).join('')}</ul>
+                    `;
+                    break;
+                case 'search':
+                    title = '🔍 搜索结果';
+                    content = `
+                        <p><strong>搜索状态：</strong> ${result.status === 'completed' ? '✅ 完成' : '⏳ 进行中'}</p>
+                        <p><strong>相关度：</strong> ${result.relevance}%</p>
+                        <p><strong>找到的法律依据：</strong></p>
+                        <ul>${result.results.map(r => `<li>📚 ${r}</li>`).join('')}</ul>
+                    `;
+                    break;
+                case 'risk':
+                    title = '⚠️ 风险评估结果';
+                    content = `
+                        <p><strong>评估状态：</strong> ${result.status === 'completed' ? '✅ 完成' : '⏳ 进行中'}</p>
+                        <p><strong>整体风险等级：</strong> ${result.overallRisk}</p>
+                        <p><strong>风险详情：</strong></p>
+                        <ul>${result.risks.map(risk => `<li>${risk.level === '高' ? '🔴' : risk.level === '中' ? '🟡' : '🟢'} <strong>${risk.type}：</strong>${risk.description}</li>`).join('')}</ul>
+                    `;
+                    break;
+                case 'predict':
+                    title = '📊 案例结果预测';
+                    content = `
+                        <p><strong>预测状态：</strong> ${result.status === 'completed' ? '✅ 完成' : '⏳ 进行中'}</p>
+                        <p><strong>成功概率：</strong> ${result.successRate}%</p>
+                        <p><strong>信心指数：</strong> ${result.confidence}%</p>
+                        <p><strong>预计时间：</strong> ${result.timeline}</p>
+                        <p><strong>关键因素：</strong></p>
+                        <ul>${result.factors.map(f => `<li>✅ ${f}</li>`).join('')}</ul>
+                    `;
+                    break;
+            }
+
+            // 安全地创建和添加内容
+            const titleElement = safeCreateElement('h3', title);
+            const contentElement = safeCreateElement('div');
+            contentElement.innerHTML = content; // 这里使用innerHTML是因为内容是受信任的模板字符串
+
+            contentDiv.appendChild(titleElement);
+            contentDiv.appendChild(contentElement);
+
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 添加动画效果
+            setTimeout(() => {
+                contentDiv.style.opacity = '1';
+                contentDiv.style.transform = 'translateY(0)';
+            }, 100);
+        }
+
+        // 其他功能函数
+        function startChat() {
+            showAlert('法律咨询助手功能正在开发中，敬请期待！', 'info');
+        }
+
+        function generateDocument() {
+            showAlert('文书生成工具正在开发中，敬请期待！', 'info');
+        }
+
+        // 提示信息函数
+        function showAlert(message, type = 'info') {
+            const alertClass = `alert-${type}`;
+            const alert = safeCreateElement('div', message, { class: `alert ${alertClass}` });
+
+            document.querySelector('.container').insertBefore(
+                alert,
+                document.querySelector('.ai-analysis-section')
+            );
+
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.parentNode.removeChild(alert);
+                }
+            }, 5000);
+        }
+
+        // 语言切换功能
+        function switchLanguage() {
+            showAlert('语言切换功能正在开发中', 'info');
+        }
+
+        // 数字动画
+        function animateNumbers() {
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(number => {
+                const target = parseInt(number.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    number.textContent = Math.floor(current);
+                }, 20);
+            });
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            animateNumbers();
+
+            // 添加滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.ai-feature-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success-color)' : type === 'error' ? 'var(--error-color)' : 'var(--primary)'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Language switching function for nav.js compatibility
+        function switchLanguage(lang) {
+            // Show notification for now
+            const messages = {
+                'zh': '语言已切换为中文',
+                'ja': '言語が日本語に切り替わりました',
+                'en': 'Language switched to English'
+            };
+            showNotification(messages[lang] || 'Language switched', 'success');
+        }
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>

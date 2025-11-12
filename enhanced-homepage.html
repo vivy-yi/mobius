@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本企业一站式服务平台 | 专业法务财税顾问</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary: #1A3A5F;
+            --secondary: #D4AF37;
+            --accent: #28A745;
+            --light: #F8F9FA;
+            --dark: #333333;
+            --gray: #6C757D;
+            --banner-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0f2742;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #218838;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .language-switcher {
+            margin-left: 20px;
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .language-switcher button {
+            background: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .language-switcher button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .language-switcher button:hover:not(.active) {
+            background-color: var(--light);
+        }
+
+        /* Hero区域 */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Banner广告区域 */
+        .banner-section {
+            background: var(--banner-bg);
+            color: white;
+            padding: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .banner-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .banner-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .banner-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .banner-image {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .banner-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .banner-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4757;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* 扩展服务卡片 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            height: 80px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .service-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        /* 服务详情网格 */
+        .service-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .detail-item {
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .detail-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* 统计数据 */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5aa0 100%);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .banner-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner-image {
+                margin-top: 20px;
+            }
+
+            .service-details {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 隐藏类 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">日本<span>企業</span>サポート</div>
+                <ul class="nav-links">
+                    <li><a href="#services" data-lang="nav-services">サービス</a></li>
+                    <li><a href="#process" data-lang="nav-process">設立流程</a></li>
+                    <li><a href="#advantages" data-lang="nav-advantages">強み</a></li>
+                    <li><a href="#testimonials" data-lang="nav-testimonials">実績</a></li>
+                    <li><a href="#contact" data-lang="nav-contact">お問い合わせ</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="active" data-lang-btn="ja">日本語</button>
+                    <button data-lang-btn="zh">中文</button>
+                    <button data-lang-btn="en">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+        <br class="container">
+            <h1 data-lang="hero-title">日本企業設立・運営の<br>ワンストップソリューション</h1>
+            <p data-lang="hero-subtitle">専門家チームが会社設立からビザ申請、補助金獲得、法務・税務サポートまで包括的に支援</p>
+            <a href="#contact" class="btn btn-accent" data-lang="hero-cta">無料相談を予約</a>
+        </div>
+    </section>
+
+    <!-- Banner广告区域 -->
+    <section class="banner-section">
+        <div class="container">
+            <div class="banner-container">
+                <div class="banner-content">
+                    <div class="banner-badge" data-lang="banner-badge">限定特典</div>
+                    <h2 class="banner-title" data-lang="banner-title">創業支援キャンペーン実施中！</h2>
+                    <p class="banner-subtitle" data-lang="banner-subtitle">今なら会社設立費用10% OFF！補助金申請成功報酬も特別価格に</p>
+                    <button class="btn btn-accent" onclick="showBannerDetails()" data-lang="banner-cta">詳細を見る</button>
+                </div>
+                <div class="banner-image">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Business Success">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 扩展服务介绍 -->
+    <section id="services">
+        <div class="container">
+            <h2 data-lang="services-title">包括的なサービス</h2>
+            <p class="section-intro" data-lang="services-intro">日本でのビジネス展開に必要なすべてのサービスをワンストップで提供</p>
+
+            <div class="services-grid">
+                <!-- 公司设立服务 -->
+                <div class="service-card" onclick="showServiceDetails('establishment')">
+                    <div class="service-badge" data-lang="popular-badge">人気</div>
+                    <div class="service-icon">🏢</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-establishment-title">会社設立サービス</h3>
+                        <p data-lang="service-establishment-desc">株式会社・合同会社の設立を効率的にサポート。約4-5週間で設立完了。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-establishment-feature1">定款作成・公証</li>
+                            <li data-lang="service-establishment-feature2">資本金の払込</li>
+                            <li data-lang="service-establishment-feature3">法務局登記申請</li>
+                            <li data-lang="service-establishment-feature4">各種官公署への届出</li>
+                            <li data-lang="service-establishment-feature5">費用透明化・明確な見積もり</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 补助金申请 -->
+                <div class="service-card" onclick="showServiceDetails('subsidy')">
+                    <div class="service-icon">💰</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-subsidy-title">補助金・助成金申請</h3>
+                        <p data-lang="service-subsidy-desc">70万円～5,000万円の政府補助金を成果報酬制でサポート。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-subsidy-feature1">申請成功率100%の実績</li>
+                            <li data-lang="service-subsidy-feature2">gbizアカウント申請</li>
+                            <li data-lang="service-subsidy-feature3">企画書作成支援</li>
+                            <li data-lang="service-subsidy-feature4">申請プロセス全体の管理</li>
+                            <li data-lang="service-subsidy-feature5">成功報酬制（33%）</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 签证办理 -->
+                <div class="service-card" onclick="showServiceDetails('visa')">
+                    <div class="service-icon">🛂</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-visa-title">ビザ申請サービス</h3>
+                        <p data-lang="service-visa-desc">在留資格認定から永住権申請まで専門家が完全サポート。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-visa-feature1">申請書類一式の準備</li>
+                            <li data-lang="service-visa-feature2">申請理由書の専門作成</li>
+                            <li data-lang="service-visa-feature3">ビザ加速サービス対応</li>
+                            <li data-lang="service-visa-feature4">永住権申請サポート</li>
+                            <li data-lang="service-visa-feature5">事業計画書作成</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 会计税务服务 -->
+                <div class="service-card" onclick="showServiceDetails('accounting')">
+                    <div class="service-badge" data-lang="new-badge">新規</div>
+                    <div class="service-icon">📊</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-accounting-title">会計・税務サービス</h3>
+                        <p data-lang="service-accounting-desc">起業から事業拡大まで、会計・税務の専門家がフルサポート。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-accounting-feature1">記帳・決算サポート</li>
+                            <li data-lang="service-accounting-feature2">法人税・消費税申告</li>
+                            <li data-lang="service-accounting-feature3">税務相談・節税対策</li>
+                            <li data-lang="service-accounting-feature4">会計ソフト導入支援</li>
+                            <li data-lang="service-accounting-feature5">月額5万円からの完全委託</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 人事劳务服务 -->
+                <div class="service-card" onclick="showServiceDetails('hr')">
+                    <div class="service-badge" data-lang="new-badge">新規</div>
+                    <div class="service-icon">👥</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-hr-title">人事労務サービス</h3>
+                        <p data-lang="service-hr-desc">従業員採用から労務管理まで、人事業務をトータルサポート。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-hr-feature1">就業規則・規程作成</li>
+                            <li data-lang="service-hr-feature2">社会保険手続き</li>
+                            <li data-lang="service-hr-feature3">給与計算・年末調整</li>
+                            <li data-lang="service-hr-feature4">労働問題・相談対応</li>
+                            <li data-lang="service-hr-feature5">採用支援・人材紹介</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 知识产权服务 -->
+                <div class="service-card" onclick="showServiceDetails('ip')">
+                    <div class="service-icon">🔒</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-ip-title">知的財産サービス</h3>
+                        <p data-lang="service-ip-desc">商標・特許・著作権などの知的財産権を専門家が保護・活用支援。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-ip-feature1">商標登録出願</li>
+                            <li data-lang="service-ip-feature2">特許調査・出願</li>
+                            <li data-lang="service-ip-feature3">著作権管理</li>
+                            <li data-lang="service-ip-feature4">営業秘密保護</li>
+                            <li data-lang="service-ip-feature5">権利侵害対応</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- 常年顾问 -->
+                <div class="service-card" onclick="showServiceDetails('consulting')">
+                    <div class="service-icon">⚖️</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-consulting-title">顧問サービス</h3>
+                        <p data-lang="service-consulting-desc">月額定額制で法務・税務の専門家チームが継続的にサポート。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-consulting-feature1">法務顧問：契約審査・法務相談</li>
+                            <li data-lang="service-consulting-feature2">税務顧問：決算・申告・節税相談</li>
+                            <li data-lang="service-consulting-feature3">労務管理：社会保険・給与計算</li>
+                            <li data-lang="service-consulting-feature4">ビジネスコンサルティング</li>
+                            <li data-lang="service-consulting-feature5">24時間中日英対応</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+
+                <!-- M&A服务 -->
+                <div class="service-card" onclick="showServiceDetails('ma')">
+                    <div class="service-icon">🤝</div>
+                    <div class="service-content">
+                        <h3 data-lang="service-ma-title">M&A・事業承継</h3>
+                        <p data-lang="service-ma-desc">企業買収・合併、事業承継に関する専門的なアドバイスと実行支援。</p>
+                        <ul class="service-features">
+                            <li data-lang="service-ma-feature1">M&A戦略立案</li>
+                            <li data-lang="service-ma-feature2">デューデリジェンス</li>
+                            <li data-lang="service-ma-feature3">交渉・契約支援</li>
+                            <li data-lang="service-ma-feature4">事業承継計画</li>
+                            <li data-lang="service-ma-feature5">株価算定</li>
+                        </ul>
+                        <a href="#" class="btn" style="margin-top: 15px;" data-lang="service-learn-more">詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="500">0</div>
+                    <div class="stat-label" data-lang="stat-companies">支援企業数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="1000">0</div>
+                    <div class="stat-label" data-lang="stat-subsidies">補助金獲得件数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="98">0</div>
+                    <div class="stat-label" data-lang="stat-satisfaction">満足度（%）</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-counter="24">0</div>
+                    <div class="stat-label" data-lang="stat-support">時間対応</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模态框 - 服务详情 -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h3 id="modalTitle">サービス詳細</h3>
+            </div>
+            <div id="modalBody">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - Banner详情 -->
+    <div id="bannerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBannerModal()">&times;</span>
+            <div class="modal-header">
+                <h3 data-lang="banner-modal-title">創業支援キャンペーン詳細</h3>
+            </div>
+            <div class="service-details">
+                <div class="detail-item">
+                    <h4 data-lang="campaign-offer1">会社設立費用10% OFF</h4>
+                    <p data-lang="campaign-offer1-desc">通常費用198,000円→178,200円で株式会社設立をサポート</p>
+                </div>
+                <div class="detail-item">
+                    <h4 data-lang="campaign-offer2">補助金成功報酬25% OFF</h4>
+                    <p data-lang="campaign-offer2-desc">通常33%→25%に成功報酬を大幅削減</p>
+                </div>
+                <div class="detail-item">
+                    <h4 data-lang="campaign-offer3">創業パッケージ特典</h4>
+                    <p data-lang="campaign-offer3-desc">1ヶ月無料顧問サービス＋03番号プレゼント</p>
+                </div>
+                <div class="detail-item">
+                    <h4 data-lang="campaign-period">キャンペーン期間</h4>
+                    <p data-lang="campaign-period-desc">2024年1月1日～2024年3月31日まで</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#contact" class="btn btn-accent" onclick="closeBannerModal()" data-lang="campaign-apply">キャンペーン応募</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 多语言配置
+        const translations = {
+            ja: {
+                'nav-services': 'サービス',
+                'nav-process': '設立流程',
+                'nav-advantages': '強み',
+                'nav-testimonials': '実績',
+                'nav-contact': 'お問い合わせ',
+                'hero-title': '日本企業設立・運営の<br>ワンストップソリューション',
+                'hero-subtitle': '専門家チームが会社設立からビザ申請、補助金獲得、法務・税務サポートまで包括的に支援',
+                'hero-cta': '無料相談を予約',
+                'banner-badge': '限定特典',
+                'banner-title': '創業支援キャンペーン実施中！',
+                'banner-subtitle': '今なら会社設立費用10% OFF！補助金申請成功報酬も特別価格に',
+                'banner-cta': '詳細を見る',
+                'services-title': '包括的なサービス',
+                'services-intro': '日本でのビジネス展開に必要なすべてのサービスをワンストップで提供',
+                'popular-badge': '人気',
+                'new-badge': '新規',
+                'service-establishment-title': '会社設立サービス',
+                'service-establishment-desc': '株式会社・合同会社の設立を効率的にサポート。約4-5週間で設立完了。',
+                'service-establishment-feature1': '定款作成・公証',
+                'service-establishment-feature2': '資本金の払込',
+                'service-establishment-feature3': '法務局登記申請',
+                'service-establishment-feature4': '各種官公署への届出',
+                'service-establishment-feature5': '費用透明化・明確な見積もり',
+                'service-subsidy-title': '補助金・助成金申請',
+                'service-subsidy-desc': '70万円～5,000万円の政府補助金を成果報酬制でサポート。',
+                'service-subsidy-feature1': '申請成功率100%の実績',
+                'service-subsidy-feature2': 'gbizアカウント申請',
+                'service-subsidy-feature3': '企画書作成支援',
+                'service-subsidy-feature4': '申請プロセス全体の管理',
+                'service-subsidy-feature5': '成功報酬制（33%）',
+                'service-visa-title': 'ビザ申請サービス',
+                'service-visa-desc': '在留資格認定から永住権申請まで専門家が完全サポート。',
+                'service-visa-feature1': '申請書類一式の準備',
+                'service-visa-feature2': '申請理由書の専門作成',
+                'service-visa-feature3': 'ビザ加速サービス対応',
+                'service-visa-feature4': '永住権申請サポート',
+                'service-visa-feature5': '事業計画書作成',
+                'service-accounting-title': '会計・税務サービス',
+                'service-accounting-desc': '起業から事業拡大まで、会計・税務の専門家がフルサポート。',
+                'service-accounting-feature1': '記帳・決算サポート',
+                'service-accounting-feature2': '法人税・消費税申告',
+                'service-accounting-feature3': '税務相談・節税対策',
+                'service-accounting-feature4': '会計ソフト導入支援',
+                'service-accounting-feature5': '月額5万円からの完全委託',
+                'service-hr-title': '人事労務サービス',
+                'service-hr-desc': '従業員採用から労務管理まで、人事業務をトータルサポート。',
+                'service-hr-feature1': '就業規則・規程作成',
+                'service-hr-feature2': '社会保険手続き',
+                'service-hr-feature3': '給与計算・年末調整',
+                'service-hr-feature4': '労働問題・相談対応',
+                'service-hr-feature5': '採用支援・人材紹介',
+                'service-ip-title': '知的財産サービス',
+                'service-ip-desc': '商標・特許・著作権などの知的財産権を専門家が保護・活用支援。',
+                'service-ip-feature1': '商標登録出願',
+                'service-ip-feature2': '特許調査・出願',
+                'service-ip-feature3': '著作権管理',
+                'service-ip-feature4': '営業秘密保護',
+                'service-ip-feature5': '権利侵害対応',
+                'service-consulting-title': '顧問サービス',
+                'service-consulting-desc': '月額定額制で法務・税務の専門家チームが継続的にサポート。',
+                'service-consulting-feature1': '法務顧問：契約審査・法務相談',
+                'service-consulting-feature2': '税務顧問：決算・申告・節税相談',
+                'service-consulting-feature3': '労務管理：社会保険・給与計算',
+                'service-consulting-feature4': 'ビジネスコンサルティング',
+                'service-consulting-feature5': '24時間中日英対応',
+                'service-ma-title': 'M&A・事業承継',
+                'service-ma-desc': '企業買収・合併、事業承継に関する専門的なアドバイスと実行支援。',
+                'service-ma-feature1': 'M&A戦略立案',
+                'service-ma-feature2': 'デューデリジェンス',
+                'service-ma-feature3': '交渉・契約支援',
+                'service-ma-feature4': '事業承継計画',
+                'service-ma-feature5': '株価算定',
+                'service-learn-more': '詳細を見る',
+                'stat-companies': '支援企業数',
+                'stat-subsidies': '補助金獲得件数',
+                'stat-satisfaction': '満足度（%）',
+                'stat-support': '時間対応',
+                'banner-modal-title': '創業支援キャンペーン詳細',
+                'campaign-offer1': '会社設立費用10% OFF',
+                'campaign-offer1-desc': '通常費用198,000円→178,200円で株式会社設立をサポート',
+                'campaign-offer2': '補助金成功報酬25% OFF',
+                'campaign-offer2-desc': '通常33%→25%に成功報酬を大幅削減',
+                'campaign-offer3': '創業パッケージ特典',
+                'campaign-offer3-desc': '1ヶ月無料顧問サービス＋03番号プレゼント',
+                'campaign-period': 'キャンペーン期間',
+                'campaign-period-desc': '2024年1月1日～2024年3月31日まで',
+                'campaign-apply': 'キャンペーン応募'
+            },
+            zh: {
+                'nav-services': '服务',
+                'nav-process': '设立流程',
+                'nav-advantages': '优势',
+                'nav-testimonials': '业绩',
+                'nav-contact': '联系我们',
+                'hero-title': '日本企业设立・运营的<br>一站式解决方案',
+                'hero-subtitle': '专家团队从公司设立到签证申请、补助金获取、法务税务支持全面协助',
+                'hero-cta': '预约免费咨询',
+                'banner-badge': '限时特惠',
+                'banner-title': '创业支援活动进行中！',
+                'banner-subtitle': '现在公司设立费用10% OFF！补助金申请成功报酬也特别价格',
+                'banner-cta': '查看详情',
+                'services-title': '综合服务',
+                'services-intro': '一站式提供在日本开展业务所需的所有服务',
+                'popular-badge': '热门',
+                'new-badge': '新增',
+                'service-establishment-title': '公司设立服务',
+                'service-establishment-desc': '高效支持株式会社・合同公司设立。约4-5周完成设立。',
+                'service-establishment-feature1': '章程制定・公证',
+                'service-establishment-feature2': '资本金缴纳',
+                'service-establishment-feature3': '法务局登记申请',
+                'service-establishment-feature4': '各机关申报',
+                'service-establishment-feature5': '费用透明化・明确估价',
+                'service-subsidy-title': '补助金助成金申请',
+                'service-subsidy-desc': '70万日元～5,000万日元的政府补助金以成功报酬制支持。',
+                'service-subsidy-feature1': '申请成功率100%的实绩',
+                'service-subsidy-feature2': 'gbiz账户申请',
+                'service-subsidy-feature3': '策划书制作支援',
+                'service-subsidy-feature4': '申请流程整体管理',
+                'service-subsidy-feature5': '成功报酬制（33%）',
+                'service-visa-title': '签证申请服务',
+                'service-visa-desc': '从在留资格认定到永住权申请专家完全支持。',
+                'service-visa-feature1': '申请文件全套准备',
+                'service-visa-feature2': '申请理由书专业制作',
+                'service-visa-feature3': '签证加速服务对应',
+                'service-visa-feature4': '永住权申请支持',
+                'service-visa-feature5': '事业计划书制作',
+                'service-accounting-title': '会计税务服务',
+                'service-accounting-desc': '从创业到事业扩大，会计税务专家全面支持。',
+                'service-accounting-feature1': '记账・结算支持',
+                'service-accounting-feature2': '法人税・消费税申报',
+                'service-accounting-feature3': '税务咨询・节税对策',
+                'service-accounting-feature4': '会计软件导入支援',
+                'service-accounting-feature5': '月额5万日元起完全委托',
+                'service-hr-title': '人事劳务服务',
+                'service-hr-desc': '从员工录用到劳务管理，人事业务全面支持。',
+                'service-hr-feature1': '就业规则・规程制作',
+                'service-hr-feature2': '社会保险手续',
+                'service-hr-feature3': '工资计算・年末调整',
+                'service-hr-feature4': '劳动问题・咨询对应',
+                'service-hr-feature5': '录用支援・人才介绍',
+                'service-ip-title': '知识产权服务',
+                'service-ip-desc': '商标・专利・著作权等知识产权专家保护・活用支持。',
+                'service-ip-feature1': '商标注册申请',
+                'service-ip-feature2': '专利调查・申请',
+                'service-ip-feature3': '著作权管理',
+                'service-ip-feature4': '营业秘密保护',
+                'service-ip-feature5': '权利侵害对应',
+                'service-consulting-title': '顾问服务',
+                'service-consulting-desc': '月额定额制法务税务专家团队持续支持。',
+                'service-consulting-feature1': '法务顾问：合同审查・法务咨询',
+                'service-consulting-feature2': '税务顾问：结算・申报・节税咨询',
+                'service-consulting-feature3': '劳务管理：社会保险・工资计算',
+                'service-consulting-feature4': '商业咨询',
+                'service-consulting-feature5': '24小时中日英对应',
+                'service-ma-title': 'M&A・事业承继',
+                'service-ma-desc': '企业收购・合并、事业承继相关的专业咨询和执行支持。',
+                'service-ma-feature1': 'M&A战略立案',
+                'service-ma-feature2': '尽职调查',
+                'service-ma-feature3': '谈判・合同支持',
+                'service-ma-feature4': '事业承继计划',
+                'service-ma-feature5': '股价算定',
+                'service-learn-more': '查看详情',
+                'stat-companies': '支持企业数',
+                'stat-subsidies': '补助金获取件数',
+                'stat-satisfaction': '满意度（%）',
+                'stat-support': '小时应对',
+                'banner-modal-title': '创业支援活动详情',
+                'campaign-offer1': '公司设立费用10% OFF',
+                'campaign-offer1-desc': '通常费用198,000日元→178,200日元支持株式会社设立',
+                'campaign-offer2': '补助金成功报酬25% OFF',
+                'campaign-offer2-desc': '通常33%→25%大幅削减成功报酬',
+                'campaign-offer3': '创业套餐特典',
+                'campaign-offer3-desc': '1个月免费顾问服务＋03号码赠送',
+                'campaign-period': '活动期间',
+                'campaign-period-desc': '2024年1月1日～2024年3月31日',
+                'campaign-apply': '申请活动'
+            },
+            en: {
+                'nav-services': 'Services',
+                'nav-process': 'Process',
+                'nav-advantages': 'Advantages',
+                'nav-testimonials': 'Testimonials',
+                'nav-contact': 'Contact',
+                'hero-title': 'One-Stop Solution for<br>Japanese Business',
+                'hero-subtitle': 'Expert team provides comprehensive support from company establishment to visa applications, subsidies, and legal/tax services',
+                'hero-cta': 'Book Free Consultation',
+                'banner-badge': 'Limited Offer',
+                'banner-title': 'Startup Support Campaign!',
+                'banner-subtitle': 'Company establishment 10% OFF! Special rates for subsidy success fees',
+                'banner-cta': 'View Details',
+                'services-title': 'Comprehensive Services',
+                'services-intro': 'All-in-one services for your business development in Japan',
+                'popular-badge': 'Popular',
+                'new-badge': 'New',
+                'service-establishment-title': 'Company Establishment',
+                'service-establishment-desc': 'Efficient support for KK/GK company establishment. Complete in 4-5 weeks.',
+                'service-establishment-feature1': 'Articles of Incorporation',
+                'service-establishment-feature2': 'Capital Deposit',
+                'service-establishment-feature3': 'Legal Registration',
+                'service-establishment-feature4': 'Government Filings',
+                'service-establishment-feature5': 'Transparent Pricing',
+                'service-subsidy-title': 'Subsidy & Grant Applications',
+                'service-subsidy-desc': 'Government subsidies from ¥700,000 to ¥50,000,000 with success-based fees.',
+                'service-subsidy-feature1': '100% Application Success Rate',
+                'service-subsidy-feature2': 'gbiz Account Registration',
+                'service-subsidy-feature3': 'Proposal Writing Support',
+                'service-subsidy-feature4': 'End-to-End Application Management',
+                'service-subsidy-feature5': 'Success Fee System (33%)',
+                'service-visa-title': 'Visa Application Services',
+                'service-visa-desc': 'Complete expert support from residency status to permanent residency applications.',
+                'service-visa-feature1': 'Complete Document Preparation',
+                'service-visa-feature2': 'Professional Reason Statement Writing',
+                'service-visa-feature3': 'Expedited Visa Service',
+                'service-visa-feature4': 'Permanent Residency Support',
+                'service-visa-feature5': 'Business Plan Preparation',
+                'service-accounting-title': 'Accounting & Tax Services',
+                'service-accounting-desc': 'Full support from startup to business expansion by accounting and tax experts.',
+                'service-accounting-feature1': 'Bookkeeping & Closing Support',
+                'service-accounting-feature2': 'Corporate & Consumption Tax Filing',
+                'service-accounting-feature3': 'Tax Consulting & Tax Planning',
+                'service-accounting-feature4': 'Accounting Software Implementation',
+                'service-accounting-feature5': 'Complete Outsourcing from ¥50,000/month',
+                'service-hr-title': 'HR & Labor Services',
+                'service-hr-desc': 'Comprehensive HR support from employee recruitment to labor management.',
+                'service-hr-feature1': 'Employment Rules & Regulations',
+                'service-hr-feature2': 'Social Insurance Procedures',
+                'service-hr-feature3': 'Payroll Calculation & Year-End Adjustment',
+                'service-hr-feature4': 'Labor Issues & Consultation',
+                'service-hr-feature5': 'Recruitment Support & Referrals',
+                'service-ip-title': 'Intellectual Property Services',
+                'service-ip-desc': 'Expert protection and utilization support for trademarks, patents, copyrights, and other IP rights.',
+                'service-ip-feature1': 'Trademark Registration',
+                'service-ip-feature2': 'Patent Search & Application',
+                'service-ip-feature3': 'Copyright Management',
+                'service-ip-feature4': 'Trade Secret Protection',
+                'service-ip-feature5': 'Rights Infringement Response',
+                'service-consulting-title': 'Consulting Services',
+                'service-consulting-desc': 'Ongoing support from expert legal and tax teams with flat-rate monthly fees.',
+                'service-consulting-feature1': 'Legal Advisory: Contract Review & Legal Consultation',
+                'service-consulting-feature2': 'Tax Advisory: Closing, Filing & Tax Planning',
+                'service-consulting-feature3': 'Labor Management: Social Insurance & Payroll',
+                'service-consulting-feature4': 'Business Consulting',
+                'service-consulting-feature5': '24/7 Japanese, Chinese, English Support',
+                'service-ma-title': 'M&A & Business Succession',
+                'service-ma-desc': 'Professional advice and execution support for M&A, mergers, and business succession.',
+                'service-ma-feature1': 'M&A Strategy Development',
+                'service-ma-feature2': 'Due Diligence',
+                'service-ma-feature3': 'Negotiation & Contract Support',
+                'service-ma-feature4': 'Business Succession Planning',
+                'service-ma-feature5': 'Stock Valuation',
+                'service-learn-more': 'Learn More',
+                'stat-companies': 'Companies Supported',
+                'stat-subsidies': 'Subsidies Obtained',
+                'stat-satisfaction': 'Satisfaction (%)',
+                'stat-support': 'Hour Support',
+                'banner-modal-title': 'Startup Support Campaign Details',
+                'campaign-offer1': 'Company Establishment 10% OFF',
+                'campaign-offer1-desc': 'Regular ¥198,000→¥178,200 for KK establishment',
+                'campaign-offer2': 'Subsidy Success Fee 25% OFF',
+                'campaign-offer2-desc': 'Reduced from 33% to 25%',
+                'campaign-offer3': 'Startup Package Benefits',
+                'campaign-offer3-desc': '1 month free consulting + 03 number gift',
+                'campaign-period': 'Campaign Period',
+                'campaign-period-desc': 'January 1, 2024 - March 31, 2024',
+                'campaign-apply': 'Apply for Campaign'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = 'ja';
+
+        // 语言切换功能
+        document.querySelectorAll('[data-lang-btn]').forEach(button => {
+            button.addEventListener('click', function() {
+                const lang = this.dataset.langBtn;
+                switchLanguage(lang);
+            });
+        });
+
+        function switchLanguage(lang) {
+            // 更新按钮状态
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang-btn="${lang}"]`).classList.add('active');
+
+            // 更新语言属性
+            document.documentElement.lang = lang;
+            currentLanguage = lang;
+
+            // 更新文本内容
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.dataset.lang;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // 服务详情模态框
+        function showServiceDetails(serviceType) {
+            const modal = document.getElementById('serviceModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            const serviceDetails = {
+                establishment: {
+                    title: currentLanguage === 'ja' ? '会社設立サービス詳細' :
+                           currentLanguage === 'zh' ? '公司设立服务详情' :
+                           'Company Establishment Details',
+                    content: `
+                        <div class="service-details">
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '設立可能な会社種類' : currentLanguage === 'zh' ? '可设立公司类型' : 'Available Company Types'}</h4>
+                                <p>${currentLanguage === 'ja' ? '株式会社、合同会社、合名会社、合資会社' : currentLanguage === 'zh' ? '株式会社、合同公司、合名公司、合资公司' : 'KK, GK, General Partnership, Limited Partnership'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '設定期間' : currentLanguage === 'zh' ? '设立期间' : 'Establishment Period'}</h4>
+                                <p>${currentLanguage === 'ja' ? '約4-5週間' : currentLanguage === 'zh' ? '约4-5周' : 'Approximately 4-5 weeks'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '費用' : currentLanguage === 'zh' ? '费用' : 'Cost'}</h4>
+                                <p>${currentLanguage === 'ja' ? '株式会社：198,000円（税別）' : currentLanguage === 'zh' ? '株式会社：198,000日元（不含税）' : 'KK: ¥198,000 (tax excluded)'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '含まれるサービス' : currentLanguage === 'zh' ? '包含服务' : 'Included Services'}</h4>
+                                <ul>
+                                    <li>${currentLanguage === 'ja' ? '定款作成・公証人役場手続き' : currentLanguage === 'zh' ? '章程制定・公证手续' : 'Articles preparation & notarization'}</li>
+                                    <li>${currentLanguage === 'ja' ? '事業目的の相談・決定' : currentLanguage === 'zh' ? '经营范围咨询・决定' : 'Business purpose consultation'}</li>
+                                    <li>${currentLanguage === 'ja' ? '登記申請書類の作成・提出' : currentLanguage === 'zh' ? '登记申请文件制作・提交' : 'Registration document preparation'}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                accounting: {
+                    title: currentLanguage === 'ja' ? '会計・税務サービス詳細' :
+                           currentLanguage === 'zh' ? '会计税务服务详情' :
+                           'Accounting & Tax Services Details',
+                    content: `
+                        <div class="service-details">
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '記帳サポート' : currentLanguage === 'zh' ? '记账支持' : 'Bookkeeping Support'}</h4>
+                                <p>${currentLanguage === 'ja' ? '月次記帳、年次決算まで完全サポート' : currentLanguage === 'zh' ? '月度记账、年度结算完全支持' : 'Monthly bookkeeping to annual closing'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '税務申告' : currentLanguage === 'zh' ? '税务申报' : 'Tax Filing'}</h4>
+                                <p>${currentLanguage === 'ja' ? '法人税、消費税、源泉所得税など全て対応' : currentLanguage === 'zh' ? '法人税、消费税、源泉所得税等全部对应' : 'Corporate tax, consumption tax, withholding tax'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '料金プラン' : currentLanguage === 'zh' ? '价格方案' : 'Pricing Plans'}</h4>
+                                <p>${currentLanguage === 'ja' ? 'スターター：月額5万円～' : currentLanguage === 'zh' ? '入门：月额5万日元起' : 'Starter: From ¥50,000/month'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '対応ソフト' : currentLanguage === 'zh' ? '对应软件' : 'Supported Software'}</h4>
+                                <p>${currentLanguage === 'ja' ? 'freee、MFクラウド、マネーフォワード等' : currentLanguage === 'zh' ? 'freee、MF云、Money Forward等' : 'freee, MF Cloud, Money Forward, etc.'}</p>
+                            </div>
+                        </div>
+                    `
+                },
+                subsidy: {
+                    title: currentLanguage === 'ja' ? '補助金・助成金申請詳細' :
+                           currentLanguage === 'zh' ? '补助金助成金申请详情' :
+                           'Subsidy & Grant Application Details',
+                    content: `
+                        <div class="service-details">
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '対象補助金' : currentLanguage === 'zh' ? '対象补助金' : 'Available Subsidies'}</h4>
+                                <p>${currentLanguage === 'ja' ? 'ものづくり補助金、IT導入補助金、小規模事業者持続化補助金等' : currentLanguage === 'zh' ? '制造业补助金、IT导入补助金、小规模事业者持续化补助金等' : 'Manufacturing, IT introduction, SME sustainability subsidies'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '補助金額' : currentLanguage === 'zh' ? '补助金额' : 'Subsidy Amount'}</h4>
+                                <p>${currentLanguage === 'ja' ? '70万円～最大5,000万円' : currentLanguage === 'zh' ? '70万日元～最大5,000万日元' : 'From ¥700,000 to ¥50,000,000'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '成功報酬' : currentLanguage === 'zh' ? '成功报酬' : 'Success Fee'}</h4>
+                                <p>${currentLanguage === 'ja' ? '補助金額の33%（キャンペーン期間中25%）' : currentLanguage === 'zh' ? '补助金金额的33%（活动期间25%）' : '33% of subsidy amount (25% during campaign)'}</p>
+                            </div>
+                        </div>
+                    `
+                },
+                visa: {
+                    title: currentLanguage === 'ja' ? 'ビザ申請サービス詳細' :
+                           currentLanguage === 'zh' ? '签证申请服务详情' :
+                           'Visa Application Service Details',
+                    content: `
+                        <div class="service-details">
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '対応ビザ種類' : currentLanguage === 'zh' ? '对应签证种类' : 'Visa Types Supported'}</h4>
+                                <p>${currentLanguage === 'ja' ? '経営管理、技術・人文知識・国際業務、留学、家族滞在等' : currentLanguage === 'zh' ? '经营管理、技术人文知识国际业务、留学、家族滞在等' : 'Business Manager, Specified Skilled Worker, Student, Dependent visas'}</p>
+                            </div>
+                            <div class="detail-item">
+                                <h4>${currentLanguage === 'ja' ? '申請期間' : currentLanguage === 'zh' ? '申请期间' : 'Processing Time'}</h4>
+                                <p>${currentLanguage === 'ja' ? '通常1-3ヶ月、加速サービス利用で2週間～1ヶ月' : currentLanguage === 'zh' ? '通常1-3个月、加速服务利用2周～1个月' : 'Usually 1-3 months, with express service 2 weeks-1 month'}</p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+
+            const service = serviceDetails[serviceType];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modal.style.display = 'block';
+            }
+        }
+
+        // Banner详情模态框
+        function showBannerDetails() {
+            document.getElementById('bannerModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('serviceModal').style.display = 'none';
+        }
+
+        function closeBannerModal() {
+            document.getElementById('bannerModal').style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const serviceModal = document.getElementById('serviceModal');
+            const bannerModal = document.getElementById('bannerModal');
+
+            if (event.target === serviceModal) {
+                serviceModal.style.display = 'none';
+            }
+            if (event.target === bannerModal) {
+                bannerModal.style.display = 'none';
+            }
+        }
+
+        // 数字计数动画
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-counter]');
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.counter);
+                const increment = target / 100;
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // 检测元素是否在视口内
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // 滚动时触发计数动画
+        let countersAnimated = false;
+        function handleScroll() {
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection && isElementInViewport(statsSection) && !countersAnimated) {
+                animateCounters();
+                countersAnimated = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭模态框
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+
+                    // 滚动到目标
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Enhanced Legal Services Platform Loaded Successfully');
+        });
+    </script>
+</body>
+
+</html>
