@@ -177,9 +177,9 @@
         "ja": "ナレッジベース - 日本ビジネスハブ"
       },
       "description": {
-        "zh": "全面的商务信息中心",
-        "en": "Comprehensive Business Information Center",
-        "ja": "包括的なビジネス情報センター"
+        "zh": "全面的商务信息中心，提供日本商业环境的专业知识和实用指南",
+        "en": "Comprehensive business information center providing professional knowledge and practical guides for Japanese business environment",
+        "ja": "包括的なビジネス情報センター、日本ビジネス環境の専門知識と実用ガイドを提供"
       }
     },
     "hero": {
@@ -192,31 +192,90 @@
         "zh": "全面的商务信息中心",
         "en": "Comprehensive Business Information Center",
         "ja": "包括的なビジネス情報センター"
+      },
+      "description": {
+        "zh": "汇集日本商业环境的专业知识，为您的商务决策提供可靠依据和实用指导",
+        "en": "Comprehensive collection of Japanese business environment knowledge, providing reliable basis and practical guidance for your business decisions",
+        "ja": "日本ビジネス環境の専門知識を集約し、ビジネス判断に信頼できる根拠と実用的な指導を提供"
       }
     },
-    "categories": [
+    "features": [
       {
+        "icon": "⚖️",
         "title": {
-          "zh": "法律知识",
-          "en": "Legal Knowledge",
-          "ja": "法務知識"
+          "zh": "法律知识库",
+          "en": "Legal Knowledge Base",
+          "ja": "法務知識ベース"
         },
         "description": {
-          "zh": "日本法律体系、商业法规、合同条款等专业知识",
-          "en": "Japanese legal system, commercial regulations, contract terms and other professional knowledge",
-          "ja": "日本の法制度、商業規制、契約条項などの専門知識"
+          "zh": "日本法律体系、商业法规、合同条款等专业法律知识",
+          "en": "Professional legal knowledge including Japanese legal system, commercial regulations, and contract terms",
+          "ja": "日本の法制度、商業規制、契約条項などの専門法務知識"
         }
       },
       {
+        "icon": "📊",
+        "title": {
+          "zh": "市场分析",
+          "en": "Market Analysis",
+          "ja": "市場分析"
+        },
+        "description": {
+          "zh": "日本市场动态、行业趋势、竞争分析等商业洞察",
+          "en": "Business insights including Japanese market dynamics, industry trends, and competitive analysis",
+          "ja": "日本市場の動向、業界トレンド、競争分析などのビジネス洞察"
+        }
+      },
+      {
+        "icon": "📋",
+        "title": {
+          "zh": "投资指南",
+          "en": "Investment Guide",
+          "ja": "投資ガイド"
+        },
+        "description": {
+          "zh": "日本投资环境、政策法规、风险评估等投资指导",
+          "en": "Investment guidance including Japanese investment environment, policies, regulations, and risk assessment",
+          "ja": "日本の投資環境、政策法規、リスク評価などの投資指導"
+        }
+      },
+      {
+        "icon": "🏢",
         "title": {
           "zh": "商业指南",
           "en": "Business Guide",
           "ja": "ビジネスガイド"
         },
         "description": {
-          "zh": "市场分析、投资策略、商业模式等实用指南",
-          "en": "Market analysis, investment strategies, business models and other practical guides",
-          "ja": "市場分析、投資戦略、ビジネスモデルなどの実用ガイド"
+          "zh": "商业模式、运营策略、管理实践等实用商业指南",
+          "en": "Practical business guides including business models, operational strategies, and management practices",
+          "ja": "ビジネスモデル、運営戦略、管理実践などの実用的なビジネスガイド"
+        }
+      },
+      {
+        "icon": "🎓",
+        "title": {
+          "zh": "培训资源",
+          "en": "Training Resources",
+          "ja": "研修リソース"
+        },
+        "description": {
+          "zh": "商务技能培训、专业认证、职业发展等学习资源",
+          "en": "Learning resources including business skills training, professional certification, and career development",
+          "ja": "ビジネススキル研修、専門認証、キャリア開発などの学習リソース"
+        }
+      },
+      {
+        "icon": "🔍",
+        "title": {
+          "zh": "案例研究",
+          "en": "Case Studies",
+          "ja": "ケーススタディ"
+        },
+        "description": {
+          "zh": "成功案例分析、失败教训、最佳实践等经验分享",
+          "en": "Experience sharing including success case analysis, failure lessons, and best practices",
+          "ja": "成功事例分析、失敗教訓、ベストプラクティスなどの経験共有"
         }
       }
     ]
@@ -229,9 +288,9 @@
         "ja": "専門人材 - 日本ビジネスハブ"
       },
       "description": {
-        "zh": "优秀人才与企业的完美匹配",
-        "en": "Perfect Matching of Excellent Talent and Companies",
-        "ja": "優秀な人材と企業のマッチング"
+        "zh": "连接优秀人才与日本企业，提供专业的职业发展和人才匹配服务",
+        "en": "Connecting excellent talent with Japanese companies, providing professional career development and talent matching services",
+        "ja": "優秀な人材と日本企業を結びつけ、プロのキャリア開発と人材マッチングサービスを提供"
       }
     },
     "hero": {
@@ -244,8 +303,93 @@
         "zh": "优秀人才与企业的完美匹配",
         "en": "Perfect Matching of Excellent Talent and Companies",
         "ja": "優秀な人材と企業のマッチング"
+      },
+      "description": {
+        "zh": "汇聚各行业专业人才，为日本企业提供精准的人才匹配和职业发展指导",
+        "en": "Gathering professional talents from various industries to provide accurate talent matching and career guidance for Japanese companies",
+        "ja": "様々な業界の専門人材を集約し、日本企業に正確な人材マッチングとキャリア指導を提供"
       }
-    }
+    },
+    "features": [
+      {
+        "icon": "🎯",
+        "title": {
+          "zh": "精准匹配",
+          "en": "Precision Matching",
+          "ja": "精密マッチング"
+        },
+        "description": {
+          "zh": "基于技能、经验、文化匹配的智能人才推荐系统",
+          "en": "Intelligent talent recommendation system based on skills, experience, and cultural fit",
+          "ja": "スキル、経験、文化適合性に基づくインテリジェントな人材推薦システム"
+        }
+      },
+      {
+        "icon": "📝",
+        "title": {
+          "zh": "职业咨询",
+          "en": "Career Consulting",
+          "ja": "キャリアコンサルティング"
+        },
+        "description": {
+          "zh": "一对一职业规划指导，帮助人才在日本市场发展",
+          "en": "One-on-one career planning guidance to help talents develop in the Japanese market",
+          "ja": "マンツーマンのキャリアプランニング指導、人材の日本市場での発展を支援"
+        }
+      },
+      {
+        "icon": "🏢",
+        "title": {
+          "zh": "企业服务",
+          "en": "Corporate Services",
+          "ja": "企業サービス"
+        },
+        "description": {
+          "zh": "为企业提供招聘策略、人才评估、团队建设等专业服务",
+          "en": "Professional services for companies including recruitment strategies, talent assessment, and team building",
+          "ja": "企業向け採用戦略、人材評価、チームビルディングなどのプロフェッショナルサービス"
+        }
+      },
+      {
+        "icon": "🌍",
+        "title": {
+          "zh": "跨文化培训",
+          "en": "Cross-cultural Training",
+          "ja": "異文化研修"
+        },
+        "description": {
+          "zh": "帮助人才快速适应日本职场文化和商业环境",
+          "en": "Helping talents quickly adapt to Japanese workplace culture and business environment",
+          "ja": "人材が日本の職場文化とビジネス環境に迅速に適応するのを支援"
+        }
+      },
+      {
+        "icon": "📊",
+        "title": {
+          "zh": "技能评估",
+          "en": "Skill Assessment",
+          "ja": "スキル評価"
+        },
+        "description": {
+          "zh": "专业的技能和潜力评估，为企业提供客观的人才分析",
+          "en": "Professional skills and potential assessment, providing objective talent analysis for companies",
+          "ja": "専門的なスキルとポテンシャル評価、企業に客観的な人材分析を提供"
+        }
+      },
+      {
+        "icon": "🎓",
+        "title": {
+          "zh": "持续发展",
+          "en": "Continuous Development",
+          "ja": "継続的発展"
+        },
+        "description": {
+          "zh": "提供职业培训和技能提升计划，支持人才长期发展",
+          "en": "Providing career training and skill enhancement programs to support long-term talent development",
+          "ja": "キャリア研修とスキル向上プログラムを提供し、人材の長期的な発展を支援"
+        }
+      }
+    ]
   },
   "education": {
     "meta": {
@@ -255,9 +399,9 @@
         "ja": "留学教育 - 日本ビジネスハブ"
       },
       "description": {
-        "zh": "日本留学的全程支持",
-        "en": "Comprehensive Support for Study in Japan",
-        "ja": "日本留学への総合サポート"
+        "zh": "专业的日本留学指导，从申请到入学的一站式教育服务",
+        "en": "Professional guidance for studying in Japan, one-stop educational services from application to enrollment",
+        "ja": "専門的な日本留学指導、申請から入学までのワンストップ教育サービス"
       }
     },
     "hero": {
@@ -270,8 +414,93 @@
         "zh": "日本留学的全程支持",
         "en": "Comprehensive Support for Study in Japan",
         "ja": "日本留学への総合サポート"
+      },
+      "description": {
+        "zh": "为留学生提供专业的日本教育指导，帮助顺利适应日本的学习和生活",
+        "en": "Providing professional Japanese education guidance for international students, helping them smoothly adapt to studying and living in Japan",
+        "ja": "留学生に専門的な日本教育指導を提供し、日本での学習と生活への円滑な適応を支援"
       }
-    }
+    },
+    "features": [
+      {
+        "icon": "🎓",
+        "title": {
+          "zh": "学校申请",
+          "en": "School Application",
+          "ja": "学校申請"
+        },
+        "description": {
+          "zh": "专业的学校选择和申请指导，提高录取成功率",
+          "en": "Professional school selection and application guidance to increase admission success rate",
+          "ja": "専門的な学校選択と申請指導、入学成功率を向上"
+        }
+      },
+      {
+        "icon": "📄",
+        "title": {
+          "zh": "签证办理",
+          "en": "Visa Processing",
+          "ja": "ビザ申請"
+        },
+        "description": {
+          "zh": "学生签证申请指导，确保顺利获得签证",
+          "en": "Student visa application guidance to ensure smooth visa acquisition",
+          "ja": "学生ビザ申請指導、円滑なビザ取得を確保"
+        }
+      },
+      {
+        "icon": "🏠",
+        "title": {
+          "zh": "住宿安排",
+          "en": "Accommodation",
+          "ja": "宿泊手配"
+        },
+        "description": {
+          "zh": "安全的住宿安排，包括学校宿舍和校外租房指导",
+          "en": "Safe accommodation arrangements including school dormitories and off-campus rental guidance",
+          "ja": "安全な宿泊手配、学校寮と学外賃貸指導を含む"
+        }
+      },
+      {
+        "icon": "🗣️",
+        "title": {
+          "zh": "语言培训",
+          "en": "Language Training",
+          "ja": "言語研修"
+        },
+        "description": {
+          "zh": "日语能力提升课程，帮助适应日本学习环境",
+          "en": "Japanese language proficiency courses to help adapt to Japanese learning environment",
+          "ja": "日本語能力向上コース、日本の学習環境への適応を支援"
+        }
+      },
+      {
+        "icon": "📚",
+        "title": {
+          "zh": "学术支持",
+          "en": "Academic Support",
+          "ja": "学術サポート"
+        },
+        "description": {
+          "zh": "学习方法指导和学术写作辅导",
+          "en": "Study method guidance and academic writing tutoring",
+          "ja": "学習方法指導と学術作文チューター"
+        }
+      },
+      {
+        "icon": "🌸",
+        "title": {
+          "zh": "文化适应",
+          "en": "Cultural Adaptation",
+          "ja": "文化適応"
+        },
+        "description": {
+          "zh": "日本文化介绍和社交指导，帮助融入当地生活",
+          "en": "Japanese culture introduction and social guidance to help integrate into local life",
+          "ja": "日本文化紹介と社交指導、地域生活への統合を支援"
+        }
+      }
+    ]
   },
   "lifestyle": {
     "meta": {

@@ -92,55 +92,105 @@ function t(key, fallback = '') {
     return value || fallback;
 }
 
-// Load page content from JSON
+// Load page content from JSON with caching and retry
 async function loadPageContent() {
     if (Object.keys(pageContent).length > 0) {
-        console.log('Page content already loaded');
+        console.log('Page content already cached');
         return pageContent;
     }
 
     console.log('Loading page content from JSON...');
 
-    try {
-        const response = await fetch('data/pages.json');
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: Failed to load pages.json`);
+    const maxRetries = 3;
+    let retryCount = 0;
+
+    while (retryCount < maxRetries) {
+        try {
+            const response = await fetch('data/pages.json', {
+                cache: 'force-cache', // Use browser cache when possible
+                headers: {
+                    'Cache-Control': 'max-age=3600' // Cache for 1 hour
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: Failed to load pages.json`);
+            }
+
+            const data = await response.json();
+
+            // Validate JSON structure
+            if (!data || typeof data !== 'object') {
+                throw new Error('Invalid JSON structure');
+            }
+
+            pageContent = data;
+            console.log('Page content loaded and cached successfully');
+            return pageContent;
+
+        } catch (error) {
+            retryCount++;
+            console.warn(`Failed to load page content (attempt ${retryCount}/${maxRetries}):`, error.message);
+
+            if (retryCount >= maxRetries) {
+                console.error('Failed to load page content after maximum retries');
+                return {};
+            }
+
+            // Exponential backoff: 1s, 2s, 4s
+            await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount - 1) * 1000));
         }
-
-        const data = await response.json();
-        pageContent = data;
-        console.log('Page content loaded successfully');
-        return pageContent;
-
-    } catch (error) {
-        console.error('Failed to load page content:', error);
-        return {};
     }
 }
 
-// Load service content from JSON
+// Load service content from JSON with caching and retry
 async function loadServiceContent() {
     if (Object.keys(serviceContent).length > 0) {
-        console.log('Service content already loaded');
+        console.log('Service content already cached');
         return serviceContent;
     }
 
     console.log('Loading service content from JSON...');
 
-    try {
-        const response = await fetch('data/services.json');
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: Failed to load services.json`);
+    const maxRetries = 3;
+    let retryCount = 0;
+
+    while (retryCount < maxRetries) {
+        try {
+            const response = await fetch('data/services.json', {
+                cache: 'force-cache', // Use browser cache when possible
+                headers: {
+                    'Cache-Control': 'max-age=3600' // Cache for 1 hour
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: Failed to load services.json`);
+            }
+
+            const data = await response.json();
+
+            // Validate JSON structure
+            if (!data || typeof data !== 'object') {
+                throw new Error('Invalid JSON structure');
+            }
+
+            serviceContent = data;
+            console.log('Service content loaded and cached successfully');
+            return serviceContent;
+
+        } catch (error) {
+            retryCount++;
+            console.warn(`Failed to load service content (attempt ${retryCount}/${maxRetries}):`, error.message);
+
+            if (retryCount >= maxRetries) {
+                console.error('Failed to load service content after maximum retries');
+                return {};
+            }
+
+            // Exponential backoff: 1s, 2s, 4s
+            await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount - 1) * 1000));
         }
-
-        const data = await response.json();
-        serviceContent = data;
-        console.log('Service content loaded successfully');
-        return serviceContent;
-
-    } catch (error) {
-        console.error('Failed to load service content:', error);
-        return {};
     }
 }
 
@@ -213,6 +263,129 @@ function generateFeaturesHTML(features) {
     return html;
 }
 
+function generateCategoriesHTML(categories) {
+    if (!categories || !Array.isArray(categories)) return '';
+
+    let html = '<section class="categories-section"><div class="container"><div class="categories-grid">';
+
+    categories.forEach(category => {
+        const title = getContentText(category.title);
+        const description = getContentText(category.description);
+
+        html += `
+            <div class="category-card">
+                <h3 class="category-title">${sanitizeText(title)}</h3>
+                <p class="category-description">${sanitizeText(description)}</p>
+            </div>
+        `;
+    });
+
+    html += '</div></div></section>';
+    return html;
+}
+
+function getPageName(pageId) {
+    const pageNames = {
+        'index': '首页',
+        'ai-legal': 'AI法律',
+        'ai-crm': 'AI CRM',
+        'knowledge': '知识库',
+        'professionals': '专业人才',
+        'education': '留学教育',
+        'lifestyle': '生活帮忙',
+        'community': '社群网络',
+        'labor': '劳务派遣',
+        'pet': '宠物帮帮忙',
+        'tourism': '旅游服务'
+    };
+    return pageNames[pageId] || pageId;
+}
+
+function generateFallbackContent(pageId) {
+    const pageName = getPageName(pageId);
+    return {
+        meta: {
+            title: {
+                zh: `${pageName} - 日本商务通`,
+                en: `${pageName} - Japan Business Hub`,
+                ja: `${pageName} - 日本ビジネスハブ`
+            },
+            description: {
+                zh: `日本商务通专业的${pageName}服务`,
+                en: `Professional ${pageName} services from Japan Business Hub`,
+                ja: `日本ビジネスハブの専門${pageName}サービス`
+            }
+        },
+        hero: {
+            title: {
+                zh: pageName,
+                en: pageName,
+                ja: pageName
+            },
+            subtitle: {
+                zh: '专业的服务，值得信赖',
+                en: 'Professional Services, Trustworthy',
+                ja: 'プロのサービス、信頼できる'
+            },
+            description: {
+                zh: '正在完善中，敬请期待更多精彩内容',
+                en: 'Under development, more exciting content coming soon',
+                ja: '開発中、さらに素晴らしいコンテンツがまもなく登場'
+            }
+        }
+    };
+}
+
+function generateFallbackHeroHTML(pageId) {
+    const pageName = getPageName(pageId);
+    return `
+        <div class="hero-section fallback-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">${pageName}</h1>
+                    <p class="hero-subtitle">专业的服务，值得信赖</p>
+                    <p class="hero-description">正在完善中，敬请期待更多精彩内容</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function generateErrorFallbackHTML(pageId) {
+    const pageName = getPageName(pageId);
+    return `
+        <div class="error-fallback">
+            <div class="container">
+                <div class="error-content">
+                    <h2>内容加载失败</h2>
+                    <p>${pageName}页面暂时无法加载内容，请稍后重试。</p>
+                    <button onclick="location.reload()" class="btn-primary">重新加载</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function showLoadingIndicator(element) {
+    element.innerHTML = `
+        <div class="loading-indicator">
+            <div class="loading-spinner"></div>
+            <p>正在加载内容...</p>
+        </div>
+    `;
+}
+
+function hideLoadingIndicator(element) {
+    const loadingIndicator = element.querySelector('.loading-indicator');
+    if (loadingIndicator) {
+        loadingIndicator.style.opacity = '0';
+        setTimeout(() => {
+            const indicator = element.querySelector('.loading-indicator');
+            if (indicator) indicator.remove();
+        }, 300);
+    }
+}
+
 // Get current page ID from URL
 function getCurrentPageId() {
     const path = window.location.pathname;
@@ -248,58 +421,101 @@ async function initContentSystem() {
     }
 }
 
-// Update page content dynamically
+// Update page content dynamically with error handling and fallbacks
 async function updatePageContent(pageId) {
     console.log(`Updating content for page: ${pageId}`);
 
-    // Load content if not already loaded
-    if (Object.keys(pageContent).length === 0) {
-        await loadPageContent();
-    }
-    if (Object.keys(serviceContent).length === 0) {
-        await loadServiceContent();
-    }
+    try {
+        // Load content if not already loaded
+        if (Object.keys(pageContent).length === 0) {
+            await loadPageContent();
+        }
+        if (Object.keys(serviceContent).length === 0) {
+            await loadServiceContent();
+        }
 
-    // Find content for current page
-    let content = null;
-    if (pageId === 'index') {
-        content = pageContent.index;
-    } else if (serviceContent[pageId]) {
-        content = serviceContent[pageId];
-    }
+        // Find content for current page
+        let content = null;
+        if (pageId === 'index') {
+            content = pageContent.index;
+        } else if (serviceContent[pageId]) {
+            content = serviceContent[pageId];
+        }
 
-    if (!content) {
-        console.warn(`No content found for page: ${pageId}`);
-        return;
-    }
+        // Fallback content if no specific content found
+        if (!content) {
+            console.warn(`No content found for page: ${pageId}, using fallback`);
+            content = generateFallbackContent(pageId);
+        }
 
-    // Update page title
-    if (content.meta && content.meta.title) {
-        const pageTitle = getContentText(content.meta.title);
-        document.title = sanitizeText(pageTitle);
-        console.log(`Updated page title to: ${pageTitle}`);
-    }
+        // Update page title with fallback
+        if (content.meta && content.meta.title) {
+            const pageTitle = getContentText(content.meta.title);
+            if (pageTitle && pageTitle !== pageId) {
+                document.title = sanitizeText(pageTitle);
+                console.log(`Updated page title to: ${pageTitle}`);
+            }
+        } else {
+            // Fallback title
+            document.title = `${getPageName(pageId)} - 日本商务通`;
+        }
 
-    // Update page description
-    const descriptionMeta = document.querySelector('meta[name="description"]');
-    if (content.meta && content.meta.description && descriptionMeta) {
-        const pageDescription = getContentText(content.meta.description);
-        descriptionMeta.content = sanitizeText(pageDescription);
-    }
+        // Update page description with fallback
+        const descriptionMeta = document.querySelector('meta[name="description"]');
+        if (content.meta && content.meta.description && descriptionMeta) {
+            const pageDescription = getContentText(content.meta.description);
+            if (pageDescription) {
+                descriptionMeta.content = sanitizeText(pageDescription);
+            }
+        } else if (descriptionMeta) {
+            descriptionMeta.content = `${getPageName(pageId)} - 日本商务通专业的${getPageName(pageId)}服务`;
+        }
 
-    // Generate and inject hero section
-    const mainElement = document.querySelector('main');
-    if (mainElement && content.hero) {
-        const heroHTML = generateHeroHTML(content.hero);
-        mainElement.innerHTML = heroHTML;
+        // Generate and inject content
+        const mainElement = document.querySelector('main');
+        if (mainElement) {
+            let contentHTML = '';
 
-        // Add features section if available
-        if (content.features) {
-            mainElement.innerHTML += generateFeaturesHTML(content.features);
+            // Add hero section
+            if (content.hero) {
+                contentHTML += generateHeroHTML(content.hero);
+            } else {
+                // Fallback hero section
+                contentHTML += generateFallbackHeroHTML(pageId);
+            }
+
+            // Add features section
+            if (content.features && Array.isArray(content.features)) {
+                contentHTML += generateFeaturesHTML(content.features);
+            } else if (content.categories && Array.isArray(content.categories)) {
+                contentHTML += generateCategoriesHTML(content.categories);
+            }
+
+            // Only update if we have content to show
+            if (contentHTML.trim()) {
+                // Show loading indicator briefly, then replace content
+                showLoadingIndicator(mainElement);
+                setTimeout(() => {
+                    mainElement.innerHTML = contentHTML;
+                    hideLoadingIndicator(mainElement);
+                }, 300);
+            } else {
+                // Ultimate fallback
+                mainElement.innerHTML = generateErrorFallbackHTML(pageId);
+            }
+        }
+
+        console.log(`Page content updated successfully for: ${pageId}`);
+
+    } catch (error) {
+        console.error(`Error updating page content for ${pageId}:`, error);
+
+        // Show error fallback
+        const mainElement = document.querySelector('main');
+        if (mainElement) {
+            mainElement.innerHTML = generateErrorFallbackHTML(pageId);
         }
     }
-
-    console.log(`Page content updated for: ${pageId}`);
 }
 
 // Sanitize text content to prevent XSS
