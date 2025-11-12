@@ -55,27 +55,56 @@ function sanitizeText(text) {
 
 // Update all elements with data-lang attributes
 function updateLanguage() {
-    document.querySelectorAll('[data-lang]').forEach(element => {
+    console.log('Updating language to:', currentLanguage);
+    console.log('Available translations:', translations[currentLanguage] ? 'Yes' : 'No');
+
+    // Update all navigation elements
+    const elements = document.querySelectorAll('[data-lang]');
+    console.log('Found elements with data-lang:', elements.length);
+
+    elements.forEach((element, index) => {
         const key = element.getAttribute('data-lang');
+        const originalText = element.textContent;
         const translation = t(key, element.textContent);
 
-        // Use textContent for security (no HTML injection)
-        element.textContent = sanitizeText(translation);
+        // Only update if translation is different from current text
+        if (translation && translation !== originalText) {
+            // Use textContent for security (no HTML injection)
+            element.textContent = sanitizeText(translation);
+            console.log(`Updated element ${index + 1}/${elements.length}: ${key} = "${translation}"`);
+        } else if (!translation) {
+            console.warn(`No translation found for key: ${key}`);
+        }
     });
 
     // Update page title
     const pageKey = getPageTranslationKey();
     const titleKey = `pages.${pageKey}.title`;
     const titleTranslation = t(titleKey);
-    if (titleTranslation) {
+    if (titleTranslation && document.title !== titleTranslation) {
         document.title = titleTranslation;
+        console.log(`Updated page title to: ${titleTranslation}`);
     }
 
     // Update language selector
     const languageSelector = document.getElementById('language-select');
-    if (languageSelector) {
+    if (languageSelector && languageSelector.value !== currentLanguage) {
         languageSelector.value = currentLanguage;
+        console.log(`Updated language selector to: ${currentLanguage}`);
     }
+
+    // Also update dropdown toggle text if it exists
+    const dropdownToggle = document.querySelector('.dropdown-toggle[data-lang="nav-other-services"]');
+    if (dropdownToggle) {
+        const dropdownTranslation = t('nav-other-services', '其他服务');
+        if (dropdownTranslation) {
+            // Keep the ▼ arrow
+            dropdownToggle.innerHTML = sanitizeText(dropdownTranslation) + ' ▼';
+            console.log(`Updated dropdown toggle to: ${dropdownTranslation}`);
+        }
+    }
+
+    console.log('Language update completed');
 }
 
 // Get current page translation key based on URL
@@ -260,18 +289,17 @@ const NAV_TEMPLATE = `
     </div>
     <ul class="nav-menu">
         <li><a href="index.html" data-lang="nav-home">首页</a></li>
-        <li><a href="index.html#customer-layers" data-lang="nav-layers">客户分层</a></li>
         <li><a href="ai-legal.html" data-lang="nav-ai-legal">⚖️ AI法律</a></li>
         <li><a href="ai-crm.html" data-lang="nav-ai-crm">🤖 AI CRM</a></li>
         <li><a href="knowledge.html" data-lang="nav-knowledge">知识库</a></li>
         <li><a href="professionals.html" data-lang="nav-professionals">专业人才</a></li>
-        <li><a href="community.html" data-lang="nav-community">社群网络</a></li>
         <li><a href="education.html" data-lang="nav-education">留学教育</a></li>
         <li class="nav-dropdown">
             <a href="#" class="dropdown-toggle" data-lang="nav-other-services"
                role="button" aria-haspopup="true" aria-expanded="false">其他服务 ▼</a>
             <ul class="dropdown-menu" role="menu" aria-label="Other services">
                 <li role="none"><a href="lifestyle.html" data-lang="nav-lifestyle" role="menuitem">生活帮忙</a></li>
+                <li role="none"><a href="community.html" data-lang="nav-community" role="menuitem">社群网络</a></li>
                 <li role="none"><a href="labor.html" data-lang="nav-labor" role="menuitem">劳务派遣</a></li>
                 <li role="none"><a href="pet.html" data-lang="nav-pet" role="menuitem">宠物帮帮忙</a></li>
                 <li role="none"><a href="tourism.html" data-lang="nav-tourism" role="menuitem">旅游服务</a></li>
@@ -907,7 +935,26 @@ function setupNavBehavior() {
 
         languageSelector.addEventListener('change', async function (e) {
             const selectedLang = e.target.value;
-            await switchLanguage(selectedLang);
+            console.log('Language selector changed to:', selectedLang);
+
+            // Prevent multiple simultaneous switches
+            if (isLanguageSwitching) {
+                console.log('Language switch already in progress, ignoring');
+                return;
+            }
+
+            try {
+                await switchLanguage(selectedLang);
+
+                // Force immediate update after language switch completes
+                setTimeout(() => {
+                    console.log('Forcing immediate language update after switch');
+                    updateLanguage();
+                }, 100);
+
+            } catch (error) {
+                console.error('Error during language switch:', error);
+            }
         });
     }
 
@@ -917,9 +964,15 @@ function setupNavBehavior() {
         navbar.addEventListener('click', function (e) {
             const link = e.target.closest('.nav-menu a');
             if (!link) return;
-            
+
             const href = link.getAttribute('href');
             if (!href) return;
+
+            // Prevent dropdown toggle from page navigation
+            if (link.classList.contains('dropdown-toggle')) {
+                e.preventDefault();
+                return;
+            }
 
             // in-page fragment
             if (href.startsWith('#') || href.includes(window.location.pathname.split('/').pop() + '#')) {
@@ -940,6 +993,37 @@ function setupNavBehavior() {
                 return;
             }
             // otherwise let browser handle (external link, download, etc.)
+        });
+
+        // Handle dropdown toggle separately
+        navbar.addEventListener('click', function (e) {
+            const dropdownToggle = e.target.closest('.dropdown-toggle');
+            if (!dropdownToggle) return;
+
+            e.preventDefault();
+
+            // Toggle dropdown menu manually (CSS hover will handle most cases)
+            const dropdownMenu = dropdownToggle.nextElementSibling;
+            if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                const isVisible = dropdownMenu.style.visibility === 'visible';
+                dropdownMenu.style.visibility = isVisible ? 'hidden' : 'visible';
+                dropdownMenu.style.opacity = isVisible ? '0' : '1';
+                dropdownMenu.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+            if (dropdownMenu && dropdownToggle &&
+                !dropdownMenu.contains(e.target) &&
+                !dropdownToggle.contains(e.target)) {
+                dropdownMenu.style.visibility = 'hidden';
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.transform = 'translateY(-10px)';
+            }
         });
     }
 
