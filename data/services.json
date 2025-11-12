@@ -1,0 +1,406 @@
+{
+  "ai-legal": {
+    "meta": {
+      "title": {
+        "zh": "AI法律服务 - 日本商务通",
+        "en": "AI Legal Services - Japan Business Hub",
+        "ja": "AI法務サービス - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "运用先进AI技术，全面助力企业法律风险管理。从合同审查到合规管理，提供全方位的法律解决方案。",
+        "en": "Utilizing advanced AI technology to comprehensively assist corporate legal risk management. From contract review to compliance management, providing comprehensive legal solutions.",
+        "ja": "高度なAI技術を活用し、企業の法務リスク管理を徹底サポート。契約書レビューからコンプライアンス管理まで、包括的な法務ソリューションを提供します。"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "AI法律咨询",
+        "en": "AI Legal Consulting",
+        "ja": "AI法務コンサルティング"
+      },
+      "subtitle": {
+        "zh": "前沿AI技术降低法律风险",
+        "en": "Cutting-edge AI Technology Reduces Legal Risks",
+        "ja": "最先端AI技術で法的リスクを削減"
+      },
+      "description": {
+        "zh": "利用先进AI技术，全面助力企业法律风险管理。从合同审查到合规管理，提供全方位的法律解决方案。",
+        "en": "Utilizing advanced AI technology to comprehensively assist corporate legal risk management. From contract review to compliance management, providing comprehensive legal solutions.",
+        "ja": "高度なAI技術を活用し、企業の法務リスク管理を徹底サポート。契約書レビューからコンプライアンス管理まで、包括的な法務ソリューションを提供します。"
+      }
+    },
+    "features": [
+      {
+        "icon": "🔍",
+        "title": {
+          "zh": "智能合同审查",
+          "en": "Smart Contract Review",
+          "ja": "スマート契約レビュー"
+        },
+        "description": {
+          "zh": "AI自动识别合同风险点，提供专业修改建议",
+          "en": "AI automatically identifies contract risk points and provides professional modification suggestions",
+          "ja": "AIが自動的に契約リスクを特定し、プロの修正提案を提供"
+        }
+      },
+      {
+        "icon": "⚖️",
+        "title": {
+          "zh": "法律风险评估",
+          "en": "Legal Risk Assessment",
+          "ja": "法的リスク評価"
+        },
+        "description": {
+          "zh": "多维度评估企业法律风险，制定防范策略",
+          "en": "Multi-dimensional assessment of corporate legal risks and formulation of prevention strategies",
+          "ja": "企業の法的リスクを多角的に評価し、防止戦略を策定"
+        }
+      },
+      {
+        "icon": "📋",
+        "title": {
+          "zh": "合规管理",
+          "en": "Compliance Management",
+          "ja": "コンプライアンス管理"
+        },
+        "description": {
+          "zh": "实时监控合规状态，及时预警违规风险",
+          "en": "Real-time monitoring of compliance status and timely warning of violation risks",
+          "ja": "コンプライアンス状況をリアルタイムで監視し、違反リスクを適時に警告"
+        }
+      },
+      {
+        "icon": "🤖",
+        "title": {
+          "zh": "智能问答",
+          "en": "Intelligent Q&A",
+          "ja": "インテリジェントQ&A"
+        },
+        "description": {
+          "zh": "24/7 AI法律顾问，随时解答法律问题",
+          "en": "24/7 AI legal consultant to answer legal questions anytime",
+          "ja": "24時間365日AI法務コンサルタント、いつでも法的質問に回答"
+        }
+      }
+    ]
+  },
+  "ai-crm": {
+    "meta": {
+      "title": {
+        "zh": "AI CRM系统 - 日本商务通",
+        "en": "AI CRM System - Japan Business Hub",
+        "ja": "AI CRMシステム - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "运用最新AI技术和云端技术，全面助力企业客户管理。实现销售、营销、客服的一体化管理。",
+        "en": "Utilizing the latest AI technology and cloud technology to comprehensively assist corporate customer management. Achieve integrated management of sales, marketing, and customer service.",
+        "ja": "最新のAI技術とクラウド技術を活用し、企業の顧客管理を徹底支援。販売、マーケティング、顧客サービスの一体化を実現します。"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "AI客户关系管理",
+        "en": "AI Customer Relationship Management",
+        "ja": "AI顧客関係管理"
+      },
+      "subtitle": {
+        "zh": "智能业务增长平台",
+        "en": "Smart Business Growth Platform",
+        "ja": "スマートビジネス成長プラットフォーム"
+      },
+      "description": {
+        "zh": "运用最新AI技术和云端技术，全面助力企业客户管理。实现销售、营销、客服的一体化管理。",
+        "en": "Utilizing the latest AI technology and cloud technology to comprehensively assist corporate customer management. Achieve integrated management of sales, marketing, and customer service.",
+        "ja": "最新のAI技術とクラウド技術を活用し、企業の顧客管理を徹底支援。販売、マーケティング、顧客サービスの一体化を実現します。"
+      }
+    },
+    "features": [
+      {
+        "icon": "🎯",
+        "title": {
+          "zh": "智能客户画像",
+          "en": "Smart Customer Profiling",
+          "ja": "スマート顧客プロファイリング"
+        },
+        "description": {
+          "zh": "AI分析客户行为，构建精准用户画像",
+          "en": "AI analyzes customer behavior to build accurate user profiles",
+          "ja": "AIが顧客行動を分析し、正確なユーザープロファイルを構築"
+        }
+      },
+      {
+        "icon": "📊",
+        "title": {
+          "zh": "数据分析报表",
+          "en": "Data Analytics Reports",
+          "ja": "データ分析レポート"
+        },
+        "description": {
+          "zh": "实时数据可视化，助力业务决策",
+          "en": "Real-time data visualization to support business decisions",
+          "ja": "リアルタイムデータ可視化でビジネス判断を支援"
+        }
+      },
+      {
+        "icon": "💬",
+        "title": {
+          "zh": "智能客服系统",
+          "en": "Smart Customer Service",
+          "ja": "スマートカスタマーサービス"
+        },
+        "description": {
+          "zh": "AI自动回复常见问题，提升服务效率",
+          "en": "AI automatically replies to common questions, improving service efficiency",
+          "ja": "AIが一般的な質問に自動返信し、サービス効率を向上"
+        }
+      },
+      {
+        "icon": "📱",
+        "title": {
+          "zh": "移动端支持",
+          "en": "Mobile Support",
+          "ja": "モバイルサポート"
+        },
+        "description": {
+          "zh": "随时随地管理客户关系",
+          "en": "Manage customer relationships anytime, anywhere",
+          "ja": "いつでもどこでも顧客関係を管理"
+        }
+      }
+    ]
+  },
+  "knowledge": {
+    "meta": {
+      "title": {
+        "zh": "知识库 - 日本商务通",
+        "en": "Knowledge Base - Japan Business Hub",
+        "ja": "ナレッジベース - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "全面的商务信息中心",
+        "en": "Comprehensive Business Information Center",
+        "ja": "包括的なビジネス情報センター"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "商务知识库",
+        "en": "Business Knowledge Base",
+        "ja": "ビジネスナレッジベース"
+      },
+      "subtitle": {
+        "zh": "全面的商务信息中心",
+        "en": "Comprehensive Business Information Center",
+        "ja": "包括的なビジネス情報センター"
+      }
+    },
+    "categories": [
+      {
+        "title": {
+          "zh": "法律知识",
+          "en": "Legal Knowledge",
+          "ja": "法務知識"
+        },
+        "description": {
+          "zh": "日本法律体系、商业法规、合同条款等专业知识",
+          "en": "Japanese legal system, commercial regulations, contract terms and other professional knowledge",
+          "ja": "日本の法制度、商業規制、契約条項などの専門知識"
+        }
+      },
+      {
+        "title": {
+          "zh": "商业指南",
+          "en": "Business Guide",
+          "ja": "ビジネスガイド"
+        },
+        "description": {
+          "zh": "市场分析、投资策略、商业模式等实用指南",
+          "en": "Market analysis, investment strategies, business models and other practical guides",
+          "ja": "市場分析、投資戦略、ビジネスモデルなどの実用ガイド"
+        }
+      }
+    ]
+  },
+  "professionals": {
+    "meta": {
+      "title": {
+        "zh": "专业人才 - 日本商务通",
+        "en": "Professionals - Japan Business Hub",
+        "ja": "専門人材 - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "优秀人才与企业的完美匹配",
+        "en": "Perfect Matching of Excellent Talent and Companies",
+        "ja": "優秀な人材と企業のマッチング"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "专业人才服务",
+        "en": "Professional Talent Services",
+        "ja": "専門人材紹介"
+      },
+      "subtitle": {
+        "zh": "优秀人才与企业的完美匹配",
+        "en": "Perfect Matching of Excellent Talent and Companies",
+        "ja": "優秀な人材と企業のマッチング"
+      }
+    }
+  },
+  "education": {
+    "meta": {
+      "title": {
+        "zh": "留学教育 - 日本商务通",
+        "en": "Education - Japan Business Hub",
+        "ja": "留学教育 - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "日本留学的全程支持",
+        "en": "Comprehensive Support for Study in Japan",
+        "ja": "日本留学への総合サポート"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "留学教育服务",
+        "en": "Education Services",
+        "ja": "留学教育サービス"
+      },
+      "subtitle": {
+        "zh": "日本留学的全程支持",
+        "en": "Comprehensive Support for Study in Japan",
+        "ja": "日本留学への総合サポート"
+      }
+    }
+  },
+  "lifestyle": {
+    "meta": {
+      "title": {
+        "zh": "生活帮忙 - 日本商务通",
+        "en": "Lifestyle Support - Japan Business Hub",
+        "ja": "生活サポート - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "舒适日本生活的全方位支持",
+        "en": "Comprehensive Support for Comfortable Life in Japan",
+        "ja": "快適な日本生活のための総合サポート"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "生活协助服务",
+        "en": "Lifestyle Assistance Services",
+        "ja": "生活サポートサービス"
+      },
+      "subtitle": {
+        "zh": "舒适日本生活的全方位支持",
+        "en": "Comprehensive Support for Comfortable Life in Japan",
+        "ja": "快適な日本生活のための総合サポート"
+      }
+    }
+  },
+  "community": {
+    "meta": {
+      "title": {
+        "zh": "社群网络 - 日本商务通",
+        "en": "Community Network - Japan Business Hub",
+        "ja": "コミュニティネットワーク - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "扩展商机的社交平台",
+        "en": "Social Platform to Expand Business Opportunities",
+        "ja": "ビジネスチャンスを広げるソーシャルプラットフォーム"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "社群网络",
+        "en": "Community Network",
+        "ja": "コミュニティネットワーク"
+      },
+      "subtitle": {
+        "zh": "扩展商机的社交平台",
+        "en": "Social Platform to Expand Business Opportunities",
+        "ja": "ビジネスチャンスを広げるソーシャルプラットフォーム"
+      }
+    }
+  },
+  "labor": {
+    "meta": {
+      "title": {
+        "zh": "劳务派遣 - 日本商务通",
+        "en": "Labor Services - Japan Business Hub",
+        "ja": "労働派遣 - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "专业人才解决方案",
+        "en": "Professional Talent Solutions",
+        "ja": "プロフェッショナル人材ソリューション"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "劳务派遣服务",
+        "en": "Labor Services",
+        "ja": "労働派遣サービス"
+      },
+      "subtitle": {
+        "zh": "专业人才解决方案",
+        "en": "Professional Talent Solutions",
+        "ja": "プロフェッショナル人材ソリューション"
+      }
+    }
+  },
+  "pet": {
+    "meta": {
+      "title": {
+        "zh": "宠物帮帮忙 - 日本商务通",
+        "en": "Pet Support - Japan Business Hub",
+        "ja": "ペットサポート - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "为爱宠提供全面照顾",
+        "en": "Comprehensive Care for Beloved Pets",
+        "ja": "愛するペットのための包括的ケア"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "宠物支持服务",
+        "en": "Pet Support Services",
+        "ja": "ペットサポートサービス"
+      },
+      "subtitle": {
+        "zh": "为爱宠提供全面照顾",
+        "en": "Comprehensive Care for Beloved Pets",
+        "ja": "愛するペットのための包括的ケア"
+      }
+    }
+  },
+  "tourism": {
+    "meta": {
+      "title": {
+        "zh": "旅游服务 - 日本商务通",
+        "en": "Tourism - Japan Business Hub",
+        "ja": "観光サービス - 日本ビジネスハブ"
+      },
+      "description": {
+        "zh": "日本旅游的专业支持",
+        "en": "Professional Support for Japan Tourism",
+        "ja": "日本観光のプロフェッショナルサポート"
+      }
+    },
+    "hero": {
+      "title": {
+        "zh": "旅游服务",
+        "en": "Tourism Services",
+        "ja": "観光サービス"
+      },
+      "subtitle": {
+        "zh": "日本旅游的专业支持",
+        "en": "Professional Support for Japan Tourism",
+        "ja": "日本観光のプロフェッショナルサポート"
+      }
+    }
+  }
+}

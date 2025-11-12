@@ -5,6 +5,10 @@
 let currentLanguage = localStorage.getItem('preferred-language') || 'zh';
 let translations = {};
 
+// Content Data System
+let pageContent = {};
+let serviceContent = {};
+
 // Load language files
 async function loadTranslations(lang) {
     if (translations[lang]) {
@@ -86,6 +90,216 @@ function t(key, fallback = '') {
     }
 
     return value || fallback;
+}
+
+// Load page content from JSON
+async function loadPageContent() {
+    if (Object.keys(pageContent).length > 0) {
+        console.log('Page content already loaded');
+        return pageContent;
+    }
+
+    console.log('Loading page content from JSON...');
+
+    try {
+        const response = await fetch('data/pages.json');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Failed to load pages.json`);
+        }
+
+        const data = await response.json();
+        pageContent = data;
+        console.log('Page content loaded successfully');
+        return pageContent;
+
+    } catch (error) {
+        console.error('Failed to load page content:', error);
+        return {};
+    }
+}
+
+// Load service content from JSON
+async function loadServiceContent() {
+    if (Object.keys(serviceContent).length > 0) {
+        console.log('Service content already loaded');
+        return serviceContent;
+    }
+
+    console.log('Loading service content from JSON...');
+
+    try {
+        const response = await fetch('data/services.json');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Failed to load services.json`);
+        }
+
+        const data = await response.json();
+        serviceContent = data;
+        console.log('Service content loaded successfully');
+        return serviceContent;
+
+    } catch (error) {
+        console.error('Failed to load service content:', error);
+        return {};
+    }
+}
+
+// Get content text with current language support
+function getContentText(contentObj, key = '') {
+    if (!contentObj) return key;
+
+    // If it's a string, return as is
+    if (typeof contentObj === 'string') return contentObj;
+
+    // If it's an object with language keys, get the current language
+    if (typeof contentObj === 'object' && contentObj[currentLanguage]) {
+        return contentObj[currentLanguage];
+    }
+
+    // Fallback to Chinese if available
+    if (typeof contentObj === 'object' && contentObj.zh) {
+        return contentObj.zh;
+    }
+
+    // Fallback to English if available
+    if (typeof contentObj === 'object' && contentObj.en) {
+        return contentObj.en;
+    }
+
+    return key;
+}
+
+// Generate HTML content from JSON data
+function generateHeroHTML(heroData) {
+    if (!heroData) return '';
+
+    const title = getContentText(heroData.title);
+    const subtitle = getContentText(heroData.subtitle);
+    const description = getContentText(heroData.description);
+
+    return `
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">${sanitizeText(title)}</h1>
+                    <p class="hero-subtitle">${sanitizeText(subtitle)}</p>
+                    ${description ? `<p class="hero-description">${sanitizeText(description)}</p>` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function generateFeaturesHTML(features) {
+    if (!features || !Array.isArray(features)) return '';
+
+    let html = '<section class="features-section"><div class="container"><div class="features-grid">';
+
+    features.forEach(feature => {
+        const title = getContentText(feature.title);
+        const description = getContentText(feature.description);
+        const icon = feature.icon || '🔧';
+
+        html += `
+            <div class="feature-card">
+                <div class="feature-icon">${icon}</div>
+                <h3 class="feature-title">${sanitizeText(title)}</h3>
+                <p class="feature-description">${sanitizeText(description)}</p>
+            </div>
+        `;
+    });
+
+    html += '</div></div></section>';
+    return html;
+}
+
+// Get current page ID from URL
+function getCurrentPageId() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop();
+
+    if (!filename || filename === 'index.html' || filename === '') {
+        return 'index';
+    }
+
+    // Remove .html extension
+    const pageId = filename.replace('.html', '');
+    return pageId;
+}
+
+// Initialize content system
+async function initContentSystem() {
+    console.log('Initializing content system...');
+
+    try {
+        // Load content data
+        await Promise.all([
+            loadPageContent(),
+            loadServiceContent()
+        ]);
+
+        // Get current page and update content
+        const pageId = getCurrentPageId();
+        await updatePageContent(pageId);
+
+        console.log('Content system initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize content system:', error);
+    }
+}
+
+// Update page content dynamically
+async function updatePageContent(pageId) {
+    console.log(`Updating content for page: ${pageId}`);
+
+    // Load content if not already loaded
+    if (Object.keys(pageContent).length === 0) {
+        await loadPageContent();
+    }
+    if (Object.keys(serviceContent).length === 0) {
+        await loadServiceContent();
+    }
+
+    // Find content for current page
+    let content = null;
+    if (pageId === 'index') {
+        content = pageContent.index;
+    } else if (serviceContent[pageId]) {
+        content = serviceContent[pageId];
+    }
+
+    if (!content) {
+        console.warn(`No content found for page: ${pageId}`);
+        return;
+    }
+
+    // Update page title
+    if (content.meta && content.meta.title) {
+        const pageTitle = getContentText(content.meta.title);
+        document.title = sanitizeText(pageTitle);
+        console.log(`Updated page title to: ${pageTitle}`);
+    }
+
+    // Update page description
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    if (content.meta && content.meta.description && descriptionMeta) {
+        const pageDescription = getContentText(content.meta.description);
+        descriptionMeta.content = sanitizeText(pageDescription);
+    }
+
+    // Generate and inject hero section
+    const mainElement = document.querySelector('main');
+    if (mainElement && content.hero) {
+        const heroHTML = generateHeroHTML(content.hero);
+        mainElement.innerHTML = heroHTML;
+
+        // Add features section if available
+        if (content.features) {
+            mainElement.innerHTML += generateFeaturesHTML(content.features);
+        }
+    }
+
+    console.log(`Page content updated for: ${pageId}`);
 }
 
 // Sanitize text content to prevent XSS
@@ -478,6 +692,8 @@ function injectNav() {
         // Success callback
         link.onload = function() {
             console.log('Navigation CSS loaded successfully');
+            // Load content CSS after navigation CSS
+            loadContentCSS();
         };
 
         document.head.appendChild(link);
@@ -489,6 +705,30 @@ function injectNav() {
                 addFallbackStyles();
             }
         }, 1000);
+    }
+
+    // Load content styles for JSON-generated content
+    function loadContentCSS() {
+        const cssId = 'content-styles';
+        if (document.getElementById(cssId)) return;
+
+        const link = document.createElement('link');
+        link.id = cssId;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'styles/content.css';
+
+        // Fallback if CSS file fails to load
+        link.onerror = function() {
+            console.error('Content CSS failed to load');
+        };
+
+        // Success callback
+        link.onload = function() {
+            console.log('Content CSS loaded successfully');
+        };
+
+        document.head.appendChild(link);
     }
 
     // Fallback styles for when CSS file fails to load
@@ -758,6 +998,9 @@ function injectNav() {
     // Initialize i18n system
     initI18n();
 
+    // Initialize content system
+    initContentSystem();
+
     // Initialize performance optimizations
     preloadCriticalResources();
     initLazyLoading();
@@ -922,6 +1165,10 @@ async function pjaxLoad(url, addToHistory = true) {
 
         // Update language after page content is loaded
         updateLanguage();
+
+        // Update JSON-based content for new page
+        const pageId = getCurrentPageId();
+        await updatePageContent(pageId);
 
         // Optionally update history
         if (addToHistory) {
