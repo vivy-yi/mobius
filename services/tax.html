@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财税・补助金服务 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="专业的日本税务和补助金申请服务，提供税理士对接、记账申报等">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components/service-advantages.css">
+    <link rel="stylesheet" href="../components/service-faq.css">
+    <style>
+        /* Tax页面特有样式 */
+        .tax-grid, .subsidy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .tax-item, .subsidy-item {
+            background: var(--light-bg, #f0f9ff);
+            border-radius: var(--radius-lg, 12px);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .tax-item:hover, .subsidy-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.1));
+        }
+
+        .tax-item h4, .subsidy-item h4 {
+            color: var(--tech-blue, #3b82f6);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .tax-item i, .subsidy-item i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--tech-blue, #3b82f6);
+        }
+
+        .tax-item p, .subsidy-item p {
+            color: var(--dark-text, #1f2937);
+            line-height: 1.6;
+        }
+
+        /* Tax页面主题色调整 */
+        .tax-item h4, .tax-item i {
+            color: #10b981; /* 绿色主题 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .tax-grid, .subsidy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  </head>
+
+<body>
+
+    <!-- Service Hero -->
+    <section class="service-hero tax-hero">
+        <div class="container">
+            <div class="service-hero-content">
+                <div class="breadcrumb">
+                    <a href="../index.html">首页</a> → <span>核心服务</span> → <span>财税・补助金服务</span>
+                </div>
+                <h1>日本财税・补助金支援</h1>
+                <p>专业的税务流程整理和补助金申请服务，提供税理士对接、记账服务与税务申报，最大化您的财务效益。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-process">
+        <div class="container">
+            <h2 class="section-title">财税服务内容</h2>
+
+            <!-- 服务类型 -->
+            <div class="service-types">
+                <div class="service-type-tabs">
+                    <button class="service-tab active" data-type="tax">税务服务</button>
+                    <button class="service-tab" data-type="subsidy">补助金申请</button>
+                </div>
+
+                <div class="service-content">
+                    <div class="service-panel active" id="tax-services">
+                        <h3>专业税务服务</h3>
+                        <div class="tax-grid">
+                            <div class="tax-item">
+                                <h4><i class="fas fa-file-invoice"></i>税务流程整理</h4>
+                                <p>协助企业整理和建立完整的税务流程体系</p>
+                            </div>
+                            <div class="tax-item">
+                                <h4><i class="fas fa-handshake"></i>税理士对接</h4>
+                                <p>提供专业税理士资源，确保税务合规</p>
+                            </div>
+                            <div class="tax-item">
+                                <h4><i class="fas fa-book"></i>记账服务</h4>
+                                <p>专业的记账和财务报表编制服务</p>
+                            </div>
+                            <div class="tax-item">
+                                <h4><i class="fas fa-calculator"></i>税务申报</h4>
+                                <p>法人税、消费税、源泉税等各类税务申报</p>
+                            </div>
+                            <div class="tax-item">
+                                <h4><i class="fas fa-chart-line"></i>财务咨询</h4>
+                                <p>企业财务规划、成本控制、税务优化</p>
+                            </div>
+                            <div class="tax-item">
+                                <h4><i class="fas fa-file-alt"></i>决算书作成</h4>
+                                <p>年度财务决算书编制和申报支持</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-panel" id="subsidy-services">
+                        <h3>补助金申请服务</h3>
+                        <div class="subsidy-grid">
+                            <div class="subsidy-item">
+                                <h4><i class="fas fa-gift"></i>创业补助金</h4>
+                                <p>针对初创企业各类创业补助金申请指导</p>
+                            </div>
+                            <div class="subsidy-item">
+                                <h4><i class="fas fa-users"></i>雇佣助成金</h4>
+                                <p>企业雇佣员工的各类助成金申请支持</p>
+                            </div>
+                            <div class="subsidy-item">
+                                <h4><i class="fas fa-laptop"></i>IT化补助</h4>
+                                <p>企业IT化导入相关补助金申请</p>
+                            </div>
+                            <div class="subsidy-item">
+                                <h4><i class="fas fa-leaf"></i>环保补助金</h4>
+                                <p>环保设备投资、绿色经营补助申请</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 服务流程 -->
+            <h2 class="section-title">服务流程</h2>
+            <div class="process-timeline">
+                <div class="process-item">
+                    <div class="process-number">1</div>
+                    <h3>状况分析</h3>
+                    <p>详细了解企业税务状况和需求</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">2</div>
+                    <h3>方案制定</h3>
+                    <p>制定个性化税务和补助金申请方案</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">3</div>
+                    <h3>手续办理</h3>
+                    <p>协助办理各类税务申报和补助金申请</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">4</div>
+                    <h3>持续跟进</h3>
+                    <p>定期财务咨询和税务优化建议</p>
+                </div>
+            </div>
+
+            <!-- 成功案例 -->
+            <div class="success-cases">
+                <h2 class="section-title">成功案例</h2>
+                <div class="cases-grid">
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-chart-pie"></i></div>
+                        <h3>初创企业节税</h3>
+                        <div class="case-result">
+                            <span class="saving">年节税280万日元</span>
+                            <span class="method">通过税务优化和补助金申请组合方案</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-coins"></i></div>
+                        <h3>制造业主补助金</h3>
+                        <div class="case-result">
+                            <span class="saving">获得补助金500万日元</span>
+                            <span class="method">设备投资IT化补助金+绿色转型补助</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-building"></i></div>
+                        <h3>餐饮连锁支持</h3>
+                        <div class="case-result">
+                            <span class="saving">服务连锁店10+家</span>
+                            <span class="method">全连锁税务规范化和持续财务咨询</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务优势 -->
+    <section class="service-advantages tax-advantages">
+        <div class="container">
+            <h2 class="section-title">选择我们的优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>专业团队</h3>
+                    <p>资深税理士和财务专家组成的专业服务团队</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-language"></i></div>
+                    <h3>中日双语</h3>
+                    <p>中文流利的税理士提供无障碍沟通服务</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-clock"></i></div>
+                    <h3>及时响应</h3>
+                    <p>税务申报截止日期提醒，全年无休咨询</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>合规保障</h3>
+                    <p>确保企业100%符合日本税务法规要求</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 - 统一FAQ组件 -->
+    <section class="service-faq tax-faq">
+        <div class="container">
+            <div id="tax-faq-container"></div>
+        </div>
+    </section>
+
+    <script src="../components/components.js"></script>
+    <script src="../script.js"></script>
+    <script src="../components/service-faq.js"></script>
+  <script>
+      // 服务类型切换功能
+      document.addEventListener('DOMContentLoaded', function() {
+          const serviceTabs = document.querySelectorAll('.service-tab');
+          const servicePanels = document.querySelectorAll('.service-panel');
+
+          serviceTabs.forEach(tab => {
+              tab.addEventListener('click', () => {
+                  const targetType = tab.dataset.type;
+
+                  // 移除所有active类
+                  serviceTabs.forEach(t => t.classList.remove('active'));
+                  servicePanels.forEach(p => p.classList.remove('active'));
+
+                  // 添加active类到当前元素
+                  tab.classList.add('active');
+                  document.getElementById(targetType + '-services').classList.add('active');
+              });
+          });
+
+          // 初始化FAQ组件 - 延迟确保脚本完全加载
+          setTimeout(() => {
+              try {
+                  if (typeof ServiceFAQ !== 'undefined') {
+                      const taxFAQ = new ServiceFAQ('tax-faq-container', 'tax');
+                      taxFAQ.initialize().catch(error => {
+                          console.error('Tax FAQ initialization failed:', error);
+                      });
+                  } else {
+                      console.error('ServiceFAQ class not found');
+                  }
+              } catch (error) {
+                  console.error('FAQ initialization error:', error);
+              }
+          }, 100);
+      });
+  </script>
+</body>
+</html>

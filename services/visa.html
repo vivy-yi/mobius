@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>签证服务 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="专业的日本签证申请服务，包括经营管理签证、高度人才签证、家族滞在签证等，专业团队确保申请成功率">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Service Page Specific Styles */
+        .service-hero {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: white;
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+            opacity: 0.3;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+
+        .service-hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 600px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .visa-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .visa-feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .visa-feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .visa-feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .visa-types {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        .visa-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .visa-type-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #ec4899, #be185d) border-box;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .visa-type-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            border-radius: var(--radius-xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .visa-type-card:hover::before {
+            opacity: 1;
+        }
+
+        .visa-type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .visa-type-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .visa-type-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: white;
+            font-size: 2rem;
+        }
+
+        .visa-type-title {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-black);
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .visa-type-subtitle {
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .visa-type-content {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .visa-type-content h3 {
+            font-size: 1.125rem;
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            padding-left: var(--spacing-md);
+        }
+
+        .visa-type-content h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+        }
+
+        .visa-type-content p {
+            color: var(--light-text);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .visa-requirements {
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .visa-requirements h4 {
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .requirements-list {
+            list-style: none;
+        }
+
+        .requirements-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            color: var(--light-text);
+            font-size: 0.875rem;
+        }
+
+        .requirements-list i {
+            color: var(--tech-blue);
+            font-size: 0.75rem;
+        }
+
+        .visa-process {
+            padding: var(--spacing-xl) 0;
+            background: var(--light-bg);
+        }
+
+        .process-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .process-step {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight-bold);
+            font-size: 1.5rem;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: var(--font-weight-semibold);
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .advantages-section {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .advantage-card {
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: white;
+            font-size: 2rem;
+        }
+
+        .visa-cta {
+            padding: var(--spacing-xl) 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons .btn-primary {
+            background: white;
+            color: var(--tech-blue);
+        }
+
+        .cta-buttons .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .timeline-section {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .visa-types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Service Hero -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="service-hero-content">
+                <div class="breadcrumb">
+                    <a href="../index.html">首页</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>核心服务</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>签证服务</span>
+                </div>
+                <h1>日本签证服务</h1>
+                <p>专业的在留资格申请服务，包括经营管理签证、高度人才签证、家族滞在等，专业团队确保您的签证申请顺利成功。</p>
+                <div class="visa-features">
+                    <div class="visa-feature-card">
+                        <div class="visa-feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>专业团队</h3>
+                        <p>拥有经验丰富的签证申请专家团队</p>
+                    </div>
+                    <div class="visa-feature-card">
+                        <div class="visa-feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>高成功率</h3>
+                        <p>签证申请成功率超过95%</p>
+                    </div>
+                    <div class="visa-feature-card">
+                        <div class="visa-feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>快速办理</h3>
+                        <p>标准办理周期4-6个月</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visa Types -->
+    <section class="visa-types">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">签证服务类型</h2>
+                <p class="section-subtitle">根据您的需求，选择最合适的签证类型</p>
+            </div>
+            <div class="visa-types-grid">
+                <div class="visa-type-card">
+                    <div class="visa-type-header">
+                        <div class="visa-type-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="visa-type-title">经营管理签证</h3>
+                        <p class="visa-type-subtitle">适合在日本设立公司的企业家</p>
+                    </div>
+                    <div class="visa-type-content">
+                        <h3>适用人群</h3>
+                        <p>计划在日本设立公司、经营企业的企业家和管理者，需要具备稳定的经营计划和充足的资金。</p>
+
+                        <div class="visa-requirements">
+                            <h4>申请要求</h4>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i>在日本有固定的办公场所</li>
+                                <li><i class="fas fa-check"></i>资本金不低于500万日元</li>
+                                <li><i class="fas fa-check"></i>具有可行的事业计划</li>
+                                <li><i class="fas fa-check"></i>在日本有稳定的经营收入来源</li>
+                                <li><i class="fas fa-check"></i>具备一定的经营管理经验</li>
+                            </ul>
+                        </div>
+
+                        <h3>签证优势</h3>
+                        <p>获得日本长期在留资格，可以携配偶和子女一同赴日，享受与日本人同等的社会福利和医疗保障。</p>
+                    </div>
+                </div>
+
+                <div class="visa-type-card">
+                    <div class="visa-type-header">
+                        <div class="visa-type-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="visa-type-title">高度人才签证</h3>
+                        <p class="visa-type-subtitle">为高学历、高收入人才设立的快速通道</p>
+                    </div>
+                    <div class="visa-type-content">
+                        <h3>评分标准</h3>
+                        <p>通过积分制评分，从学历、工作年限、年收入、年龄等维度进行综合评估，总分达到70分即可申请。</p>
+
+                        <div class="visa-requirements">
+                            <h4>积分项目</h4>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i>学历：硕士30分，博士20分</li>
+                                <li><i class="fas fa-check"></i>工作经验：每年10分（最高20分）</li>
+                                <li><i class="fas fa-check"></i>年收入：1000万日元以上</li>
+                                <li><i class="fas fa-check"></i>年龄：39岁以下15分</li>
+                                <li><i class="fas fa-check"></i>日语能力：N1/N2等级</li>
+                            </ul>
+                        </div>
+
+                        <h3>特殊优势</h3>
+                        <p>申请时间短至1-3个月，1年后可申请永住，配偶可全职工作，提供多种家庭团聚优惠政策。</p>
+                    </div>
+                </div>
+
+                <div class="visa-type-card">
+                    <div class="visa-type-header">
+                        <div class="visa-type-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="visa-type-title">家族滞在签证</h3>
+                        <p class="visa-type-subtitle">为主申请人配偶和子女提供签证</p>
+                    </div>
+                    <div class="visa-type-content">
+                        <h3>申请条件</h3>
+                        <p>主申请人持有长期在留资格（如经营管理签证、工作签证等），经济能力足以抚养家属，家庭关系真实稳定。</p>
+
+                        <div class="visa-requirements">
+                            <h4>所需材料</h4>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i>婚姻证明或出生证明</li>
+                                <li><i class="fas fa-check"></i>主申请人在留资格证明</li>
+                                <li><i class="fas fa-check"></i>收入证明和生活保障能力</li>
+                                <li><i class="fas fa-check"></i>在日住所证明</li>
+                                <li><i class="fas fa-check"></i>健康证明</li>
+                            </ul>
+                        </div>
+
+                        <h3>签证权益</h3>
+                        <p>配偶可在日本工作（需申请许可），子女可就读日本学校，享受与日本国民同等的教育和医疗福利。</p>
+                    </div>
+                </div>
+
+                <div class="visa-type-card">
+                    <div class="visa-type-header">
+                        <div class="visa-type-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h3 class="visa-type-title">在留资格变更</h3>
+                        <p class="visa-type-subtitle">帮助您转换到更适合的签证类型</p>
+                    </div>
+                    <div class="visa-type-content">
+                        <h3>常见变更类型</h3>
+                        <p>从留学签证转为工作签证、从工作签证转为经营管理签证，或从技术签证转为高度人才签证等。</p>
+
+                        <div class="visa-requirements">
+                            <h4>变更要求</h4>
+                            <ul class="requirements-list">
+                                <li><i class="fas fa-check"></i>现有签证在有效期内</li>
+                                <li><i class="fas fa-check"></i>符合目标签证的申请条件</li>
+                                <li><i class="fas fa-check"></i>提供充分的变更理由</li>
+                                <li><i class="fas fa-check"></i>无违法违规记录</li>
+                                <li><i class="fas fa-check"></i>具备相应的工作能力</li>
+                            </ul>
+                        </div>
+
+                        <h3>专业协助</h3>
+                        <p>我们提供专业的变更申请指导，帮助您准备所需材料，确保变更过程顺利进行。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visa Process -->
+    <section class="visa-process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">签证申请流程</h2>
+                <p class="section-subtitle">专业团队全程陪同，确保申请成功</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">初步咨询</h4>
+                    <p>详细了解您的背景和需求，评估适合的签证类型，制定个性化申请方案。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">材料准备</h4>
+                    <p>指导准备申请所需的各类材料，确保材料完整、规范、符合要求。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">申请递交</h4>
+                    <p>代理向入国管理局递交申请，跟踪申请进度，及时应对可能的问题。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4 class="step-title">补件应对</h4>
+                    <p>如遇要求补充材料，迅速响应并提供完善材料，确保申请顺利通过。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h4 class="step-title">签证获批</h4>
+                    <p>收到在留资格认定证明书后，协助办理后续的签证贴付手续。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h4 class="step-title">落地支持</h4>
+                    <p>提供入境后的生活安置、住所登记、银行开户等落地支持服务。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">成功案例</h2>
+                <p class="section-subtitle">真实的客户签证申请成功故事</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>IT企业主 - 王先生</h4>
+                        <p>申请经营管理签证，6个月后成功获批，现已携家人在日本稳定经营。</p>
+                        <small class="text-muted">2023年3月</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>高级工程师 - 李女士</h4>
+                        <p>高度人才签证申请，凭借高学历和丰富经验，3个月快速获批。</p>
+                        <small class="text-muted">2023年5月</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>连锁餐饮 - 张总</h4>
+                        <p>从工作签证成功转为经营管理签证，扩大在日本的事业规模。</p>
+                        <small class="text-muted">2023年8月</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>贸易公司 - 陈先生</h4>
+                        <p>首次申请经营管理签证，凭借完善的商业计划成功获批。</p>
+                        <small class="text-muted">2023年10月</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="advantages-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我们的优势</h2>
+                <p class="section-subtitle">专业团队，丰富经验，为您保驾护航</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>专业团队</h3>
+                    <p>拥有日本行政书士、移民律师等专业资质的团队成员，确保签证申请的专业性和成功率。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>成功率高</h3>
+                    <p>通过精准的材料准备和专业的申请策略，签证申请成功率超过95%，远高于行业平均水平。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>效率优先</h3>
+                    <p>熟悉日本入国管理局的审批流程，能够有效缩短申请时间，快速响应各类要求。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>语言无障碍</h3>
+                    <p>中日双语服务团队，确保您与各机构之间的沟通准确无误，避免因语言问题造成延误。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>风险控制</h3>
+                    <p>预先识别可能的风险点，提供专业的解决方案，确保签证申请过程安全合规。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>全程陪同</h3>
+                    <p>从咨询到获批，全程陪同办理各项手续，提供专业的指导和跟进服务。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service CTA -->
+    <section class="visa-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>开始您的日本签证申请</h2>
+                <p>专业团队为您提供一对一签证咨询服务，制定最适合的签证申请方案</p>
+                <div class="cta-buttons">
+                    <a href="../index.html#contact" class="btn-primary">
+                        <i class="fas fa-phone"></i>
+                        立即咨询
+                    </a>
+                    <a href="../index.html#contact" class="btn-secondary">
+                        <i class="fas fa-calendar"></i>
+                        预约咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="../components/components.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>

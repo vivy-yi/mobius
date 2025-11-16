@@ -1,0 +1,367 @@
+{
+  "faq": {
+    "tax": {
+      "title": "财税・补助金服务常见问题",
+      "category": "税务服务",
+      "icon": "fas fa-coins",
+      "color": "#10b981",
+      "hotQuestions": [
+        "tax-faq-002",
+        "tax-faq-001"
+      ],
+      "filterKeywords": ["税务", "补助金", "税理士", "消费税", "法人税", "申报"],
+      "items": [
+        {
+          "id": "tax-faq-001",
+          "question": "外国人在日本开公司需要办理哪些税务手续？",
+          "answer": "需要办理法人设立登记、税务登记、开业申报等手续。我们提供一站式服务，协助完成所有必要税务流程。",
+          "tags": ["税务登记", "法人设立", "开业申报"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 1250,
+            "clicks": 890,
+            "helpful": 156,
+            "rating": 4.7,
+            "trend": "up",
+            "hotScore": 95
+          },
+          "featured": true,
+          "relatedService": "tax.html"
+        },
+        {
+          "id": "tax-faq-002",
+          "question": "补助金申请的条件和流程是什么？",
+          "answer": "不同补助金有不同的申请条件，通常要求企业在日本注册、满足一定经营年限等。我们协助评估符合条件的补助金并全程办理申请手续。",
+          "tags": ["补助金", "申请条件", "申请流程"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 1520,
+            "clicks": 1180,
+            "helpful": 189,
+            "rating": 4.9,
+            "trend": "up",
+            "hotScore": 98
+          },
+          "featured": true,
+          "relatedService": "tax.html"
+        },
+        {
+          "id": "tax-003",
+          "question": "日本的消费税制度是怎样的？",
+          "answer": "目前标准税率为10%，食品等部分商品适用8%的轻减税率。年销售额超过1000万日元的企业需要缴纳消费税。",
+          "tags": ["消费税", "税率", "税务申报"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 980,
+            "clicks": 720,
+            "helpful": 134,
+            "rating": 4.8,
+            "trend": "stable",
+            "hotScore": 82
+          },
+          "featured": true,
+          "relatedService": "tax.html"
+        },
+        {
+          "id": "tax-004",
+          "question": "如何选择合适的税理士？",
+          "answer": "建议选择有中国企业服务经验、中文流利的税理士。我们提供多家合作税理士资源，根据企业需求匹配合适的专业人士。",
+          "tags": ["税理士", "专业服务", "中文服务"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 750,
+            "clicks": 520,
+            "helpful": 98,
+            "rating": 4.5,
+            "trend": "stable",
+            "hotScore": 68
+          },
+          "featured": false,
+          "relatedService": "tax.html"
+        }
+      ]
+    },
+    "legal": {
+      "title": "法务・合同服务常见问题",
+      "category": "法务服务",
+      "icon": "fas fa-balance-scale",
+      "color": "#8b5cf6",
+      "hotQuestions": [
+        "legal-faq-001",
+        "legal-faq-002"
+      ],
+      "filterKeywords": ["法务", "合同", "法律", "合规", "知识产权", "商标"],
+      "items": [
+        {
+          "id": "legal-faq-001",
+          "question": "在日本签订商业合同需要注意什么？",
+          "answer": "需要注意日本特有的合同制度、印花税、印纸税等规定，以及违约金比例限制等日本法律的特殊条款。",
+          "tags": ["商业合同", "印花税", "违约金"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 1180,
+            "clicks": 890,
+            "helpful": 167,
+            "rating": 4.8,
+            "trend": "up",
+            "hotScore": 91
+          },
+          "featured": true,
+          "relatedService": "legal.html"
+        },
+        {
+          "id": "legal-faq-002",
+          "question": "如何保护知识产权在日本？",
+          "answer": "可以通过商标注册、专利申请、著作权登记等方式保护知识产权。日本对知识产权保护非常严格，建议及早申请。",
+          "tags": ["知识产权", "商标注册", "专利申请"],
+          "difficulty": "高级",
+          "popularity": {
+            "views": 620,
+            "clicks": 410,
+            "helpful": 87,
+            "rating": 4.6,
+            "trend": "stable",
+            "hotScore": 72
+          },
+          "featured": false,
+          "relatedService": "legal.html"
+        },
+        {
+          "id": "legal-003",
+          "question": "外国人在日本开展业务需要哪些法律手续？",
+          "answer": "需要完成公司注册、税务登记、营业许可申请、在留资格办理等手续。不同行业还有特定的准入要求。",
+          "tags": ["公司注册", "营业许可", "在留资格"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 1420,
+            "clicks": 1120,
+            "helpful": 198,
+            "rating": 4.9,
+            "trend": "up",
+            "hotScore": 96
+          },
+          "featured": true,
+          "relatedService": "legal.html"
+        },
+        {
+          "id": "legal-004",
+          "question": "合同审核服务包括哪些内容？",
+          "answer": "包括合同条款审核、法律风险识别、修改建议、中日对照翻译等，确保合同符合日本法律要求并保护您的权益。",
+          "tags": ["合同审核", "风险识别", "翻译服务"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 890,
+            "clicks": 680,
+            "helpful": 123,
+            "rating": 4.7,
+            "trend": "stable",
+            "hotScore": 78
+          },
+          "featured": false,
+          "relatedService": "legal.html"
+        }
+      ]
+    },
+    "business": {
+      "title": "开店咨询常见问题",
+      "category": "开店咨询",
+      "icon": "fas fa-store",
+      "color": "#0891b2",
+      "hotQuestions": [
+        "business-faq-001",
+        "business-faq-002"
+      ],
+      "filterKeywords": ["开店", "餐厅", "美容院", "贸易", "咨询", "业务"],
+      "items": [
+        {
+          "id": "business-faq-001",
+          "question": "外国人在日本开餐厅需要什么条件？",
+          "answer": "需要有效的在留资格（通常要求经营・管理签证）、适当的资金、餐饮业经验、符合日本的食品卫生法规和消防安全标准。我们协助您满足所有要求。",
+          "tags": ["餐厅开设", "在留资格", "食品卫生"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 1680,
+            "clicks": 1340,
+            "helpful": 245,
+            "rating": 4.9,
+            "trend": "up",
+            "hotScore": 99
+          },
+          "featured": true,
+          "relatedService": "business.html"
+        },
+        {
+          "id": "business-faq-002",
+          "question": "开设美容院需要哪些资质？",
+          "answer": "需要美容师国家资格证书、店铺营业许可、卫生许可证。如果是外国经营者，还需要相应的在留资格。我们提供资质申请和培训指导服务。",
+          "tags": ["美容院", "资质申请", "营业许可"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 980,
+            "clicks": 720,
+            "helpful": 134,
+            "rating": 4.6,
+            "trend": "stable",
+            "hotScore": 81
+          },
+          "featured": false,
+          "relatedService": "business.html"
+        },
+        {
+          "id": "business-003",
+          "question": "贸易公司的启动资金大概需要多少？",
+          "answer": "根据业务规模不同，一般需要200-500万日元的启动资金。包括公司注册费、办公场地租金、初期运营资金等。我们提供详细的资金规划服务。",
+          "tags": ["贸易公司", "启动资金", "资金规划"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 1120,
+            "clicks": 890,
+            "helpful": 156,
+            "rating": 4.7,
+            "trend": "up",
+            "hotScore": 87
+          },
+          "featured": true,
+          "relatedService": "business.html"
+        },
+        {
+          "id": "business-004",
+          "question": "如何选择适合的店铺位置？",
+          "answer": "需要考虑目标客群、交通便利性、租金成本、竞争环境等因素。我们提供专业的选址分析和市场调研服务。",
+          "tags": ["店铺选址", "市场调研", "商业分析"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 760,
+            "clicks": 540,
+            "helpful": 98,
+            "rating": 4.5,
+            "trend": "stable",
+            "hotScore": 70
+          },
+          "featured": false,
+          "relatedService": "business.html"
+        }
+      ]
+    },
+    "life": {
+      "title": "生活支援服务常见问题",
+      "category": "生活支援",
+      "icon": "fas fa-home",
+      "color": "#f59e0b",
+      "hotQuestions": [
+        "life-faq-001",
+        "life-faq-002"
+      ],
+      "filterKeywords": ["生活", "银行", "租房", "医疗", "教育", "保险"],
+      "items": [
+        {
+          "id": "life-faq-001",
+          "question": "外国人在日本开设银行账户需要什么条件？",
+          "answer": "需要有效的在留资格、住所证明、身份证明文件等。不同银行的要求略有差异，我们协助准备所有必要文件并推荐合适的银行。",
+          "tags": ["银行账户", "在留资格", "住所证明"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 1450,
+            "clicks": 1180,
+            "helpful": 189,
+            "rating": 4.8,
+            "trend": "up",
+            "hotScore": 94
+          },
+          "featured": true,
+          "relatedService": "life.html"
+        },
+        {
+          "id": "life-faq-002",
+          "question": "租房需要注意哪些事项？",
+          "answer": "需要注意礼金、敷金、中介费、保证人制度等日本特有的租房制度。我们提供详细的合同解读和费用说明，避免不必要的损失。",
+          "tags": ["租房", "礼金敷金", "保证人"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 1780,
+            "clicks": 1450,
+            "helpful": 267,
+            "rating": 4.9,
+            "trend": "up",
+            "hotScore": 100
+          },
+          "featured": true,
+          "relatedService": "life.html"
+        },
+        {
+          "id": "life-003",
+          "question": "在日本看病需要注意什么？",
+          "answer": "需要加入国民健康保险或社会保险，携带在留卡和健康保险卡。我们协助办理保险手续并推荐适合的医疗机构。",
+          "tags": ["医疗保险", "就医指南", "保险手续"],
+          "difficulty": "初级",
+          "popularity": {
+            "views": 1320,
+            "clicks": 1040,
+            "helpful": 178,
+            "rating": 4.8,
+            "trend": "up",
+            "hotScore": 92
+          },
+          "featured": true,
+          "relatedService": "life.html"
+        },
+        {
+          "id": "life-004",
+          "question": "子女在日本上学需要什么手续？",
+          "answer": "需要办理入学申请、在留资格确认、疫苗接种证明等手续。我们协助选择适合的学校并完成所有入学准备。",
+          "tags": ["子女教育", "入学手续", "学校选择"],
+          "difficulty": "中级",
+          "popularity": {
+            "views": 890,
+            "clicks": 680,
+            "helpful": 123,
+            "rating": 4.7,
+            "trend": "stable",
+            "hotScore": 79
+          },
+          "featured": false,
+          "relatedService": "life.html"
+        }
+      ]
+    }
+  },
+  "hotQuestions": [
+    {
+      "id": "life-faq-002",
+      "position": 1,
+      "reason": "最高浏览量和帮助度评分",
+      "hotScore": 100
+    },
+    {
+      "id": "business-faq-001",
+      "position": 2,
+      "reason": "开店需求持续增长",
+      "hotScore": 99
+    },
+    {
+      "id": "tax-faq-002",
+      "position": 3,
+      "reason": "补助金政策关注度提升",
+      "hotScore": 98
+    },
+    {
+      "id": "legal-003",
+      "position": 4,
+      "reason": "跨境业务法律需求",
+      "hotScore": 96
+    },
+    {
+      "id": "life-faq-001",
+      "position": 5,
+      "reason": "银行开户基础需求",
+      "hotScore": 94
+    }
+  ],
+  "categories": ["tax", "legal", "business", "life"],
+  "metadata": {
+    "totalFAQs": 16,
+    "lastUpdated": "2025-11-16",
+    "version": "2.0.0",
+    "hotTopics": ["补助金申请", "开店咨询", "银行开户", "租房", "税务申报"]
+  }
+}

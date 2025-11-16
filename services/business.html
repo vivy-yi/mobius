@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开店咨询 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="专业的日本开店咨询服务，包括选址评估、装修设计、许可证申请、营销推广等，助您成功在日本开设店铺">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components/service-advantages.css">
+    <link rel="stylesheet" href="../components/service-faq.css">
+    <style>
+        /* Service Page Specific Styles */
+        .service-hero {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+            opacity: 0.3;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+
+        .service-hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 600px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Service Content Styles */
+        .service-process {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        /* Tab Navigation */
+        .service-types { margin: var(--spacing-xl) 0; }
+        .service-type-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .service-tab {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: 2px solid #0891b2;
+            background: white;
+            color: #0891b2;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-weight: var(--font-weight-semibold);
+            transition: all 0.3s ease;
+            font-family: var(--font-family);
+        }
+
+        .service-tab.active {
+            background: #0891b2;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-tab:hover {
+            background: #0891b2;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .service-panel { display: none; }
+        .service-panel.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Grid Layout */
+        .restaurant-grid, .beauty-grid, .trade-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .restaurant-item, .beauty-item, .trade-item {
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .restaurant-item:hover, .beauty-item:hover, .trade-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: #0891b2;
+        }
+
+        .restaurant-item h4, .beauty-item h4, .trade-item h4 {
+            color: var(--dark-text);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .restaurant-item i, .beauty-item i, .trade-item i {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+            color: #0891b2;
+        }
+
+        /* Process Timeline */
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .process-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            background: #0891b2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            font-size: 1.2rem;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* Success Cases */
+        .success-cases {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .case-card {
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: #0891b2;
+        }
+
+        .case-icon {
+            font-size: 3rem;
+            color: #0891b2;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .case-result {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .saving {
+            font-size: 1.3rem;
+            font-weight: var(--font-weight-bold);
+            color: #0891b2;
+        }
+
+        .method {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Service Advantages */
+        .service-advantages {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(185, 28, 28, 0.1) 100%);
+        }
+        .service-advantages .advantage-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+        .service-advantages .advantage-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.2);
+        }
+        .service-advantages .advantage-icon {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s ease;
+        }
+        .service-advantages .advantage-card:hover .advantage-icon {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+        .service-advantages .advantage-card h3 {
+            color: #0891b2;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .service-advantages .advantage-card p {
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* FAQ Styles */
+        .service-faq {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .faq-item {
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-item h3 {
+            color: #0891b2;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .faq-item h3 i {
+            margin-right: var(--spacing-sm);
+        }
+
+        .faq-item p {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="service-hero">
+        <div class="container">
+            <div class="service-hero-content">
+                <div class="breadcrumb">
+                    <a href="../index.html">首页</a> → <span>核心服务</span> → <span>开店咨询</span>
+                </div>
+                <h1>日本开店咨询</h1>
+                <p>餐饮店、美容院、贸易公司、医疗合作等行业的开店咨询和落地支持。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-process">
+        <div class="container">
+            <h2 class="section-title">开店咨询内容</h2>
+
+            <!-- 服务类型 -->
+            <div class="service-types">
+                <div class="service-type-tabs">
+                    <button class="service-tab active" data-type="restaurant">餐饮店</button>
+                    <button class="service-tab" data-type="beauty">美容院</button>
+                    <button class="service-tab" data-type="trade">贸易公司</button>
+                </div>
+
+                <div class="service-content">
+                    <div class="service-panel active" id="restaurant-services">
+                        <h3>餐饮店开业支持</h3>
+                        <div class="restaurant-grid">
+                            <div class="restaurant-item">
+                                <h4><i class="fas fa-utensils"></i>餐饮店选址</h4>
+                                <p>商业地段分析、人流量评估、竞争分析</p>
+                            </div>
+                            <div class="restaurant-item">
+                                <h4><i class="fas fa-certificate"></i>餐饮许可办理</h4>
+                                <p>食品经营许可证、酒类销售许可证申请</p>
+                            </div>
+                            <div class="restaurant-item">
+                                <h4><i class="fas fa-hard-hat"></i>装修设计</h4>
+                                <p>餐厅布局设计、厨房设备配置、装修施工管理</p>
+                            </div>
+                            <div class="restaurant-item">
+                                <h4><i class="fas fa-users"></i>人员招聘</h4>
+                                <p>厨师招聘、服务人员培训、员工管理制度建立</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-panel" id="beauty-services">
+                        <h3>美容院开设指导</h3>
+                        <div class="beauty-grid">
+                            <div class="beauty-item">
+                                <h4><i class="fas fa-cut"></i>美容院许可</h4>
+                                <p>美容师资格认证、店铺营业许可办理</p>
+                            </div>
+                            <div class="beauty-item">
+                                <h4><i class="fas fa-store"></i>店铺规划</h4>
+                                <p>店铺选址分析、室内设计、设备采购指导</p>
+                            </div>
+                            <div class="beauty-item">
+                                <h4><i class="fas fa-box"></i>产品供应链</h4>
+                                <p>化妆品供应商选择、产品线规划、库存管理</p>
+                            </div>
+                            <div class="beauty-item">
+                                <h4><i class="fas fa-bullhorn"></i>营销策略</h4>
+                                <p>会员制度设计、价格策略制定、推广方案策划</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-panel" id="trade-services">
+                        <h3>贸易公司设立</h3>
+                        <div class="trade-grid">
+                            <div class="trade-item">
+                                <h4><i class="fas fa-globe"></i>进出口许可</h4>
+                                <p>贸易资质申请、海关登记、进出口许可办理</p>
+                            </div>
+                            <div class="trade-item">
+                                <h4><i class="fas fa-truck"></i>物流方案</h4>
+                                <p>国际物流安排、仓储管理、配送网络建设</p>
+                            </div>
+                            <div class="trade-item">
+                                <h4><i class="fas fa-handshake"></i>供应商开发</h4>
+                                <p>日本供应商寻找、商务谈判、合作协议签订</p>
+                            </div>
+                            <div class="trade-item">
+                                <h4><i class="fas fa-chart-line"></i>市场调研</h4>
+                                <p>目标市场分析、产品定位、竞争对手研究</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 服务流程 -->
+            <h2 class="section-title">服务流程</h2>
+            <div class="process-timeline">
+                <div class="process-item">
+                    <div class="process-number">1</div>
+                    <h3>商业计划</h3>
+                    <p>制定详细的商业计划和市场分析</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">2</div>
+                    <h3>资金规划</h3>
+                    <p>预算制定、融资方案、投资回报分析</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">3</div>
+                    <h3>法律手续</h3>
+                    <p>公司注册、许可申请、合同签订</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">4</div>
+                    <h3>筹备执行</h3>
+                    <p>装修施工、设备采购、人员招聘</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">5</div>
+                    <h3>开业运营</h3>
+                    <p>开业策划、营销推广、运营指导</p>
+                </div>
+            </div>
+
+            <!-- 成功案例 -->
+            <div class="success-cases">
+                <h2 class="section-title">成功案例</h2>
+                <div class="cases-grid">
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>中餐厅连锁店</h3>
+                        <div class="case-result">
+                            <span class="saving">6个月成功开业</span>
+                            <span class="method">从选址到开业全流程支持，现已发展3家分店</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-spa"></i></div>
+                        <h3>高端美容SPA</h3>
+                        <div class="case-result">
+                            <span class="saving">投资回报率25%</span>
+                            <span class="method">精准定位高端市场，会员制经营模式成功</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-box"></i></div>
+                        <h3>跨境电商平台</h3>
+                        <div class="case-result">
+                            <span class="saving">年销售额超5亿日元</span>
+                            <span class="method">中日跨境电商全链条建设，供应链优化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务优势 -->
+    <section class="service-advantages">
+        <div class="container">
+            <h2 class="section-title">选择我们的优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>本地化经验</h3>
+                    <p>深入了解日本本地市场和消费者习惯</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>资源网络</h3>
+                    <p>丰富的供应商、装修公司、人才资源网络</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>成功案例</h3>
+                    <p>成功帮助100+企业开业，成功率高达95%</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-headset"></i></div>
+                    <h3>全程陪伴</h3>
+                    <p>从咨询到开业全程一对一专业指导</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 - 统一FAQ组件 -->
+    <section class="service-faq business-faq">
+        <div class="container">
+            <div id="business-faq-container"></div>
+        </div>
+    </section>
+
+
+    <script src="../components/components.js"></script>
+<script src="../script.js"></script>
+<script src="../components/service-faq.js"></script>
+    <script>
+        // Service type tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceTabs = document.querySelectorAll('.service-tab');
+            const servicePanels = document.querySelectorAll('.service-panel');
+
+            serviceTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetType = tab.dataset.type;
+
+                    // Remove active class from all tabs and panels
+                    serviceTabs.forEach(t => t.classList.remove('active'));
+                    servicePanels.forEach(p => p.classList.remove('active'));
+
+                    // Add active class to clicked tab and corresponding panel
+                    tab.classList.add('active');
+                    document.getElementById(targetType + '-services').classList.add('active');
+                });
+            });
+
+            // 初始化FAQ组件 - 延迟确保脚本完全加载
+            setTimeout(() => {
+                try {
+                    if (typeof ServiceFAQ !== 'undefined') {
+                        const businessFAQ = new ServiceFAQ('business-faq-container', 'business');
+                        businessFAQ.initialize().catch(error => {
+                            console.error('Business FAQ initialization failed:', error);
+                        });
+                    } else {
+                        console.error('ServiceFAQ class not found');
+                    }
+                } catch (error) {
+                    console.error('FAQ initialization error:', error);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

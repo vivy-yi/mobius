@@ -1,0 +1,991 @@
+{
+  "navigation": {
+    "structure": [
+      {
+        "id": "business",
+        "name": "企业落地",
+        "icon": "fas fa-building",
+        "count": 4,
+        "color": "#3b82f6",
+        "expanded": true,
+        "children": [
+          {
+            "id": "company-registration",
+            "name": "公司注册",
+            "count": 1,
+            "icon": "fas fa-certificate",
+            "tags": [
+              "公司注册",
+              "株式会社",
+              "合同公司"
+            ],
+            "description": "公司设立流程和法律要求"
+          },
+          {
+            "id": "business-setup",
+            "name": "落地服务",
+            "count": 1,
+            "icon": "fas fa-university",
+            "tags": [
+              "企业落地",
+              "银行开户",
+              "税务登记"
+            ],
+            "description": "一站式企业落地解决方案"
+          },
+          {
+            "id": "business-faq",
+            "name": "开店咨询",
+            "count": 2,
+            "icon": "fas fa-store",
+            "tags": [
+              "餐厅开设",
+              "美容院",
+              "贸易公司"
+            ],
+            "description": "开店和业务咨询常见问题"
+          }
+        ]
+      },
+      {
+        "id": "visa",
+        "name": "签证政策",
+        "icon": "fas fa-passport",
+        "count": 3,
+        "color": "#10b981",
+        "expanded": false,
+        "children": [
+          {
+            "id": "management-visa",
+            "name": "经营管理签证",
+            "count": 1,
+            "icon": "fas fa-briefcase",
+            "tags": [
+              "经营管理签证",
+              "日本投资",
+              "在留资格"
+            ],
+            "description": "投资经营类签证申请指南"
+          },
+          {
+            "id": "talent-visa",
+            "name": "高度人才签证",
+            "count": 1,
+            "icon": "fas fa-user-tie",
+            "tags": [
+              "高度人才",
+              "积分计算",
+              "永住权"
+            ],
+            "description": "高级人才签证快速通道"
+          },
+          {
+            "id": "visa-faq",
+            "name": "签证FAQ",
+            "count": 1,
+            "icon": "fas fa-question-circle",
+            "tags": [
+              "签证申请",
+              "在留资格",
+              "续签"
+            ],
+            "description": "签证申请常见问题"
+          }
+        ]
+      },
+      {
+        "id": "tax",
+        "name": "税务筹划",
+        "icon": "fas fa-coins",
+        "count": 4,
+        "color": "#f59e0b",
+        "expanded": false,
+        "children": [
+          {
+            "id": "tax-declaration",
+            "name": "税务申报",
+            "count": 1,
+            "icon": "fas fa-file-invoice",
+            "tags": [
+              "税务申报",
+              "法人税",
+              "消费税"
+            ],
+            "description": "企业税务申报流程和注意事项"
+          },
+          {
+            "id": "tax-optimization",
+            "name": "税务优惠",
+            "count": 1,
+            "icon": "fas fa-percentage",
+            "tags": [
+              "税务优惠",
+              "中小企业",
+              "节税策略"
+            ],
+            "description": "合理利用税收优惠政策"
+          },
+          {
+            "id": "tax-faq",
+            "name": "税务FAQ",
+            "count": 2,
+            "icon": "fas fa-question-circle",
+            "tags": [
+              "税务登记",
+              "补助金",
+              "消费税"
+            ],
+            "description": "税务和补助金相关常见问题"
+          }
+        ]
+      },
+      {
+        "id": "subsidy",
+        "name": "补助金申请",
+        "icon": "fas fa-gift",
+        "count": 3,
+        "color": "#ef4444",
+        "expanded": false,
+        "children": [
+          {
+            "id": "it-subsidy",
+            "name": "IT化补助",
+            "count": 1,
+            "icon": "fas fa-laptop",
+            "tags": [
+              "IT化补助",
+              "数字化转型",
+              "申请指南"
+            ],
+            "description": "企业数字化转型补助金申请"
+          },
+          {
+            "id": "green-subsidy",
+            "name": "环保补助",
+            "count": 1,
+            "icon": "fas fa-leaf",
+            "tags": [
+              "环保补助",
+              "绿色项目",
+              "申请策略"
+            ],
+            "description": "绿色环保项目补助金支持"
+          },
+          {
+            "id": "subsidy-faq",
+            "name": "补助金FAQ",
+            "count": 1,
+            "icon": "fas fa-question-circle",
+            "tags": [
+              "补助金申请",
+              "条件流程",
+              "成功案例"
+            ],
+            "description": "补助金申请常见问题"
+          }
+        ]
+      },
+      {
+        "id": "legal",
+        "name": "法务合规",
+        "icon": "fas fa-balance-scale",
+        "count": 4,
+        "color": "#8b5cf6",
+        "expanded": false,
+        "children": [
+          {
+            "id": "labor-law",
+            "name": "劳动法",
+            "count": 1,
+            "icon": "fas fa-users",
+            "tags": [
+              "劳动法",
+              "劳动合同",
+              "员工权益"
+            ],
+            "description": "日本劳动法律法规和合规要求"
+          },
+          {
+            "id": "data-protection",
+            "name": "数据保护",
+            "count": 1,
+            "icon": "fas fa-shield-alt",
+            "tags": [
+              "个人情报",
+              "数据保护",
+              "合规指南"
+            ],
+            "description": "个人信息保护和数据合规"
+          },
+          {
+            "id": "legal-faq",
+            "name": "法务FAQ",
+            "count": 2,
+            "icon": "fas fa-question-circle",
+            "tags": [
+              "商业合同",
+              "知识产权",
+              "法律咨询"
+            ],
+            "description": "法律和合同相关常见问题"
+          }
+        ]
+      },
+      {
+        "id": "life",
+        "name": "生活支援",
+        "icon": "fas fa-home",
+        "count": 3,
+        "color": "#f59e0b",
+        "expanded": false,
+        "children": [
+          {
+            "id": "financial-services",
+            "name": "金融服务",
+            "count": 1,
+            "icon": "fas fa-university",
+            "tags": [
+              "银行账户",
+              "信用卡",
+              "汇款"
+            ],
+            "description": "日本银行账户和金融服务"
+          },
+          {
+            "id": "housing-support",
+            "name": "住房支援",
+            "count": 1,
+            "icon": "fas fa-home",
+            "tags": [
+              "租房",
+              "买房",
+              "保证人"
+            ],
+            "description": "日本租房和买房指导"
+          },
+          {
+            "id": "life-faq",
+            "name": "生活FAQ",
+            "count": 1,
+            "icon": "fas fa-question-circle",
+            "tags": [
+              "日常生活",
+              "医疗教育",
+              "文化适应"
+            ],
+            "description": "在日生活相关常见问题"
+          }
+        ]
+      }
+    ],
+    "quickFilters": [
+      {
+        "id": "filter-all",
+        "name": "全部内容",
+        "icon": "fas fa-border-all",
+        "description": "显示所有文章和FAQ"
+      },
+      {
+        "id": "filter-featured",
+        "name": "精选内容",
+        "icon": "fas fa-star",
+        "description": "仅显示精选推荐内容"
+      },
+      {
+        "id": "filter-articles",
+        "name": "知识文章",
+        "icon": "fas fa-file-alt",
+        "description": "仅显示知识文章"
+      },
+      {
+        "id": "filter-faq",
+        "name": "常见问题",
+        "icon": "fas fa-question-circle",
+        "description": "仅显示常见问题"
+      },
+      {
+        "id": "filter-recent",
+        "name": "最新发布",
+        "icon": "fas fa-clock",
+        "description": "按发布时间排序"
+      },
+      {
+        "id": "filter-popular",
+        "name": "热门内容",
+        "icon": "fas fa-fire",
+        "description": "按热度分数排序"
+      }
+    ],
+    "difficultyFilters": [
+      {
+        "id": "beginner",
+        "name": "初级",
+        "color": "#10b981",
+        "icon": "fas fa-seedling",
+        "description": "适合初学者的内容"
+      },
+      {
+        "id": "intermediate",
+        "name": "中级",
+        "color": "#f59e0b",
+        "icon": "fas fa-mountain",
+        "description": "需要一定基础知识"
+      },
+      {
+        "id": "advanced",
+        "name": "高级",
+        "color": "#ef4444",
+        "icon": "fas fa-crown",
+        "description": "专业深度内容"
+      }
+    ]
+  },
+  "categories": {
+    "business": [
+      {
+        "id": "business-article-company-registration",
+        "title": "2024年日本公司注册完整流程",
+        "excerpt": "详细解析2024年在日本设立株式会社和合同公司的完整流程、所需材料、费用和时间周期，助您顺利开展日本业务...",
+        "date": "2024年1月15日",
+        "readingTime": "15分钟阅读",
+        "views": "1245",
+        "icon": "fas fa-building",
+        "tags": [
+          "公司注册",
+          "株式会社",
+          "合同公司"
+        ],
+        "url": "knowledge/business-article-company-registration.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "企业落地",
+        "type": "article",
+        "popularity": {
+          "views": 1245,
+          "clicks": 890,
+          "helpful": 156,
+          "rating": 4.7,
+          "trend": "up",
+          "hotScore": 88
+        }
+      },
+      {
+        "id": "business-article-setup-guide",
+        "title": "日本企业落地服务指南",
+        "excerpt": "为中日企业提供全方位的日本市场进入解决方案，包括公司注册、银行开户、税务登记等一站式服务...",
+        "date": "2024年1月12日",
+        "readingTime": "10分钟阅读",
+        "views": "892",
+        "icon": "fas fa-university",
+        "tags": [
+          "企业落地",
+          "银行开户",
+          "税务登记"
+        ],
+        "url": "knowledge/business-article-setup-guide.html",
+        "featured": true,
+        "difficulty": "初级",
+        "category": "企业落地",
+        "type": "article",
+        "popularity": {
+          "views": 892,
+          "clicks": 670,
+          "helpful": 123,
+          "rating": 4.6,
+          "trend": "stable",
+          "hotScore": 75
+        }
+      },
+      {
+        "id": "business-faq-restaurant",
+        "title": "外国人在日本开餐厅需要什么条件？",
+        "excerpt": "需要有效的在留资格（通常要求经营・管理签证）、适当的资金、餐饮业经验、符合日本的食品卫生法规...",
+        "date": "2024年1月18日",
+        "readingTime": "4分钟阅读",
+        "views": "1680",
+        "icon": "fas fa-utensils",
+        "tags": [
+          "餐厅开设",
+          "在留资格",
+          "食品卫生"
+        ],
+        "url": "knowledge/business-faq-restaurant.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "开店咨询",
+        "type": "faq",
+        "popularity": {
+          "views": 1680,
+          "clicks": 1340,
+          "helpful": 245,
+          "rating": 4.9,
+          "trend": "up",
+          "hotScore": 99
+        }
+      },
+      {
+        "id": "business-faq-beauty-salon",
+        "title": "开设美容院需要哪些资质？",
+        "excerpt": "需要美容师国家资格证书、店铺营业许可、卫生许可证。如果是外国经营者，还需要相应的在留资格...",
+        "date": "2024年1月14日",
+        "readingTime": "3分钟阅读",
+        "views": "980",
+        "icon": "fas fa-cut",
+        "tags": [
+          "美容院",
+          "资质申请",
+          "营业许可"
+        ],
+        "url": "knowledge/business-faq-restaurant.html",
+        "featured": false,
+        "difficulty": "中级",
+        "category": "开店咨询",
+        "type": "faq",
+        "popularity": {
+          "views": 980,
+          "clicks": 720,
+          "helpful": 134,
+          "rating": 4.6,
+          "trend": "stable",
+          "hotScore": 81
+        }
+      }
+    ],
+    "visa": [
+      {
+        "id": "visa-article-management-guide",
+        "title": "2024年日本经营管理签证申请指南",
+        "excerpt": "全面解析2024年日本经营管理签证的申请条件、流程、材料准备和成功要点，助您顺利获得在留资格...",
+        "date": "2024年1月20日",
+        "readingTime": "12分钟阅读",
+        "views": "892",
+        "icon": "fas fa-passport",
+        "tags": [
+          "经营管理签证",
+          "日本投资",
+          "在留资格"
+        ],
+        "url": "knowledge/visa-article-management-guide.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "签证政策",
+        "type": "article",
+        "popularity": {
+          "views": 892,
+          "clicks": 680,
+          "helpful": 112,
+          "rating": 4.5,
+          "trend": "up",
+          "hotScore": 79
+        }
+      },
+      {
+        "id": "visa-article-talent-points",
+        "title": "高度人才签证积分计算详解",
+        "excerpt": "详细解析高度人才签证的积分计算方式，如何最大化积分获得永住权，快速通道申请攻略...",
+        "date": "2024年1月18日",
+        "readingTime": "10分钟阅读",
+        "views": "756",
+        "icon": "fas fa-user-tie",
+        "tags": [
+          "高度人才",
+          "积分计算",
+          "永住权"
+        ],
+        "url": "knowledge/visa-faq-renewal.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "签证FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 756,
+          "clicks": 580,
+          "helpful": 98,
+          "rating": 4.4,
+          "trend": "stable",
+          "hotScore": 70
+        }
+      },
+      {
+        "id": "visa-faq-renewal",
+        "title": "经营管理签证续签需要注意什么？",
+        "excerpt": "续签需要确保企业经营持续稳定，满足一定的营业额和纳税要求，同时准备完整的续签材料...",
+        "date": "2024年1月16日",
+        "readingTime": "5分钟阅读",
+        "views": "1120",
+        "icon": "fas fa-redo",
+        "tags": [
+          "签证续签",
+          "经营要求",
+          "材料准备"
+        ],
+        "url": "knowledge/visa-article-talent-points.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "签证FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 1120,
+          "clicks": 890,
+          "helpful": 178,
+          "rating": 4.8,
+          "trend": "up",
+          "hotScore": 87
+        }
+      }
+    ],
+    "tax": [
+      {
+        "id": "tax-article-declaration-guide",
+        "title": "2024年日本税务申报指南",
+        "excerpt": "详细解析2024年日本法人税、消费税、源泉税等各类税务申报流程、时间节点和注意事项...",
+        "date": "2024年1月25日",
+        "readingTime": "18分钟阅读",
+        "views": "756",
+        "icon": "fas fa-coins",
+        "tags": [
+          "税务申报",
+          "法人税",
+          "消费税"
+        ],
+        "url": "knowledge/tax-article-declaration-guide.html",
+        "featured": true,
+        "difficulty": "高级",
+        "category": "税务筹划",
+        "type": "article",
+        "popularity": {
+          "views": 756,
+          "clicks": 590,
+          "helpful": 95,
+          "rating": 4.6,
+          "trend": "stable",
+          "hotScore": 73
+        }
+      },
+      {
+        "id": "tax-article-consumption-tax",
+        "title": "中小企业税务优惠策略",
+        "excerpt": "合理利用日本税法中的优惠政策，为中小企业节省税务成本，提升企业竞争力...",
+        "date": "2024年1月22日",
+        "readingTime": "6分钟阅读",
+        "views": "623",
+        "icon": "fas fa-percentage",
+        "tags": [
+          "税务优惠",
+          "中小企业",
+          "节税策略"
+        ],
+        "url": "knowledge/tax-faq-registration.html",
+        "featured": true,
+        "difficulty": "初级",
+        "category": "税务FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 623,
+          "clicks": 480,
+          "helpful": 78,
+          "rating": 4.3,
+          "trend": "stable",
+          "hotScore": 65
+        }
+      },
+      {
+        "id": "tax-faq-registration",
+        "title": "外国人在日本开公司需要办理哪些税务手续？",
+        "excerpt": "需要办理法人设立登记、税务登记、开业申报等手续。我们提供一站式服务，协助完成所有必要税务流程...",
+        "date": "2024年1月15日",
+        "readingTime": "3分钟阅读",
+        "views": "1250",
+        "icon": "fas fa-coins",
+        "tags": [
+          "税务登记",
+          "法人设立",
+          "开业申报"
+        ],
+        "url": "knowledge/tax-faq-subsidy-application.html",
+        "featured": true,
+        "difficulty": "初级",
+        "category": "税务FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 1250,
+          "clicks": 890,
+          "helpful": 156,
+          "rating": 4.7,
+          "trend": "up",
+          "hotScore": 95
+        }
+      },
+      {
+        "id": "tax-faq-subsidy-application",
+        "title": "补助金申请的条件和流程是什么？",
+        "excerpt": "不同补助金有不同的申请条件，通常要求企业在日本注册、满足一定经营年限等。我们协助评估符合条件的补助金...",
+        "date": "2024年1月8日",
+        "readingTime": "4分钟阅读",
+        "views": "1520",
+        "icon": "fas fa-gift",
+        "tags": [
+          "补助金",
+          "申请条件",
+          "申请流程"
+        ],
+        "url": "knowledge/subsidy-article-it-digital.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "补助金申请",
+        "type": "article",
+        "popularity": {
+          "views": 1520,
+          "clicks": 1180,
+          "helpful": 189,
+          "rating": 4.9,
+          "trend": "up",
+          "hotScore": 98
+        }
+      }
+    ],
+    "subsidy": [
+      {
+        "id": "subsidy-article-it-digital",
+        "title": "2024年IT化补助金申请指南",
+        "excerpt": "详细介绍IT化补助金的申请条件、申请流程和成功案例，助您的企业数字化转型成功...",
+        "date": "2024年1月30日",
+        "readingTime": "6分钟阅读",
+        "views": "445",
+        "icon": "fas fa-gift",
+        "tags": [
+          "IT化补助",
+          "数字化转型",
+          "申请指南"
+        ],
+        "url": "knowledge/subsidy-article-it-digital.html",
+        "featured": false,
+        "difficulty": "中级",
+        "category": "补助金申请",
+        "type": "article",
+        "popularity": {
+          "views": 445,
+          "clicks": 340,
+          "helpful": 62,
+          "rating": 4.2,
+          "trend": "stable",
+          "hotScore": 58
+        }
+      },
+      {
+        "id": "subsidy-article-green-environmental",
+        "title": "绿色环保补助金申请策略",
+        "excerpt": "针对环保企业和绿色项目的补助金申请技巧，如何提高申请成功率...",
+        "date": "2024年1月28日",
+        "readingTime": "8分钟阅读",
+        "views": "367",
+        "icon": "fas fa-leaf",
+        "tags": [
+          "环保补助",
+          "绿色项目",
+          "申请策略"
+        ],
+        "url": "knowledge/subsidy-article-green-environmental.html",
+        "featured": false,
+        "difficulty": "高级",
+        "category": "补助金申请",
+        "type": "article",
+        "popularity": {
+          "views": 367,
+          "clicks": 280,
+          "helpful": 51,
+          "rating": 4.1,
+          "trend": "stable",
+          "hotScore": 52
+        }
+      },
+      {
+        "id": "subsidy-faq-success-tips",
+        "title": "如何提高补助金申请的成功率？",
+        "excerpt": "提高申请成功率的关键是充分了解补助金的目标和要求，准备完整的申请材料，并符合申请条件...",
+        "date": "2024年1月25日",
+        "readingTime": "5分钟阅读",
+        "views": "890",
+        "icon": "fas fa-trophy",
+        "tags": [
+          "申请技巧",
+          "成功率",
+          "材料准备"
+        ],
+        "url": "knowledge/subsidy-faq-success-tips.html",
+        "featured": false,
+        "difficulty": "中级",
+        "category": "补助金FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 890,
+          "clicks": 680,
+          "helpful": 112,
+          "rating": 4.5,
+          "trend": "up",
+          "hotScore": 76
+        }
+      }
+    ],
+    "legal": [
+      {
+        "id": "legal-article-labor-law",
+        "title": "日本劳动合同法要点解析",
+        "excerpt": "了解日本劳动合同的基本要求、解雇规定、员工权益保护等重要法律条款...",
+        "date": "2024年1月28日",
+        "readingTime": "9分钟阅读",
+        "views": "521",
+        "icon": "fas fa-balance-scale",
+        "tags": [
+          "劳动法",
+          "劳动合同",
+          "员工权益"
+        ],
+        "url": "knowledge/legal-article-data-protection.html",
+        "featured": false,
+        "difficulty": "高级",
+        "category": "法务合规",
+        "type": "article",
+        "popularity": {
+          "views": 521,
+          "clicks": 390,
+          "helpful": 68,
+          "rating": 4.4,
+          "trend": "stable",
+          "hotScore": 61
+        }
+      },
+      {
+        "id": "legal-article-data-protection",
+        "title": "个人情报保护法合规指南",
+        "excerpt": "企业在处理客户和员工个人信息时必须遵守的法律要求和合规措施...",
+        "date": "2024年1月24日",
+        "readingTime": "7分钟阅读",
+        "views": "438",
+        "icon": "fas fa-shield-alt",
+        "tags": [
+          "个人情报",
+          "数据保护",
+          "合规指南"
+        ],
+        "url": "knowledge/legal-article-labor-law.html",
+        "featured": false,
+        "difficulty": "高级",
+        "category": "法务合规",
+        "type": "article",
+        "popularity": {
+          "views": 438,
+          "clicks": 320,
+          "helpful": 55,
+          "rating": 4.2,
+          "trend": "stable",
+          "hotScore": 55
+        }
+      },
+      {
+        "id": "legal-faq-contract",
+        "title": "在日本签订商业合同需要注意什么？",
+        "excerpt": "需要注意日本特有的合同制度、印花税、印纸税等规定，以及违约金比例限制等日本法律的特殊条款...",
+        "date": "2024年1月12日",
+        "readingTime": "3分钟阅读",
+        "views": "1180",
+        "icon": "fas fa-file-contract",
+        "tags": [
+          "商业合同",
+          "印花税",
+          "违约金"
+        ],
+        "url": "knowledge/legal-faq-contract.html",
+        "featured": true,
+        "difficulty": "中级",
+        "category": "法务FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 1180,
+          "clicks": 890,
+          "helpful": 167,
+          "rating": 4.8,
+          "trend": "up",
+          "hotScore": 91
+        }
+      },
+      {
+        "id": "legal-faq-ip-protection",
+        "title": "如何保护知识产权在日本？",
+        "excerpt": "可以通过商标注册、专利申请、著作权登记等方式保护知识产权。日本对知识产权保护非常严格，建议及早申请...",
+        "date": "2024年1月9日",
+        "readingTime": "5分钟阅读",
+        "views": "620",
+        "icon": "fas fa-trademark",
+        "tags": [
+          "知识产权",
+          "商标注册",
+          "专利申请"
+        ],
+        "url": "knowledge/legal-faq-ip-protection.html",
+        "featured": false,
+        "difficulty": "高级",
+        "category": "法务FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 620,
+          "clicks": 410,
+          "helpful": 87,
+          "rating": 4.6,
+          "trend": "stable",
+          "hotScore": 72
+        }
+      }
+    ],
+    "life": [
+      {
+        "id": "life-article-banking",
+        "title": "日本银行账户开户指南",
+        "excerpt": "详细介绍外国人在日本开设银行账户的流程、所需材料和注意事项...",
+        "date": "2024年1月26日",
+        "readingTime": "8分钟阅读",
+        "views": "680",
+        "icon": "fas fa-university",
+        "tags": [
+          "银行账户",
+          "开户流程",
+          "在留资格"
+        ],
+        "url": "knowledge/life-article-banking.html",
+        "featured": false,
+        "difficulty": "初级",
+        "category": "生活支援",
+        "type": "article",
+        "popularity": {
+          "views": 680,
+          "clicks": 520,
+          "helpful": 95,
+          "rating": 4.5,
+          "trend": "up",
+          "hotScore": 68
+        }
+      },
+      {
+        "id": "life-article-housing",
+        "title": "日本租房全攻略",
+        "excerpt": "从找房到签约，详细解读日本租房的各个环节、费用结构和注意事项...",
+        "date": "2024年1月23日",
+        "readingTime": "12分钟阅读",
+        "views": "920",
+        "icon": "fas fa-home",
+        "tags": [
+          "租房",
+          "礼金敷金",
+          "保证人"
+        ],
+        "url": "knowledge/life-article-housing.html",
+        "featured": true,
+        "difficulty": "初级",
+        "category": "生活支援",
+        "type": "article",
+        "popularity": {
+          "views": 920,
+          "clicks": 720,
+          "helpful": 134,
+          "rating": 4.7,
+          "trend": "up",
+          "hotScore": 83
+        }
+      },
+      {
+        "id": "life-faq-banking-account",
+        "title": "外国人在日本开设银行账户需要什么条件？",
+        "excerpt": "需要有效的在留资格、住所证明、身份证明文件等。不同银行的要求略有差异，我们协助准备所有必要文件...",
+        "date": "2024年1月20日",
+        "readingTime": "3分钟阅读",
+        "views": "1450",
+        "icon": "fas fa-university",
+        "tags": [
+          "银行账户",
+          "在留资格",
+          "住所证明"
+        ],
+        "url": "knowledge/life-faq-banking-account.html",
+        "featured": true,
+        "difficulty": "初级",
+        "category": "生活FAQ",
+        "type": "faq",
+        "popularity": {
+          "views": 1450,
+          "clicks": 1180,
+          "helpful": 189,
+          "rating": 4.8,
+          "trend": "up",
+          "hotScore": 94
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "totalArticles": 21,
+    "totalFAQs": 9,
+    "lastUpdated": "2025-11-16",
+    "version": "3.0.0",
+    "categories": [
+      {
+        "id": "business",
+        "name": "企业落地",
+        "count": 4,
+        "icon": "fas fa-building",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "visa",
+        "name": "签证政策",
+        "count": 3,
+        "icon": "fas fa-passport",
+        "color": "#10b981"
+      },
+      {
+        "id": "tax",
+        "name": "税务筹划",
+        "count": 4,
+        "icon": "fas fa-coins",
+        "color": "#f59e0b"
+      },
+      {
+        "id": "subsidy",
+        "name": "补助金申请",
+        "count": 3,
+        "icon": "fas fa-gift",
+        "color": "#ef4444"
+      },
+      {
+        "id": "legal",
+        "name": "法务合规",
+        "count": 4,
+        "icon": "fas fa-balance-scale",
+        "color": "#8b5cf6"
+      },
+      {
+        "id": "life",
+        "name": "生活支援",
+        "count": 3,
+        "icon": "fas fa-home",
+        "color": "#f59e0b"
+      }
+    ],
+    "hotContent": [
+      {
+        "id": "business-faq-restaurant",
+        "position": 1,
+        "reason": "开店需求持续增长"
+      },
+      {
+        "id": "tax-faq-subsidy-application",
+        "position": 2,
+        "reason": "补助金政策关注度提升"
+      },
+      {
+        "id": "life-faq-banking-account",
+        "position": 3,
+        "reason": "生活刚需问题"
+      }
+    ]
+  }
+}

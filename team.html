@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业团队 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="认识Mobius专业团队，中日英专家为您提供企业落地、签证、税务、法务等全方位服务">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .team-hero {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+            opacity: 0.3;
+        }
+
+        .team-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.7;
+        }
+
+        /* 团队介绍 */
+        .team-intro {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #8b5cf6;
+            margin-bottom: 30px;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .intro-features {
+            margin-top: 40px;
+        }
+
+        .intro-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .intro-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .intro-feature-text {
+            flex: 1;
+        }
+
+        .intro-feature-text h4 {
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+
+        .intro-feature-text p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .intro-visual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .visual-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+        }
+
+        .visual-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #8b5cf6;
+            margin-bottom: 10px;
+        }
+
+        .visual-label {
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        /* 团队成员 */
+        .team-members {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .member-header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .member-title {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .member-badges {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .member-badge {
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .member-body {
+            padding: 30px;
+        }
+
+        .member-skills {
+            margin-bottom: 25px;
+        }
+
+        .member-skills h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 15px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 6px 14px;
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .member-bio {
+            color: var(--light-text);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .member-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .contact-btn {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* 专业领域 */
+        .expertise-section {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6 0%, #6d28d9 100%);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+        }
+
+        .expertise-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 auto 20px;
+            transition: all 0.4s ease;
+        }
+
+        .expertise-card:hover .expertise-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .expertise-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+        }
+
+        .expertise-count {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #8b5cf6;
+            margin-bottom: 10px;
+        }
+
+        .expertise-desc {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* 加入我们 -->*/
+        .join-team {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(109, 40, 217, 0.1) 100%);
+        }
+
+        .join-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .join-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .benefit-item {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6 0%, #6d28d9 100%);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: white;
+            margin: 0 auto 20px;
+            transition: all 0.4s ease;
+        }
+
+        .benefit-item:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .benefit-desc {
+            color: var(--light-text);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .join-cta {
+            margin-top: 50px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: #8b5cf6;
+            border: 2px solid #8b5cf6;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+        }
+
+        .cta-secondary:hover {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-secondary:hover {
+            border-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .intro-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            .intro-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .member-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .visual-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Team Hero -->
+    <section class="team-hero">
+        <div class="container">
+            <div class="team-hero-content">
+                <div class="breadcrumb">
+                    <a href="index.html">首页</a> → <span>专业团队</span>
+                </div>
+                <h1>专业团队</h1>
+                <p>汇聚中日英专业人才，为您提供全方位的企业落地和发展支持</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Introduction -->
+    <section class="team-intro">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>为什么选择我们</h2>
+                    <p>Mobius团队由经验丰富的中日英专业人士组成，每位成员都在各自领域深耕多年，深刻理解中日两国的商业文化和法律环境。我们不仅提供专业服务，更致力于成为您最信赖的商业伙伴。</p>
+
+                    <div class="intro-features">
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="intro-feature-text">
+                                <h4>中日英服务</h4>
+                                <p>流利的中文和日文沟通，消除语言障碍</p>
+                            </div>
+                        </div>
+
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="intro-feature-text">
+                                <h4>专业资质认证</h4>
+                                <p>团队成员均具备相关领域的专业资格认证</p>
+                            </div>
+                        </div>
+
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                            <div class="intro-feature-text">
+                                <h4>跨境经验丰富</h4>
+                                <p>丰富的中日跨境业务实操经验</p>
+                            </div>
+                        </div>
+
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="intro-feature-text">
+                                <h4>7×24小时响应</h4>
+                                <p>全天候为您提供专业咨询服务</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-visual">
+                    <div class="visual-card">
+                        <div class="visual-number">15+</div>
+                        <div class="visual-label">专业团队成员</div>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-number">8年+</div>
+                        <div class="visual-label">平均从业经验</div>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-number">500+</div>
+                        <div class="visual-label">成功案例</div>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-number">98%</div>
+                        <div class="visual-label">客户满意度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members -->
+    <section class="team-members">
+        <div class="container">
+            <h2 class="section-title">核心团队成员</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">陈</div>
+                        <h3 class="member-name">陈明</h3>
+                        <p class="member-title">创始人 & CEO</p>
+                        <div class="member-badges">
+                            <span class="member-badge">行政书士</span>
+                            <span class="member-badge">房产交易士</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">企业设立</span>
+                                <span class="skill-tag">签证申请</span>
+                                <span class="skill-tag">房产投资</span>
+                                <span class="skill-tag">商业咨询</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            拥有15年日本企业服务经验，成功协助500+中国企业在日落地。精通日本商业法律法规，深度理解中日商业文化差异。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">田</div>
+                        <h3 class="member-name">田中雄太</h3>
+                        <p class="member-title">法务总监</p>
+                        <div class="member-badges">
+                            <span class="member-badge">日本律师</span>
+                            <span class="member-badge">中国律师</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">公司法务</span>
+                                <span class="skill-tag">合同审核</span>
+                                <span class="skill-tag">知识产权</span>
+                                <span class="skill-tag">争议解决</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            中日双重执业资格律师，专注于跨境投资、并购重组等业务。曾为众多知名企业提供法律咨询服务，实践经验丰富。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">李</div>
+                        <h3 class="member-name">李雪梅</h3>
+                        <p class="member-title">税务总监</p>
+                        <div class="member-badges">
+                            <span class="member-badge">税理士</span>
+                            <span class="member-badge">公认会计士</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">税务筹划</span>
+                                <span class="skill-tag">国际税务</span>
+                                <span class="skill-tag">财务咨询</span>
+                                <span class="skill-tag">补助金申请</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            资深税理士和会计师，拥有12年国际税务经验。擅长为跨国企业提供税务优化方案，年均为客户节税超过千万日元。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">王</div>
+                        <h3 class="member-name">王建华</h3>
+                        <p class="member-title">市场总监</p>
+                        <div class="member-badges">
+                            <span class="member-badge">营销专家</span>
+                            <span class="member-badge">商业顾问</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">市场战略</span>
+                                <span class="skill-tag">品牌建设</span>
+                                <span class="skill-tag">跨境电商</span>
+                                <span class="skill-tag">数字化转型</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            资深市场营销专家，拥有10年中日跨境营销经验。曾帮助多个中国品牌成功进入日本市场，深谙日本消费者心理。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">佐</div>
+                        <h3 class="member-name">佐藤美咲</h3>
+                        <p class="member-title">运营总监</p>
+                        <div class="member-badges">
+                            <span class="member-badge">MBA</span>
+                            <span class="member-badge">PMP</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">项目管理</span>
+                                <span class="skill-tag">流程优化</span>
+                                <span class="skill-tag">团队管理</span>
+                                <span class="skill-tag">质量控制</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            拥有PMP认证的项目管理专家，精通日式管理理念。曾任职于日本知名咨询公司，负责多个大型跨境项目的实施。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">张</div>
+                        <h3 class="member-name">张晓东</h3>
+                        <p class="member-title">技术总监</p>
+                        <div class="member-badges">
+                            <span class="member-badge">系统架构师</span>
+                            <span class="member-badge">IT顾问</span>
+                        </div>
+                    </div>
+                    <div class="member-body">
+                        <div class="member-skills">
+                            <h4>专业领域</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">系统集成</span>
+                                <span class="skill-tag">网络安全</span>
+                                <span class="skill-tag">数字化转型</span>
+                                <span class="skill-tag">AI应用</span>
+                            </div>
+                        </div>
+                        <p class="member-bio">
+                            资深IT专家，专注于企业数字化转型解决方案。拥有丰富的中日IT项目经验，擅长为企业提供定制化技术服务。
+                        </p>
+                        <div class="member-contact">
+                            <a href="#" class="contact-btn">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-btn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise-section">
+        <div class="container">
+            <h2 class="section-title">专业领域覆盖</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="expertise-title">企业落地</h3>
+                    <div class="expertise-count">5人</div>
+                    <p class="expertise-desc">公司设立、银行开户、办公室租赁等一站式服务</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3 class="expertise-title">签证服务</h3>
+                    <div class="expertise-count">3人</div>
+                    <p class="expertise-desc">经营签证、工作签证、家族签证等全方位签证支持</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="expertise-title">财税服务</h3>
+                    <div class="expertise-count">4人</div>
+                    <p class="expertise-desc">税务筹划、记账服务、补助金申请等专业财务支持</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="expertise-title">法务合规</h3>
+                    <div class="expertise-count">3人</div>
+                    <p class="expertise-desc">合同审核、法律咨询、知识产权保护等法律服务</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="expertise-title">市场咨询</h3>
+                    <div class="expertise-count">2人</div>
+                    <p class="expertise-desc">市场调研、营销策略、品牌推广等市场支持</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="expertise-title">生活支援</h3>
+                    <div class="expertise-count">2人</div>
+                    <p class="expertise-desc">住房安排、医疗协助、子女教育等生活支持</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Team -->
+    <section class="join-team">
+        <div class="container">
+            <div class="join-content">
+                <h2 class="section-title">加入我们的团队</h2>
+                <p>我们正在寻找有激情、有才华的专业人才加入Mobius团队</p>
+
+                <div class="join-benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4 class="benefit-title">职业发展</h4>
+                        <p class="benefit-desc">快速成长平台，清晰的职业晋升路径</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="benefit-title">持续学习</h4>
+                        <p class="benefit-desc">定期的专业培训和知识更新</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="benefit-title">优秀团队</h4>
+                        <p class="benefit-desc">与行业精英共事，互相学习成长</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4 class="benefit-title">国际视野</h4>
+                        <p class="benefit-desc">接触中日两国前沿商业机会</p>
+                    </div>
+                </div>
+
+                <div class="join-cta">
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-btn cta-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            申请职位
+                        </a>
+                        <a href="#" class="cta-btn cta-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            了解更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="components/components.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生活支援服务 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="专业的在日华人生活支援服务，包括租房协助、日语学习、医疗陪同、子女教育等，让您安心在日生活">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components/service-advantages.css">
+    <link rel="stylesheet" href="../components/service-faq.css">
+    <style>
+        .service-hero { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+
+        /* 生活服务类型 */
+        .service-types { margin: 60px 0; }
+        .service-type-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .service-tab { padding: 12px 30px; border: 2px solid #f59e0b; background: white; color: #f59e0b; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .service-tab.active { background: #f59e0b; color: white; }
+        .service-tab:hover { background: #f59e0b; color: white; transform: translateY(-2px); }
+        .service-panel { display: none; }
+        .service-panel.active { display: block; animation: fadeInUp 0.6s ease-out; }
+
+        /* 网格布局 */
+        .banking-grid, .housing-grid, .daily-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .banking-item, .housing-item, .daily-item { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 30px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; }
+        .banking-item:hover, .housing-item:hover, .daily-item:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.15); }
+        .banking-item h4, .housing-item h4, .daily-item h4 { color: #f59e0b; font-size: 1.2rem; margin-bottom: 15px; }
+        .banking-item i, .housing-item i, .daily-item i { font-size: 2rem; margin-bottom: 15px; color: #f59e0b; }
+
+        /* 流程时间线 */
+        .process-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin: 60px 0; }
+        .process-item { text-align: center; position: relative; }
+        .process-number { width: 50px; height: 50px; background: #f59e0b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 20px; }
+
+        /* 成功案例 */
+        .success-cases { margin: 60px 0; }
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .case-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 30px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .case-icon { font-size: 3rem; color: #f59e0b; margin-bottom: 20px; }
+        .case-result { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .saving { font-size: 1.3rem; font-weight: bold; color: #f59e0b; }
+        .method { color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; }
+
+        /* FAQ样式 */
+        .service-faq { padding: 80px 0; background: rgba(245, 158, 11, 0.1); }
+        .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .faq-item { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .faq-item h3 { color: #f59e0b; margin-bottom: 15px; font-size: 1.1rem; }
+        .faq-item h3 i { margin-right: 10px; }
+        .faq-item p { color: #666; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <section class="service-hero">
+        <div class="container">
+            <div class="service-hero-content">
+                <div class="breadcrumb">
+                    <a href="../index.html">首页</a> → <span>核心服务</span> → <span>生活支援</span>
+                </div>
+                <h1>日本生活・落地支援</h1>
+                <p>银行卡办理、手机开通、住所登记、医疗协助等全方位生活支援服务。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-process">
+        <div class="container">
+            <h2 class="section-title">生活支援内容</h2>
+
+            <!-- 服务类型 -->
+            <div class="service-types">
+                <div class="service-type-tabs">
+                    <button class="service-tab active" data-type="banking">金融服务</button>
+                    <button class="service-tab" data-type="housing">住房支援</button>
+                    <button class="service-tab" data-type="daily">日常生活</button>
+                </div>
+
+                <div class="service-content">
+                    <div class="service-panel active" id="banking-services">
+                        <h3>银行金融服务</h3>
+                        <div class="banking-grid">
+                            <div class="banking-item">
+                                <h4><i class="fas fa-credit-card"></i>银行账户开设</h4>
+                                <p>协助开设日本银行账户、选择合适的银行类型</p>
+                            </div>
+                            <div class="banking-item">
+                                <h4><i class="fas fa-credit-card"></i>信用卡申请</h4>
+                                <p>协助申请日本信用卡、建立信用记录</p>
+                            </div>
+                            <div class="banking-item">
+                                <h4><i class="fas fa-piggy-bank"></i>汇款服务</h4>
+                                <p>国际汇款指导、跨境资金转移协助</p>
+                            </div>
+                            <div class="banking-item">
+                                <h4><i class="fas fa-file-invoice-dollar"></i>贷款咨询</h4>
+                                <p>住房贷款、商业贷款申请指导</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-panel" id="housing-services">
+                        <h3>住房生活支援</h3>
+                        <div class="housing-grid">
+                            <div class="housing-item">
+                                <h4><i class="fas fa-home"></i>住所登记</h4>
+                                <p>住民票登记、印章登录证明办理</p>
+                            </div>
+                            <div class="housing-item">
+                                <h4><i class="fas fa-key"></i>租房协助</h4>
+                                <p>房源寻找、租房合同解读、保证人安排</p>
+                            </div>
+                            <div class="housing-item">
+                                <h4><i class="fas fa-bolt"></i>生活手续</h4>
+                                <p>水电气煤气开通、网络安装协助</p>
+                            </div>
+                            <div class="housing-item">
+                                <h4><i class="fas fa-trash"></i>垃圾分类</h4>
+                                <p>垃圾分类指导、垃圾收集日历说明</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-panel" id="daily-services">
+                        <h3>日常生活服务</h3>
+                        <div class="daily-grid">
+                            <div class="daily-item">
+                                <h4><i class="fas fa-mobile-alt"></i>手机办理</h4>
+                                <p>手机套餐选择、合约机购买指导</p>
+                            </div>
+                            <div class="daily-item">
+                                <h4><i class="fas fa-id-card"></i>证件办理</h4>
+                                <p>在留卡更新、驾驶证换取、My Number卡申请</p>
+                            </div>
+                            <div class="daily-item">
+                                <h4><i class="fas fa-heartbeat"></i>医疗协助</h4>
+                                <p>医院选择、医疗保险办理、就医陪同</p>
+                            </div>
+                            <div class="daily-item">
+                                <h4><i class="fas fa-graduation-cap"></i>日语学习</h4>
+                                <p>日语学校推荐、学习资源提供</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 服务流程 -->
+            <h2 class="section-title">服务流程</h2>
+            <div class="process-timeline">
+                <div class="process-item">
+                    <div class="process-number">1</div>
+                    <h3>需求评估</h3>
+                    <p>详细了解客户生活支援需求</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">2</div>
+                    <h3>方案制定</h3>
+                    <p>制定个性化生活支援方案</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">3</div>
+                    <h3>手续办理</h3>
+                    <p>协助客户办理各项生活手续</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">4</div>
+                    <h3>生活指导</h3>
+                    <p>提供日本生活规则和文化指导</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">5</div>
+                    <h3>后续跟进</h3>
+                    <p>定期回访，解决后续生活问题</p>
+                </div>
+            </div>
+
+            <!-- 成功案例 -->
+            <div class="success-cases">
+                <h2 class="section-title">成功案例</h2>
+                <div class="cases-grid">
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-user-check"></i></div>
+                        <h3>企业家安家服务</h3>
+                        <div class="case-result">
+                            <span class="saving">3天内完成所有手续</span>
+                            <span class="method">银行账户+住房+手机一站式服务</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-users"></i></div>
+                        <h3>家族移居支援</h3>
+                        <div class="case-result">
+                            <span class="saving">服务客户家庭50+户</span>
+                            <span class="method">子女入学、配偶就业、医疗安排</span>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-icon"><i class="fas fa-medal"></i></div>
+                        <h3>留学生生活指导</h3>
+                        <div class="case-result">
+                            <span class="saving">成功支援留学生200+名</span>
+                            <span class="method">从接机到完全独立的全流程服务</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务优势 -->
+    <section class="service-advantages">
+        <div class="container">
+            <h2 class="section-title">选择我们的优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-globe-asia"></i></div>
+                    <h3>文化桥梁</h3>
+                    <p>深入了解中日文化差异，提供贴心的文化适应指导</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-route"></i></div>
+                    <h3>经验丰富</h3>
+                    <p>已成功帮助1000+客户在日安家落户</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>全程陪同</h3>
+                    <p>重要手续提供全程陪同翻译服务</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-headset"></i></div>
+                    <h3>24小时支持</h3>
+                    <p>紧急生活问题24小时在线咨询服务</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 - 统一FAQ组件 -->
+    <section class="service-faq life-faq">
+        <div class="container">
+            <div id="life-faq-container"></div>
+        </div>
+    </section>
+
+
+    <script src="../components/components.js"></script>
+<script src="../script.js"></script>
+<script src="../components/service-faq.js"></script>
+  <script>
+      // 服务类型切换功能
+      document.addEventListener('DOMContentLoaded', function() {
+          const serviceTabs = document.querySelectorAll('.service-tab');
+          const servicePanels = document.querySelectorAll('.service-panel');
+
+          serviceTabs.forEach(tab => {
+              tab.addEventListener('click', () => {
+                  const targetType = tab.dataset.type;
+
+                  // 移除所有active类
+                  serviceTabs.forEach(t => t.classList.remove('active'));
+                  servicePanels.forEach(p => p.classList.remove('active'));
+
+                  // 添加active类到当前元素
+                  tab.classList.add('active');
+                  document.getElementById(targetType + '-services').classList.add('active');
+              });
+          });
+
+          // 初始化FAQ组件 - 延迟确保脚本完全加载
+          setTimeout(() => {
+              try {
+                  if (typeof ServiceFAQ !== 'undefined') {
+                      const lifeFAQ = new ServiceFAQ('life-faq-container', 'life');
+                      lifeFAQ.initialize().catch(error => {
+                          console.error('Life FAQ initialization failed:', error);
+                      });
+                  } else {
+                      console.error('ServiceFAQ class not found');
+                  }
+              } catch (error) {
+                  console.error('FAQ initialization error:', error);
+              }
+          }, 100);
+      });
+  </script>
+</body>
+</html>

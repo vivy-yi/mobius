@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分页测试</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>分页功能测试</h1>
+
+    <button onclick="testPagination()">测试分页功能</button>
+
+    <div id="test-container">
+        <!-- 测试内容将在这里显示 -->
+    </div>
+
+    <script src="components/article-card.js"></script>
+    <script>
+        async function testPagination() {
+            console.log('🧪 开始测试分页功能');
+
+            // 等待数据加载
+            if (!window.articleCardManager || !window.articleCardManager.dataLoaded) {
+                console.log('⏳ 等待数据加载...');
+                await new Promise(resolve => {
+                    setTimeout(resolve, 2000);
+                });
+            }
+
+            // 测试分页功能
+            try {
+                await window.articleCardManager.generatePaginatedAllArticleGrid(
+                    'test-container',
+                    1,
+                    true
+                );
+                console.log('✅ 分页测试成功');
+            } catch (error) {
+                console.error('❌ 分页测试失败:', error);
+            }
+        }
+
+        // 页面加载后自动测试
+        setTimeout(testPagination, 3000);
+    </script>
+</body>
+</html>

@@ -1,180 +1,250 @@
-# CLAUDE.md
+# Mobius 中日企业服务网站
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## 项目概述
 
-## Project Overview
+Mobius 是一个现代化的企业服务网站，专注于中日跨境业务支持。网站采用响应式设计，提供6大核心服务的详细介绍和咨询功能。
 
-This is a multi-page static website for a Japanese business services platform called "日本商务通" (Japan Business Hub). The website provides various services including legal consulting, CRM systems, lifestyle services, education, and more for Japanese and Chinese business communities.
+## 技术栈
 
-## Architecture
+- **HTML5**: 语义化标签和结构
+- **CSS3**: 现代CSS变量、Grid布局、Flexbox
+- **JavaScript ES6+**: 交互效果和动态功能
+- **Font Awesome 6.5.1**: 图标库
+- **Google Fonts**: Inter + Noto Sans SC
 
-### Static Website Structure
-- **Technology**: Pure HTML/CSS/JavaScript (no build system required)
-- **Navigation**: Centralized navigation system with PJAX-style page switching
-- **Multi-language**: Chinese/English language support prepared
-- **Responsive**: Mobile-first responsive design
+## 设计系统
 
-### Key Components
+### CSS 变量
+```css
+:root {
+    /* 颜色 */
+    --primary-blue: #1e3a8a;
+    --tech-blue: #3b82f6;
+    --accent-red: #dc2626;
+    --light-bg: #f0f9ff;
+    --dark-text: #1f2937;
+    --light-text: #64748b;
+    --white: #ffffff;
 
-#### Navigation System (`nav.js`)
-- **Purpose**: Centralized navigation management with PJAX-style loading
-- **Key Features**:
-  - Single source of truth for navigation HTML (`NAV_TEMPLATE`)
-  - PJAX-based page switching for smooth transitions
-  - Mobile responsive menu with hamburger toggle
-  - Scroll-based hide/show behavior
-  - Language switcher support
-  - Automatic style injection and cleanup
+    /* 渐变 */
+    --gradient-primary: linear-gradient(135deg, var(--tech-blue), var(--accent-red));
+    --gradient-blue: linear-gradient(135deg, #3b82f6, #1e40af);
+    --gradient-glass: rgba(255, 255, 255, 0.1);
 
-#### Page Structure
-All pages follow a consistent header structure:
-```html
-<header>
-    <div class="container">
-        <nav id="main-navbar"></nav>
-    </div>
-</header>
+    /* 间距 */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+
+    /* 边框圆角 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+}
 ```
 
-#### CSS Architecture
-- **CSS Variables**: Standardized color scheme using CSS custom properties
-- **Primary Colors**:
-  - `--primary: #1e3a5f` (deep blue)
-  - `--secondary: #2c5282` (medium blue)
-  - `--gold: #d69e2e` (gold accent for hover states)
-  - `--success: #38a169` (green)
-- **Fixed Header**: All pages use fixed header with 100px top margin for content
+### 字体系统
+- **主字体**: Inter, 'Noto Sans SC', sans-serif
+- **字重**: 300 (Light), 400 (Normal), 500 (Medium), 600 (Semibold), 700 (Bold), 800 (Black)
 
-## File Organization
+## 网站结构
 
 ```
-/
-├── staticSPA/              # Main website pages
-│   ├── index.html         # Homepage
-│   ├── ai-crm.html        # CRM system demo
-│   ├── ai-legal.html      # Legal services
-│   ├── knowledge.html     # Knowledge base
-│   ├── professionals.html # Professional services
-│   ├── lifestyle.html     # Lifestyle services
-│   ├── community.html     # Community features
-│   ├── education.html     # Education services
-│   ├── labor.html         # Labor services
-│   ├── tourism.html       # Tourism services
-│   ├── pet.html          # Pet services
-│   └── nav.js            # Central navigation system
-├── CRM/                   # Documentation and research
-│   ├── type.md           # CRM system analysis
-│   └── type2.md          # No-code CRM tools comparison
-├── staticSPA/plan.md     # Mini-program development plan
-└── FIXES_SUMMARY.md      # Recent fixes and improvements summary
+mobius/
+├── index.html              # 主页面
+├── style.css              # 主样式文件
+├── script.js              # JavaScript交互
+├── README.md              # 项目说明
+├── CLAUDE.md              # Claude项目文档
+└── services/              # 服务详情页面
+    ├── setup.html         # 企业落地服务
+    ├── visa.html          # 签证服务
+    ├── tax.html           # 财税・补助金
+    ├── legal.html         # 法务・合同
+    ├── life.html          # 生活支援
+    └── business.html      # 开店咨询
 ```
 
-## Common Development Tasks
+## 核心功能
 
-### Adding New Pages
-1. Create new HTML file in `staticSPA/` directory
-2. Include the standard header structure with `<nav id="main-navbar"></nav>`
-3. Include `nav.js` script at the end of body: `<script src="nav.js"></script>`
-4. Add navigation link to `NAV_TEMPLATE` in `nav.js`
-5. Follow the established CSS variable patterns
+### ✅ 已实现功能
 
-### Modifying Navigation
-- **Edit Location**: `nav.js` file, `NAV_TEMPLATE` constant
-- **Key Points**:
-  - All navigation HTML is centralized in `NAV_TEMPLATE`
-  - Use `data-lang` attributes for translatable text
-  - Maintain consistent icon and text patterns
+1. **导航系统**
+   - 固定顶部导航栏
+   - 滚动时背景变化效果
+   - 下拉菜单（悬停/点击显示6种服务）
+   - 移动端汉堡菜单
+   - 平滑滚动导航
 
-### CSS Customization
-- **Color Scheme**: Modify CSS variables in `:root` selector
-- **Typography**: Font families are defined in the body styles
-- **Responsive**: Use existing mobile-first media queries as patterns
+2. **主页面模块**
+   - Hero区域（Mobius环3D动画）
+   - 品牌定位介绍
+   - 6大核心服务展示
+   - 团队介绍
+   - 落地流程时间线
+   - 知识库
+   - 社群介绍
+   - 联系表单
 
-### PJAX Navigation
-The `nav.js` system implements PJAX-style navigation:
-- Fetches pages via `fetch()` API
-- Replaces `<main>` content dynamically
-- Handles style sheet injection and cleanup
-- Maintains navigation state and scroll position
-- Gracefully falls back to full page loads on errors
+3. **服务详情页面**
+   - 交互式标签切换界面
+   - 详细服务内容展示
+   - 服务流程时间线
+   - 成功案例展示
+   - 服务优势说明
+   - 常见问题解答
 
-## Important Implementation Notes
+4. **响应式设计**
+   - 桌面端（1200px+）
+   - 平板端（768px-1199px）
+   - 移动端（<768px）
 
-### Security Considerations
-- Uses `textContent` instead of `innerHTML` for dynamic content to prevent XSS
-- Sanitizes user inputs in forms
-- Safe DOM manipulation practices in `nav.js`
+5. **动画效果**
+   - 页面加载动画
+   - 滚动触发动画
+   - 悬停效果
+   - 数字计数动画
+   - 视差滚动
 
-### Performance Optimizations
-- Event delegation used extensively to prevent memory leaks
-- Cleanup functions remove old event listeners
-- RequestAnimationFrame throttling for scroll handlers
-- Single global scroll handler instance
+## 服务页面详细说明
 
-### Browser Compatibility
-- Modern ES6+ JavaScript features used
-- CSS Grid and Flexbox for layouts
-- CSS custom properties (variables) for theming
+### 1. 企业落地服务 (setup.html)
+- **特色**: 现代化程度最高，作为模板参考
+- **颜色**: 蓝色渐变主题
+- **内容**: 公司设立、章程制作、银行开户、税务登记
 
-## Development Workflow
+### 2. 签证服务 (visa.html)
+- **颜色**: 蓝色渐变主题
+- **标签**: 经营管理签证、高级人才签证、家属签证、在留资格变更
+- **特色**: 详细签证类型介绍和申请流程
 
-### Testing the Website
-1. Use a local HTTP server (required for PJAX to work properly):
-   ```bash
-   # Python 3
-   python -m http.server 8000
+### 3. 财税・补助金服务 (tax.html)
+- **颜色**: 绿色渐变主题
+- **标签**: 税务申报、补助金申请、财务记账
+- **特色**: 节税案例和补助金成功案例
 
-   # Node.js (if available)
-   npx serve .
+### 4. 法务・合同服务 (legal.html)
+- **颜色**: 紫色渐变主题
+- **标签**: 法律服务、合同审核、合规支持
+- **特色**: 多语言合同审核和知识产权保护
 
-   # PHP (if available)
-   php -S localhost:8000
-   ```
+### 5. 生活支援服务 (life.html)
+- **颜色**: 橙色渐变主题
+- **标签**: 金融服务、住房支援、日常生活
+- **特色**: 在日生活全方位指导和文化适应支持
 
-2. Navigate to `http://localhost:8000/staticSPA/`
+### 6. 开店咨询 (business.html)
+- **颜色**: 红色渐变主题
+- **标签**: 餐饮店、美容院、贸易公司
+- **特色**: 各行业开店指导和成功案例
 
-### Making Changes
-1. Edit HTML/CSS/JS files directly
-2. Refresh browser to see changes immediately
-3. Test navigation between pages to ensure PJAX works correctly
-4. Verify responsive behavior on mobile viewport sizes
+## 设计特色
 
-### Debugging PJAX Issues
-- Check browser console for JavaScript errors
-- Verify all pages have the correct header structure
-- Ensure `nav.js` is included on all pages
-- Check that internal links use correct relative paths
+### 视觉效果
+- **渐变背景**: 各服务页面使用不同颜色主题
+- **玻璃态效果**: 半透明背景和模糊效果
+- **卡片设计**: 悬停动效和阴影变化
+- **时间线动画**: 连接线动画和步骤高亮
 
-## Content Management
+### 交互设计
+- **标签切换**: 服务页面的交互式内容展示
+- **悬停效果**: 卡片、按钮的动态反馈
+- **平滑过渡**: 所有状态变化都有流畅动画
+- **响应式导航**: 桌面端悬停、移动端点击
 
-### Language Support
-The site is prepared for bilingual support:
-- Navigation items use `data-lang` attributes
-- Language switcher is present in navigation
-- `switchLanguage()` function is available for implementation
+### 用户体验
+- **面包屑导航**: 清晰的页面层级结构
+- **进度指示**: 服务流程的可视化展示
+- **案例展示**: 真实成功案例建立信任感
+- **FAQ部分**: 解答常见问题减少用户疑虑
 
-### Service Categories
-The website covers these main service areas:
-- Legal services (⚖️ AI法律)
-- CRM systems (🤖 AI CRM)
-- Knowledge base (知识库)
-- Professional services (专业人才)
-- Lifestyle assistance (生活帮忙)
-- Community networking (社群网络)
-- Education services (留学教育)
-- Tourism services (旅游服务)
-- Pet services (宠物帮帮忙)
-- Labor services (劳务派遣)
+## 开发规范
 
-## Known Issues and Fixes
+### CSS 规范
+- 使用CSS变量保持一致性
+- 移动优先的响应式设计
+- BEM命名规范（类名结构）
+- 避免内联样式（除特殊情况）
+- **CSS布局原则**: 当子元素使用flex/grid布局时，父级块元素必须设置明确的宽度约束（width: 100%, display: block, box-sizing: border-box）以确保占据完整窗口宽度，同时子内容可以在特定max-width容器内居中
 
-Recent fixes documented in `FIXES_SUMMARY.md`:
-- Navigation style consistency across pages
-- PJAX style sheet replacement logic
-- Event listener cleanup and memory management
-- CSS variable standardization
-- Mobile menu functionality
+### CSS专家Agent
+项目包含专门的CSS问题解决专家agent，当询问布局和样式问题时自动启用：
 
-## Future Development Plans
+**触发关键词**: width, 宽度, 全屏, 居中, responsive, 响应式, layout, 布局, 样式, override, 覆盖
 
-Mini-program development plans are outlined in `staticSPA/plan.md` for extending the platform to mobile applications with enhanced CRM capabilities.
+**核心能力**:
+- 宽度约束问题诊断和解决
+- 布局居中方案提供
+- 响应式设计优化建议
+- CSS特异性管理指导
+- 基于Mobius项目的最佳实践
+
+**使用方式**: 直接描述CSS问题，agent会自动提供诊断、解决方案代码和实现步骤
+
+### 组件系统
+项目采用动态组件系统，统一管理导航栏、footer等重复组件：
+
+**组件管理器** (`components/components.js`):
+- 动态生成导航栏和footer组件
+- 统一的组件样式和交互逻辑
+- 响应式导航菜单（汉堡菜单和下拉菜单）
+
+**Article-Card组件** (`components/article-card.js`):
+- 统一管理知识库文章卡片
+- 支持动态内容生成和搜索
+- 安全的DOM操作，避免XSS风险
+- 分类管理和动画效果
+
+
+### JavaScript 规范
+- 使用ES6+语法
+- 事件委托优化性能
+- 防抖节流处理滚动事件
+- 模块化代码组织
+
+### 性能优化
+- 图片懒加载
+- CSS和JS文件压缩
+- 字体预加载
+- 动画使用GPU加速
+
+## 浏览器兼容性
+
+- ✅ Chrome (最新版本)
+- ✅ Firefox (最新版本)
+- ✅ Safari (最新版本)
+- ✅ Edge (最新版本)
+- ✅ 移动端浏览器
+
+## 未来扩展
+
+### 🔄 可扩展功能
+- [ ] 后端API集成
+- [ ] 实际表单提交
+- [ ] 微信支付集成
+- [ ] 在线客服系统
+- [ ] 多语言支持
+- [ ] 深色模式
+- [ ] 搜索功能
+- [ ] 用户账户系统
+
+## 联系信息
+
+- **邮箱**: contact@mobius-service.com
+- **微信**: (二维码展示)
+- **响应时间**: 24小时内
+
+---
+
+**最后更新**: 2025年11月16日
+**版本**: 1.0.0
+**开发者**: Claude Code Assistant

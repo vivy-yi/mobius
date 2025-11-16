@@ -1,42 +1,516 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本商务通 - JSON内容驱动</title>
-    <meta name="description" content="日本商务通 - JSON数据驱动的页面内容">
-    <link rel="stylesheet" href="styles/navigation.css">
-    <link rel="stylesheet" href="styles/content.css">
+    <title>Mobius - 中日企业无缝连接桥梁</title>
+    <meta name="description" content="Mobius环代表'无断点连接'，为中日企业提供无缝稳定的落地与经营支持服务">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mobius - 中日企业无缝连接桥梁">
+    <meta property="og:description" content="Mobius环代表'无断点连接'，为中日企业提供无缝稳定的落地与经营支持服务">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mobius-bridge.com">
+    <meta property="og:site_name" content="Mobius Bridge">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mobius - 中日企业无缝连接桥梁">
+    <meta name="twitter:description" content="Mobius环代表'无断点连接'，为中日企业提供无缝稳定的落地与经营支持服务">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="container">
-            <nav id="main-navbar"></nav>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        中日企业<span class="highlight">无缝连接桥梁</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Mobius环代表"无断点连接"，为中日企业提供无缝、稳定的落地与经营支持服务
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            开启日本事业
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-play-circle"></i>
+                            观看介绍视频
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="mobius-ring">
+                        <div class="ring-inner"></div>
+                        <div class="ring-outer"></div>
+                        <div class="connection-lines">
+                            <div class="line line-1"></div>
+                            <div class="line line-2"></div>
+                            <div class="line line-3"></div>
+                        </div>
+                    </div>
+                    <div class="floating-icons">
+                        <div class="icon-item icon-jp">🇯🇵</div>
+                        <div class="icon-item icon-cn">🇨🇳</div>
+                        <div class="icon-item icon-briefcase">💼</div>
+                        <div class="icon-item icon-handshake">🤝</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- JSON内容将被动态注入到这里 -->
-        <div class="loading-placeholder" style="padding: 120px 20px 40px; text-align: center;">
-            <h2>正在加载页面内容...</h2>
-            <p>请稍候，页面内容正在从JSON数据文件中加载。</p>
+    <!-- Brand Positioning -->
+    <section class="brand-positioning">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">什么是 Mobius？</h2>
+                <p class="section-subtitle">专业、可靠、无断点的跨境企业服务</p>
+                <p class="brand-description">
+                    Mobius环代表"无断点连接"，象征我们为中日企业提供无缝、稳定的落地与经营支持。我们致力于消除跨境业务中的障碍，为企业提供一站式解决方案。
+                </p>
+            </div>
+            <div class="brand-content">
+                
+                <div class="brand-container">
+                  
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h3>无语言障碍</h3>
+                            <p>中日英专业团队，确保沟通精准无误</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li>母语级中日英服务</li>
+                                    <li>专业术语精准翻译</li>
+                                    <li>文化差异桥梁</li>
+                                </ul>
+                            </div>
+                            <div class="feature-badge">语言优势</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>全程护航</h3>
+                            <p>从规划到落地，全程专业支持</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li>7×24小时快速响应</li>
+                                    <li>一站式服务流程</li>
+                                    <li>专属顾问对接</li>
+                                </ul>
+                            </div>
+                            <div class="feature-badge">全程服务</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe-asia"></i>
+                            </div>
+                            <h3>本土化经验</h3>
+                            <p>深度理解日本商业环境与文化</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li>10年+日本本土经验</li>
+                                    <li>深厚政商人脉资源</li>
+                                    <li>熟悉行业监管政策</li>
+                                </ul>
+                            </div>
+                            <div class="feature-badge">本土专家</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-visual">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">成功案例</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10年</div>
+                            <div class="stat-label">行业经验</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">客户满意度</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <script src="nav.js"></script>
-    <script>
-        // 页面加载完成后移除加载占位符
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                const placeholder = document.querySelector('.loading-placeholder');
-                const main = document.querySelector('main');
+    <!-- Core Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">核心服务</h2>
+                <p class="section-subtitle">六大服务模块，全方位支持您的跨境业务</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-service="setup">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="service-title">企业落地服务</h3>
+                    <p class="service-description">日本公司设立全程支持，从注册到运营一站式服务</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>会社设立（株式会社/合同会社）</li>
+                        <li><i class="fas fa-check"></i>章程制作与公证</li>
+                        <li><i class="fas fa-check"></i>银行开户协助</li>
+                        <li><i class="fas fa-check"></i>税务社保登记</li>
+                    </ul>
+                    <a href="services/setup.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
 
-                // 如果已经有JSON内容，移除占位符
-                if (main.querySelector('.hero-section') && placeholder) {
-                    placeholder.remove();
-                }
-            }, 2000);
-        });
-    </script>
+                <div class="service-card" data-service="visa">
+                    <div class="service-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3 class="service-title">签证服务</h3>
+                    <p class="service-description">各类在留资格申请与变更，专业团队确保成功率</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>经营管理签证</li>
+                        <li><i class="fas fa-check"></i>高度人才签证</li>
+                        <li><i class="fas fa-check"></i>家族滞在签证</li>
+                        <li><i class="fas fa-check"></i>在留资格变更</li>
+                    </ul>
+                    <a href="services/visa.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card" data-service="tax">
+                    <div class="service-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="service-title">财税・补助金</h3>
+                    <p class="service-description">专业税务支持与补助金申请，优化财务效益</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>税务流程整理</li>
+                        <li><i class="fas fa-check"></i>税理士对接服务</li>
+                        <li><i class="fas fa-check"></i>记账与申报</li>
+                        <li><i class="fas fa-check"></i>补助金申请协助</li>
+                    </ul>
+                    <a href="services/tax.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card" data-service="legal">
+                    <div class="service-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="service-title">法务・合同</h3>
+                    <p class="service-description">中日英三语合同审核，法律风险防控</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>合同审核与起草</li>
+                        <li><i class="fas fa-check"></i>公司合规咨询</li>
+                        <li><i class="fas fa-check"></i>法律风险排查</li>
+                        <li><i class="fas fa-check"></i>商务谈判辅助</li>
+                    </ul>
+                    <a href="services/legal.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card" data-service="life">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="service-title">生活・落地支援</h3>
+                    <p class="service-description">个人生活服务，让您在日本安居乐业</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>银行卡办理</li>
+                        <li><i class="fas fa-check"></i>手机开通</li>
+                        <li><i class="fas fa-check"></i>住所登记</li>
+                        <li><i class="fas fa-check"></i>医疗协助</li>
+                    </ul>
+                    <a href="services/life.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card" data-service="business">
+                    <div class="service-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="service-title">开店咨询</h3>
+                    <p class="service-description">餐饮、零售等行业开店全流程支持</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>餐饮店落地</li>
+                        <li><i class="fas fa-check"></i>美容院设立</li>
+                        <li><i class="fas fa-check"></i>贸易公司注册</li>
+                        <li><i class="fas fa-check"></i>医疗合作项目</li>
+                    </ul>
+                    <a href="services/business.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Profile -->
+    <section class="team-profile">
+        <div class="container">
+            <div class="team-content">
+                <div class="team-visual">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMjAiIHI9IjQwIiBmaWxsPSIjZjBmOWZmIi8+CjxwYXRoIGQ9Ik05MCAyMDBDMTQwIDIwMCAxNjAgMjgwIDIxMCAyMDAiIHN0cm9rZT0iIzJkMzcyNCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzNiODJmNjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZGMyNjI2O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Profile">
+                        </div>
+                        <div class="profile-info">
+                            <h3>张明</h3>
+                            <p class="title">创始人 / 首席顾问</p>
+                            <div class="credentials">
+                                <span class="badge">早稻田大学 MBA</span>
+                                <span class="badge">日本商务顾问资格</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-text">
+                    <h2 class="section-title">专业团队</h2>
+                    <p class="team-intro">
+                        拥有10年中日商务经验，深度了解日本商业环境与法律法规。曾帮助超过200家企业成功落地日本，精通日语与英语，熟悉日本文化习俗与商业礼仪。
+                    </p>
+                    <p class="team-detail">
+                        毕业于早稻田大学商学院，持有日本国家认可的商务顾问资格，致力于为中日企业搭建无缝连接的桥梁。团队成员包括税理士、行政书士、律师等专业人才。
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">日本公司法</span>
+                        <span class="tag">签证政策</span>
+                        <span class="tag">税务规划</span>
+                        <span class="tag">跨境投资</span>
+                        <span class="tag">商务谈判</span>
+                        <span class="tag">风险管控</span>
+                        <span class="tag">合规咨询</span>
+                        <span class="tag">投资尽调</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">日本落地流程</h2>
+                <p class="section-subtitle">六步流程，专业团队全程陪伴</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item" data-step="1">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">01</div>
+                        <h3>前期咨询</h3>
+                        <p>需求分析与方案规划，明确商业目标</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-step="2">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">02</div>
+                        <h3>方案定制</h3>
+                        <p>个性化落地计划，量身定制市场策略</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-step="3">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">03</div>
+                        <h3>公司设立</h3>
+                        <p>法人登记、章程公证，完成注册程序</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-step="4">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">04</div>
+                        <h3>银行开户</h3>
+                        <p>企业账户开设，建立财务管理体系</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-step="5">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">05</div>
+                        <h3>签证办理</h3>
+                        <p>在留资格申请，确保合法工作居住</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-step="6">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="step-number">06</div>
+                        <h3>正式运营</h3>
+                        <p>全面业务支持，助力日本市场成长</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Base Preview -->
+    <section class="knowledge-preview" id="knowledge">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">知识库</h2>
+                <p class="section-subtitle">日本落地百科，专业解答您的疑问</p>
+            </div>
+            <div class="knowledge-grid" id="homepage-knowledge-grid">
+                <!-- 知识分类卡片将通过 knowledgePreviewManager 动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="container">
+            <div class="community-content">
+                <div class="community-text">
+                    <h2 class="section-title">Mobius Cross-border Club</h2>
+                    <p class="community-description">
+                        加入我们的中日跨境社群，获取最新政策更新、企业落地指南、补助金开放时间提醒等服务。
+                    </p>
+                    <ul class="community-benefits">
+                        <li><i class="fas fa-check-circle"></i>日本政策实时更新</li>
+                        <li><i class="fas fa-check-circle"></i>企业落地案例分享</li>
+                        <li><i class="fas fa-check-circle"></i>补助金开放时间提醒</li>
+                        <li><i class="fas fa-check-circle"></i>税务节点重要提醒</li>
+                        <li><i class="fas fa-check-circle"></i>专业问答社区</li>
+                    </ul>
+                </div>
+                <div class="community-visual">
+                    <div class="qr-code">
+                        <div class="qr-placeholder">
+                            <i class="fab fa-weixin"></i>
+                            <p>扫码加入社群</p>
+                        </div>
+                    </div>
+                    <div class="community-stats">
+                        <div class="stat">
+                            <span class="number">1000+</span>
+                            <span class="label">活跃成员</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">50+</span>
+                            <span class="label">每周问答</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">联系我们</h2>
+                <p class="section-subtitle">开启您的日本事业之旅</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">姓名 *</label>
+                                <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">公司/个人</label>
+                                <input type="text" id="company" name="company" placeholder="请输入公司名称或个人">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">邮箱 *</label>
+                                <input type="email" id="email" name="email" required placeholder="请输入联系邮箱">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">电话</label>
+                                <input type="tel" id="phone" name="phone" placeholder="请输入联系电话">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">咨询类型 *</label>
+                            <select id="service" name="service" required>
+                                <option value="">请选择服务类型</option>
+                                <option value="setup">企业落地服务</option>
+                                <option value="visa">签证服务</option>
+                                <option value="tax">财税・补助金</option>
+                                <option value="legal">法务・合同</option>
+                                <option value="life">生活支援</option>
+                                <option value="business">开店咨询</option>
+                                <option value="other">其他服务</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">详细需求</label>
+                            <textarea id="message" name="message" rows="5" placeholder="请详细描述您的需求，我们会为您提供专业解答..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            提交咨询
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                        <h3>微信咨询</h3>
+                        <div class="wechat-qr">
+                            <div class="qr-placeholder">
+                                <i class="fab fa-weixin"></i>
+                                <p>扫码添加客服</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>邮箱</h4>
+                                <p>contact@mobius-service.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>响应时间</h4>
+                                <p>24小时内专业回复</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>服务范围</h4>
+                                <p>中日跨境企业服务</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="components/components.js?v=2.1"></script>
+<script src="components/knowledge-preview.js?v=1.0"></script>
+<script src="script.js"></script>
 </body>
 </html>

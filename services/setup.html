@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业落地服务 - Mobius 中日企业无缝连接桥梁</title>
+    <meta name="description" content="专业的日本公司设立服务，包括会社设立、章程制作、银行开户、税务登记等全方位支持">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Service Page Specific Styles */
+        .service-hero {
+            background: linear-gradient(135deg, var(--tech-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+            opacity: 0.3;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+
+        .service-hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .service-feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .service-feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .service-process {
+            padding: var(--spacing-xl) 0;
+            background: var(--light-bg);
+        }
+
+        .process-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 60px;
+            bottom: -var(--spacing-lg);
+            width: 2px;
+            background: var(--tech-blue);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight-bold);
+            font-size: 1.25rem;
+            margin-right: var(--spacing-lg);
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-advantages {
+            padding: var(--spacing-xl) 0;
+            background: white;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .advantage-card {
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: white;
+            font-size: 2rem;
+        }
+
+        .service-cta {
+            padding: var(--spacing-xl) 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons .btn-primary {
+            background: white;
+            color: var(--tech-blue);
+        }
+
+        .cta-buttons .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 768px) {
+            .process-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: var(--spacing-md);
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Service Hero -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="service-hero-content">
+                <div class="breadcrumb">
+                    <a href="../index.html">首页</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>核心服务</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>企业落地服务</span>
+                </div>
+                <h1>日本企业落地服务</h1>
+                <p>为您提供完整的日本公司设立与落地支持，从会社设立到银行开户，一站式解决您的日本企业设立需求。</p>
+                <div class="service-features">
+                    <div class="service-feature-card">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>会社设立</h3>
+                        <p>株式会社、合同会社等专业设立服务</p>
+                    </div>
+                    <div class="service-feature-card">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>银行开户</h3>
+                        <p>企业银行账户开设全程协助</p>
+                    </div>
+                    <div class="service-feature-card">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>法律合规</h3>
+                        <p>确保公司设立合法合规</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="service-process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">企业设立流程</h2>
+                <p class="section-subtitle">专业团队全程陪同，6周完成企业设立</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>前期咨询与规划</h3>
+                        <p>深入了解您的业务需求，制定最佳的日本企业设立方案，包括公司类型选择、资本金规划、经营范围确定等。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>公司类型确定</h3>
+                        <p>根据您的业务规模和发展计划，协助选择最适合的公司类型（株式会社或合同会社），并说明各自的优劣势。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>章程制作与公证</h3>
+                        <p>专业的日本公司章程制作，确保符合日本公司法要求，并完成必要的公证程序。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>法人登记</h3>
+                        <p>向日本法务局提交公司设立申请，完成法人登记手续，获得营业执照和相关证明文件。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>银行开户</h3>
+                        <p>协助选择合适的银行，准备开户所需材料，陪同前往银行办理企业账户开设手续。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>税务社保登记</h3>
+                        <p>完成税务署、社保事务所等相关机构登记，确保公司正常运营所需的各项手续齐全。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Advantages -->
+    <section class="service-advantages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我们的优势</h2>
+                <p class="section-subtitle">专业团队，丰富经验，为您保驾护航</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>专业团队</h3>
+                    <p>拥有日本行政书士、税理士、律师等专业资质的团队成员，确保服务质量。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>高效快捷</h3>
+                    <p>熟悉日本企业设立的各个环节，能够有效缩短办理时间，最快6周完成全部手续。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>语言无障碍</h3>
+                    <p>中日双语服务，确保您与各机构之间的沟通准确无误，避免因语言问题造成的延误。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>风险控制</h3>
+                    <p>预先识别可能的风险点，提供专业的解决方案，确保企业设立过程安全合规。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>全程陪同</h3>
+                    <p>从咨询到完成设立，全程陪同办理各项手续，让您省心省力。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>后续支持</h3>
+                    <p>企业设立完成后，还提供记账报税、签证办理等后续支持服务。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service CTA -->
+    <section class="service-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>开始您的日本企业之旅</h2>
+                <p>专业团队为您提供一对一咨询服务，制定最适合的企业设立方案</p>
+                <div class="cta-buttons">
+                    <a href="../index.html#contact" class="btn-primary">
+                        <i class="fas fa-phone"></i>
+                        立即咨询
+                    </a>
+                    <a href="../index.html#process" class="btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        了解流程
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="../components/components.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>
