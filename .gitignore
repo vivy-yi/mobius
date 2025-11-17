@@ -85,3 +85,13 @@ content/
 
 # 其他可能的临时文件
 Thumbs.db
+
+# 特定名称的文件夹和文件
+clouded/
+doc/
+skill/
+plandoc/
+clouded*
+doc*
+skill*
+plandoc*
