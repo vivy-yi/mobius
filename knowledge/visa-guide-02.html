@@ -3,47 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高度人才签证积分计算详解 - Mobius知识库</title>
-    <meta name="description" content="详细解析高度人才签证的积分计算方式，如何最大化积分获得永住权，快速通道申请攻略...">
-    <link rel="stylesheet" href="../style.css">
+    <title>高级人才积分制度详解 - Mobius 知识库</title>
+    <meta name="description" content="全面介绍日本高级人才积分制度的计算方法、申请流程和优势。">
+    <meta name="keywords" content="高级人才签证,积分制度,高度专门职,在留资格">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="高级人才积分制度详解 - Mobius 知识库">
+    <meta property="og:description" content="全面介绍日本高级人才积分制度的计算方法、申请流程和优势。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mobius-service.com/knowledge/visa-article-talent-points">
+    <meta property="og:site_name" content="Mobius 知识库">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="高级人才积分制度详解 - Mobius 知识库">
+    <meta name="twitter:description" content="全面介绍日本高级人才积分制度的计算方法、申请流程和优势。">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/favicon.ico">
+
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../components/zhihu-article.css">
-    <link rel="stylesheet" href="../components/browser-compatibility.css">
-    <link rel="stylesheet" href="../components/zhihu-mobile.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href=".../styles/css/components/knowledge-detail.css">
+
+    <!-- Critical CSS Inline -->
+    <style>
+        /* 防止页面闪烁的关键CSS */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .nav-breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .breadcrumb a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb a:hover, .breadcrumb a:focus {
+            color: #1e40af;
+            text-decoration: underline;
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .error-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #dc2626;
+        }
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #dc2626;
+        }
+        .error-message h2 {
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+        .error-message a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .error-message a:hover, .error-message a:focus {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <article class="zhihu-article-wrapper">
-            <header class="zhihu-article-header">
-            <div class="zhihu-author-info">
-                <div class="zhihu-author-avatar">M</div>
-                <div class="zhihu-author-details">
-                    <div class="zhihu-author-name">Mobius专业团队</div>
-                    <div class="zhihu-article-meta">
-                        <span class="zhihu-article-date">2024年1月18日</span>
-                        <span class="zhihu-article-reading">10分钟阅读</span>
-                    </div>
-                </div>
+    <!-- 导航栏将由动态加载 -->
+    <div id="navbar-container"></div>
+
+    <!-- 面包屑导航 -->
+    <nav class="nav-breadcrumb" role="navigation" aria-label="面包屑导航">
+        <div class="breadcrumb-container">
+            <div class="breadcrumb">
+                <a href="../index.html" aria-label="返回首页">
+                    <i class="fas fa-home"></i>
+                </a>
+                <span aria-hidden="true">/</span>
+                <a href="../knowledge.html" aria-label="知识库首页">知识库</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">签证服务</span>
             </div>
-                <h1 class="zhihu-article-title">高度人才签证积分计算详解</h1>
-                <div class="zhihu-article-excerpt">
-                    <p>详细解析高度人才签证的积分计算方式，如何最大化积分获得永住权，快速通道申请攻略...</p>
-                </div>
-            </header>
+        </div>
+    </nav>
 
-            <div class="zhihu-content-layout">
-                <div class="zhihu-main-content"><div class="zhihu-article-body">
-                        <h2>🎯 什么是高度人才签证？</h2>
-                        <p>高度人才签证（高度専門職ビザ）是日本为吸引外国高级人才设立的特殊在留资格。通过积分制评估申请人的学术背景、工作经验、年收等综合条件，达到70分以上即可获得。</p>
-
-                        <blockquote>
-                            <p><strong>核心优势</strong>：高度人才签证持有者最快1年可申请永住权，享受多项优惠待遇，包括父母陪同、配偶就业、多种在留活动等。</p>
-                        </blockquote>
-
-                        <h2>📊 积分计算系统详解</h2>
+    <!-- 文章容器 -->
+    <main class="article-container" role="main">
+        <article id="article-content">
+            <!-- 文章内容将通过JavaScript动态加载 -->
+            <div class="loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span style="margin-left: 0.5rem;"><h2>📊 积分计算系统详解</h2>
 
                         <h3>三类高度人才类别</h3>
                         <table>
@@ -572,49 +670,95 @@
                         <blockquote>
                             <p><strong>联系Mobius</strong>：我们拥有丰富的高度人才签证申请经验，成功率超过95%。联系我们，让我们帮助您快速获得日本高度人才签证！</p>
                         </blockquote>
-                    </div>
-            <div class="zhihu-interaction-bar">
-                <div class="zhihu-interaction-buttons">
-                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span class="zhihu-interaction-count">赞同</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
-                        <i class="fas fa-bookmark"></i>
-                        <span class="zhihu-interaction-count">收藏</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
-                        <i class="fas fa-comment"></i>
-                        <span class="zhihu-interaction-count">评论</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-share-btn">
-                        <i class="fas fa-share"></i>
-                        <span class="zhihu-interaction-count">分享</span>
-                    </button>
-                </div>
+                    </div></span>
             </div>
-                </div>
-            <aside class="zhihu-sidebar">
-                <nav class="zhihu-toc">
-                    <h3 class="zhihu-toc-title">文章目录</h3>
-                    <ul class="zhihu-toc-list" id="toc-list">
-                        <!-- 目录项将通过JavaScript动态生成 -->
-                    </ul>
-                </nav>
-            </aside>
-            </div>
-            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
-                        <i class="fas fa-arrow-left"></i>
-                        返回知识库
-                    </a>
-            </footer>
         </article>
-    </div>
+    </main>
 
-    <script src="../components/zhihu-article-interactions.js"></script>
-    <script src="../components/related-articles.js"></script>
-    <script src="../components/toc-generator.js"></script>
-    <script src="../components/performance-optimizer-safe.js"></script>
-    <script src="../components/seo-accessibility.js"></script>
+    <!-- 页脚将由动态加载 -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="../components/components.js" defer></script>
+    <script src="../components/knowledge-detail.js" defer></script>
+
+    <!-- 文章特定脚本 -->
+    <script>
+        // 安全的DOM操作工具函数
+        function safeCreateElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
+
+        // 安全地设置元素内容
+        function safeSetContent(element, content) {
+            // 清空现有内容
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+
+            if (typeof content === 'string') {
+                element.textContent = content;
+            } else if (content instanceof Node) {
+                element.appendChild(content);
+            }
+        }
+
+        // 错误处理 - 使用安全的DOM操作方法
+        window.addEventListener('error', function(e) {
+            console.error('文章页面加载错误:', e.error);
+            const articleContent = document.getElementById('article-content');
+            if (articleContent) {
+                // 清空现有内容
+                while (articleContent.firstChild) {
+                    articleContent.removeChild(articleContent.firstChild);
+                }
+
+                // 创建错误消息容器
+                const errorDiv = safeCreateElement('div', 'error-message');
+                errorDiv.setAttribute('role', 'alert');
+
+                // 创建图标
+                const icon = safeCreateElement('i', 'fas fa-exclamation-triangle');
+                icon.setAttribute('aria-hidden', 'true');
+                errorDiv.appendChild(icon);
+
+                // 创建标题
+                const title = safeCreateElement('h2', '', '文章加载失败');
+                errorDiv.appendChild(title);
+
+                // 创建描述段落
+                const paragraph = safeCreateElement('p', '', '抱歉，文章内容加载失败。请尝试刷新页面或');
+
+                // 创建链接
+                const link = safeCreateElement('a', '', '返回知识库首页');
+                link.href = '../knowledge.html';
+                link.setAttribute('aria-label', '返回知识库首页');
+
+                paragraph.appendChild(link);
+                errorDiv.appendChild(paragraph);
+
+                articleContent.appendChild(errorDiv);
+            }
+        });
+
+        // 页面性能监控
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`文章页面加载时间: ${loadTime}ms`);
+            }
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            // ESC键返回知识库
+            if (e.key === 'Escape') {
+                window.location.href = '../knowledge.html';
+            }
+        });
+    </script>
 </body>
 </html>

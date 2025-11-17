@@ -1,0 +1,87 @@
+# Node.js 相关
+node_modules/
+package-lock.json
+package.json
+
+# 开发和测试文件
+*.log
+*.tmp
+.cache/
+.DS_Store
+
+# Python 相关
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 临时和测试文件
+temp/
+test*.html
+test*.js
+temp-*
+*.bak
+*.swp
+*~
+
+# 性能分析和调试文件
+performance-*.js
+performance-*.html
+cache-*.js
+debug-*.js
+analyze-*.js
+verify-*.js
+fix_*.py
+clean_*.py
+
+# 服务器相关
+server.js
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 文档和分析文件
+*.md
+!README.md
+CMS_WORKFLOW.md
+CARD_CLICK_DATA_FLOW_ANALYSIS.md
+CRITICAL_PERFORMANCE_ANALYSIS.md
+CSS_RESTRUCTURE_SUMMARY.md
+GITHUB_PAGES_COMPARISON.md
+KNOWLEDGE_DETAIL_LAYOUT_REPORT.md
+PERFORMANCE_COMPARISON_REPORT.md
+PERFORMANCE_OPTIMIZATION_GUIDE.md
+PERFORMANCE_OPTIMIZATION_REPORT.md
+QUICK_PERFORMANCE_REPORT.md
+github-pages-setup.md
+seo-markdown-guide.md
+
+# 技能和工具目录
+skills/
+scripts/
+
+# 样式和构建目录（保留主要文件）
+styles/css/
+styles/scss/
+
+# 临时数据文件
+data/article-metadata/
+content/
+
+# GitHub Pages 不需要的文件
+.github/
+
+# 备份文件
+*-backup.*
+*-original.*
+
+# 其他可能的临时文件
+Thumbs.db

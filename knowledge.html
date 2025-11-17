@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>知识库 - Mobius 中日企业无缝连接桥梁</title>
     <meta name="description" content="中日企业落地指南、政策解读、补助金申请技巧等实用知识分享">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- 引入现有样式 -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="components/knowledge-navigation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- 知识库页面样式 -->
     <style>
+        /* ===== CSS Variables ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
         /* 知识库页面样式 */
         .knowledge-hero {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
@@ -57,27 +70,252 @@
             opacity: 0.7;
         }
 
-        /* 知识库主布局 */
-        .knowledge-layout {
+              .knowledge-layout {
             display: flex;
-            min-height: calc(100vh - 80px);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            gap: 30px;
         }
 
+        /* 左侧导航栏 */
         .knowledge-navigation {
-            width: 280px;
-            flex-shrink: 0;
-            background: #ffffff;
-            border-right: 1px solid #e5e7eb;
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: fit-content;
             position: sticky;
-            top: 0;
-            height: calc(100vh - 80px);
+            top: 100px;
+            max-height: calc(100vh - 120px);
             overflow-y: auto;
         }
 
+        .nav-section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .nav-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+            /* 快速筛选样式 */
+        .quick-filters {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .filter-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: left;
+        }
+
+        .filter-button:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+            color: #374151;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-button.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+          /* 难度筛选样式 */
+        .difficulty-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .difficulty-button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .difficulty-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .difficulty-button.active {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* "全部难度"按钮特殊样式 */
+        .difficulty-button[data-difficulty="all"] {
+            background: #f8fafc;
+            border-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .difficulty-button[data-difficulty="all"]:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+            color: #374151;
+        }
+
+        .difficulty-button[data-difficulty="all"].active {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .difficulty-button[data-difficulty="beginner"].active {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .difficulty-button[data-difficulty="intermediate"].active {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .difficulty-button[data-difficulty="advanced"].active {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        /* 主分类样式 */
+        .nav-category {
+            margin-bottom: 4px;
+        }
+
+        .nav-category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .nav-category-header:hover {
+            background: #e5e7eb;
+            transform: translateX(4px);
+            border-color: #d1d5db;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-category-header.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-color: #3b82f6;
+            transform: translateX(4px);
+        }
+
+        .nav-expand-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-children {
+            margin-left: 16px;
+            margin-top: 8px;
+            padding-left: 24px;
+            border-left: 2px solid #e5e7eb;
+            display: none;
+        }
+
+        .nav-children.expanded {
+            display: block;
+        }
+
+        .nav-subcategory {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            color: #6b7280;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .nav-subcategory:hover {
+            background: #f3f4f6;
+            color: #374151;
+            transform: translateX(4px);
+            border-color: #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-subcategory.active {
+            background: #eff6ff;
+            color: #3b82f6;
+            border-color: #bfdbfe;
+        }
+
+        /* 主内容区域 */
         .knowledge-main {
             flex: 1;
-            padding: 60px 40px;
-            background: #f8fafc;
+            min-width: 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         /* 分类标签 */
@@ -89,88 +327,199 @@
         }
 
         .category-tab {
-            padding: 12px 24px;
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
             background: white;
-            border: 2px solid #3b82f6;
-            color: #3b82f6;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s ease;
             font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .category-tab.active,
         .category-tab:hover {
-            background: #3b82f6;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+            background: white;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: #3b82f6;
             color: white;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* 内容区域 */
+        .category-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .category-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* 文章网格 */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 24px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
+        /* 文章卡片 */
         .article-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            height: 380px;
+            position: relative;
         }
 
         .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f59e0b, #f97316);
         }
 
         .article-image {
-            height: 180px;
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 42px;
             color: white;
-            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+
+        /* 精选徽章 */
+        .featured-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-badge i {
+            margin-right: 4px;
         }
 
         .article-content {
-            padding: 24px;
             flex: 1;
+            padding: 20px;
             display: flex;
             flex-direction: column;
         }
 
         .article-meta {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 16px;
             margin-bottom: 12px;
-            font-size: 13px;
-            color: #6b7280;
+            font-size: 11px;
+        }
+
+        .article-category {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .article-date {
+            color: #9ca3af;
+        }
+
+        /* 难度标签 */
+        .difficulty-tag {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .difficulty-tag.beginner {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .difficulty-tag.intermediate {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .difficulty-tag.advanced {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
         .article-title {
             font-size: 18px;
-            font-weight: 700;
-            color: #1f2937;
+            font-weight: 600;
             margin-bottom: 12px;
+            color: #1f2937;
             line-height: 1.4;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .article-excerpt {
+            font-size: 14px;
             color: #6b7280;
             line-height: 1.6;
-            margin-bottom: 20px;
-            flex: 1;
+            margin-bottom: 16px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -179,260 +528,127 @@
 
         .article-tags {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .article-tag {
+        .tag {
             background: #f3f4f6;
-            color: #374151;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 12px;
+            color: #4b5563;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 500;
         }
 
-        /* 分类内容显示 */
-        .category-content {
-            display: none;
+        /* 搜索区域 */
+        .search-section {
+            margin-bottom: 30px;
         }
 
-        .category-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* FAQ卡片样式 */
-        .article-card.faq-card .article-image {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        .search-container {
             position: relative;
+            max-width: 500px;
         }
 
-        .article-type-label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 4px 8px;
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid #e5e7eb;
             border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
-        .article-type-label i {
-            font-size: 10px;
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        /* 精选内容样式 */
-        .article-card.featured {
-            border: 2px solid #fbbf24;
-            box-shadow: 0 8px 16px rgba(251, 191, 36, 0.2);
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
         }
 
-        /* 热度指标样式 */
-        .hot-score {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 11px;
+        /* 搜索结果标题 */
+        .search-results-header {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid #3b82f6;
         }
 
-        .hot-score.high {
-            background: linear-gradient(135deg, #fef3c7, #f59e0b);
-            color: #92400e;
+        .search-results-header h3 {
+            margin: 0 0 8px 0;
+            color: #1f2937;
+            font-size: 20px;
         }
 
-        .hot-score.medium {
-            background: linear-gradient(135deg, #e0f2fe, #0ea5e9);
-            color: #075985;
+        .search-results-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
         }
 
-        .hot-score.low {
-            background: linear-gradient(135deg, #f3f4f6, #9ca3af);
+        /* 无结果状态 */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .no-results i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #d1d5db;
+        }
+
+        .no-results h3 {
+            margin-bottom: 10px;
             color: #374151;
         }
 
-        .hot-score i {
-            font-size: 10px;
-        }
-
-        /* 难度标签样式 */
-        .difficulty-tag {
-            background: #10b981 !important;
-            color: white !important;
-        }
-
-        .difficulty-tag.beginner {
-            background: #10b981 !important;
-        }
-
-        .difficulty-tag.intermediate {
-            background: #f59e0b !important;
-        }
-
-        .difficulty-tag.advanced {
-            background: #ef4444 !important;
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .article-card {
-                flex-direction: row;
-                height: auto;
-            }
-
-            .article-image {
-                width: 120px;
-                height: 100%;
-                font-size: 1.5rem;
-            }
-
-            .article-content {
-                padding: 16px;
-            }
-
-            .article-meta {
-                flex-wrap: wrap;
-                gap: 8px;
-                font-size: 11px;
-            }
-
-            .article-tags {
-                margin-top: 8px;
-            }
-
-            .article-title {
-                font-size: 16px;
-            }
-        }
-
-        /* 订阅区域 */
-        .subscribe-section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 60px;
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 12px;
-            max-width: 500px;
-            margin: 24px auto 0;
-        }
-
-        .subscribe-input {
-            flex: 1;
-            padding: 14px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .subscribe-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-
-        .subscribe-btn {
-            padding: 14px 28px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .subscribe-btn:hover {
-            background: #2563eb;
-        }
-
-        /* 移动端适配 */
-        @media (max-width: 768px) {
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
             .knowledge-layout {
                 flex-direction: column;
             }
 
             .knowledge-navigation {
                 width: 100%;
-                height: auto;
                 position: static;
-                order: 2;
             }
 
-            .knowledge-main {
-                padding: 30px 20px;
-                order: 1;
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .knowledge-layout {
+                padding: 20px 15px;
             }
 
             .articles-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .subscribe-form {
-                flex-direction: column;
             }
 
             .category-tabs {
                 justify-content: center;
             }
-        }
 
-        @media (max-width: 1024px) {
-            .knowledge-navigation {
-                width: 240px;
-            }
-
-            .articles-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            .article-card {
+                height: auto;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-wrapper">
-                <div class="nav-logo">
-                    <h2>Mobius</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="index.html#home">首页</a></li>
-                    <li class="nav-item"><a href="index.html#services">服务</a></li>
-                    <li class="nav-item"><a href="knowledge.html">知识库</a></li>
-                    <li class="nav-item"><a href="index.html#about">关于我们</a></li>
-                    <li class="nav-item"><a href="index.html#community">社群</a></li>
-                    <li class="nav-item"><a href="index.html#contact">联系我们</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <!-- Hero区域 -->
     <section class="knowledge-hero">
@@ -451,1367 +667,536 @@
     <div class="knowledge-layout">
         <!-- 左侧导航 -->
         <aside class="knowledge-navigation" id="knowledgeNavigation">
-            <!-- 导航内容将通过JavaScript动态加载 -->
+            <!-- 导航内容将通过JavaScript动态生成 -->
         </aside>
 
         <!-- 主内容区域 -->
         <main class="knowledge-main">
+            <!-- 搜索区域 -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="搜索文章、关键词...">
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+
             <!-- 分类标签标题 -->
             <h2 class="section-title">
-                <i class="fas fa-tags" style="margin-right: 10px; color: #3b82f6;"></i>
+                <i class="fas fa-tags" style="color: #3b82f6;"></i>
                 热门标签
-                <span style="font-size: 14px; font-weight: 400; color: #6b7280; margin-left: 12px;">分类导航</span>
+                <span style="font-size: 16px; font-weight: 400; color: #6b7280;">分类导航</span>
             </h2>
 
             <!-- 分类标签 -->
             <div class="category-tabs">
                 <button class="category-tab active" data-category="all">
-                    <i class="fas fa-th" style="margin-right: 6px;"></i>全部
+                    <i class="fas fa-th"></i>全部
                 </button>
                 <button class="category-tab" data-category="business">
-                    <i class="fas fa-building" style="margin-right: 6px;"></i>企业落地
+                    <i class="fas fa-building"></i>企业落地
                 </button>
                 <button class="category-tab" data-category="visa">
-                    <i class="fas fa-passport" style="margin-right: 6px;"></i>签证政策
+                    <i class="fas fa-passport"></i>签证政策
                 </button>
                 <button class="category-tab" data-category="tax">
-                    <i class="fas fa-coins" style="margin-right: 6px;"></i>税务筹划
+                    <i class="fas fa-coins"></i>税务筹划
                 </button>
                 <button class="category-tab" data-category="legal">
-                    <i class="fas fa-balance-scale" style="margin-right: 6px;"></i>法务合规
+                    <i class="fas fa-balance-scale"></i>法务合规
                 </button>
                 <button class="category-tab" data-category="subsidy">
-                    <i class="fas fa-gift" style="margin-right: 6px;"></i>补助金申请
+                    <i class="fas fa-gift"></i>补助金申请
                 </button>
-                <button class="category-tab" data-category="faq">
-                    <i class="fas fa-question-circle" style="margin-right: 6px;"></i>常见问题
+                <button class="category-tab" data-category="life">
+                    <i class="fas fa-home"></i>生活支援
                 </button>
             </div>
 
             <!-- 全部内容 -->
             <div class="category-content active" id="all-content">
                 <div class="articles-grid" id="all-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
+                    <!-- 文章卡片将通过JavaScript动态生成 -->
                 </div>
             </div>
 
-            <!-- 企业落地内容 -->
+            <!-- 其他分类内容 -->
             <div class="category-content" id="business-content">
-                <div class="articles-grid" id="business-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
-                </div>
+                <div class="articles-grid" id="business-articles"></div>
             </div>
-
-            <!-- 签证政策内容 -->
             <div class="category-content" id="visa-content">
-                <div class="articles-grid" id="visa-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
-                </div>
+                <div class="articles-grid" id="visa-articles"></div>
             </div>
-
-            <!-- 税务筹划内容 -->
             <div class="category-content" id="tax-content">
-                <div class="articles-grid" id="tax-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
-                </div>
+                <div class="articles-grid" id="tax-articles"></div>
             </div>
-
-            <!-- 法务合规内容 -->
             <div class="category-content" id="legal-content">
-                <div class="articles-grid" id="legal-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
-                </div>
+                <div class="articles-grid" id="legal-articles"></div>
             </div>
-
-            <!-- 补助金申请内容 -->
             <div class="category-content" id="subsidy-content">
-                <div class="articles-grid" id="subsidy-articles">
-                    <!-- 文章卡片将通过 articleCardManager 动态生成 -->
-                </div>
+                <div class="articles-grid" id="subsidy-articles"></div>
             </div>
-
-            <!-- 常见问题内容 -->
-            <div class="category-content" id="faq-content">
-                <div class="articles-grid" id="faq-articles">
-                    <!-- FAQ卡片将通过 articleCardManager 动态生成 -->
-                </div>
+            <div class="category-content" id="life-content">
+                <div class="articles-grid" id="life-articles"></div>
             </div>
-
         </main>
-            <!-- 订阅区域 -->
-            <section class="subscribe-section">
-                <h2 class="section-title">订阅知识更新</h2>
-                <p>第一时间获取中日跨境业务最新政策和实用指南</p>
-                <form class="subscribe-form" id="subscribeForm">
-                    <input type="email" class="subscribe-input" placeholder="请输入您的邮箱地址" required>
-                    <button type="submit" class="subscribe-btn">立即订阅</button>
-                </form>
-            </section>
     </div>
 
-    <!-- JavaScript文件 -->
-    <script src="components/components.js?v=2.1"></script>
-    <script src="components/article-card.js?v=2.1"></script>
-    <script src="components/knowledge-navigation.js?v=4.3"></script>
-    <script src="components/knowledge-filter.js?v=2.2"></script>
-    <script src="script.js?v=2.2"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mobius</h3>
+                    <p>您的中日跨境业务专家，提供专业的企业设立、签证、财税、法务、生活支援一站式服务。</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+                        <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
 
-    <!-- 添加脚本加载检查 -->
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="#services">服务项目</a></li>
+                        <li><a href="knowledge.html">知识库</a></li>
+                        <li><a href="#team">关于我们</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>服务项目</h4>
+                    <ul>
+                        <li><a href="services/setup.html">企业落地服务</a></li>
+                        <li><a href="services/visa.html">签证服务</a></li>
+                        <li><a href="services/tax.html">财税・补助金</a></li>
+                        <li><a href="services/legal.html">法务・合同</a></li>
+                        <li><a href="services/life.html">生活支援</a></li>
+                        <li><a href="services/business.html">开店咨询</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> contact@mobius-service.com</li>
+                        <li><i class="fas fa-phone"></i> +81-3-1234-5678</li>
+                        <li><i class="fas fa-clock"></i> 周一至周五 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mobius. 版权所有。</p>
+                <div class="footer-links">
+                    <a href="#">隐私政策</a>
+                    <a href="#">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FontAwesome 图标库 -->
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/js/all.min.js"></script>
+
+    <!-- 组件脚本 - 使用defer确保在DOM加载后生成导航栏 -->
+    <script src="components/components.js?v=2.2" defer></script>
+
+    <!-- 主要功能脚本 -->
     <script>
-        console.log('knowledge-navigation.js加载前检查...');
-
-        // 等待knowledge-navigation.js加载完成
-        const checkNavigationLoaded = setInterval(() => {
-            if (typeof KnowledgeNavigation !== 'undefined') {
-                console.log('KnowledgeNavigation类已加载！');
-                clearInterval(checkNavigationLoaded);
-            }
-        }, 100);
-
-        // 5秒后停止检查
-        setTimeout(() => {
-            clearInterval(checkNavigationLoaded);
-            if (typeof KnowledgeNavigation === 'undefined') {
-                console.error('5秒后KnowledgeNavigation仍未加载，可能有脚本加载问题');
-            }
-        }, 5000);
-    </script>
-
-    <script>
-        // 页面初始化 - 确保所有脚本加载完成 v2.6
-        window.addEventListener('load', function() {
-            console.log('页面和所有脚本加载完成，开始初始化...');
-
-            // 添加小延迟确保类已正确加载
-            setTimeout(() => {
-                // 初始化导航系统
-                initializeKnowledgeNavigation();
-
-                // 分类切换功能
-                initializeCategoryTabs();
-
-                // 初始化默认显示全部内容
-                initializeDefaultContent();
-
-                // 订阅表单
-                initializeSubscribeForm();
-
-                // 监听数据容器变化通知
-                initializeDataContainerListener();
-            }, 100);
-        });
-
-        // 备用：也保留DOMContentLoaded以防万一
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM加载完成，等待脚本加载...');
-        });
-
-        // 初始化知识库导航
-        async function initializeKnowledgeNavigation() {
-            try {
-                console.log('开始初始化导航系统...');
-
-                if (window.KnowledgeNavigation) {
-                    console.log('KnowledgeNavigation类可用');
-                    window.knowledgeNavigation = new KnowledgeNavigation();
-
-                    const container = document.getElementById('knowledgeNavigation');
-                    if (container) {
-                        console.log('导航容器找到:', container);
-                    } else {
-                        console.error('导航容器未找到!');
-                    }
-
-                    console.log('开始初始化导航数据...');
-                    const initResult = await window.knowledgeNavigation.initializeNavigation();
-                    console.log('导航数据加载完成，结果:', initResult);
-
-                    console.log('开始渲染导航...');
-                    await window.knowledgeNavigation.renderNavigation('knowledgeNavigation');
-                    console.log('导航渲染完成');
-
-                    // 添加导航筛选事件监听器
-                    document.addEventListener('navigationFilterChange', handleNavigationFilterChange);
-
-                    console.log('知识库导航系统初始化完成');
-                } else {
-                    console.error('KnowledgeNavigation类未找到!');
-                }
-
-                if (window.KnowledgeFilter) {
-                    window.knowledgeFilter = new KnowledgeFilter();
-                    console.log('知识库筛选系统初始化完成');
-                }
-
-                // 初始化文章卡片管理器
-                if (typeof ArticleCardManager !== 'undefined') {
-                    window.articleCardManager = new ArticleCardManager();
-                    console.log('文章卡片管理器初始化完成');
-
-                    // 等待数据加载完成后再生成默认内容
-                    const checkDataLoaded = setInterval(() => {
-                        if (window.articleCardManager.dataLoaded) {
-                            console.log('✅ 文章数据已加载，生成默认内容');
-                            clearInterval(checkDataLoaded);
-                            // 生成默认分类内容
-                            window.articleCardManager.generateArticleGrid('tax', 'tax-articles');
-                        }
-                    }, 100);
-
-                    // 10秒后停止检查
-                    setTimeout(() => {
-                        clearInterval(checkDataLoaded);
-                        if (!window.articleCardManager.dataLoaded) {
-                            console.warn('⚠️ 10秒后文章数据仍未加载');
-                        }
-                    }, 10000);
-                } else {
-                    console.warn('ArticleCardManager未找到，文章卡片功能可能不可用');
-                }
-            } catch (error) {
-                console.error('导航系统初始化失败:', error);
-            }
-        }
-
-        // 处理导航筛选变化事件 - 统一处理逻辑
-        function handleNavigationFilterChange(event) {
-            console.log('🚀 导航筛选变化事件触发');
-            console.log('📊 事件数据:', event.detail);
-
-            if (!event || !event.detail) {
-                console.warn('⚠️ 事件数据为空');
-                return;
+        // 完整知识库管理
+        class CompleteKnowledgeBase {
+            constructor() {
+                this.data = null;
+                this.currentCategory = 'all';
+                this.currentQuickFilter = null; // 不过滤快速筛选
+                this.currentDifficulty = 'all'; // 默认显示全部难度
+                this.searchTerm = '';
+                this.expandedCategories = new Set();
+                this.init();
             }
 
-            const filters = event.detail.filters || event.detail;
-            console.log('🎯 统一过滤器数据:', filters);
-
-            // 统一处理逻辑 - 根据action类型处理
-            if (!filters.action) {
-                console.warn('⚠️ 缺少action字段');
-                return;
+            async init() {
+                await this.loadData();
+                this.renderNavigation();
+                this.renderArticles('all');
+                this.bindEvents();
             }
 
-            console.log('🎯 筛选上下文:', filters.basedOnNavigation ? '基于导航栏筛选' : '全局筛选');
-
-            // 处理热门标签的级联逻辑（如果需要）
-            handleQuickFilterMutex(filters);
-
-            switch(filters.action) {
-                case 'show-all':
-                                        handleShowAll(filters);
-                    break;
-                case 'show-featured':
-                                        // 检查是否有filterBy字段，如果有则使用它，否则使用featured
-                    const filterType = filters.filterBy || 'featured';
-                    handleShowFiltered(filters, filterType);
-                    break;
-                case 'show-articles':
-                    console.log('📄 显示文章内容');
-                    handleShowFiltered(filters, 'article');
-                    break;
-                case 'show-faq':
-                    console.log('❓ 显示FAQ内容');
-                    handleShowFiltered(filters, 'faq');
-                    break;
-                case 'show-category':
-                    console.log('📂 显示分类内容:', filters.category);
-                    handleShowCategory(filters);
-                    break;
-                case 'show-category-all':
-                    console.log('📂 显示分类全部内容:', filters.category);
-                    handleShowCategoryAll(filters);
-                    break;
-                case 'show-category-featured':
-                    console.log('📂 显示分类精选内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'featured');
-                    break;
-                case 'show-recent':
-                    console.log('🆕 显示最新发布内容');
-                    handleShowFiltered(filters, 'recent');
-                    break;
-                case 'show-popular':
-                    console.log('🔥 显示热门内容');
-                    // 检查是否有filterBy字段，如果有则使用它，否则使用popular
-                    const popularFilterType = filters.filterBy || 'popular';
-                    handleShowFiltered(filters, popularFilterType);
-                    break;
-                case 'show-difficulty':
-                    console.log('🎯 显示全局难度筛选内容');
-                    handleShowFiltered(filters, 'difficulty');
-                    break;
-                case 'show-category-difficulty':
-                    console.log('🎯 显示分类难度筛选内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'difficulty');
-                    break;
-                case 'show-category-subcategory':
-                    console.log('🏷️ 显示分类二级标签内容:', filters.category, filters.subcategory);
-                    handleShowCategoryFiltered(filters, 'subcategory');
-                    break;
-                case 'show-category-recent':
-                    console.log('🆕 显示分类最新内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'recent');
-                    break;
-                case 'show-category-popular':
-                    console.log('📂 显示分类热门内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'popular');
-                    break;
-                case 'show-category-articles':
-                    console.log('📂 显示分类文章内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'article');
-                    break;
-                case 'show-category-faq':
-                    console.log('📂 显示分类FAQ内容:', filters.category);
-                    handleShowCategoryFiltered(filters, 'faq');
-                    break;
-                case 'clear-selection':
-                    console.log('🧹 清除选择');
-                    handleClearSelection();
-                    break;
-                default:
-                    console.warn('⚠️ 未知的action类型:', filters.action);
-            }
-        }
-
-        // 统一的渲染处理函数 - 支持级联筛选管理
-        function handleShowAll(filters) {
-            
-            // 当选择"全部"时，重置导航筛选状态
-            if (window.knowledgeNavigation) {
-                window.knowledgeNavigation.currentFilters.navigationActive = false;
-                window.knowledgeNavigation.currentFilters.category = null;
-                window.knowledgeNavigation.currentFilters.subcategory = null;
-
-                // 重新渲染导航以更新状态
-                setTimeout(() => {
-                    window.knowledgeNavigation.renderNavigation('knowledgeNavigation');
-                }, 50);
-            }
-
-            // 激活"全部"标签
-            activateTab('all');
-
-            // 清空数据容器2（这是"全部内容"的特殊逻辑）
-            if (window.articleCardManager && window.articleCardManager.hasFilteredData) {
-                              window.articleCardManager.clearFilteredData();
-            }
-
-            if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                generateAllCategoriesContent(filters.targetContainer, false); // 从数据容器1加载
-            }
-        }
-
-        function handleShowFiltered(filters, filterType) {
-            console.log(`⭐ 处理显示${filterType}内容`);
-
-            // 激活相应的标签
-            if (filterType === 'difficulty') {
-                // 难度筛选不需要激活特定标签
-            } else {
-                // 其他筛选激活税务标签
-                activateTab('tax');
-            }
-
-            if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                // 热门标签点击：智能选择数据容器
-                // 先检查容器2，如果存在且有数据就使用，否则使用容器1
-                const hasContainer2 = window.articleCardManager.hasFilteredData;
-                let useContainer2 = false;
-
-                if (hasContainer2) {
-                    // 检查容器2中是否有相关数据
-                    let container2HasData = false;
-                    filters.dataCategories.forEach(category => {
-                        const categoryData = window.articleCardManager.filteredArticles[category] || [];
-                        if (categoryData.length > 0) {
-                            container2HasData = true;
-                        }
-                    });
-
-                    useContainer2 = container2HasData;
-                    console.log(`🔥 热门标签筛选：容器2存在${container2HasData ? '且有数据，使用容器2' : '但无数据，使用容器1'}`);
-                } else {
-                    console.log('🔥 热门标签筛选：容器2不存在，使用容器1');
-                }
-
-                // 生成内容
-                generateFilteredContent(filters.targetContainer, filters.dataCategories, filterType, useContainer2);
-
-                // 如果是难度筛选，应用额外的难度过滤
-                if (filterType === 'difficulty' && filters.difficulty) {
-                    console.log(`🎯 应用难度筛选: ${filters.difficulty}`);
-                    applyDifficultyFilter(filters.targetContainer, filters.difficulty);
+            async loadData() {
+                try {
+                    const response = await fetch('./data/articles.json');
+                    this.data = await response.json();
+                    console.log('✅ 完整数据加载完成');
+                } catch (error) {
+                    console.error('❌ 数据加载失败:', error);
                 }
             }
-        }
 
-        // 应用难度筛选到已生成的内容
-        function applyDifficultyFilter(containerId, difficultyId) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
+            renderNavigation() {
+                const navContainer = document.getElementById('knowledgeNavigation');
+                if (!navContainer || !this.data) return;
 
-            const articles = container.querySelectorAll('.article-card');
-            let visibleCount = 0;
+                let navHTML = '';
 
-            articles.forEach(article => {
-                const articleDifficulty = article.dataset.difficulty;
-                if (!articleDifficulty || articleDifficulty === difficultyId) {
-                    article.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    article.style.display = 'none';
-                }
-            });
-
-            console.log(`🎯 难度筛选完成: ${difficultyId}, 显示 ${visibleCount} 篇文章`);
-
-            // 如果没有可见文章，显示提示
-            if (visibleCount === 0) {
-                const noResults = document.createElement('div');
-                noResults.className = 'no-results';
-                noResults.innerHTML = `
-                    <h3>暂无相关内容</h3>
-                    <p>该难度级别下暂时没有符合条件的文章</p>
+                // 快速筛选
+                navHTML += `
+                    <div class="nav-section">
+                        <div class="nav-title"><i class="fas fa-filter"></i>快速筛选</div>
+                        <div class="quick-filters">
                 `;
-                container.appendChild(noResults);
-            }
-        }
+                this.data.navigation.quickFilters.forEach(filter => {
+                    navHTML += `
+                        <button class="filter-button" data-filter="${filter.id}" title="${filter.description}">
+                            <i class="${filter.icon}"></i>
+                            <span>${filter.name}</span>
+                        </button>
+                    `;
+                });
+                navHTML += `</div></div>`;
 
-        // 应用二级标签筛选到已生成的内容
-        function applySubcategoryFilter(containerId, categoryId, subcategoryId) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
-
-            // 获取导航数据中的二级分类信息
-            const navData = window.knowledgeNavigation?.navData;
-            if (!navData || !navData.structure) {
-                console.error('❌ 无法获取导航结构数据');
-                return;
-            }
-
-            // 找到对应的分类
-            const category = navData.structure.find(cat => cat.id === categoryId);
-            if (!category || !category.children) {
-                console.error('❌ 无法找到分类或二级分类:', categoryId);
-                return;
-            }
-
-            // 找到对应的二级分类
-            const subcategory = category.children.find(child => child.id === subcategoryId);
-            if (!subcategory) {
-                console.error('❌ 无法找到二级分类:', subcategoryId);
-                return;
-            }
-
-            console.log(`🏷️ 二级标签筛选: ${categoryId}/${subcategoryId}, 相关tags:`, subcategory.tags);
-
-            const articles = container.querySelectorAll('.article-card');
-            let visibleCount = 0;
-
-            articles.forEach((article, index) => {
-                const articleElement = article;
-
-                // 尝试从多个可能的分类查找文章数据
-                const categoriesToTry = [categoryId, 'business', 'tax', 'legal', 'visa', 'life'];
-                let articleData = null;
-
-                for (const tryCategory of categoriesToTry) {
-                    if (tryCategory) {
-                        articleData = window.articleCardManager.findArticleData(tryCategory, article);
-                        if (articleData) {
-                            break;
-                        }
-                    }
-                }
-
-                if (articleData) {
-                    // 检查文章的tags是否包含二级分类的tags
-                    const hasMatchingTag = subcategory.tags.some(tag =>
-                        articleData.tags && articleData.tags.includes(tag)
-                    );
-
-                    if (hasMatchingTag) {
-                        articleElement.style.display = 'block';
-                        articleElement.style.visibility = 'visible';
-                        articleElement.style.opacity = '1';
-                        visibleCount++;
-                        console.log(`✅ 显示文章: ${articleData.title}`);
-                    } else {
-                        articleElement.style.display = 'none';
-                        articleElement.style.visibility = 'hidden';
-                        articleElement.style.opacity = '0';
-                        console.log(`❌ 隐藏文章: ${articleData?.title || '未知标题'}`);
-                    }
-                } else {
-                    articleElement.style.display = 'none';
-                    articleElement.style.visibility = 'hidden';
-                    articleElement.style.opacity = '0';
-                    console.log(`❌ 隐藏文章: 无数据`);
-                }
-            });
-
-            console.log(`🏷️ 二级标签筛选完成: ${subcategoryId}, 显示 ${visibleCount} 篇文章`);
-
-            // 如果没有可见文章，显示提示
-            if (visibleCount === 0) {
-                const noResults = document.createElement('div');
-                noResults.className = 'no-results';
-                noResults.innerHTML = `
-                    <h3>暂无相关内容</h3>
-                    <p>该二级分类下暂时没有符合条件的文章</p>
+                // 难度筛选
+                navHTML += `
+                    <div class="nav-section">
+                        <div class="nav-title"><i class="fas fa-layer-group"></i>难度级别</div>
+                        <div class="difficulty-filters">
                 `;
-                container.appendChild(noResults);
-            }
-        }
-
-        function handleShowCategory(filters) {
-            console.log(`📂 处理显示分类内容: ${filters.category}`);
-
-            // 激活对应的标签
-            const tabMap = {
-                'tax': 'tax',
-                'legal': 'legal',
-                'business': 'subsidy',
-                'visa': 'faq'
-            };
-            activateTab(tabMap[filters.category]);
-
-            if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                // 快速筛选标签：从数据容器1加载数据并生成新的数据容器2
-                console.log('🏷️ 快速筛选标签点击：从数据容器1加载并创建数据容器2');
-
-                // 设置数据容器2（只包含当前分类的数据）
-                window.articleCardManager.setFilteredData([filters.dataCategory]);
-
-                // 确认数据容器2创建成功
-                console.log('✅ 数据容器2状态:', window.articleCardManager.hasFilteredData);
-
-                // 从数据容器2生成文章网格
-                window.articleCardManager.generateArticleGridFromContainer(filters.dataCategory, filters.targetContainer);
-            }
-        }
-
-        function handleShowCategoryAll(filters) {
-            console.log(`📂 处理显示分类全部内容: ${filters.category}`);
-
-            // 激活对应的标签
-            const tabMap = {
-                'tax': 'tax',
-                'legal': 'legal',
-                'business': 'subsidy',
-                'visa': 'faq'
-            };
-            activateTab(tabMap[filters.category]);
-
-            if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                // 一级标签：从数据容器1加载数据并生成新的数据容器2
-                console.log('📦 一级标签点击：从数据容器1加载并创建数据容器2');
-
-                // 设置数据容器2（只包含当前分类的数据）
-                window.articleCardManager.setFilteredData([filters.dataCategory]);
-
-                // 确认数据容器2创建成功
-                console.log('✅ 数据容器2状态:', window.articleCardManager.hasFilteredData);
-
-                // 基于当前分类显示全部内容（从数据容器2）
-                generateCategoryAllContent(filters.dataCategory, filters.targetContainer, true);
-            }
-        }
-
-        function handleShowCategoryFiltered(filters, filterType) {
-            console.log(`📂 处理显示分类${filterType}内容: ${filters.category}`);
-
-            // 激活对应的标签
-            const tabMap = {
-                'tax': 'tax',
-                'legal': 'legal',
-                'business': 'subsidy',
-                'visa': 'faq',
-                'life': 'all' // life分类激活全部标签
-            };
-            activateTab(tabMap[filters.category]);
-
-            if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                // 智能选择数据容器：先检查容器2，如果存在且有数据就使用
-                let useContainer2 = false;
-                const hasContainer2 = window.articleCardManager.hasFilteredData;
-
-                if (hasContainer2) {
-                    // 检查容器2中是否有当前分类的数据
-                    const categoryData = window.articleCardManager.filteredArticles[filters.dataCategory] || [];
-                    useContainer2 = categoryData.length > 0;
-
-                    if (filters.subcategory && filters.subcategory !== 'all') {
-                        console.log(`🔍 二级标签筛选：容器2${useContainer2 ? '有数据，使用容器2' : '无数据，使用容器1'}`);
-                    } else if (filters.difficulty) {
-                        console.log(`🎯 难度级别筛选：容器2${useContainer2 ? '有数据，使用容器2' : '无数据，使用容器1'}`);
-                    }
-                } else {
-                    console.log(`📂 分类筛选：容器2不存在，使用容器1`);
-                }
-
-                // 基于当前分类显示筛选内容
-                generateCategoryFilteredContent(filters.dataCategory, filters.targetContainer, filterType, useContainer2);
-
-                // 如果是难度筛选，应用额外的难度过滤
-                if (filterType === 'difficulty' && filters.difficulty) {
-                    console.log(`🎯 应用分类内难度筛选: ${filters.difficulty}`);
-                    applyDifficultyFilter(filters.targetContainer, filters.difficulty);
-                }
-
-                // 如果是二级标签筛选，应用额外的二级标签过滤
-                if (filterType === 'subcategory' && filters.subcategory) {
-                    console.log(`🏷️ 应用分类内二级标签筛选: ${filters.subcategory}`);
-                    applySubcategoryFilter(filters.targetContainer, filters.category, filters.subcategory);
-                }
-            }
-        }
-
-        // 简化的状态重置函数（移除了不必要的互斥逻辑）
-        function handleNavigationMutex(filters) {
-            // 由于标签ID已经分离，这里只需要处理必要的状态重置
-            // 大部分互斥逻辑已经不需要，因为ID冲突已解决
-        }
-
-        // 处理热门标签点击时的级联逻辑（简化版）
-        function handleQuickFilterMutex(filters) {
-            // 由于标签ID已经分离，不再需要复杂的互斥逻辑
-            // 热门标签和导航栏标签现在可以独立工作
-            if (filters.quickFilterActive) {
-                console.log('🔥 热门标签激活，独立工作模式');
-            }
-        }
-
-        // 激活导航栏的视觉效果（但不触发点击事件）
-        function activateNavigationVisual(categoryId) {
-            // 这里可以添加导航栏的视觉激活效果
-            // 比如高亮显示但不触发数据加载
-            console.log('✨ 激活导航栏视觉效果:', categoryId);
-
-            // 可以通过CSS类来显示激活效果
-            const navItems = document.querySelectorAll('.nav-category');
-            navItems.forEach(item => item.classList.remove('visually-active'));
-
-            const targetItem = document.querySelector(`[data-category-id="${categoryId}"]`);
-            if (targetItem) {
-                targetItem.classList.add('visually-active');
-            }
-        }
-
-        // 清除所有导航栏选中状态
-        function clearAllNavigationSelection() {
-            const navItems = document.querySelectorAll('.nav-category');
-            navItems.forEach(item => item.classList.remove('visually-active'));
-            console.log('🧹 已清除所有导航栏选中状态');
-        }
-
-        function handleClearSelection() {
-            // 清除所有激活状态
-            const tabs = document.querySelectorAll('.category-tab');
-            const contents = document.querySelectorAll('.category-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-        }
-
-        function activateTab(tabName) {
-            const tabs = document.querySelectorAll('.category-tab');
-            const contents = document.querySelectorAll('.category-content');
-
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-
-            const targetTab = document.querySelector(`[data-category="${tabName}"]`);
-            const targetContent = document.getElementById(`${tabName}-content`);
-
-            if (targetTab) targetTab.classList.add('active');
-            if (targetContent) targetContent.classList.add('active');
-        }
-
-        // 显示所有分类的内容
-        function showAllCategories() {
-            console.log('🌟 开始显示所有分类内容');
-
-            // 移除所有标签的active状态
-            const categoryTabs = document.querySelectorAll('.category-tab');
-            const categoryContents = document.querySelectorAll('.category-content');
-
-            categoryTabs.forEach(tab => tab.classList.remove('active'));
-            categoryContents.forEach(content => content.classList.remove('active'));
-
-            // 激活税务标签作为默认显示
-            const taxTab = document.querySelector('[data-category="tax"]');
-            const taxContent = document.getElementById('tax-content');
-
-            if (taxTab && taxContent) {
-                taxTab.classList.add('active');
-                taxContent.classList.add('active');
-
-                // 生成所有分类的内容到税务区域
-                if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                    generateAllCategoriesContent('tax-articles');
-                } else {
-                    console.warn('⚠️ ArticleCardManager未准备好');
-                }
-            }
-        }
-
-        
-        // 生成所有分类的内容
-        function generateAllCategoriesContent(containerId, fromDataContainer2 = false) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
-
-            // 清空容器
-            container.innerHTML = '';
-
-            
-            // 合并所有分类的文章
-            const allCategories = ['tax', 'legal', 'business', 'visa'];
-            let allArticles = [];
-
-            // 使用统一的数据源选择逻辑
-            allCategories.forEach(category => {
-                const categoryData = fromDataContainer2 ?
-                    window.articleCardManager.getCategoryDataSafely(category, false) :
-                    window.articleCardManager.getCategoryDataSafely(category, true);
-                allArticles = allArticles.concat(categoryData);
-            });
-
-            // 按热度排序
-            allArticles.sort((a, b) => {
-                const scoreA = a.popularity?.hotScore || a.popularity?.views || 0;
-                const scoreB = b.popularity?.hotScore || b.popularity?.views || 0;
-                return scoreB - scoreA;
-            });
-
-            // 生成文章卡片
-            allArticles.forEach(article => {
-                const card = window.articleCardManager.createArticleCard(article);
-                container.appendChild(card);
-            });
-
-                    }
-
-        // 生成筛选后的内容
-        function generateFilteredContent(containerId, categories, filterType, fromDataContainer2 = false) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
-
-            // 清空容器
-            container.innerHTML = '';
-
-            let allArticles = [];
-
-            // 使用统一的数据源选择逻辑
-            categories.forEach(category => {
-                const categoryData = fromDataContainer2 ?
-                    window.articleCardManager.getCategoryDataSafely(category, false) :
-                    window.articleCardManager.getCategoryDataSafely(category, true);
-                allArticles = allArticles.concat(categoryData);
-            });
-
-            // 根据筛选类型过滤
-            let filteredArticles = allArticles;
-            switch(filterType) {
-                case 'featured':
-                    filteredArticles = allArticles.filter(article => article.featured);
-                    break;
-                case 'article':
-                    filteredArticles = allArticles.filter(article => article.type === 'article');
-                    break;
-                case 'faq':
-                    filteredArticles = allArticles.filter(article => article.type === 'faq');
-                    break;
-                case 'recent':
-                    // 按发布日期排序，取最新的内容
-                    filteredArticles = allArticles.filter(article => article.publishDate || article.date).sort((a, b) => {
-                        const dateA = new Date(a.publishDate || a.date);
-                        const dateB = new Date(b.publishDate || b.date);
-                        return dateB - dateA; // 降序排列，最新的在前
-                    });
-                    break;
-                case 'popular':
-                    // 按热度分数排序，显示最热门的内容
-                    filteredArticles = allArticles.filter(article => article.popularity && article.popularity.hotScore).sort((a, b) => {
-                        const scoreA = a.popularity.hotScore || 0;
-                        const scoreB = b.popularity.hotScore || 0;
-                        return scoreB - scoreA; // 降序排列，最热门的在前
-                    });
-                    break;
-                case 'difficulty':
-                    // 难度筛选逻辑将在外部处理，这里只是获取所有文章
-                    filteredArticles = allArticles;
-                    break;
-                case 'subcategory':
-                    // 二级标签筛选逻辑将在外部通过applySubcategoryFilter处理
-                    filteredArticles = allArticles;
-                    break;
-            }
-
-            // 按热度排序（除了最新发布、热门内容和二级标签，因为已经按相应方式排序了）
-            if (filterType !== 'recent' && filterType !== 'popular' && filterType !== 'subcategory') {
-                filteredArticles.sort((a, b) => {
-                    const scoreA = a.popularity?.hotScore || a.popularity?.views || 0;
-                    const scoreB = b.popularity?.hotScore || b.popularity?.views || 0;
-                    return scoreB - scoreA;
+                // 添加"全部难度"选项
+                navHTML += `
+                    <button class="difficulty-button active" data-difficulty="all" title="显示所有难度级别的文章">
+                        <i class="fas fa-layer-group"></i>
+                        <span>全部难度</span>
+                    </button>
+                `;
+                this.data.navigation.difficultyFilters.forEach(difficulty => {
+                    navHTML += `
+                        <button class="difficulty-button" data-difficulty="${difficulty.id}" title="${difficulty.description}">
+                            <i class="${difficulty.icon}"></i>
+                            <span>${difficulty.name}</span>
+                        </button>
+                    `;
                 });
-            }
+                navHTML += `</div></div>`;
 
-            // 生成文章卡片
-            filteredArticles.forEach(article => {
-                const card = window.articleCardManager.createArticleCard(article);
-                container.appendChild(card);
-            });
+                // 分类导航
+                navHTML += `
+                    <div class="nav-section">
+                        <div class="nav-title"><i class="fas fa-folder"></i>文章分类</div>
+                `;
 
-            console.log(`✅ 已生成 ${filteredArticles.length} 篇${filterType}内容文章`);
-        }
+                // 全部按钮
+                navHTML += `
+                    <div class="nav-category">
+                        <div class="nav-category-header active" data-category="all">
+                            <i class="fas fa-th-large"></i>
+                            <span>全部文章</span>
+                            <span>${this.getTotalArticleCount()}</span>
+                        </div>
+                    </div>
+                `;
 
-        // 基于分类生成全部内容（级联筛选）
-        function generateCategoryAllContent(category, containerId, fromDataContainer2 = false) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
+                // 各分类
+                this.data.navigation.structure.forEach(category => {
+                    navHTML += `
+                        <div class="nav-category">
+                            <div class="nav-category-header" data-category="${category.id}" data-expanded="${category.expanded}">
+                                <i class="${category.icon}"></i>
+                                <span>${category.name}</span>
+                                <span>${category.count}</span>
+                                <i class="nav-expand-icon fas fa-chevron-right"></i>
+                            </div>
+                            <div class="nav-children ${category.expanded ? 'expanded' : ''}">
+                    `;
 
-            // 清空容器
-            container.innerHTML = '';
-
-            // 使用统一的数据源选择逻辑获取分类数据
-            const categoryArticles = fromDataContainer2 ?
-                window.articleCardManager.getCategoryDataSafely(category, false) :
-                window.articleCardManager.getCategoryDataSafely(category, true);
-
-            // 按热度排序
-            categoryArticles.sort((a, b) => {
-                const scoreA = a.popularity?.hotScore || a.popularity?.views || 0;
-                const scoreB = b.popularity?.hotScore || b.popularity?.views || 0;
-                return scoreB - scoreA;
-            });
-
-            // 生成文章卡片
-            categoryArticles.forEach(article => {
-                const card = window.articleCardManager.createArticleCard(article);
-                container.appendChild(card);
-            });
-
-            console.log(`✅ 已生成 ${categoryArticles.length} 篇${category}分类全部内容文章`);
-        }
-
-        // 基于分类生成筛选内容（级联筛选）
-        function generateCategoryFilteredContent(category, containerId, filterType, fromDataContainer2 = false) {
-            const container = document.getElementById(containerId);
-            if (!container) {
-                console.error('❌ 找不到容器:', containerId);
-                return;
-            }
-
-            // 清空容器
-            container.innerHTML = '';
-
-            // 使用统一的数据源选择逻辑获取分类数据
-            const categoryArticles = fromDataContainer2 ?
-                window.articleCardManager.getCategoryDataSafely(category, false) :
-                window.articleCardManager.getCategoryDataSafely(category, true);
-
-            // 根据筛选类型过滤
-            let filteredArticles = categoryArticles;
-            switch(filterType) {
-                case 'featured':
-                    filteredArticles = categoryArticles.filter(article => article.featured);
-                    break;
-                case 'article':
-                    filteredArticles = categoryArticles.filter(article => article.type === 'article');
-                    break;
-                case 'faq':
-                    filteredArticles = categoryArticles.filter(article => article.type === 'faq');
-                    break;
-                case 'recent':
-                    // 按发布日期排序，取最新的内容
-                    filteredArticles = categoryArticles.filter(article => article.publishDate || article.date).sort((a, b) => {
-                        const dateA = new Date(a.publishDate || a.date);
-                        const dateB = new Date(b.publishDate || b.date);
-                        return dateB - dateA; // 降序排列，最新的在前
+                    category.children.forEach(child => {
+                        navHTML += `
+                            <div class="nav-subcategory" data-category="${category.id}" data-subcategory="${child.id}">
+                                <i class="${child.icon}"></i>
+                                <span>${child.name}</span>
+                                <span>${child.count}</span>
+                            </div>
+                        `;
                     });
-                    break;
-                case 'popular':
-                    // 按热度分数排序，显示最热门的内容
-                    filteredArticles = categoryArticles.filter(article => article.popularity && article.popularity.hotScore).sort((a, b) => {
-                        const scoreA = a.popularity.hotScore || 0;
-                        const scoreB = b.popularity.hotScore || 0;
-                        return scoreB - scoreA; // 降序排列，最热门的在前
-                    });
-                    break;
-                case 'subcategory':
-                    // 二级标签筛选逻辑将在外部通过applySubcategoryFilter处理
-                    filteredArticles = categoryArticles;
-                    break;
-            }
 
-            // 按热度排序（除了最新发布、热门内容和二级标签，因为已经按相应方式排序了）
-            if (filterType !== 'recent' && filterType !== 'popular' && filterType !== 'subcategory') {
-                filteredArticles.sort((a, b) => {
-                    const scoreA = a.popularity?.hotScore || a.popularity?.views || 0;
-                    const scoreB = b.popularity?.hotScore || b.popularity?.views || 0;
-                    return scoreB - scoreA;
+                    navHTML += `</div></div>`;
                 });
+
+                navHTML += `</div>`;
+                navContainer.innerHTML = navHTML;
+
+                this.bindNavigationExpand();
             }
 
-            // 生成文章卡片
-            filteredArticles.forEach(article => {
-                const card = window.articleCardManager.createArticleCard(article);
-                container.appendChild(card);
-            });
+            bindNavigationExpand() {
+                document.querySelectorAll('.nav-category-header').forEach(header => {
+                    header.addEventListener('click', () => {
+                        const categoryId = header.dataset.category;
 
-            console.log(`✅ 已生成 ${filteredArticles.length} 篇${category}分类${filterType}内容文章`);
-        }
+                        if (categoryId !== 'all') {
+                            const isExpanded = header.dataset.expanded === 'true';
+                            const children = header.nextElementSibling;
 
-        // 切换到指定分类标签
-        async function switchToCategoryTab(mainCategory) {
-            console.log('🔄 切换到分类:', mainCategory);
-            const categoryTabs = document.querySelectorAll('.category-tab');
-            const categoryContents = document.querySelectorAll('.category-content');
-
-            console.log('📋 找到标签数量:', categoryTabs.length, '找到内容数量:', categoryContents.length);
-
-            // 移除所有active类
-            categoryTabs.forEach(tab => tab.classList.remove('active'));
-            // 注意：不要清空所有内容，只是移除active类
-            categoryContents.forEach(content => content.classList.remove('active'));
-
-            // 查找匹配的分类标签
-            let targetTab = null;
-            let targetCategory = '';
-
-            // 根据mainCategory映射到页面标签和文章分类
-            switch(mainCategory) {
-                case 'tax':
-                    targetTab = document.querySelector('[data-category="tax"]');
-                    targetCategory = 'tax';
-                    break;
-                case 'legal':
-                    targetTab = document.querySelector('[data-category="legal"]');
-                    targetCategory = 'legal';
-                    break;
-                case 'business':
-                    targetTab = document.querySelector('[data-category="business"]'); // 修复：直接使用business标签
-                    targetCategory = 'business';
-                    break;
-                case 'visa':
-                    targetTab = document.querySelector('[data-category="visa"]'); // 修复：直接使用visa标签
-                    targetCategory = 'visa';
-                    break;
-                default:
-                    // 如果没有匹配，默认显示所有内容
-                    targetTab = document.querySelector('[data-category="tax"]');
-                    targetCategory = 'tax';
-            }
-
-            if (targetTab) {
-                targetTab.classList.add('active');
-
-                // 映射到实际的容器ID
-                let containerId = `${targetCategory}-articles`;
-                if (mainCategory === 'business') {
-                    containerId = 'subsidy-articles'; // business分类显示在subsidy容器中
-                } else if (mainCategory === 'life') {
-                    containerId = 'faq-articles'; // life分类显示在faq容器中
-                }
-
-                const targetContent = document.getElementById(containerId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                    console.log('✅ 激活内容区域:', containerId);
-
-                    // 生成对应分类的文章卡片（使用传统模式）
-                    if (window.articleCardManager) {
-                        console.log('🔄 开始生成文章卡片:', targetCategory, containerId);
-
-                        // 等待数据加载完成
-                        if (window.articleCardManager.dataLoaded) {
-                            window.articleCardManager.generateArticleGrid(targetCategory, containerId);
-                        } else {
-                            console.log('⏳ 等待文章数据加载...');
-                            const waitForData = setInterval(() => {
-                                if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                                    console.log('✅ 数据加载完成，开始生成文章卡片');
-                                    clearInterval(waitForData);
-                                    window.articleCardManager.generateArticleGrid(targetCategory, containerId);
-                                }
-                            }, 100);
-
-                            // 5秒后停止等待
-                            setTimeout(() => {
-                                clearInterval(waitForData);
-                                if (!window.articleCardManager.dataLoaded) {
-                                    console.warn('⚠️ 等待数据超时，可能无法显示文章');
-                                }
-                            }, 5000);
-                        }
-                    } else {
-                        console.warn('⚠️ ArticleCardManager未找到');
-                    }
-                } else {
-                    console.error('❌ 找不到内容容器:', `${targetCategory}-content`);
-                }
-            } else {
-                console.error('❌ 找不到目标标签:', mainCategory);
-            }
-        }
-
-        // 根据子分类进一步过滤内容
-        function filterContentBySubcategory(subcategory) {
-            const articleCards = document.querySelectorAll('.article-card');
-
-            articleCards.forEach(card => {
-                const cardTags = card.querySelector('.article-tags');
-                const cardTitle = card.querySelector('.article-title');
-                const hasMatchingTag = cardTags && cardTags.textContent.includes(subcategory);
-                const hasMatchingTitle = cardTitle && cardTitle.textContent.includes(subcategory);
-
-                if (hasMatchingTag || hasMatchingTitle) {
-                    card.style.display = 'flex';
-                    card.style.border = '2px solid #3b82f6';
-                    card.style.boxShadow = '0 0 10px rgba(59, 130, 246, 0.3)';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // 分类切换功能
-        async function initializeCategoryTabs() {
-            const categoryTabs = document.querySelectorAll('.category-tab');
-            const categoryContents = document.querySelectorAll('.category-content');
-
-            categoryTabs.forEach(tab => {
-                tab.addEventListener('click', async () => {
-                    const targetCategory = tab.dataset.category;
-                    console.log('🏷️ 分类标签点击:', targetCategory);
-
-                    // 移除所有active类
-                    categoryTabs.forEach(t => t.classList.remove('active'));
-                    categoryContents.forEach(c => c.classList.remove('active'));
-
-                    // 添加active类到当前选中的标签和内容
-                    tab.classList.add('active');
-                    const targetContent = document.getElementById(`${targetCategory}-content`);
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                    }
-
-                    // 重置热门标签状态并设置导航栏状态
-                    if (window.knowledgeNavigation) {
-                        window.knowledgeNavigation.currentFilters.quickFilter = null;
-                        window.knowledgeNavigation.currentFilters.quickFilterActive = false;
-
-                        if (targetCategory === 'all') {
-                            // 如果选择"全部"，重置导航栏状态
-                            window.knowledgeNavigation.currentFilters.category = null;
-                            window.knowledgeNavigation.currentFilters.navigationActive = false;
-                            console.log('🔄 重置导航栏状态为全部');
-                        } else {
-                            // 如果选择具体分类，设置导航栏状态
-                            window.knowledgeNavigation.currentFilters.category = targetCategory;
-                            window.knowledgeNavigation.currentFilters.navigationActive = true;
-                            console.log('🔄 设置导航栏状态为分类:', targetCategory);
-                        }
-
-                        // 重新渲染导航以更新热门标签状态
-                        setTimeout(() => {
-                            window.knowledgeNavigation.renderNavigation('knowledgeNavigation');
-                        }, 50);
-                    }
-
-                    // 生成文章卡片
-                    if (window.articleCardManager) {
-                        if (targetCategory === 'all') {
-                            // 如果选择的是"全部"，生成所有分类的内容（传统模式）
-                                                        if (window.articleCardManager.dataLoaded) {
-                                generateAllCategoriesContent('all-articles', false);
+                            if (isExpanded) {
+                                header.dataset.expanded = 'false';
+                                children.classList.remove('expanded');
+                                header.querySelector('.nav-expand-icon').className = 'nav-expand-icon fas fa-chevron-right';
+                            } else {
+                                header.dataset.expanded = 'true';
+                                children.classList.add('expanded');
+                                header.querySelector('.nav-expand-icon').className = 'nav-expand-icon fas fa-chevron-down';
                             }
-                        } else {
-                            // 生成单个分类的文章卡片（传统模式）
-                            console.log('📂 显示分类内容:', targetCategory);
-                            window.articleCardManager.generateArticleGrid(targetCategory, `${targetCategory}-articles`);
                         }
+
+                        this.selectCategory(categoryId);
+                    });
+                });
+
+                document.querySelectorAll('.nav-subcategory').forEach(sub => {
+                    sub.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const categoryId = sub.dataset.category;
+                        const subcategoryId = sub.dataset.subcategory;
+                        this.selectSubCategory(categoryId, subcategoryId);
+                    });
+                });
+            }
+
+            selectCategory(categoryId) {
+                document.querySelectorAll('.nav-category-header').forEach(h => h.classList.remove('active'));
+                document.querySelector(`[data-category="${categoryId}"]`).classList.add('active');
+                document.querySelectorAll('.nav-subcategory').forEach(s => s.classList.remove('active'));
+
+                this.currentCategory = categoryId;
+                this.renderArticles(categoryId);
+                this.updateTabActive(categoryId);
+            }
+
+            selectSubCategory(categoryId, subcategoryId) {
+                document.querySelectorAll('.nav-category-header').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.nav-subcategory').forEach(s => s.classList.remove('active'));
+                document.querySelector(`[data-subcategory="${subcategoryId}"]`).classList.add('active');
+
+                const categoryArticles = this.data.categories[categoryId] || [];
+                const subcategoryArticles = categoryArticles.filter(article =>
+                    article.id && article.id.includes(subcategoryId)
+                );
+
+                this.showContentArea(categoryId);
+                const container = document.getElementById(`${categoryId}-articles`);
+                if (container) {
+                    container.innerHTML = subcategoryArticles.length ?
+                        subcategoryArticles.map(article => this.createArticleCard(article)).join('') :
+                        '<div class="no-results"><i class="fas fa-search"></i><h3>暂无文章</h3></div>';
+                }
+            }
+
+            updateTabActive(category) {
+                document.querySelectorAll('.category-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.category === category) tab.classList.add('active');
+                });
+            }
+
+            showContentArea(category) {
+                document.querySelectorAll('.category-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                const targetId = category === 'all' ? 'all-content' : `${category}-content`;
+                document.getElementById(targetId).classList.add('active');
+            }
+
+            getTotalArticleCount() {
+                let total = 0;
+                Object.values(this.data.categories).forEach(articles => total += articles.length);
+                return total;
+            }
+
+            renderArticles(category) {
+                let articles = category === 'all' ?
+                    Object.values(this.data.categories).flat() :
+                    this.data.categories[category] || [];
+
+                // 应用筛选
+                if (this.currentQuickFilter) articles = this.applyQuickFilter(articles);
+                if (this.currentDifficulty && this.currentDifficulty !== 'all') articles = articles.filter(a => this.getDifficultyClass(a.difficulty) === this.currentDifficulty);
+                if (this.searchTerm) articles = this.applySearchFilter(articles);
+
+                this.showContentArea(category);
+                const container = document.getElementById(category === 'all' ? 'all-articles' : `${category}-articles`);
+                if (container) {
+                    container.innerHTML = articles.length ?
+                        articles.map(article => this.createArticleCard(article)).join('') :
+                        '<div class="no-results"><i class="fas fa-search"></i><h3>暂无文章</h3></div>';
+                }
+            }
+
+            applyQuickFilter(articles) {
+                switch (this.currentQuickFilter) {
+                    case 'filter-featured': return articles.filter(a => a.featured);
+                    case 'filter-articles': return articles.filter(a => a.type !== 'faq');
+                    case 'filter-faq': return articles.filter(a => a.type === 'faq');
+                    case 'filter-recent': return articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    case 'filter-popular': return articles.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+                    default: return articles;
+                }
+            }
+
+            applySearchFilter(articles) {
+                const searchLower = this.searchTerm.toLowerCase();
+                return articles.filter(article =>
+                    article.title.toLowerCase().includes(searchLower) ||
+                    article.excerpt.toLowerCase().includes(searchLower) ||
+                    article.tags.some(tag => tag.toLowerCase().includes(searchLower))
+                );
+            }
+
+            createArticleCard(article) {
+                const colors = {
+                    '企业落地': '#3b82f6', '签证政策': '#8b5cf6', '税务筹划': '#10b981',
+                    '法务合规': '#f59e0b', '补助金申请': '#ef4444', '生活支援': '#ec4899'
+                };
+                const color = colors[article.category] || '#64748b';
+                const icons = {
+                    'business': 'fas fa-building', 'visa': 'fas fa-passport', 'tax': 'fas fa-coins',
+                    'legal': 'fas fa-balance-scale', 'subsidy': 'fas fa-gift', 'life': 'fas fa-home'
+                };
+
+                const difficultyClass = this.getDifficultyClass(article.difficulty);
+                const popularity = article.popularity || {};
+                const hotScore = popularity.hotScore || 0;
+
+                return `
+                    <div class="article-card ${article.featured ? 'featured' : ''}" onclick="window.openArticle('${article.url || '#'}')">
+                        <div class="article-image" style="background: linear-gradient(135deg, ${color}, ${this.adjustColor(color, -20)});">
+                            ${article.featured ? '<div class="featured-badge"><i class="fas fa-star"></i>精选</div>' : ''}
+                            <i class="${article.icon || icons[article.categoryId] || 'fas fa-file-alt'}"></i>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <div class="article-category">
+                                    <i class="fas fa-tag" style="font-size: 10px;"></i>
+                                    <span style="color: ${color};">${article.category}</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span class="difficulty-tag ${difficultyClass}">${article.difficulty || '初级'}</span>
+                                    ${article.readingTime ? `<span style="color: #9ca3af; font-size: 10px;"><i class="fas fa-clock"></i> ${article.readingTime}</span>` : ''}
+                                </div>
+                            </div>
+                            <h3 class="article-title">${this.escapeHtml(article.title)}</h3>
+                            <p class="article-excerpt">${this.escapeHtml(article.excerpt)}</p>
+                            <div class="article-stats" style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 11px; color: #6b7280;">
+                                ${article.views ? `<span><i class="fas fa-eye"></i> ${this.formatNumber(article.views)}</span>` : ''}
+                                ${popularity.clicks ? `<span><i class="fas fa-mouse-pointer"></i> ${this.formatNumber(popularity.clicks)}</span>` : ''}
+                                ${popularity.rating ? `<span><i class="fas fa-star" style="color: #f59e0b;"></i> ${popularity.rating}</span>` : ''}
+                                ${hotScore > 70 ? `<span style="color: #ef4444; font-weight: 600;"><i class="fas fa-fire"></i> 热门</span>` : ''}
+                                ${popularity.trend === 'up' ? '<span style="color: #10b981;"><i class="fas fa-arrow-up"></i> 上升</span>' : ''}
+                            </div>
+                            <div class="article-tags">
+                                ${article.tags.map(tag => `<span class="tag">${this.escapeHtml(tag)}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            adjustColor(color, amount) {
+                const num = parseInt(color.replace("#", ""), 16);
+                const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+                const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
+                const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
+                return "#" + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+            }
+
+            formatNumber(num) {
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'k';
+                }
+                return num.toString();
+            }
+
+            getDifficultyClass(difficulty) {
+                const difficultyMap = {
+                    '初级': 'beginner',
+                    '中级': 'intermediate',
+                    '高级': 'advanced',
+                    'beginner': 'beginner',
+                    'intermediate': 'intermediate',
+                    'advanced': 'advanced'
+                };
+                return difficultyMap[difficulty] || 'beginner';
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            bindEvents() {
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.filter-button')) {
+                        const btn = e.target.closest('.filter-button');
+                        document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentQuickFilter = btn.dataset.filter;
+                        this.renderArticles(this.currentCategory);
+                    }
+
+                    if (e.target.closest('.difficulty-button')) {
+                        const btn = e.target.closest('.difficulty-button');
+                        document.querySelectorAll('.difficulty-button').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentDifficulty = btn.dataset.difficulty;
+                        this.renderArticles(this.currentCategory);
+                    }
+
+                    if (e.target.closest('.category-tab')) {
+                        const tab = e.target.closest('.category-tab');
+                        const category = tab.dataset.category;
+
+                        this.currentQuickFilter = null;
+                        this.currentDifficulty = null;
+                        this.searchTerm = '';
+                        document.getElementById('searchInput').value = '';
+                        document.querySelectorAll('.filter-button, .difficulty-button').forEach(b => b.classList.remove('active'));
+
+                        this.renderArticles(category);
                     }
                 });
-            });
-        }
 
-        // 初始化默认内容显示
-        function initializeDefaultContent() {
-      
-            // 延迟执行确保文章卡片管理器已加载
-            setTimeout(() => {
-                if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                    // 确保开始时没有数据容器2（使用原始数据容器）
-                    window.articleCardManager.clearFilteredData();
-
-                    // 设置导航栏和热门标签的初始状态
-                    if (window.knowledgeNavigation) {
-                        window.knowledgeNavigation.currentFilters.category = null;
-                        window.knowledgeNavigation.currentFilters.navigationActive = false;
-                        window.knowledgeNavigation.currentFilters.quickFilter = 'filter-all'; // 设置"全部内容"为选中
-                        window.knowledgeNavigation.currentFilters.quickFilterActive = true;
-
-                        // 重新渲染导航栏以显示"全部内容"为选中状态
-                        window.knowledgeNavigation.renderNavigation('knowledgeNavigation');
-                    }
-
-                    // 激活全部标签并生成初始内容
-                    activateTab('all');
-
-                    // 生成初始内容（此时会触发数据容器变化，智能分页逻辑会在之后介入）
-                    const event = new CustomEvent('navigationFilterChange', {
-                        detail: {
-                            category: 'all',
-                            subcategory: null,
-                            quickFilter: 'filter-all',
-                            difficulty: null,
-                            search: '',
-                            action: 'show-all',
-                            targetContainer: 'tax-articles',
-                            dataCategories: ['business', 'visa', 'tax', 'legal'],
-                            navigationActive: false,
-                            quickFilterActive: true,
-                            fromDataContainer2: false
-                        }
-                    });
-                    document.dispatchEvent(event);
-                } else {
-                    // 如果数据还未加载，再次尝试
-                                    setTimeout(initializeDefaultContent, 1000);
-                }
-            }, 500);
-        }
-
-        // 订阅表单处理
-        function initializeSubscribeForm() {
-            const subscribeForm = document.getElementById('subscribeForm');
-            if (subscribeForm) {
-                subscribeForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = e.target.querySelector('.subscribe-input').value;
-                    if (email) {
-                        alert('感谢订阅！我们将向 ' + email + ' 发送最新知识更新。');
-                        e.target.reset();
-                    }
+                const searchInput = document.getElementById('searchInput');
+                searchInput?.addEventListener('input', (e) => {
+                    clearTimeout(this.searchTimer);
+                    this.searchTimer = setTimeout(() => {
+                        this.searchTerm = e.target.value.trim();
+                        this.renderArticles(this.currentCategory);
+                    }, 300);
                 });
             }
         }
 
-    // ================================
-    // 数据容器变化通知-自动刷新系统
-    // ================================
-
-    /**
-     * 初始化数据容器监听器
-     */
-    function initializeDataContainerListener() {
-      
-        // 监听ArticleCardManager发送的数据容器变化通知
-        document.addEventListener('dataContainerChanged', handleDataContainerChanged);
-
-        // 监听分页变化事件
-        document.addEventListener('paginationChanged', handlePaginationChanged);
-
-        // 监听分页配置变化事件
-        document.addEventListener('paginationConfigChanged', handlePaginationConfigChanged);
-
-      }
-
-    /**
-     * 处理分页变化事件
-     */
-    function handlePaginationChanged(event) {
         
-        const { containerId, page, category, useContainer1 } = event.detail;
+        function openArticle(url) {
+            if (url && url !== '#') {
+                // 从URL中提取完整文章ID (例如: "knowledge/business-registration-01.html" -> "business-registration-01")
+                const articleId = url.replace(/^knowledge\//, '').replace(/\.html$/, '');
 
-        // 更新当前分类的分页状态
-        if (category && window.articleCardManager) {
-            window.articleCardManager.updatePaginationState(category, page);
+                // 跳转到新的详情页，并传递文章ID参数
+                window.location.href = `knowledge-detail-new.html?id=${articleId}`;
+            }
         }
 
-        // 显示分页变化通知
-        showDataLoadNotification(`第 ${page} 页`, 'info');
+        window.openArticle = openArticle;
 
-        // 注意：不在这里重新生成分页内容，让数据容器变化监听器处理
-        // 分页内容应该通过数据容器变化事件来触发
-    }
-
-    /**
-     * 处理分页配置变化事件
-     */
-    function handlePaginationConfigChanged(event) {
-        console.log('⚙️ 收到分页配置变化事件:', event.detail);
-
-        const { containerId, itemsPerPage } = event.detail;
-
-        // 保存用户偏好到本地存储
-        localStorage.setItem('knowledgePaginationItemsPerPage', itemsPerPage.toString());
-
-        // 显示配置变化通知
-        showDataLoadNotification(`每页显示 ${itemsPerPage} 项`, 'success');
-
-        // 重新生成当前内容以应用新的分页配置
-        refreshCurrentPageContent();
-    }
-
-    /**
-     * 处理数据容器变化的统一函数
-     */
-    function handleDataContainerChanged(event) {
-      
-        const { eventType, data } = event.detail;
-
-        switch(eventType) {
-            case 'container1-initialized':
-                              showDataLoadNotification('数据加载完成', 'success');
-
-                // 数据容器1初始化完成后，自动显示全部内容
-                setTimeout(() => {
-                    if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                        // 激活"全部"标签页
-                        activateTab('all');
-
-                        // 生成全部内容的文章网格
-                        generateAllCategoriesContent('all-articles', false); // 从数据容器1加载
-
-                                        }
-                }, 100);
-                break;
-
-            case 'container1-initialized-fallback':
-                                showDataLoadNotification('数据加载完成（备用数据）', 'warning');
-
-                // 使用备用数据时也要显示内容
-                setTimeout(() => {
-                    if (window.articleCardManager && window.articleCardManager.dataLoaded) {
-                        // 激活"全部"标签页
-                        activateTab('all');
-
-                        // 生成全部内容的文章网格
-                        generateAllCategoriesContent('all-articles', false); // 从数据容器1加载
-
-                                            }
-                }, 100);
-                break;
-
-            case 'container2-updated':
-                                showDataLoadNotification('筛选完成', 'info');
-                break;
-
-            case 'container2-cleared':
-                                showDataLoadNotification('显示全部内容', 'info');
-                break;
-
-            default:
-                        }
-    }
-
-    
-    /**
-     * 刷新当前页面内容
-     */
-    async function refreshCurrentPageContent() {
-        console.log('🔄 自动刷新当前页面内容');
-
-        // 检查当前活跃的标签
-        const activeTab = document.querySelector('.category-tab.active');
-        if (!activeTab) {
-            console.warn('⚠️ 没有找到活跃的标签，跳过刷新');
-            return;
-        }
-
-        const activeCategory = activeTab.dataset.category;
-        console.log('📂 当前活跃分类:', activeCategory);
-
-        // 注意：不再在这里直接处理内容刷新
-        // 内容刷新应该通过触发相应的数据容器变化事件来处理
-        // 分页逻辑只会通过数据容器变化监听器执行
-        console.log('🔄 内容刷新请求，将通过数据容器变化事件处理');
-    }
-
-    /**
-     * 显示数据加载通知
-     */
-    function showDataLoadNotification(message, type = 'info') {
-        console.log('💬 显示通知:', message, type);
-
-        // 创建通知元素
-        const notification = document.createElement('div');
-        notification.className = `data-notification ${type}`;
-        notification.textContent = message;
-
-        // 设置样式
-        Object.assign(notification.style, {
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            padding: '12px 20px',
-            borderRadius: '8px',
-            fontSize: '14px',
-            fontWeight: '500',
-            zIndex: '9999',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-            transform: 'translateX(100%)',
-            transition: 'transform 0.3s ease-in-out',
-            maxWidth: '300px',
-            wordWrap: 'break-word'
+        document.addEventListener('DOMContentLoaded', () => {
+            new CompleteKnowledgeBase();
         });
-
-        // 根据类型设置颜色
-        switch(type) {
-            case 'success':
-                notification.style.background = '#10b981';
-                notification.style.color = 'white';
-                break;
-            case 'warning':
-                notification.style.background = '#f59e0b';
-                notification.style.color = 'white';
-                break;
-            case 'error':
-                notification.style.background = '#ef4444';
-                notification.style.color = 'white';
-                break;
-            default: // info
-                notification.style.background = '#3b82f6';
-                notification.style.color = 'white';
-        }
-
-        // 添加到页面
-        document.body.appendChild(notification);
-
-        // 显示动画
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-
-        // 自动隐藏
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 2000);
-    }
-
     </script>
+
+    <script src="script.js?v=2.2" defer></script>
 </body>
 </html>

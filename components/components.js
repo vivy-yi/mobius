@@ -9,7 +9,7 @@ class ComponentManager {
         this.currentPage = this.getCurrentPage();
 
         // 立即显示版本信息
-        console.log(`🚀 ComponentManager v${this.version} 已加载 - Logo已更新为图片!`);
+        // console.log(`🚀 ComponentManager v${this.version} 已加载 - Logo已更新为图片!`);
     }
 
     /**
@@ -55,7 +55,11 @@ class ComponentManager {
             <div class="logo-container">
                 <a href="index.html" class="logo-link" title="返回首页">
                     <div class="mobius-logo">
-                        <img src="${this.baseUrl}assets/imgs/logo.png" alt="Mobius Logo" class="logo-image">
+                        <picture>
+                            <source srcset="${this.baseUrl}assets/imgs/logo-medium.webp" type="image/webp">
+                            <source srcset="${this.baseUrl}assets/imgs/logo-tiny.png" type="image/png">
+                            <img src="${this.baseUrl}assets/imgs/logo-tiny.png" alt="Mobius Logo" class="logo-image" width="120" height="40" loading="lazy">
+                        </picture>
                     </div>
                 </a>
                 <a href="index.html" class="brand-link" title="返回首页">
@@ -186,7 +190,11 @@ class ComponentManager {
                     <div class="logo-container">
                         <a href="index.html" class="logo-link" title="返回首页">
                             <div class="mobius-logo">
-                                <img src="${this.baseUrl}assets/imgs/logo.png" alt="Mobius Logo" class="logo-image">
+                                <picture>
+                                    <source srcset="${this.baseUrl}assets/imgs/logo-medium.webp" type="image/webp">
+                                    <source srcset="${this.baseUrl}assets/imgs/logo-tiny.png" type="image/png">
+                                    <img src="${this.baseUrl}assets/imgs/logo-tiny.png" alt="Mobius Logo" class="logo-image" width="120" height="40" loading="lazy">
+                                </picture>
                             </div>
                         </a>
                         <a href="index.html" class="brand-link" title="返回首页">
@@ -359,6 +367,6 @@ window.componentManager = new ComponentManager();
 window.componentManager.init();
 
 // 调试信息 - 确认logo更新
-console.log('📝 Mobius Components.js v2.0 - Logo已更新为图片版本');
-console.log('📱 当前时间:', new Date().toLocaleString());
-console.log('🖼️ Logo图片路径测试:', window.componentManager.baseUrl + 'assets/imgs/logo.png');
+// console.log('📝 Mobius Components.js v2.0 - Logo已更新为图片版本');
+// console.log('📱 当前时间:', new Date().toLocaleString());
+// console.log('🖼️ Logo图片路径测试:', window.componentManager.baseUrl + 'assets/imgs/logo.png');

@@ -161,7 +161,7 @@ class SeoAccessibilityOptimizer {
             '@type': 'Organization',
             name: 'Mobius',
             url: 'https://mobius-service.com',
-            logo: 'https://mobius-service.com/assets/imgs/logo.png',
+            logo: 'https://mobius-service.com/assets/imgs/logo-medium.webp',
             description: '专业的中日企业服务平台',
             contactPoint: {
                 '@type': 'ContactPoint',
@@ -455,7 +455,7 @@ class SeoAccessibilityOptimizer {
         this.setupFocusTrap();
 
         // 跳过链接焦点
-        this.setupSkipLinks();
+        this.addSkipLinks();
 
         // 焦点指示器
         this.enhanceFocusVisibility();

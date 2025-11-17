@@ -10,8 +10,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../components/service-advantages.css">
-    <link rel="stylesheet" href="../components/service-faq.css">
+    <link rel="stylesheet" href="../styles/css/components/service-advantages.css">
+    <link rel="stylesheet" href="../styles/css/components/service-faq.css">
+    <style>
+        /* 面包屑导航样式 */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb i {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+    </style>
     </head>
 <body>
 
@@ -19,7 +48,11 @@
         <div class="container">
             <div class="service-hero-content">
                 <div class="breadcrumb">
-                    <a href="../index.html">首页</a> → <span>核心服务</span> → <span>法务・合同服务</span>
+                    <a href="../index.html">首页</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>核心服务</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>法务・合同服务</span>
                 </div>
                 <h1>日本法务・合同支持</h1>
                 <p>中日英三语合同审核与合规支持，企业法律风险提示与排查，保障您的商业安全。</p>

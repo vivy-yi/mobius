@@ -3,7 +3,7 @@
  * 包含点赞、收藏、评论、分享等功能
  */
 
-class ZhihuArticleInteractions {
+class MobiusArticleInteractions {
     constructor() {
         this.init();
     }
@@ -24,7 +24,7 @@ class ZhihuArticleInteractions {
             button.addEventListener('click', function() {
                 const count = parseInt(this.dataset.count) || 0;
                 const isActive = this.classList.contains('active');
-                const countSpan = this.querySelector('.zhihu-interaction-count');
+                const countSpan = this.querySelector('.mobius-interaction-count');
 
                 if (isActive) {
                     this.classList.remove('active');
@@ -45,13 +45,13 @@ class ZhihuArticleInteractions {
 
     // 初始化收藏功能
     initCollectButtons() {
-        const collectButtons = document.querySelectorAll('.zhihu-collect-btn');
+        const collectButtons = document.querySelectorAll('.mobius-collect-btn');
 
         collectButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const count = parseInt(this.dataset.count) || 0;
                 const isActive = this.classList.contains('active');
-                const countSpan = this.querySelector('.zhihu-interaction-count');
+                const countSpan = this.querySelector('.mobius-interaction-count');
 
                 if (isActive) {
                     this.classList.remove('active');
@@ -72,15 +72,15 @@ class ZhihuArticleInteractions {
 
     // 初始化评论功能
     initCommentButtons() {
-        const commentButtons = document.querySelectorAll('.zhihu-comment-btn');
+        const commentButtons = document.querySelectorAll('.mobius-comment-btn');
 
         commentButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const commentCount = parseInt(this.dataset.count) || 0;
-                const countSpan = this.querySelector('.zhihu-interaction-count');
+                const countSpan = this.querySelector('.mobius-interaction-count');
 
                 // 如果有评论区域，滚动到评论区域
-                const commentsSection = document.querySelector('.zhihu-comments-section');
+                const commentsSection = document.querySelector('.mobius-comments-section');
                 if (commentsSection) {
                     commentsSection.scrollIntoView({ behavior: 'smooth' });
                 } else {
@@ -99,7 +99,7 @@ class ZhihuArticleInteractions {
 
     // 初始化分享功能
     initShareButtons() {
-        const shareButtons = document.querySelectorAll('.zhihu-share-btn');
+        const shareButtons = document.querySelectorAll('.mobius-share-btn');
 
         shareButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -119,7 +119,7 @@ class ZhihuArticleInteractions {
                     <button class="zhihu-modal-close">&times;</button>
                 </div>
                 <div class="zhihu-modal-body">
-                    <textarea class="zhihu-comment-input" placeholder="写下你的评论..."></textarea>
+                    <textarea class="mobius-comment-input" placeholder="写下你的评论..."></textarea>
                 </div>
                 <div class="zhihu-modal-footer">
                     <button class="zhihu-btn zhihu-btn-secondary">取消</button>
@@ -137,26 +137,26 @@ class ZhihuArticleInteractions {
         const modal = document.createElement('div');
         modal.className = 'zhihu-modal-overlay';
         modal.innerHTML = `
-            <div class="zhihu-modal zhihu-share-modal">
+            <div class="zhihu-modal mobius-share-modal">
                 <div class="zhihu-modal-header">
                     <h3>分享到</h3>
                     <button class="zhihu-modal-close">&times;</button>
                 </div>
                 <div class="zhihu-modal-body">
-                    <div class="zhihu-share-platforms">
-                        <button class="zhihu-share-platform" data-platform="wechat">
+                    <div class="mobius-share-platforms">
+                        <button class="mobius-share-platform" data-platform="wechat">
                             <i class="fab fa-weixin"></i>
                             <span>微信</span>
                         </button>
-                        <button class="zhihu-share-platform" data-platform="weibo">
+                        <button class="mobius-share-platform" data-platform="weibo">
                             <i class="fab fa-weibo"></i>
                             <span>微博</span>
                         </button>
-                        <button class="zhihu-share-platform" data-platform="qq">
+                        <button class="mobius-share-platform" data-platform="qq">
                             <i class="fab fa-qq"></i>
                             <span>QQ</span>
                         </button>
-                        <button class="zhihu-share-platform" data-platform="link">
+                        <button class="mobius-share-platform" data-platform="link">
                             <i class="fas fa-link"></i>
                             <span>复制链接</span>
                         </button>
@@ -193,7 +193,7 @@ class ZhihuArticleInteractions {
 
     // 初始化分享平台按钮
     initSharePlatforms(modal) {
-        const platforms = modal.querySelectorAll('.zhihu-share-platform');
+        const platforms = modal.querySelectorAll('.mobius-share-platform');
 
         platforms.forEach(platform => {
             platform.addEventListener('click', function() {
@@ -299,7 +299,7 @@ class ZhihuArticleInteractions {
         const collectKey = `zhihu_collect_${articleId}`;
         const collectState = localStorage.getItem(collectKey) === 'true';
         if (collectState) {
-            const collectBtn = document.querySelector('.zhihu-collect-btn');
+            const collectBtn = document.querySelector('.mobius-collect-btn');
             if (collectBtn) {
                 collectBtn.classList.add('active');
             }
@@ -309,7 +309,7 @@ class ZhihuArticleInteractions {
 
 // 当页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
-    new ZhihuArticleInteractions();
+    new MobiusArticleInteractions();
 });
 
 // 添加必要的CSS样式
@@ -338,7 +338,7 @@ style.textContent = `
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .zhihu-share-modal {
+    .mobius-share-modal {
         max-width: 400px;
     }
 
@@ -389,7 +389,7 @@ style.textContent = `
         gap: 12px;
     }
 
-    .zhihu-comment-input {
+    .mobius-comment-input {
         width: 100%;
         min-height: 100px;
         padding: 12px;
@@ -400,7 +400,7 @@ style.textContent = `
         resize: vertical;
     }
 
-    .zhihu-comment-input:focus {
+    .mobius-comment-input:focus {
         outline: none;
         border-color: #0084FF;
     }
@@ -433,13 +433,13 @@ style.textContent = `
         background: #0077E6;
     }
 
-    .zhihu-share-platforms {
+    .mobius-share-platforms {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
 
-    .zhihu-share-platform {
+    .mobius-share-platform {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -451,18 +451,18 @@ style.textContent = `
         transition: all 0.2s;
     }
 
-    .zhihu-share-platform:hover {
+    .mobius-share-platform:hover {
         border-color: #0084FF;
         background: #E5F3FF;
     }
 
-    .zhihu-share-platform i {
+    .mobius-share-platform i {
         font-size: 24px;
         margin-bottom: 8px;
         color: #0084FF;
     }
 
-    .zhihu-share-platform span {
+    .mobius-share-platform span {
         font-size: 14px;
         color: #1A1A1A;
     }

@@ -3,89 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本租房全攻略 - Mobius知识库</title>
-    <meta name="description" content="从找房到签约，详细解读日本租房的各个环节、费用结构和注意事项...">
-    <link rel="stylesheet" href="../style.css">
+    <title>在日住房解决方案 - Mobius 知识库</title>
+    <meta name="description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+    <meta name="keywords" content="日本租房,外国人住房,租房保证人, housing in Japan">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="在日住房解决方案 - Mobius 知识库">
+    <meta property="og:description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mobius-service.com/knowledge/life-article-housing">
+    <meta property="og:site_name" content="Mobius 知识库">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="在日住房解决方案 - Mobius 知识库">
+    <meta name="twitter:description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/favicon.ico">
+
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../components/zhihu-article.css">
-    <link rel="stylesheet" href="../components/browser-compatibility.css">
-    <link rel="stylesheet" href="../components/zhihu-mobile.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href=".../styles/css/components/knowledge-detail.css">
+
+    <!-- Critical CSS Inline -->
+    <style>
+        /* 防止页面闪烁的关键CSS */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .nav-breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .breadcrumb a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb a:hover, .breadcrumb a:focus {
+            color: #1e40af;
+            text-decoration: underline;
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .error-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #dc2626;
+        }
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #dc2626;
+        }
+        .error-message h2 {
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+        .error-message a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .error-message a:hover, .error-message a:focus {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <article class="zhihu-article-wrapper">
-            <header class="zhihu-article-header">
-            <div class="zhihu-author-info">
-                <div class="zhihu-author-avatar">M</div>
-                <div class="zhihu-author-details">
-                    <div class="zhihu-author-name">Mobius专业团队</div>
-                    <div class="zhihu-article-meta">
-                        <span class="zhihu-article-date">2024年1月23日</span>
-                        <span class="zhihu-article-reading">12分钟阅读</span>
-                    </div>
-                </div>
+    <!-- 导航栏将由动态加载 -->
+    <div id="navbar-container"></div>
+
+    <!-- 面包屑导航 -->
+    <nav class="nav-breadcrumb" role="navigation" aria-label="面包屑导航">
+        <div class="breadcrumb-container">
+            <div class="breadcrumb">
+                <a href="../index.html" aria-label="返回首页">
+                    <i class="fas fa-home"></i>
+                </a>
+                <span aria-hidden="true">/</span>
+                <a href="../knowledge.html" aria-label="知识库首页">知识库</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">生活支援</span>
             </div>
-                <h1 class="zhihu-article-title">日本租房全攻略</h1>
-                <div class="zhihu-article-excerpt">
-                    <p>从找房到签约，详细解读日本租房的各个环节、费用结构和注意事项...</p>
-                </div>
-            </header>
+        </div>
+    </nav>
 
-            <div class="zhihu-content-layout">
-                <div class="zhihu-main-content"><div class="zhihu-article-body">
-                        <h2>🏠 日本租房市场特点</h2>
-
-                        <h3>日本租房的独特性</h3>
-                        <ul>
-                            <li><strong>初期费用高</strong>：礼金、敷金、仲介费等初始成本约为月租的4-6倍</li>
-                            <li><strong>保证人制度</strong>：几乎所有房源都需要保证人或保证公司</li>
-                            <li><strong>审查严格</strong>：外国人需要更严格的资格审查</li>
-                            <li><strong>设备标准</strong>：通常不包含家具家电</li>
-                            <li><strong>契约文化</strong>：重视书面契约和规定事项</li>
-                        </ul>
-
-                        <h3>房源类型分类</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>类型</th>
-                                    <th>日语</th>
-                                    <th>特点</th>
-                                    <th>适合人群</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>单身公寓</strong></td>
-                                    <td>ワンルーム</td>
-                                    <td>1K/1DK/1LDK，20-30㎡</td>
-                                    <td>单身人士、学生</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>家庭公寓</strong></td>
-                                    <td>ファミリー向け</td>
-                                    <td>2LDK以上，50㎡+</td>
-                                    <td>家庭、情侣</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>高级公寓</strong></td>
-                                    <td>マンション</td>
-                                    <td>钢筋混凝土，设备先进</td>
-                                    <td>追求高品质生活</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>传统住宅</strong></td>
-                                    <td>一戸建て</td>
-                                    <td>独栋房屋，私密性好</td>
-                                    <td>长期居住家庭</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h2>💰 详细费用结构解析</h2>
+    <!-- 文章容器 -->
+    <main class="article-container" role="main">
+        <article id="article-content">
+            <!-- 文章内容将通过JavaScript动态加载 -->
+            <div class="loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span style="margin-left: 0.5rem;"><h2>💰 详细费用结构解析</h2>
 
                         <h3>初期费用明细（以月租10万日元为例）</h3>
                         <table>
@@ -385,49 +441,95 @@
                         <div class="info-box">
                             <h3>💡 专家建议</h3>
                             <p>作为在日外国人租房，最重要的是充分准备和耐心。建议提前3-6个月开始找房，准备所有必要的文件，选择有外国人服务经验的中介公司。初期费用虽然较高，但可以通过寻找优惠房源来降低成本。记住，良好的沟通和遵守日本租房文化是成功租房的关键。</p>
-                        </div>
-            <div class="zhihu-interaction-bar">
-                <div class="zhihu-interaction-buttons">
-                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span class="zhihu-interaction-count">赞同</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
-                        <i class="fas fa-bookmark"></i>
-                        <span class="zhihu-interaction-count">收藏</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
-                        <i class="fas fa-comment"></i>
-                        <span class="zhihu-interaction-count">评论</span>
-                    </button>
-                    <button class="zhihu-interaction-btn zhihu-share-btn">
-                        <i class="fas fa-share"></i>
-                        <span class="zhihu-interaction-count">分享</span>
-                    </button>
-                </div>
+                        </div></span>
             </div>
-                </div>
-            <aside class="zhihu-sidebar">
-                <nav class="zhihu-toc">
-                    <h3 class="zhihu-toc-title">文章目录</h3>
-                    <ul class="zhihu-toc-list" id="toc-list">
-                        <!-- 目录项将通过JavaScript动态生成 -->
-                    </ul>
-                </nav>
-            </aside>
-            </div>
-            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
-                        <i class="fas fa-arrow-left"></i>
-                        返回知识库
-                    </a>
-            </footer>
         </article>
-    </div>
+    </main>
 
-    <script src="../components/zhihu-article-interactions.js"></script>
-    <script src="../components/related-articles.js"></script>
-    <script src="../components/toc-generator.js"></script>
-    <script src="../components/performance-optimizer-safe.js"></script>
-    <script src="../components/seo-accessibility.js"></script>
+    <!-- 页脚将由动态加载 -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="../components/components.js" defer></script>
+    <script src="../components/knowledge-detail.js" defer></script>
+
+    <!-- 文章特定脚本 -->
+    <script>
+        // 安全的DOM操作工具函数
+        function safeCreateElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
+
+        // 安全地设置元素内容
+        function safeSetContent(element, content) {
+            // 清空现有内容
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+
+            if (typeof content === 'string') {
+                element.textContent = content;
+            } else if (content instanceof Node) {
+                element.appendChild(content);
+            }
+        }
+
+        // 错误处理 - 使用安全的DOM操作方法
+        window.addEventListener('error', function(e) {
+            console.error('文章页面加载错误:', e.error);
+            const articleContent = document.getElementById('article-content');
+            if (articleContent) {
+                // 清空现有内容
+                while (articleContent.firstChild) {
+                    articleContent.removeChild(articleContent.firstChild);
+                }
+
+                // 创建错误消息容器
+                const errorDiv = safeCreateElement('div', 'error-message');
+                errorDiv.setAttribute('role', 'alert');
+
+                // 创建图标
+                const icon = safeCreateElement('i', 'fas fa-exclamation-triangle');
+                icon.setAttribute('aria-hidden', 'true');
+                errorDiv.appendChild(icon);
+
+                // 创建标题
+                const title = safeCreateElement('h2', '', '文章加载失败');
+                errorDiv.appendChild(title);
+
+                // 创建描述段落
+                const paragraph = safeCreateElement('p', '', '抱歉，文章内容加载失败。请尝试刷新页面或');
+
+                // 创建链接
+                const link = safeCreateElement('a', '', '返回知识库首页');
+                link.href = '../knowledge.html';
+                link.setAttribute('aria-label', '返回知识库首页');
+
+                paragraph.appendChild(link);
+                errorDiv.appendChild(paragraph);
+
+                articleContent.appendChild(errorDiv);
+            }
+        });
+
+        // 页面性能监控
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`文章页面加载时间: ${loadTime}ms`);
+            }
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            // ESC键返回知识库
+            if (e.key === 'Escape') {
+                window.location.href = '../knowledge.html';
+            }
+        });
+    </script>
 </body>
 </html>

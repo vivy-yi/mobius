@@ -19,11 +19,222 @@
     <meta name="twitter:title" content="Mobius - 中日企业无缝连接桥梁">
     <meta name="twitter:description" content="Mobius环代表'无断点连接'，为中日企业提供无缝稳定的落地与经营支持服务">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- SEO结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Mobius",
+        "alternateName": "Mobius 中日企业无缝连接桥梁",
+        "description": "Mobius环代表'无断点连接'，为中日企业提供无缝稳定的落地与经营支持服务",
+        "url": "https://mobius-service.com",
+        "logo": "https://mobius-service.com/assets/imgs/logo-medium.webp",
+        "image": "https://mobius-service.com/assets/imgs/hero-image.jpg",
+        "telephone": "+81-3-1234-5678",
+        "email": "contact@mobius-service.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "东京都涩谷区1-2-3",
+            "addressLocality": "涩谷区",
+            "addressRegion": "东京都",
+            "addressCountry": "JP",
+            "postalCode": "150-0001"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 35.6762,
+            "longitude": 139.6503
+        },
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+81-3-1234-5678",
+            "contactType": "customer service",
+            "availableLanguage": ["中文", "日本語", "English"]
+        },
+        "serviceType": [
+            "企业落地服务",
+            "签证服务",
+            "财税・补助金",
+            "法务・合同",
+            "生活支援",
+            "开店咨询"
+        ],
+        "areaServed": [
+            {
+                "@type": "Country",
+                "name": "日本"
+            },
+            {
+                "@type": "Country",
+                "name": "中国"
+            }
+        ],
+        "knowsLanguage": ["中文", "日本語", "English"],
+        "priceRange": "$$$",
+        "paymentAccepted": "现金, 银行转账",
+        "currenciesAccepted": "JPY, CNY"
+    }
+    </script>
+
+    <!-- 面包屑导航结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首页",
+                "item": "https://mobius-service.com"
+            }
+        ]
+    }
+    </script>
+
+    <!-- 字体优化策略 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- 预加载关键字体 -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/notosanssc/v36/k3kXo84MPvpLmixcA63oeALZTYKL2S24UEg-2_c.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- 优化的字体加载 - 只加载必要的字重和字符集 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- 字体回退策略 -->
+  <style>
+    /* 字体加载回退 - 防止FOUT和FOIT */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-loading: 0s;
+    }
+
+    /* 字体加载完成后替换 */
+    @font-face {
+      font-family: 'Inter';
+      font-display: swap;
+      src: local('Inter'), url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Noto Sans SC';
+      font-display: swap;
+      src: local('Noto Sans SC'), url('https://fonts.gstatic.com/s/notosanssc/v36/k3kXo84MPvpLmixcA63oeALZTYKL2S24UEg-2_c.woff2') format('woff2');
+      unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF; /* 中文字符范围 */
+    }
+
+    /* 防止布局偏移 */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-weight: 600;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-weight: 400;
+    }
+  </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // Google Analytics配置
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            // 自定义维度追踪
+            custom_map: {'custom_parameter_1': 'page_category'}
+        });
+
+        // 性能监控设置
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            // 启用增强型测量
+            enhanced_measurement: true,
+            // 页面加载时间追踪
+            page_load_timeout: 1000,
+            // 自定义事件追踪
+            send_page_view: true
+        });
+
+        // Core Web Vitals监控
+        function sendToAnalytics(metric) {
+            gtag('event', metric.name, {
+                event_category: 'Web Vitals',
+                event_label: metric.id,
+                value: Math.round(metric.value),
+                non_interaction: true
+            });
+        }
+
+        // 导出性能监控函数供其他脚本使用
+        window.webPerformanceTracker = {
+            trackEvent: function(action, category, label, value) {
+                gtag('event', action, {
+                    event_category: category,
+                    event_label: label,
+                    value: value,
+                    non_interaction: true
+                });
+            },
+            trackPageView: function(pagePath, pageTitle) {
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                    page_path: pagePath,
+                    page_title: pageTitle
+                });
+            }
+        };
+    </script>
+
+    <!-- 性能监控和优化脚本 -->
+    <script>
+        // 页面加载性能监控
+        window.addEventListener('load', function() {
+            // 监控首屏渲染时间
+            if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.entryType === 'largest-contentful-paint') {
+                            console.log(`LCP: ${entry.startTime}ms`);
+                            window.webPerformanceTracker.trackEvent('LCP', 'Performance', window.location.pathname, Math.round(entry.startTime));
+                        }
+                        if (entry.entryType === 'first-input') {
+                            console.log(`FID: ${entry.processingStart - entry.startTime}ms`);
+                            window.webPerformanceTracker.trackEvent('FID', 'Performance', window.location.pathname, Math.round(entry.processingStart - entry.startTime));
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['largest-contentful-paint', 'first-input']});
+            }
+
+            // 监控页面加载时间
+            const navigation = performance.getEntriesByType('navigation')[0];
+            const loadTime = Math.round(navigation.loadEventEnd - navigation.loadEventStart);
+            console.log(`Page Load Time: ${loadTime}ms`);
+            window.webPerformanceTracker.trackEvent('Page Load', 'Performance', window.location.pathname, loadTime);
+        });
+
+        // 压缩效果监控
+        window.addEventListener('DOMContentLoaded', function() {
+            // 检查是否启用了gzip压缩
+            const compressedSize = document.head.innerHTML.length;
+            console.log(`HTML Head Size: ${compressedSize} characters`);
+
+            // 跟踪字体加载状态
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    console.log('All fonts loaded');
+                    window.webPerformanceTracker.trackEvent('Fonts Loaded', 'Performance', window.location.pathname, 1);
+                });
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -509,8 +720,9 @@
         </div>
     </section>
 
-    <script src="components/components.js?v=2.1"></script>
-<script src="components/knowledge-preview.js?v=1.0"></script>
-<script src="script.js"></script>
+    <!-- 优化的JavaScript加载策略 -->
+    <script src="components/components.js?v=2.1" defer></script>
+    <script src="components/knowledge-preview.js?v=1.0" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

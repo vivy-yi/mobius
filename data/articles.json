@@ -10,7 +10,7 @@
         "expanded": true,
         "children": [
           {
-            "id": "company-registration",
+            "id": "business-registration",
             "name": "公司注册",
             "count": 1,
             "icon": "fas fa-certificate",
@@ -22,7 +22,7 @@
             "description": "公司设立流程和法律要求"
           },
           {
-            "id": "business-setup",
+            "id": "business-setupguide",
             "name": "落地服务",
             "count": 1,
             "icon": "fas fa-university",
@@ -56,7 +56,7 @@
         "expanded": false,
         "children": [
           {
-            "id": "management-visa",
+            "id": "visa-guide",
             "name": "经营管理签证",
             "count": 1,
             "icon": "fas fa-briefcase",
@@ -68,7 +68,7 @@
             "description": "投资经营类签证申请指南"
           },
           {
-            "id": "talent-visa",
+            "id": "visa-guide",
             "name": "高度人才签证",
             "count": 1,
             "icon": "fas fa-user-tie",
@@ -148,7 +148,7 @@
         "expanded": false,
         "children": [
           {
-            "id": "it-subsidy",
+            "id": "subsidy-gift",
             "name": "IT化补助",
             "count": 1,
             "icon": "fas fa-laptop",
@@ -160,7 +160,7 @@
             "description": "企业数字化转型补助金申请"
           },
           {
-            "id": "green-subsidy",
+            "id": "subsidy-greengift",
             "name": "环保补助",
             "count": 1,
             "icon": "fas fa-leaf",
@@ -194,7 +194,7 @@
         "expanded": false,
         "children": [
           {
-            "id": "labor-law",
+            "id": "law-labor",
             "name": "劳动法",
             "count": 1,
             "icon": "fas fa-users",
@@ -206,7 +206,7 @@
             "description": "日本劳动法律法规和合规要求"
           },
           {
-            "id": "data-protection",
+            "id": "law-dataprotection",
             "name": "数据保护",
             "count": 1,
             "icon": "fas fa-shield-alt",
@@ -240,7 +240,7 @@
         "expanded": false,
         "children": [
           {
-            "id": "financial-services",
+            "id": "life-financial",
             "name": "金融服务",
             "count": 1,
             "icon": "fas fa-university",
@@ -252,7 +252,7 @@
             "description": "日本银行账户和金融服务"
           },
           {
-            "id": "housing-support",
+            "id": "life-housingsupport",
             "name": "住房支援",
             "count": 1,
             "icon": "fas fa-home",
@@ -343,7 +343,7 @@
   "categories": {
     "business": [
       {
-        "id": "business-article-company-registration",
+        "id": "business-registration",
         "title": "2024年日本公司注册完整流程",
         "excerpt": "详细解析2024年在日本设立株式会社和合同公司的完整流程、所需材料、费用和时间周期，助您顺利开展日本业务...",
         "date": "2024年1月15日",
@@ -355,7 +355,7 @@
           "株式会社",
           "合同公司"
         ],
-        "url": "knowledge/business-article-company-registration.html",
+        "url": "knowledge/business-registration-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "企业落地",
@@ -370,7 +370,7 @@
         }
       },
       {
-        "id": "business-article-setup-guide",
+        "id": "business-setupguide",
         "title": "日本企业落地服务指南",
         "excerpt": "为中日企业提供全方位的日本市场进入解决方案，包括公司注册、银行开户、税务登记等一站式服务...",
         "date": "2024年1月12日",
@@ -382,7 +382,7 @@
           "银行开户",
           "税务登记"
         ],
-        "url": "knowledge/business-article-setup-guide.html",
+        "url": "knowledge/business-setupguide-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "企业落地",
@@ -397,7 +397,7 @@
         }
       },
       {
-        "id": "business-faq-restaurant",
+        "id": "business-restaurant",
         "title": "外国人在日本开餐厅需要什么条件？",
         "excerpt": "需要有效的在留资格（通常要求经营・管理签证）、适当的资金、餐饮业经验、符合日本的食品卫生法规...",
         "date": "2024年1月18日",
@@ -409,7 +409,7 @@
           "在留资格",
           "食品卫生"
         ],
-        "url": "knowledge/business-faq-restaurant.html",
+        "url": "knowledge/business-restaurant-02.html",
         "featured": true,
         "difficulty": "中级",
         "category": "开店咨询",
@@ -424,7 +424,7 @@
         }
       },
       {
-        "id": "business-faq-beauty-salon",
+        "id": "business-faq",
         "title": "开设美容院需要哪些资质？",
         "excerpt": "需要美容师国家资格证书、店铺营业许可、卫生许可证。如果是外国经营者，还需要相应的在留资格...",
         "date": "2024年1月14日",
@@ -436,7 +436,7 @@
           "资质申请",
           "营业许可"
         ],
-        "url": "knowledge/business-faq-restaurant.html",
+        "url": "knowledge/business-faq-01.html",
         "featured": false,
         "difficulty": "中级",
         "category": "开店咨询",
@@ -453,7 +453,7 @@
     ],
     "visa": [
       {
-        "id": "visa-article-management-guide",
+        "id": "visa-guide",
         "title": "2024年日本经营管理签证申请指南",
         "excerpt": "全面解析2024年日本经营管理签证的申请条件、流程、材料准备和成功要点，助您顺利获得在留资格...",
         "date": "2024年1月20日",
@@ -465,7 +465,7 @@
           "日本投资",
           "在留资格"
         ],
-        "url": "knowledge/visa-article-management-guide.html",
+        "url": "knowledge/visa-guide-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证政策",
@@ -480,7 +480,7 @@
         }
       },
       {
-        "id": "visa-article-talent-points",
+        "id": "visa-faq",
         "title": "高度人才签证积分计算详解",
         "excerpt": "详细解析高度人才签证的积分计算方式，如何最大化积分获得永住权，快速通道申请攻略...",
         "date": "2024年1月18日",
@@ -492,7 +492,7 @@
           "积分计算",
           "永住权"
         ],
-        "url": "knowledge/visa-faq-renewal.html",
+        "url": "knowledge/visa-faq-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证FAQ",
@@ -507,7 +507,7 @@
         }
       },
       {
-        "id": "visa-faq-renewal",
+        "id": "visa-guide",
         "title": "经营管理签证续签需要注意什么？",
         "excerpt": "续签需要确保企业经营持续稳定，满足一定的营业额和纳税要求，同时准备完整的续签材料...",
         "date": "2024年1月16日",
@@ -519,7 +519,7 @@
           "经营要求",
           "材料准备"
         ],
-        "url": "knowledge/visa-article-talent-points.html",
+        "url": "knowledge/visa-guide-02.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证FAQ",
@@ -536,7 +536,7 @@
     ],
     "tax": [
       {
-        "id": "tax-article-declaration-guide",
+        "id": "tax-guide",
         "title": "2024年日本税务申报指南",
         "excerpt": "详细解析2024年日本法人税、消费税、源泉税等各类税务申报流程、时间节点和注意事项...",
         "date": "2024年1月25日",
@@ -548,7 +548,7 @@
           "法人税",
           "消费税"
         ],
-        "url": "knowledge/tax-article-declaration-guide.html",
+        "url": "knowledge/tax-guide-02.html",
         "featured": true,
         "difficulty": "高级",
         "category": "税务筹划",
@@ -563,7 +563,7 @@
         }
       },
       {
-        "id": "tax-article-consumption-tax",
+        "id": "tax-consumption",
         "title": "中小企业税务优惠策略",
         "excerpt": "合理利用日本税法中的优惠政策，为中小企业节省税务成本，提升企业竞争力...",
         "date": "2024年1月22日",
@@ -575,7 +575,7 @@
           "中小企业",
           "节税策略"
         ],
-        "url": "knowledge/tax-faq-registration.html",
+        "url": "knowledge/tax-consumption-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "税务FAQ",
@@ -590,7 +590,7 @@
         }
       },
       {
-        "id": "tax-faq-registration",
+        "id": "tax-faq",
         "title": "外国人在日本开公司需要办理哪些税务手续？",
         "excerpt": "需要办理法人设立登记、税务登记、开业申报等手续。我们提供一站式服务，协助完成所有必要税务流程...",
         "date": "2024年1月15日",
@@ -602,7 +602,7 @@
           "法人设立",
           "开业申报"
         ],
-        "url": "knowledge/tax-faq-subsidy-application.html",
+        "url": "knowledge/tax-faq-02.html",
         "featured": true,
         "difficulty": "初级",
         "category": "税务FAQ",
@@ -617,7 +617,7 @@
         }
       },
       {
-        "id": "tax-faq-subsidy-application",
+        "id": "tax-faq",
         "title": "补助金申请的条件和流程是什么？",
         "excerpt": "不同补助金有不同的申请条件，通常要求企业在日本注册、满足一定经营年限等。我们协助评估符合条件的补助金...",
         "date": "2024年1月8日",
@@ -629,11 +629,11 @@
           "申请条件",
           "申请流程"
         ],
-        "url": "knowledge/subsidy-article-it-digital.html",
+        "url": "knowledge/tax-faq-03.html",
         "featured": true,
         "difficulty": "中级",
         "category": "补助金申请",
-        "type": "article",
+        "type": "faq",
         "popularity": {
           "views": 1520,
           "clicks": 1180,
@@ -646,7 +646,7 @@
     ],
     "subsidy": [
       {
-        "id": "subsidy-article-it-digital",
+        "id": "subsidy-gift",
         "title": "2024年IT化补助金申请指南",
         "excerpt": "详细介绍IT化补助金的申请条件、申请流程和成功案例，助您的企业数字化转型成功...",
         "date": "2024年1月30日",
@@ -658,11 +658,11 @@
           "数字化转型",
           "申请指南"
         ],
-        "url": "knowledge/subsidy-article-it-digital.html",
+        "url": "knowledge/subsidy-guide-02.html",
         "featured": false,
         "difficulty": "中级",
         "category": "补助金申请",
-        "type": "article",
+        "type": "gift",
         "popularity": {
           "views": 445,
           "clicks": 340,
@@ -673,7 +673,7 @@
         }
       },
       {
-        "id": "subsidy-article-green-environmental",
+        "id": "subsidy-greengift",
         "title": "绿色环保补助金申请策略",
         "excerpt": "针对环保企业和绿色项目的补助金申请技巧，如何提高申请成功率...",
         "date": "2024年1月28日",
@@ -685,11 +685,11 @@
           "绿色项目",
           "申请策略"
         ],
-        "url": "knowledge/subsidy-article-green-environmental.html",
+        "url": "knowledge/subsidy-greengift-01.html",
         "featured": false,
         "difficulty": "高级",
         "category": "补助金申请",
-        "type": "article",
+        "type": "greengift",
         "popularity": {
           "views": 367,
           "clicks": 280,
@@ -700,7 +700,7 @@
         }
       },
       {
-        "id": "subsidy-faq-success-tips",
+        "id": "subsidy-faq",
         "title": "如何提高补助金申请的成功率？",
         "excerpt": "提高申请成功率的关键是充分了解补助金的目标和要求，准备完整的申请材料，并符合申请条件...",
         "date": "2024年1月25日",
@@ -712,7 +712,7 @@
           "成功率",
           "材料准备"
         ],
-        "url": "knowledge/subsidy-faq-success-tips.html",
+        "url": "knowledge/subsidy-faq-01.html",
         "featured": false,
         "difficulty": "中级",
         "category": "补助金FAQ",
@@ -729,7 +729,7 @@
     ],
     "legal": [
       {
-        "id": "legal-article-labor-law",
+        "id": "legal-labor",
         "title": "日本劳动合同法要点解析",
         "excerpt": "了解日本劳动合同的基本要求、解雇规定、员工权益保护等重要法律条款...",
         "date": "2024年1月28日",
@@ -741,11 +741,11 @@
           "劳动合同",
           "员工权益"
         ],
-        "url": "knowledge/legal-article-data-protection.html",
+        "url": "knowledge/legal-labor-01.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务合规",
-        "type": "article",
+        "type": "labor",
         "popularity": {
           "views": 521,
           "clicks": 390,
@@ -756,7 +756,7 @@
         }
       },
       {
-        "id": "legal-article-data-protection",
+        "id": "legal-dataprotection",
         "title": "个人情报保护法合规指南",
         "excerpt": "企业在处理客户和员工个人信息时必须遵守的法律要求和合规措施...",
         "date": "2024年1月24日",
@@ -768,11 +768,11 @@
           "数据保护",
           "合规指南"
         ],
-        "url": "knowledge/legal-article-labor-law.html",
+        "url": "knowledge/legal-dataprotection-02.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务合规",
-        "type": "article",
+        "type": "dataprotection",
         "popularity": {
           "views": 438,
           "clicks": 320,
@@ -783,7 +783,7 @@
         }
       },
       {
-        "id": "legal-faq-contract",
+        "id": "legal-faq",
         "title": "在日本签订商业合同需要注意什么？",
         "excerpt": "需要注意日本特有的合同制度、印花税、印纸税等规定，以及违约金比例限制等日本法律的特殊条款...",
         "date": "2024年1月12日",
@@ -795,7 +795,7 @@
           "印花税",
           "违约金"
         ],
-        "url": "knowledge/legal-faq-contract.html",
+        "url": "knowledge/legal-faq-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "法务FAQ",
@@ -810,7 +810,7 @@
         }
       },
       {
-        "id": "legal-faq-ip-protection",
+        "id": "legal-faq-ip",
         "title": "如何保护知识产权在日本？",
         "excerpt": "可以通过商标注册、专利申请、著作权登记等方式保护知识产权。日本对知识产权保护非常严格，建议及早申请...",
         "date": "2024年1月9日",
@@ -822,7 +822,7 @@
           "商标注册",
           "专利申请"
         ],
-        "url": "knowledge/legal-faq-ip-protection.html",
+        "url": "knowledge/legal-faq-02.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务FAQ",
@@ -839,7 +839,7 @@
     ],
     "life": [
       {
-        "id": "life-article-banking",
+        "id": "life-banking",
         "title": "日本银行账户开户指南",
         "excerpt": "详细介绍外国人在日本开设银行账户的流程、所需材料和注意事项...",
         "date": "2024年1月26日",
@@ -851,11 +851,11 @@
           "开户流程",
           "在留资格"
         ],
-        "url": "knowledge/life-article-banking.html",
+        "url": "knowledge/life-banking-01.html",
         "featured": false,
         "difficulty": "初级",
         "category": "生活支援",
-        "type": "article",
+        "type": "banking",
         "popularity": {
           "views": 680,
           "clicks": 520,
@@ -866,7 +866,7 @@
         }
       },
       {
-        "id": "life-article-housing",
+        "id": "life-housing",
         "title": "日本租房全攻略",
         "excerpt": "从找房到签约，详细解读日本租房的各个环节、费用结构和注意事项...",
         "date": "2024年1月23日",
@@ -878,11 +878,11 @@
           "礼金敷金",
           "保证人"
         ],
-        "url": "knowledge/life-article-housing.html",
+        "url": "knowledge/life-housing-02.html",
         "featured": true,
         "difficulty": "初级",
         "category": "生活支援",
-        "type": "article",
+        "type": "housing",
         "popularity": {
           "views": 920,
           "clicks": 720,
@@ -893,7 +893,7 @@
         }
       },
       {
-        "id": "life-faq-banking-account",
+        "id": "life-faq",
         "title": "外国人在日本开设银行账户需要什么条件？",
         "excerpt": "需要有效的在留资格、住所证明、身份证明文件等。不同银行的要求略有差异，我们协助准备所有必要文件...",
         "date": "2024年1月20日",
@@ -905,7 +905,7 @@
           "在留资格",
           "住所证明"
         ],
-        "url": "knowledge/life-faq-banking-account.html",
+        "url": "knowledge/life-faq-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "生活FAQ",

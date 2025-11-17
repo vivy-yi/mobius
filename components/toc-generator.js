@@ -6,8 +6,8 @@
 class TOCGenerator {
     constructor(options = {}) {
         this.options = {
-            containerSelector: '.zhihu-toc-list',
-            contentSelector: '.zhihu-article-body',
+            containerSelector: '.mobius-toc-list',
+            contentSelector: '.mobius-article-body',
             headingSelectors: ['h1', 'h2', 'h3', 'h4'],
             minHeadings: 2,
             scrollOffset: 80,
@@ -94,11 +94,11 @@ class TOCGenerator {
     // 创建目录项
     createTOCItem(text, id, level) {
         const li = document.createElement('li');
-        li.className = 'zhihu-toc-item';
+        li.className = 'mobius-toc-item';
 
         const link = document.createElement('a');
         link.href = `#${id}`;
-        link.className = 'zhihu-toc-link';
+        link.className = 'mobius-toc-link';
         link.textContent = text;
 
         // 根据标题级别设置缩进
@@ -151,7 +151,7 @@ class TOCGenerator {
 
         // 更新目录项的活动状态
         this.tocItems.forEach(item => {
-            const link = item.querySelector('.zhihu-toc-link');
+            const link = item.querySelector('.mobius-toc-link');
             const isActive = link.getAttribute('href') === `#${activeId}`;
 
             if (isActive) {
@@ -190,7 +190,7 @@ class TOCGenerator {
 
     // 键盘导航
     bindKeyboardNavigation() {
-        const tocLinks = document.querySelectorAll('.zhihu-toc-link');
+        const tocLinks = document.querySelectorAll('.mobius-toc-link');
 
         tocLinks.forEach((link, index) => {
             link.addEventListener('keydown', (e) => {
@@ -246,7 +246,7 @@ class TOCGenerator {
 // 页面加载完成后自动初始化
 document.addEventListener('DOMContentLoaded', function() {
     // 检查是否有目录容器
-    const tocContainer = document.querySelector('.zhihu-toc-list');
+    const tocContainer = document.querySelector('.mobius-toc-list');
     if (tocContainer) {
         new TOCGenerator();
     }
@@ -260,17 +260,17 @@ if (typeof module !== 'undefined' && module.exports) {
 // 添加一些增强功能的CSS样式
 const tocStyle = document.createElement('style');
 tocStyle.textContent = `
-    .zhihu-toc-link:focus {
+    .mobius-toc-link:focus {
         outline: 2px solid #0084FF;
         outline-offset: 2px;
     }
 
-    .zhihu-toc-link {
+    .mobius-toc-link {
         transition: all 0.2s ease;
         position: relative;
     }
 
-    .zhihu-toc-link::before {
+    .mobius-toc-link::before {
         content: '';
         position: absolute;
         left: -8px;
@@ -283,21 +283,21 @@ tocStyle.textContent = `
         transition: height 0.2s ease;
     }
 
-    .zhihu-toc-link.active::before {
+    .mobius-toc-link.active::before {
         height: 20px;
     }
 
-    .zhihu-toc-item {
+    .mobius-toc-item {
         opacity: 0;
         animation: fadeInUp 0.3s ease forwards;
     }
 
-    .zhihu-toc-item:nth-child(1) { animation-delay: 0.1s; }
-    .zhihu-toc-item:nth-child(2) { animation-delay: 0.15s; }
-    .zhihu-toc-item:nth-child(3) { animation-delay: 0.2s; }
-    .zhihu-toc-item:nth-child(4) { animation-delay: 0.25s; }
-    .zhihu-toc-item:nth-child(5) { animation-delay: 0.3s; }
-    .zhihu-toc-item:nth-child(n+6) { animation-delay: 0.35s; }
+    .mobius-toc-item:nth-child(1) { animation-delay: 0.1s; }
+    .mobius-toc-item:nth-child(2) { animation-delay: 0.15s; }
+    .mobius-toc-item:nth-child(3) { animation-delay: 0.2s; }
+    .mobius-toc-item:nth-child(4) { animation-delay: 0.25s; }
+    .mobius-toc-item:nth-child(5) { animation-delay: 0.3s; }
+    .mobius-toc-item:nth-child(n+6) { animation-delay: 0.35s; }
 
     @keyframes fadeInUp {
         from {
@@ -318,25 +318,25 @@ tocStyle.textContent = `
             margin-top: 32px;
         }
 
-        .zhihu-toc {
+        .mobius-toc {
             max-height: 200px;
             overflow-y: auto;
         }
 
-        .zhihu-toc::-webkit-scrollbar {
+        .mobius-toc::-webkit-scrollbar {
             width: 4px;
         }
 
-        .zhihu-toc::-webkit-scrollbar-track {
+        .mobius-toc::-webkit-scrollbar-track {
             background: #F6F6F6;
         }
 
-        .zhihu-toc::-webkit-scrollbar-thumb {
+        .mobius-toc::-webkit-scrollbar-thumb {
             background: #B8BFC7;
             border-radius: 2px;
         }
 
-        .zhihu-toc::-webkit-scrollbar-thumb:hover {
+        .mobius-toc::-webkit-scrollbar-thumb:hover {
             background: #8590A6;
         }
     }

@@ -1,30 +1,46 @@
 /**
  * Article Card 组件管理器
- * 统一管理知识库中的文章卡片组件
+ * 重构为纯内容渲染组件，只负责内容生成和DOM渲染
  */
 
+// 导入事件总线和状态管理器
+import globalEventBus, { EVENT_TYPES } from './event-bus.js';
+import { KnowledgeStateManager } from './state-manager.js';
+
 class ArticleCardManager {
-    constructor() {
+    constructor(eventBus = null, stateManager = null) {
+        // 注入依赖的事件总线和状态管理器
+        this.eventBus = eventBus || globalEventBus;
+        this.stateManager = stateManager || new KnowledgeStateManager(this.eventBus);
+
         this.articles = {};           // 原始数据容器（全部数据）
-        this.filteredArticles = {};  // 数据容器2（导航栏筛选后的数据）
         this.metadata = {};
         this.baseUrl = this.getBaseUrl();
         this.dataLoaded = false;
-        this.hasFilteredData = false; // 是否有数据容器2
 
         // 分页配置
         this.pagination = {
-            itemsPerPage: 12, // 每页显示12篇文章
+            itemsPerPage: 12,
             currentPage: 1,
             totalPages: 1,
             totalItems: 0
         };
 
-        // 分页状态跟踪
-        this.currentPageStates = {}; // 每个容器的当前页状态
-        this.currentFilters = {};    // 每个分类的当前筛选状态
+        this.currentPageStates = {};
+        this.cache = new Map(); // 内容缓存
 
-        this.loadArticlesFromJSON();
+        // 绑定方法
+        this.render = this.render.bind(this);
+        this.handleDataLoaded = this.handleDataLoaded.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
+
+        // 初始化事件监听
+        this.initEventListeners();
+
+        // 数据加载将由外部调用，避免重复加载
+        // this.loadArticlesFromJSON();
+
+        console.log('📄 ArticleCardManager initialized with event-driven architecture');
     }
 
     /**
@@ -39,12 +55,43 @@ class ArticleCardManager {
     }
 
     /**
-     * 创建DOM元素的安全方法
+     * 初始化事件监听
      */
-    createElement(tag, className = '', innerHTML = '') {
+  initEventListeners() {
+    // 监听导航事件
+    this.eventBus.on(EVENT_TYPES.NAV_CATEGORY_CLICK, this.handleFilterChange);
+    this.eventBus.on(EVENT_TYPES.NAV_TAG_CLICK, this.handleFilterChange);
+    this.eventBus.on(EVENT_TYPES.NAV_DIFFICULTY_CLICK, this.handleFilterChange);
+    this.eventBus.on(EVENT_TYPES.NAV_SEARCH, this.handleFilterChange);
+
+    // 监听状态变化 - 只监听过滤器变化，避免分页更新循环
+    this.stateManager.subscribe(this.render, ['filters'], {
+      immediate: false // 不立即执行，等待数据加载完成
+    });
+
+    console.log('🎧 Event listeners initialized for content rendering');
+  }
+
+  /**
+     * 创建DOM元素的完全安全方法
+     * @param {string} tag - HTML标签名
+     * @param {string} className - CSS类名
+     * @param {string|Node} content - 内容（文本或节点），安全替代innerHTML
+     */
+    createElement(tag, className = '', content = '') {
         const element = document.createElement(tag);
         if (className) element.className = className;
-        if (innerHTML) element.innerHTML = innerHTML;
+
+        if (content) {
+            if (typeof content === 'string') {
+                // 安全：使用textContent而不是innerHTML
+                element.textContent = content;
+            } else if (content instanceof Node) {
+                // 安全：直接添加DOM节点
+                element.appendChild(content);
+            }
+        }
+
         return element;
     }
 
@@ -53,6 +100,45 @@ class ArticleCardManager {
      */
     createTextNode(text) {
         return document.createTextNode(text);
+    }
+
+    /**
+     * 安全地清空容器内容
+     * @param {Element} container - 要清空的容器元素
+     */
+    safeClearContainer(container) {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+
+    /**
+     * 安全地设置容器内容
+     * @param {Element} container - 容器元素
+     * @param {string|Node|NodeList} content - 新内容
+     */
+    safeSetContainerContent(container, content) {
+        // 清空现有内容
+        this.safeClearContainer(container);
+
+        if (typeof content === 'string') {
+            // 如果内容包含HTML，创建临时div来解析，然后验证安全性
+            if (content.includes('<')) {
+                const tempDiv = document.createElement('div');
+                tempDiv.textContent = content; // 安全转义
+                container.appendChild(tempDiv);
+            } else {
+                container.textContent = content;
+            }
+        } else if (content instanceof Node) {
+            container.appendChild(content);
+        } else if (content instanceof NodeList || Array.isArray(content)) {
+            content.forEach(node => {
+                if (node instanceof Node) {
+                    container.appendChild(node);
+                }
+            });
+        }
     }
 
     /**
@@ -81,15 +167,22 @@ class ArticleCardManager {
             this.metadata = data.metadata;
             this.dataLoaded = true;
 
-            // 数据加载完成后触发自定义事件
-            document.dispatchEvent(new CustomEvent('articlesLoaded', {
-                detail: { articles: this.articles, metadata: this.metadata }
-            }));
-
-            // 触发数据容器变化事件（容器1初始化）
-            this.triggerPageRefresh('container1-initialized', {
+            // 数据加载完成后触发事件
+            this.eventBus.emit(EVENT_TYPES.DATA_LOADED, {
                 articles: this.articles,
-                metadata: this.metadata
+                metadata: this.metadata,
+                timestamp: Date.now()
+            });
+
+            // 更新状态管理器
+            this.stateManager.updateState({
+                data: {
+                    articles: Object.values(this.articles).flat(),
+                    categories: Object.keys(this.articles),
+                    isLoaded: true,
+                    isLoading: false,
+                    lastUpdated: new Date().toISOString()
+                }
             });
 
           } catch (error) {
@@ -545,8 +638,33 @@ class ArticleCardManager {
      * 处理卡片点击事件
      */
     handleCardClick(article) {
+        console.log('🔍 卡片点击调试信息:', {
+            id: article.id,
+            url: article.url,
+            title: article.title
+        });
+
+        // 优先使用URL直接跳转（最可靠）
         if (article.url) {
+            console.log('✅ 使用URL直接跳转:', article.url);
             window.location.href = article.url;
+            return;
+        }
+
+        // 备选方案：提取文章ID
+        let articleId = '';
+
+        if (article.id) {
+            articleId = article.id;
+        }
+
+        // 跳转到知识详情页面
+        if (articleId) {
+            console.log('⚠️ 使用ID跳转（不推荐）:', articleId);
+            window.location.href = `./knowledge-detail.html?id=${encodeURIComponent(articleId)}`;
+        } else {
+            console.error('❌ 无法获取文章信息:', article);
+            alert('文章信息不完整，请稍后重试');
         }
     }
 
@@ -780,29 +898,327 @@ class ArticleCardManager {
     }
 
     /**
-     * 初始化所有文章网格 (支持异步数据加载)
+     * 生成所有文章的网格
      */
-    async initializeAllArticleGrids() {
-        // 延迟执行确保DOM加载完成
-        setTimeout(async () => {
-            console.log('🚀 开始初始化所有文章网格...');
+    async generateAllArticlesGrid() {
+        console.log('🎯 生成所有文章网格到all-articles容器');
 
-            const categories = ['business', 'visa', 'tax', 'subsidy', 'legal'];
+        const container = document.getElementById('all-articles');
+        if (!container) {
+            console.warn('❌ 找不到all-articles容器');
+            return;
+        }
 
-            // 并行加载所有分类
-            const loadPromises = categories.map(category =>
-                this.generateArticleGrid(category, `${category}-articles`)
-            );
+        // 等待数据加载完成
+        await this.waitForDataLoad();
 
-            try {
-                await Promise.all(loadPromises);
-                console.log('✅ 所有文章网格初始化完成');
-            } catch (error) {
-                console.error('❌ 文章网格初始化失败:', error);
+        try {
+            // 合并所有分类的文章
+            const allArticles = [];
+            const categories = ['business', 'visa', 'tax', 'subsidy', 'legal', 'life'];
+
+            categories.forEach(category => {
+                if (this.articles[category]) {
+                    allArticles.push(...this.articles[category]);
+                }
+            });
+
+            // 按日期排序（最新的在前）
+            allArticles.sort((a, b) => {
+                const dateA = new Date(a.date || '2024-01-01');
+                const dateB = new Date(b.date || '2024-01-01');
+                return dateB - dateA;
+            });
+
+            // 清空容器
+            this.safeClearContainer(container);
+
+            // 渲染文章卡片
+            if (allArticles.length > 0) {
+                const articleElements = allArticles.map(article =>
+                    this.createArticleCard(article, 'all')
+                );
+
+                // 添加到容器
+                articleElements.forEach(element => {
+                    container.appendChild(element);
+                });
+
+                console.log(`✅ all-articles容器渲染完成，共 ${allArticles.length} 篇文章`);
+            } else {
+                // 显示空状态
+                const emptyState = this.createElement('div', 'empty-state');
+                emptyState.innerHTML = `
+                    <div class="empty-state-icon">📚</div>
+                    <h3>暂无文章</h3>
+                    <p>还没有发布任何文章，请稍后再来查看。</p>
+                `;
+                container.appendChild(emptyState);
             }
-        }, 100);
+
+        } catch (error) {
+            console.error('❌ 生成所有文章网格失败:', error);
+            this.showErrorState(container, '加载文章失败');
+        }
     }
 
+    /**
+     * 处理数据加载完成事件
+     */
+  handleDataLoaded(eventData) {
+    console.log('📚 数据加载完成:', eventData);
+    this.dataLoaded = true;
+
+    // 触发初始渲染 - 显示所有文章
+    setTimeout(() => {
+      this.stateManager.updateFilter('category', 'all');
+    }, 100);
+  }
+
+  /**
+     * 处理过滤变化事件 - 新的事件驱动架构
+     */
+  handleFilterChange(eventData) {
+    console.log('🔄 处理过滤变化:', eventData);
+
+    // 更新状态管理器中的过滤器
+    switch (eventData.type) {
+      case 'category':
+        this.stateManager.updateFilter('category', eventData.value);
+        break;
+      case 'subcategory':
+        this.stateManager.updateFilter('subcategory', eventData.value);
+        break;
+      case 'quickFilter':
+        this.stateManager.updateFilter('quickFilter', eventData.value);
+        break;
+      case 'difficulty':
+        this.stateManager.updateFilter('difficulty', eventData.value);
+        break;
+      case 'search':
+        this.stateManager.updateFilter('search', eventData.value);
+        break;
+      default:
+        console.warn('未知的过滤器类型:', eventData.type);
+    }
+  }
+
+  /**
+     * 渲染方法 - 根据当前状态渲染内容
+     */
+  render(state) {
+    console.log('🎨 渲染内容:', state);
+
+    if (!this.dataLoaded) {
+      console.log('⏳ 数据未加载完成，跳过渲染');
+      return;
+    }
+
+    const { filters, pagination } = state;
+
+    // 获取过滤后的文章
+    const filteredArticles = this.applyFilters(this.articles, filters);
+
+    // 计算分页数据
+    const paginatedData = this.calculatePagination(filteredArticles, pagination.page, pagination.limit);
+
+    // 确定要渲染的容器
+    const targetContainer = this.getTargetContainer(filters.category);
+
+    // 渲染内容到容器
+    this.renderArticlesToContainer(paginatedData.items, targetContainer);
+
+    // 更新分页状态（不会触发循环，因为render不再监听pagination变化）
+    this.stateManager.updatePagination({
+      ...paginatedData,
+      page: pagination.page
+    });
+
+    console.log(`✅ 渲染完成: ${paginatedData.items.length} 篇文章到容器 ${targetContainer}`);
+  }
+
+    /**
+     * 应用过滤器到文章数据
+     */
+  applyFilters(articles, filters) {
+    let filtered = Object.values(articles).flat();
+
+    // 分类过滤
+    if (filters.category && filters.category !== 'all') {
+      filtered = filtered.filter(article => {
+        // 分类映射：英文ID -> 中文分类名
+        const categoryMap = {
+          'business': '企业落地',
+          'visa': '签证政策',
+          'tax': '税务筹划',
+          'subsidy': '补助金申请',
+          'legal': '法务合规',
+          'life': '生活支援'
+        };
+
+        const targetCategory = categoryMap[filters.category] || filters.category;
+        return article.category === targetCategory;
+      });
+    }
+
+    // 标签过滤
+    if (filters.tags && filters.tags.length > 0) {
+      filtered = filtered.filter(article =>
+        filters.tags.some(tag => article.tags.includes(tag))
+      );
+    }
+
+    // 难度过滤
+    if (filters.difficulty) {
+      filtered = filtered.filter(article => article.difficulty === filters.difficulty);
+    }
+
+    // 搜索过滤
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase();
+      filtered = filtered.filter(article =>
+        article.title.toLowerCase().includes(searchTerm) ||
+        article.excerpt.toLowerCase().includes(searchTerm) ||
+        article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+      );
+    }
+
+    // 快速过滤器
+    if (filters.quickFilter) {
+      filtered = this.applyQuickFilter(filtered, filters.quickFilter);
+    }
+
+    return filtered;
+  }
+
+  /**
+     * 应用快速过滤器
+     */
+  applyQuickFilter(articles, quickFilter) {
+    switch (quickFilter) {
+      case 'featured':
+        return articles.filter(article => article.featured);
+      case 'articles':
+        return articles.filter(article => article.type === 'article');
+      case 'faq':
+        return articles.filter(article => article.type === 'faq');
+      case 'recent':
+        return articles
+          .slice()
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 20);
+      case 'popular':
+        return articles
+          .filter(article => article.popularity?.hotScore >= 80)
+          .sort((a, b) => (b.popularity?.hotScore || 0) - (a.popularity?.hotScore || 0));
+      default:
+        return articles;
+    }
+  }
+
+  /**
+     * 获取目标容器ID
+     */
+  getTargetContainer(category) {
+    if (category === 'all') {
+      return 'all-articles';
+    }
+    return `${category}-articles`;
+  }
+
+  /**
+     * 渲染文章到指定容器
+     */
+  renderArticlesToContainer(articles, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+      console.warn(`⚠️ 找不到容器: ${containerId}`);
+      return;
+    }
+
+    // 隐藏所有容器
+    this.hideAllContainers();
+
+    // 显示目标容器
+    container.style.display = 'block';
+    container.classList.add('active');
+
+    // 清空容器
+    container.innerHTML = '';
+
+    if (articles.length === 0) {
+      this.renderEmptyState(container);
+      return;
+    }
+
+    // 渲染文章卡片
+    articles.forEach(article => {
+      const card = this.createArticleCard(article);
+      container.appendChild(card);
+    });
+
+    // 添加动画效果
+    this.addAnimationEffects(container);
+  }
+
+  /**
+     * 隐藏所有内容容器
+     */
+  hideAllContainers() {
+    const allContainers = ['all-articles', 'business-articles', 'visa-articles',
+                          'tax-articles', 'subsidy-articles', 'legal-articles', 'life-articles'];
+
+    allContainers.forEach(containerId => {
+      const container = document.getElementById(containerId);
+      if (container) {
+        container.style.display = 'none';
+        container.classList.remove('active');
+      }
+    });
+  }
+
+  /**
+     * 渲染空状态
+     */
+  renderEmptyState(container) {
+    const emptyState = this.createElement('div');
+    emptyState.style.cssText = 'text-align: center; padding: 40px; color: #6b7280;';
+
+    const icon = this.createIcon('fas fa-inbox');
+    icon.style.cssText = 'font-size: 3rem; margin-bottom: 15px; opacity: 0.5; display: block;';
+    emptyState.appendChild(icon);
+
+    const title = this.createElement('h3');
+    title.textContent = '暂无文章';
+    emptyState.appendChild(title);
+
+    const desc = this.createElement('p');
+    desc.textContent = '当前筛选条件下没有找到相关文章';
+    emptyState.appendChild(desc);
+
+    this.safeSetContainerContent(container, emptyState);
+  }
+
+    /**
+     * 显示错误状态
+     */
+    showErrorState(container, message) {
+        this.safeClearContainer(container);
+
+        const errorState = this.createElement('div', 'error-state');
+        errorState.innerHTML = `
+            <div class="error-icon">⚠️</div>
+            <h3>加载失败</h3>
+            <p>${message}</p>
+            <button class="btn-secondary" onclick="location.reload()">
+                <i class="fas fa-redo"></i> 重新加载
+            </button>
+        `;
+
+        container.appendChild(errorState);
+    }
+
+    
     /**
      * 获取文章元数据
      */
@@ -1252,10 +1668,18 @@ class ArticleCardManager {
     }
 }
 
-// 创建全局实例
-window.articleCardManager = new ArticleCardManager();
+// 在新架构中不创建全局实例，由初始化脚本负责
+// 保留全局实例创建作为后备方案
+if (!window.articleCardManager) {
+    window.articleCardManager = new ArticleCardManager();
+}
 
-// 自动初始化
-document.addEventListener('DOMContentLoaded', () => {
-    window.articleCardManager.initializeAllArticleGrids();
-});
+// 新架构下不需要自动初始化，由初始化脚本负责
+// 如果在非新架构环境下使用，可以取消注释下面的代码
+// document.addEventListener('DOMContentLoaded', () => {
+//     window.articleCardManager = new ArticleCardManager();
+// });
+
+// ES6 模块导出
+export { ArticleCardManager };
+export default ArticleCardManager;

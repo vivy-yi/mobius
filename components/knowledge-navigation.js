@@ -1,22 +1,24 @@
 /**
  * 知识库导航组件管理器
  * 负责左侧导航栏的渲染和交互
+ * 重构为纯导航组件，只负责交互和事件发送
  */
 
+// 导入事件总线和事件类型
+import globalEventBus, { EVENT_TYPES } from './event-bus.js';
+
 class KnowledgeNavigation {
-    constructor() {
+    constructor(eventBus = null) {
+        // 注入依赖的事件总线
+        this.eventBus = eventBus || globalEventBus;
+
         this.navData = null;
-        this.currentFilters = {
-            category: null,
-            subcategory: null,
-            quickFilter: null,  // 修复：不要默认选中任何热门标签
-            difficulty: null,
-            search: '',
-            navigationActive: false,
-            quickFilterActive: false
-        };
+        this.cacheManager = new CacheManager();
         this.expandedCategories = new Set();
         this.baseUrl = this.getBaseUrl();
+        this.isNavigationInitialized = false;
+        this.lastRenderedState = null;
+        this.isRendering = false;
 
         // 绑定方法
         this.handleCategoryClick = this.handleCategoryClick.bind(this);
@@ -24,6 +26,30 @@ class KnowledgeNavigation {
         this.handleQuickFilterClick = this.handleQuickFilterClick.bind(this);
         this.handleDifficultyClick = this.handleDifficultyClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+
+        console.log('🧭 KnowledgeNavigation initialized with event bus');
+    }
+
+    /**
+     * 刷新缓存数据
+     */
+    async refreshCache() {
+        console.log('🔄 手动刷新导航缓存...');
+        try {
+            const jsonUrl = `${this.baseUrl}data/articles.json`;
+            const result = await this.cacheManager.forceRefresh(jsonUrl);
+
+            if (result.data) {
+                this.navData = result.data.navigation;
+                this.isNavigationInitialized = true;
+                console.log('✅ 缓存刷新完成');
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('❌ 缓存刷新失败:', error);
+            return false;
+        }
     }
 
     /**
@@ -41,16 +67,34 @@ class KnowledgeNavigation {
      * 初始化导航数据
      */
     async initializeNavigation() {
-        try {
-            const jsonUrl = `${this.baseUrl}data/articles.json`;
-            const response = await fetch(jsonUrl);
+        // 防止重复初始化
+        if (this.isNavigationInitialized) {
+            console.log('🔄 导航已初始化，跳过重复加载');
+            return true;
+        }
 
-            if (!response.ok) {
-                throw new Error(`Failed to load navigation: ${response.status}`);
+        try {
+            console.log('🚀 开始初始化导航系统...');
+
+            const jsonUrl = `${this.baseUrl}data/articles.json`;
+            console.log(`📡 加载导航数据（智能缓存）...`);
+
+            // 使用缓存管理器加载数据
+            const result = await this.cacheManager.loadData(jsonUrl);
+
+            if (!result.data) {
+                throw new Error('无法加载导航数据');
             }
 
-            const data = await response.json();
-            this.navData = data.navigation;
+            this.navData = result.data.navigation;
+
+            // 显示缓存信息
+            const cacheInfo = this.cacheManager.getCacheInfo();
+            console.log(`📊 缓存信息: ${result.fromCache ? '命中缓存' : '网络加载'}, 版本: ${cacheInfo.version}, 大小: ${cacheInfo.sizeKB}KB`);
+
+            if (result.expired) {
+                console.log('⚠️ 使用的是过期缓存数据');
+            }
 
             // 初始化展开状态
             this.navData.structure.forEach(category => {
@@ -59,7 +103,9 @@ class KnowledgeNavigation {
                 }
             });
 
-                        return true;
+            this.isNavigationInitialized = true;
+            console.log('🎉 导航系统初始化完成');
+            return true;
 
         } catch (error) {
             console.error('❌ 导航数据加载失败:', error);
@@ -96,33 +142,68 @@ class KnowledgeNavigation {
      * 渲染完整导航栏
      */
     renderNavigation(containerId) {
+        // 防止重复渲染
+        if (this.isRendering) {
+            console.log('⏸️ 导航正在渲染中，跳过重复调用');
+            return;
+        }
+
         const container = document.getElementById(containerId);
         if (!container) {
             console.warn(`导航容器 ${containerId} 未找到`);
             return;
         }
 
-        container.innerHTML = '';
-        container.className = 'knowledge-navigation';
+        // 创建当前状态的哈希值，用于比较
+        const currentState = JSON.stringify({
+            category: this.currentFilters.category,
+            subcategory: this.currentFilters.subcategory,
+            quickFilter: this.currentFilters.quickFilter,
+            difficulty: this.currentFilters.difficulty,
+            expandedCategories: Array.from(this.expandedCategories).sort()
+        });
 
-        
-        // 搜索框
-        const searchSection = this.renderSearchSection();
-        container.appendChild(searchSection);
+        // 如果状态没有变化，跳过渲染
+        if (this.lastRenderedState === currentState) {
+            console.log('🔄 导航状态未变化，跳过重新渲染');
+            return;
+        }
 
-        // 快速筛选
-        const quickFiltersSection = this.renderQuickFiltersSection();
-        container.appendChild(quickFiltersSection);
+        this.isRendering = true;
+        console.log('🎨 开始渲染导航...');
 
-        // 主导航结构
-        const mainNavSection = this.renderMainNavigationSection();
-        container.appendChild(mainNavSection);
+        try {
+            container.innerHTML = '';
+            container.className = 'knowledge-navigation';
 
-        // 难度筛选
-        const difficultySection = this.renderDifficultySection();
-        container.appendChild(difficultySection);
+            // 搜索框
+            const searchSection = this.renderSearchSection();
+            container.appendChild(searchSection);
+
+            // 快速筛选
+            const quickFiltersSection = this.renderQuickFiltersSection();
+            container.appendChild(quickFiltersSection);
+
+            // 主导航结构
+            const mainNavSection = this.renderMainNavigationSection();
+            container.appendChild(mainNavSection);
+
+            // 难度筛选
+            const difficultySection = this.renderDifficultySection();
+            container.appendChild(difficultySection);
+
+            // 缓存当前状态
+            this.lastRenderedState = currentState;
+            console.log('✅ 导航渲染完成');
+
+        } catch (error) {
+            console.error('❌ 导航渲染失败:', error);
+        } finally {
+            this.isRendering = false;
+        }
     }
 
+    
     /**
      * 渲染搜索框
      */
@@ -273,6 +354,7 @@ class KnowledgeNavigation {
         header.appendChild(categoryInfo);
 
         header.onclick = () => this.handleCategoryClick(category.id);
+        header.setAttribute('data-category-id', category.id);
 
         node.appendChild(header);
 
@@ -365,380 +447,128 @@ class KnowledgeNavigation {
     }
 
     /**
-     * 处理分类点击
+     * 处理分类点击 - 重构为纯事件发送
      */
     handleCategoryClick(categoryId) {
-        const category = this.navData.structure.find(c => c.id === categoryId);
-        if (!category) return;
+        console.log(`🧭 分类点击: ${categoryId}`);
 
-        
-        // 切换展开状态
+        // 特殊处理"全部"分类
+        if (categoryId === 'all') {
+            this.eventBus.emit(EVENT_TYPES.NAV_CATEGORY_CLICK, {
+                type: 'category',
+                value: 'all',
+                action: 'show-all',
+                metadata: {
+                    source: 'navigation',
+                    resetFilters: true
+                }
+            });
+
+            // 只更新展开状态，不触发内容变更
+            this.renderNavigation('knowledgeNavigation');
+            return;
+        }
+
+        const category = this.navData.structure.find(c => c.id === categoryId);
+        if (!category) {
+            console.warn(`⚠️ 未找到分类: ${categoryId}`);
+            return;
+        }
+
+        // 发送分类点击事件
+        this.eventBus.emit(EVENT_TYPES.NAV_CATEGORY_CLICK, {
+            type: 'category',
+            value: categoryId,
+            action: 'show-category',
+            metadata: {
+                source: 'navigation',
+                categoryName: category.name,
+                categoryIcon: category.icon,
+                categoryColor: category.color,
+                resetFilters: true
+            }
+        });
+
+        // 处理展开/折叠状态
+        this.toggleCategoryExpansion(categoryId);
+
+        // 重新渲染导航
+        this.renderNavigation('knowledgeNavigation');
+    }
+
+    /**
+     * 切换分类展开状态
+     * @param {string} categoryId - 分类ID
+     */
+    toggleCategoryExpansion(categoryId) {
         if (this.expandedCategories.has(categoryId)) {
             this.expandedCategories.delete(categoryId);
         } else {
             this.expandedCategories.add(categoryId);
         }
 
-        // 映射分类点击到统一的数据结构
-        const containerMap = {
-            'tax': 'tax-articles',
-            'legal': 'legal-articles',
-            'business': 'subsidy-articles',
-            'visa': 'faq-articles'
-        };
-
-        const categoryMap = {
-            'tax': 'tax',
-            'legal': 'legal',
-            'business': 'business',
-            'visa': 'visa'
-        };
-
-        // 更新过滤器为统一结构 - 级联筛选逻辑
-        if (this.currentFilters.category === categoryId) {
-            // 如果点击已激活的分类，保持选中，只取消热门标签
-            this.currentFilters.quickFilter = null;
-            this.currentFilters.quickFilterActive = false;
-            this.currentFilters.action = 'show-category';
-            this.currentFilters.targetContainer = containerMap[categoryId];
-            this.currentFilters.dataCategory = categoryMap[categoryId];
-            this.currentFilters.dataCategories = [categoryMap[categoryId]];
-            this.currentFilters.navigationActive = true;
-        } else {
-            // 选择新的导航分类
-            this.currentFilters = {
-                category: categoryId,
-                subcategory: null,
-                quickFilter: null,
-                action: 'show-category',
-                targetContainer: containerMap[categoryId],
-                dataCategory: categoryMap[categoryId],
-                dataCategories: [categoryMap[categoryId]],
-                navigationActive: true,
-                quickFilterActive: false
-            };
-        }
-
-        
-        // 重新渲染导航
-        this.renderNavigation('knowledgeNavigation');
-
-        // 触发筛选事件
-        this.triggerFilterChange();
+        this.updateExpandedStateOnly();
     }
 
     /**
-     * 处理子分类点击
+     * 仅更新展开状态，不触发完整重新渲染
+     */
+    updateExpandedStateOnly() {
+        console.log('📁 仅更新展开状态');
+
+        // 更新展开/折叠图标
+        this.navData.structure.forEach(category => {
+            const header = document.querySelector(`[data-category-id="${category.id}"] .nav-expand-icon i`);
+            if (header) {
+                header.className = this.expandedCategories.has(category.id) ?
+                    'fas fa-chevron-down' : 'fas fa-chevron-right';
+            }
+
+            const childrenContainer = document.querySelector(`[data-category-id="${category.id}"] + .nav-children`);
+            if (childrenContainer) {
+                childrenContainer.style.display = this.expandedCategories.has(category.id) ? 'block' : 'none';
+            }
+        });
+    }
+
+    /**
+     * 处理子分类点击 - 重构为纯事件发送
      */
     handleSubcategoryClick(categoryId, subcategoryId) {
-        this.currentFilters.category = categoryId;
-        this.currentFilters.subcategory = subcategoryId;
+        console.log(`🧭 子分类点击: ${categoryId}/${subcategoryId}`);
 
-        // 设置二级标签筛选的action和相关字段
-        const containerMap = {
-            'tax': 'tax-articles',
-            'legal': 'legal-articles',
-            'business': 'business-articles',
-            'visa': 'faq-articles',
-            'life': 'all-articles' // life分类使用全部容器，因为生活支援内容通常较少
-        };
-
-        const categoryMap = {
-            'tax': 'tax',
-            'legal': 'legal',
-            'business': 'business',
-            'visa': 'visa',
-            'life': 'life'
-        };
-
-        this.currentFilters.action = 'show-category-subcategory';
-        this.currentFilters.targetContainer = containerMap[categoryId] || 'tax-articles';
-        this.currentFilters.dataCategory = categoryMap[categoryId] || 'tax';
-        this.currentFilters.dataCategories = [categoryMap[categoryId] || 'tax'];
-        this.currentFilters.navigationActive = true;
-
-        // 重新渲染导航
-        this.renderNavigation('knowledgeNavigation');
-
-        // 触发筛选事件
-        this.triggerFilterChange();
+        // 发送子分类点击事件
+        this.eventBus.emit(EVENT_TYPES.NAV_CATEGORY_CLICK, {
+            type: 'subcategory',
+            value: { categoryId, subcategoryId },
+            action: 'show-category-subcategory',
+            metadata: {
+                source: 'navigation',
+                resetFilters: false
+            }
+        });
     }
 
     /**
-     * 处理快速筛选点击
+     * 处理快速筛选点击 - 重构为纯事件发送
      */
     handleQuickFilterClick(filterId) {
-                
-        // 检查是否有激活的导航分类
-        const activeNavigationCategory = this.currentFilters.category;
-        const isNavigationActive = this.currentFilters.navigationActive;
+        console.log(`🧭 快速筛选点击: ${filterId}`);
 
+        // 发送快速筛选点击事件
+        this.eventBus.emit(EVENT_TYPES.NAV_TAG_CLICK, {
+            type: 'quickFilter',
+            value: filterId,
+            action: 'filter-by-tag',
+            metadata: {
+                source: 'navigation',
+                filterType: this.getQuickFilterType(filterId),
+                resetFilters: false
+            }
+        });
 
-        // 映射快速筛选到统一的数据结构
-        let filterData = {};
-
-        switch(filterId) {
-            case 'filter-all':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选全部内容
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-all',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的全部内容
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-all',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            case 'filter-featured':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选精选内容
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-featured',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        filterBy: 'featured',
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的精选内容
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-featured',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        filterBy: 'featured',
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            case 'filter-articles':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选文章
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-articles',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        filterBy: 'article',
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的文章
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-articles',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        filterBy: 'article',
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            case 'filter-faq':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选FAQ
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-faq',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        filterBy: 'faq',
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的FAQ
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-faq',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        filterBy: 'faq',
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            case 'filter-recent':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选最新内容
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-recent',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        filterBy: 'recent',
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的最新内容
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-recent',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        filterBy: 'recent',
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            case 'filter-popular':
-                if (isNavigationActive && activeNavigationCategory) {
-                    // 基于当前导航分类筛选热门内容
-                    const categoryMap = {
-                        'tax': 'tax',
-                        'legal': 'legal',
-                        'business': 'business',
-                        'visa': 'visa'
-                    };
-                    filterData = {
-                        category: activeNavigationCategory,
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-category-popular',
-                        targetContainer: this.getContainerId(activeNavigationCategory),
-                        dataCategory: categoryMap[activeNavigationCategory],
-                        dataCategories: [categoryMap[activeNavigationCategory]],
-                        filterBy: 'popular',
-                        navigationActive: true,
-                        quickFilterActive: true,
-                        basedOnNavigation: true,
-                        originalNavigationCategory: activeNavigationCategory
-                    };
-                } else {
-                    // 显示所有分类的热门内容
-                    filterData = {
-                        category: 'all',
-                        subcategory: null,
-                        quickFilter: filterId,
-                        action: 'show-popular',
-                        targetContainer: 'tax-articles',
-                        dataCategories: ['tax', 'legal', 'business', 'visa'],
-                        filterBy: 'popular',
-                        navigationActive: false,
-                        quickFilterActive: true,
-                        basedOnNavigation: false
-                    };
-                }
-                break;
-            default:
-                filterData = {
-                    quickFilter: filterId,
-                    navigationActive: false,
-                    quickFilterActive: true,
-                    basedOnNavigation: false,
-                    action: 'show-unknown',
-                    category: 'all',
-                    targetContainer: 'tax-articles',
-                    dataCategories: ['tax', 'legal', 'business', 'visa']
-                };
-        }
-
-        // 检查是否有对应的导航分类
-        const matchingCategory = this.findMatchingNavigationCategory(filterId);
-        if (matchingCategory) {
-            filterData.targetNavigationCategory = matchingCategory;
-        } else {
-            filterData.targetNavigationCategory = null;
-        }
-
-        this.currentFilters = filterData;
-
-
-        // 重新渲染导航
+        // 重新渲染导航以更新UI状态
         this.renderNavigation('knowledgeNavigation');
-
-        // 触发筛选事件
-        this.triggerFilterChange();
     }
 
     /**
@@ -769,147 +599,359 @@ class KnowledgeNavigation {
     }
 
     /**
-     * 处理难度筛选点击
+     * 处理难度筛选点击 - 重构为纯事件发送
      */
     handleDifficultyClick(difficultyId) {
-        if (this.currentFilters.difficulty === difficultyId) {
-            this.currentFilters.difficulty = null;
-        } else {
-            this.currentFilters.difficulty = difficultyId;
-        }
+        console.log(`🧭 难度筛选点击: ${difficultyId}`);
 
-        // 设置难度筛选的action和相关字段
-        if (this.currentFilters.category && this.currentFilters.category !== 'all') {
-            // 如果有选中的分类，进行分类内难度筛选
-            const containerMap = {
-                'tax': 'tax-articles',
-                'legal': 'legal-articles',
-                'business': 'business-articles',
-                'visa': 'faq-articles',
-                'all': 'all-articles'
-            };
+        // 发送难度筛选点击事件
+        this.eventBus.emit(EVENT_TYPES.NAV_DIFFICULTY_CLICK, {
+            type: 'difficulty',
+            value: difficultyId,
+            action: 'filter-by-difficulty',
+            metadata: {
+                source: 'navigation',
+                resetFilters: false
+            }
+        });
 
-            const categoryMap = {
-                'tax': 'tax',
-                'legal': 'legal',
-                'business': 'business',
-                'visa': 'visa',
-                'all': 'all'
-            };
-
-            this.currentFilters.action = 'show-category-difficulty';
-            this.currentFilters.targetContainer = containerMap[this.currentFilters.category] || 'all-articles';
-            this.currentFilters.dataCategory = categoryMap[this.currentFilters.category] || 'tax';
-            this.currentFilters.dataCategories = [categoryMap[this.currentFilters.category] || 'tax'];
-            this.currentFilters.navigationActive = true;
-        } else {
-            // 如果没有选中分类，进行全局难度筛选
-            this.currentFilters.action = 'show-difficulty';
-            this.currentFilters.targetContainer = 'all-articles';
-            this.currentFilters.dataCategory = 'all';
-            this.currentFilters.dataCategories = ['tax', 'legal', 'business', 'visa'];
-            this.currentFilters.navigationActive = false;
-        }
-
-        // 重新渲染导航
+        // 重新渲染导航以更新UI状态
         this.renderNavigation('knowledgeNavigation');
-
-        // 触发筛选事件
-        this.triggerFilterChange();
     }
 
     /**
-     * 处理搜索
+     * 处理搜索 - 重构为纯事件发送
      */
     handleSearch(searchTerm) {
-        this.currentFilters.search = searchTerm.trim();
+        console.log(`🧭 搜索: "${searchTerm}"`);
 
-        // 触发筛选事件
-        this.triggerFilterChange();
+        // 发送搜索事件
+        this.eventBus.emit(EVENT_TYPES.NAV_SEARCH, {
+            type: 'search',
+            value: searchTerm.trim(),
+            action: 'search-content',
+            metadata: {
+                source: 'navigation'
+            }
+        });
     }
 
     /**
-     * 清除搜索
+     * 清除搜索 - 重构为纯事件发送
      */
     clearSearch() {
         const searchInput = document.getElementById('knowledge-search');
         if (searchInput) {
             searchInput.value = '';
         }
-        
+
         const clearButton = document.querySelector('.search-clear');
         if (clearButton) {
             clearButton.style.display = 'none';
         }
 
-        this.currentFilters.search = '';
-        this.triggerFilterChange();
-    }
-
-    /**
-     * 触发筛选变化事件
-     */
-    triggerFilterChange() {
-        console.log('准备触发事件, 当前filters:', this.currentFilters);
-
-        // 添加数据容器状态信息到事件数据中
-        const hasDataContainer2 = window.articleCardManager && window.articleCardManager.hasDataContainer2();
-        const eventData = {
-            filters: { ...this.currentFilters },
-            hasDataContainer2: hasDataContainer2
-        };
-        console.log('事件数据:', eventData);
-
-        const event = new CustomEvent('navigationFilterChange', {
-            detail: eventData
+        // 发送清除搜索事件
+        this.eventBus.emit(EVENT_TYPES.NAV_SEARCH, {
+            type: 'search',
+            value: '',
+            action: 'clear-search',
+            metadata: {
+                source: 'navigation'
+            }
         });
-        console.log('事件已创建，准备发送');
-        document.dispatchEvent(event);
-        console.log('事件已发送');
     }
 
     /**
-     * 获取当前筛选器状态
+     * 获取快速筛选类型
+     * @param {string} filterId - 筛选器ID
      */
-    getCurrentFilters() {
-        return { ...this.currentFilters };
-    }
-
-    /**
-     * 设置筛选器状态
-     */
-    setFilters(filters) {
-        this.currentFilters = { ...this.currentFilters, ...filters };
-        this.renderNavigation('knowledgeNavigation');
-        this.triggerFilterChange();
-    }
-
-    /**
-     * 清除所有筛选器
-     */
-    clearAllFilters() {
-        this.currentFilters = {
-            category: null,
-            subcategory: null,
-            quickFilter: 'all',
-            difficulty: null,
-            search: ''
+    getQuickFilterType(filterId) {
+        const filterTypes = {
+            'filter-all': 'all',
+            'filter-featured': 'featured',
+            'filter-articles': 'articles',
+            'filter-faq': 'faq',
+            'filter-recent': 'recent',
+            'filter-popular': 'popular'
         };
 
-        const searchInput = document.getElementById('knowledge-search');
-        if (searchInput) {
-            searchInput.value = '';
-        }
-
-        const clearButton = document.querySelector('.search-clear');
-        if (clearButton) {
-            clearButton.style.display = 'none';
-        }
-
-        this.renderNavigation('knowledgeNavigation');
-        this.triggerFilterChange();
+        return filterTypes[filterId] || 'unknown';
     }
 }
 
 // 将类暴露给全局作用域
-window.KnowledgeNavigation = KnowledgeNavigation;
+window.KnowledgeNavigation = new KnowledgeNavigation();
+window.knowledgeNavigation = window.KnowledgeNavigation; // 添加小写别名
+
+// 等待DOM加载完成和数据可用后初始化
+document.addEventListener('DOMContentLoaded', () => {
+    // 等待一小段时间确保事件总线和状态管理器已加载
+    setTimeout(async () => {
+        if (window.knowledgeNavigation && window.knowledgeNavigation.isNavigationInitialized === false) {
+            try {
+                console.log('🧭 自动初始化导航组件...');
+                await window.knowledgeNavigation.initializeNavigation();
+            } catch (error) {
+                console.warn('⚠️ 自动初始化导航失败:', error);
+            }
+        }
+    }, 500);
+});
+
+/**
+ * 知识库导航移动端抽屉功能
+ * 为移动设备添加汉堡菜单和抽屉效果
+ */
+class KnowledgeNavigationDrawer {
+    constructor() {
+        this.isOpen = false;
+        this.hamburger = null;
+        this.overlay = null;
+        this.navigation = null;
+        this.init();
+    }
+
+    init() {
+        this.createMobileElements();
+        this.bindEvents();
+        this.checkScreenSize();
+
+        // 监听屏幕大小变化
+        window.addEventListener('resize', () => {
+            this.checkScreenSize();
+        });
+    }
+
+    createMobileElements() {
+        // 创建汉堡菜单按钮
+        this.hamburger = document.createElement('div');
+        this.hamburger.className = 'knowledge-nav-hamburger';
+        this.hamburger.id = 'knowledgeNavHamburger';
+        this.hamburger.innerHTML = '<span></span><span></span><span></span>';
+        this.hamburger.style.cssText = `
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1002;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        `;
+
+        // 创建遮罩层
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'knowledge-nav-overlay';
+        this.overlay.id = 'knowledgeNavOverlay';
+        this.overlay.style.cssText = `
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+
+        // 添加到页面
+        document.body.appendChild(this.hamburger);
+        document.body.appendChild(this.overlay);
+
+        // 获取导航元素
+        this.navigation = document.getElementById('knowledgeNavigation');
+    }
+
+    bindEvents() {
+        // 汉堡菜单点击事件
+        this.hamburger.addEventListener('click', () => {
+            this.toggle();
+        });
+
+        // 遮罩层点击事件
+        this.overlay.addEventListener('click', () => {
+            this.close();
+        });
+
+        // ESC键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.close();
+            }
+        });
+    }
+
+    checkScreenSize() {
+        const isMobile = window.innerWidth <= 768;
+        const navigation = document.getElementById('knowledgeNavigation');
+
+        if (navigation) {
+            if (isMobile) {
+                // 移动端样式
+                navigation.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 280px;
+                    height: 100%;
+                    background: white;
+                    z-index: 1001;
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease;
+                    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                `;
+
+                // 显示汉堡菜单
+                this.hamburger.style.display = 'block';
+            } else {
+                // 桌面端样式
+                navigation.style.cssText = `
+                    position: static;
+                    transform: translateX(0);
+                    box-shadow: none;
+                    width: 280px;
+                `;
+
+                // 隐藏汉堡菜单
+                this.hamburger.style.display = 'none';
+
+                // 关闭抽屉（如果是打开状态）
+                if (this.isOpen) {
+                    this.close();
+                }
+            }
+        }
+    }
+
+    toggle() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    open() {
+        this.isOpen = true;
+
+        // 更新汉堡菜单状态
+        this.hamburger.classList.add('active');
+
+        // 显示遮罩层
+        this.overlay.style.display = 'block';
+        setTimeout(() => {
+            this.overlay.style.opacity = '1';
+        }, 10);
+
+        // 滑入导航
+        if (this.navigation) {
+            this.navigation.style.transform = 'translateX(0)';
+        }
+
+        // 防止背景滚动
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.isOpen = false;
+
+        // 更新汉堡菜单状态
+        this.hamburger.classList.remove('active');
+
+        // 隐藏遮罩层
+        this.overlay.style.opacity = '0';
+        setTimeout(() => {
+            this.overlay.style.display = 'none';
+        }, 300);
+
+        // 滑出导航
+        if (this.navigation) {
+            this.navigation.style.transform = 'translateX(-100%)';
+        }
+
+        // 恢复背景滚动
+        document.body.style.overflow = '';
+    }
+}
+
+// 添加移动端抽屉样式
+if (!document.querySelector('#knowledge-nav-drawer-styles')) {
+    const style = document.createElement('style');
+    style.id = 'knowledge-nav-drawer-styles';
+    style.textContent = `
+        /* 汉堡菜单按钮样式 */
+        .knowledge-nav-hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #333;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .knowledge-nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+
+        .knowledge-nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .knowledge-nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
+        .knowledge-nav-hamburger:hover {
+            background: #f8f9fa !important;
+            transform: scale(1.05);
+        }
+
+        /* 确保在移动端的知识库文章内容不重叠 */
+        @media (max-width: 768px) {
+            .zhihu-article-wrapper {
+                margin-left: 0 !important;
+                padding: 20px !important;
+            }
+
+            /* 遮罩层显示时防止页面滚动 */
+            body.nav-open {
+                overflow: hidden;
+            }
+        }
+
+        /* 移动端导航项点击后自动关闭抽屉 */
+        @media (max-width: 768px) {
+            .knowledge-navigation .nav-category-header,
+            .knowledge-navigation .nav-subcategory,
+            .knowledge-navigation .filter-button,
+            .knowledge-navigation .difficulty-button {
+                cursor: pointer;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// 自动初始化移动端抽屉功能
+document.addEventListener('DOMContentLoaded', () => {
+    // 等待知识库导航加载完成后再初始化抽屉
+    setTimeout(() => {
+        if (!window.knowledgeNavigationDrawer) {
+            window.knowledgeNavigationDrawer = new KnowledgeNavigationDrawer();
+            console.log('✅ 知识库导航移动端抽屉功能已初始化');
+        }
+    }, 500);
+});
+
+// 暴露类到全局作用域
+window.KnowledgeNavigationDrawer = KnowledgeNavigationDrawer;
+
+// ES6 模块导出
+export { KnowledgeNavigation, KnowledgeNavigationDrawer };
+export default KnowledgeNavigation;

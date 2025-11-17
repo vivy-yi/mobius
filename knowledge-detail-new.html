@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识详情 - Mobius专业知识库</title>
+    <meta name="description" content="Mobius专业知识库详细内容，提供深度分析和专业评论">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./styles/css/components/knowledge-detail.css">
+
+    <!-- 详情页布局样式 -->
+    <style>
+        /* 响应式三栏布局 */
+        .knowledge-detail-main {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            gap: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* 左侧：文章目录 */
+        .detail-sidebar-left {
+            flex: 0 0 280px;
+        }
+
+        /* 中间：文章内容 */
+        .detail-content-center {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 右侧：专家分析、标签、相关知识 */
+        .detail-sidebar-right {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* 底部交互和评论区域 */
+        .detail-footer-section {
+            margin-top: 3rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 2rem;
+        }
+
+        .detail-article-interactions {
+            margin-bottom: 2rem;
+        }
+
+        .interaction-stats {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .detail-interaction-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .detail-interaction-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: #f0f9ff;
+        }
+
+        /* 评论区域 */
+        .detail-comments-section {
+            margin-top: 2rem;
+        }
+
+        .comments-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comments-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .comments-count {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .comment-input-area {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .comment-input-wrapper {
+            flex: 1;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .comment-actions {
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .comment-submit-btn {
+            padding: 0.5rem 1rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-submit-btn:hover {
+            background: #2563eb;
+        }
+
+        /* 响应式布局 */
+        @media (max-width: 1200px) {
+            .knowledge-detail-main {
+                flex-direction: column;
+            }
+
+            .detail-sidebar-left,
+            .detail-sidebar-right {
+                flex: none;
+                width: 100%;
+            }
+
+            .detail-sidebar-right {
+                order: -1; /* 右侧内容放在前面 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .knowledge-detail-main {
+                padding: 1rem 0.5rem;
+            }
+
+            .interaction-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .comment-input-area {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="knowledge-detail-body">
+    <!-- 主导航栏 -->
+    <nav id="navbar">
+        <!-- 导航内容将通过 components.js 动态加载 -->
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb-container">
+        <nav class="breadcrumb">
+            <a href="./index.html">首页</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="./knowledge.html">知识库</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="current-category">分类</span>
+            <i class="fas fa-chevron-right"></i>
+            <span id="current-title">文章标题</span>
+        </nav>
+    </div>
+
+    <!-- 知识详情页面主体 -->
+    <main class="knowledge-detail-main">
+        <!-- 左侧：文章目录 -->
+        <aside class="detail-sidebar-left">
+            <div class="detail-toc-container">
+                <div class="detail-toc-header">
+                    <i class="fas fa-list"></i>
+                    <h3>文章目录</h3>
+                </div>
+                <nav class="detail-toc" id="detailToc">
+                    <!-- 目录项将通过JavaScript动态生成 -->
+                </nav>
+            </div>
+        </aside>
+
+        <!-- 中间：文章内容 -->
+        <section class="detail-content-center">
+            <!-- 文章头部信息 -->
+            <header class="detail-article-header">
+                <div class="detail-author-info">
+                    <div class="detail-author-avatar">M</div>
+                    <div class="detail-author-details">
+                        <div class="detail-author-name">Mobius专业团队</div>
+                        <div class="detail-article-meta">
+                            <span class="detail-article-date" id="articleDate">2024年1月15日</span>
+                            <span class="detail-article-reading" id="readingTime">5分钟阅读</span>
+                            <span class="detail-article-category" id="articleCategory">分类</span>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="detail-article-title" id="articleTitle">文章标题</h1>
+                <div class="detail-article-excerpt" id="articleExcerpt">
+                    文章摘要内容
+                </div>
+            </header>
+
+            <!-- 文章正文内容 -->
+            <div class="detail-article-body" id="articleBody">
+                <!-- 文章内容将通过JavaScript动态加载 -->
+                <div class="loading-placeholder">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>正在加载文章内容...</p>
+                </div>
+            </div>
+
+            <!-- 底部：点赞、收藏、分享和用户评论 -->
+            <section class="detail-footer-section">
+                <!-- 互动区域 -->
+                <div class="detail-article-interactions">
+                    <div class="interaction-stats">
+                        <button class="detail-interaction-btn detail-helpful-btn" id="helpfulBtn">
+                            <i class="fas fa-thumbs-up"></i>
+                            <span class="interaction-count">有帮助</span>
+                        </button>
+                        <button class="detail-interaction-btn detail-bookmark-btn" id="bookmarkBtn">
+                            <i class="fas fa-bookmark"></i>
+                            <span class="interaction-count">收藏</span>
+                        </button>
+                        <button class="detail-interaction-btn detail-share-btn" id="shareBtn">
+                            <i class="fas fa-share"></i>
+                            <span class="interaction-count">分享</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 用户评论区域 -->
+                <div class="detail-comments-section">
+                    <div class="comments-header">
+                        <h3><i class="fas fa-comments"></i> 用户评论</h3>
+                        <span class="comments-count" id="commentsCount">(0)</span>
+                    </div>
+
+                    <!-- 评论输入框 -->
+                    <div class="comment-input-area">
+                        <div class="comment-avatar">U</div>
+                        <div class="comment-input-wrapper">
+                            <textarea class="comment-input" placeholder="分享你的想法..." id="commentInput"></textarea>
+                            <div class="comment-actions">
+                                <button class="comment-submit-btn" id="submitComment">
+                                    <i class="fas fa-paper-plane"></i> 发表评论
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 评论列表 -->
+                    <div class="comments-list" id="commentsList">
+                        <!-- 评论将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- 右侧：专家分析、相关标签、相关知识 -->
+        <aside class="detail-sidebar-right">
+            <!-- 专家分析 -->
+            <div class="expert-analysis">
+                <div class="analysis-header">
+                    <i class="fas fa-microscope"></i>
+                    <h3>专家分析</h3>
+                </div>
+                <div class="analysis-content" id="expertAnalysis">
+                    <div class="analysis-item">
+                        <div class="analysis-score">
+                            <span class="score-label">实用度</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="score-value">9.5/10</span>
+                        </div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-score">
+                            <span class="score-label">专业度</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="score-value">9.0/10</span>
+                        </div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-score">
+                            <span class="score-label">可操作性</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="score-value">8.8/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关标签 -->
+            <div class="related-tags">
+                <div class="tags-header">
+                    <i class="fas fa-tags"></i>
+                    <h3>相关标签</h3>
+                </div>
+                <div class="tags-content" id="relatedTags">
+                    <span class="tag">日本企业注册</span>
+                    <span class="tag">税务规划</span>
+                    <span class="tag">法律合规</span>
+                </div>
+            </div>
+
+            <!-- 相关知识推荐 -->
+            <div class="related-knowledge">
+                <h3><i class="fas fa-book-open"></i> 相关知识</h3>
+                <ul id="relatedKnowledgeList">
+                    <!-- 相关知识将通过JavaScript动态加载 -->
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="footer">
+        <!-- 页脚内容将通过 components.js 动态加载 -->
+    </footer>
+
+    <!-- JavaScript文件 -->
+    <script src="./components/components.js"></script>
+    <script src="./components/knowledge-detail.js?v=2.1"></script>
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化组件
+            if (window.componentManager) {
+                window.componentManager.init();
+            }
+
+            // 初始化知识详情功能
+            if (window.KnowledgeDetail) {
+                window.knowledgeDetail = new KnowledgeDetail();
+                window.knowledgeDetail.init();
+            }
+        });
+    </script>
+</body>
+</html>
