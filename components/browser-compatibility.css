@@ -1,0 +1,445 @@
+/* ==========================================================================
+   浏览器兼容性修复 - Cross-browser Compatibility Fixes
+   ========================================================================== */
+
+/* CSS变量回退 - 不支持CSS变量的浏览器 */
+.zhihu-article-wrapper {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #1A1A1A;
+    line-height: 1.8;
+    background: #FFFFFF;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Flexbox回退 */
+.zhihu-content-layout {
+    display: block;
+}
+
+@supports (display: grid) {
+    .zhihu-content-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@supports (display: grid) and (min-width: 1024px) {
+    .zhihu-content-layout {
+        grid-template-columns: 690px 290px;
+        gap: 48px;
+    }
+}
+
+/* Flexbox居中回退 */
+.zhihu-interaction-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* 旧版Flexbox支持 */
+.zhihu-interaction-buttons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+}
+
+/* Grid布局回退 */
+.zhihu-related-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+}
+
+/* 自定义属性回退 */
+.zhihu-interaction-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #EBEEF0;
+    border-radius: 12px;
+    background: #FFFFFF;
+    color: #8590A6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* 不支持gap属性的浏览器 */
+@supports not (gap: 8px) {
+    .zhihu-interaction-buttons > * {
+        margin-right: 8px;
+    }
+
+    .zhihu-interaction-buttons > *:last-child {
+        margin-right: 0;
+    }
+}
+
+/* backdrop-filter回退 */
+.zhihu-modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@supports (backdrop-filter: blur(8px)) {
+    .zhihu-modal-overlay {
+        backdrop-filter: blur(8px);
+    }
+}
+
+/* sticky定位回退 */
+.zhihu-sidebar {
+    position: static;
+}
+
+@supports (position: sticky) {
+    .zhihu-sidebar {
+        position: sticky;
+        top: 32px;
+        height: fit-content;
+    }
+}
+
+/* object-fit回退 */
+.zhihu-article-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+@supports (object-fit: cover) {
+    .zhihu-article-body img {
+        object-fit: cover;
+    }
+}
+
+/* CSS Grid回退 - 使用float布局 */
+.zhihu-share-items {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@supports not (gap: 12px) {
+    .zhihu-share-items > * {
+        margin-right: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+/* 过渡动画回退 */
+.zhihu-interaction-btn {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* 不支持transition的浏览器 */
+.no-csstransitions .zhihu-interaction-btn {
+    transition: none;
+}
+
+/* transform回退 */
+@supports (transform: translateY(-20px)) {
+    .zhihu-toast {
+        transform: translateY(-20px);
+    }
+}
+
+/* 旧版浏览器滚动优化 */
+.zhihu-article-body table {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+
+/* 边框盒模型回退 */
+.zhihu-article-wrapper,
+.zhihu-modal-content {
+    box-sizing: border-box;
+}
+
+/* 旧版IE盒模型支持 */
+.zhihu-article-wrapper,
+.zhihu-modal-content {
+    *behavior: url(/boxsizing.htc);
+}
+
+/* 焦点样式兼容性 */
+.zhihu-interaction-btn:focus,
+.zhihu-toc-link:focus {
+    outline: 2px solid #0084FF;
+    outline-offset: 2px;
+}
+
+/* 高对比度模式支持 */
+@media screen and (-ms-high-contrast: active) {
+    .zhihu-interaction-btn {
+        border: 2px solid windowText;
+    }
+
+    .zhihu-interaction-btn:hover,
+    .zhihu-interaction-btn:focus {
+        background: highlight;
+        color: highlightText;
+    }
+}
+
+/* IE10+ 特定修复 */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .zhihu-content-layout {
+        display: -ms-flexbox;
+        -ms-flex-direction: column;
+    }
+
+    @media (min-width: 1024px) {
+        .zhihu-content-layout {
+            -ms-flex-direction: row;
+        }
+    }
+}
+
+/* Safari特定修复 */
+@supports (-webkit-appearance: none) {
+    .zhihu-share-item {
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* Firefox特定修复 */
+@supports (-moz-appearance: none) {
+    .zhihu-interaction-btn::-moz-focus-inner {
+        border: 0;
+    }
+}
+
+/* Chrome特定修复 */
+@supports (-webkit-user-select: none) {
+    .zhihu-mobile-toc-toggle {
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* 打印样式兼容性 */
+@media print {
+    .zhihu-article-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* 字体回退 */
+@supports (font-family: "PingFang SC") {
+    .zhihu-article-title,
+    .zhihu-toc-title {
+        font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+    }
+}
+
+/* 触摸设备检测 */
+@media (hover: none) and (pointer: coarse) {
+    .zhihu-interaction-btn:hover {
+        background: #FFFFFF;
+        color: #8590A6;
+    }
+
+    .zhihu-interaction-btn:active {
+        background: #E5F3FF;
+        color: #0084FF;
+    }
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 图片懒加载兼容性 */
+.zhihu-article-body img {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.zhihu-article-body img.loading {
+    opacity: 0.7;
+}
+
+.zhihu-article-body img.loaded {
+    opacity: 1;
+}
+
+/* 不支持loading="lazy"的浏览器 */
+@supports not (loading: lazy) {
+    .zhihu-article-body img {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .zhihu-article-body img.lazyloaded {
+        opacity: 1;
+    }
+}
+
+/* CSS containment回退 */
+@supports (contain: layout) {
+    .zhihu-related-item {
+        contain: layout;
+    }
+}
+
+/* aspect-ratio回退 */
+@supports not (aspect-ratio: 16/9) {
+    .zhihu-article-body iframe {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 */
+    }
+
+    .zhihu-article-body iframe iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* scroll-behavior回退 */
+@supports (scroll-behavior: smooth) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* 不支持CSS变量的浏览器回退 */
+.no-cssvariables {
+    /* 颜色回退 */
+    --zhihu-blue: #0084FF;
+    --zhihu-gray-primary: #1A1A1A;
+    --zhihu-gray-secondary: #8590A6;
+    --zhihu-bg-primary: #FFFFFF;
+    --zhihu-bg-secondary: #F6F6F6;
+    --zhihu-border: #EBEEF0;
+}
+
+/* 旧版浏览器渐变回退 */
+@supports not ((background: linear-gradient(...))) {
+    .zhihu-reading-progress-bar {
+        background: #0084FF;
+    }
+}
+
+/* 字体回退栈 */
+.zhihu-article-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+                 "Noto Color Emoji";
+}
+
+/* Emoji字体回退 */
+.zhihu-article-body {
+    font-family: inherit;
+}
+
+/* 性能优化 - will-change提示 */
+.zhihu-interaction-btn:hover {
+    will-change: transform;
+}
+
+.zhihu-modal-content {
+    will-change: transform, opacity;
+}
+
+/* 重绘优化 */
+.zhihu-interaction-btn {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* GPU加速提示 */
+@supports (transform: translate3d(0, 0, 0)) {
+    .zhihu-toast {
+        transform: translate3d(0, -20px, 0);
+    }
+
+    .zhihu-floating-heart {
+        transform: translate3d(0, -60px, 0) scale(0.8);
+    }
+}
+
+/* 文本渲染优化 */
+.zhihu-article-title,
+.zhihu-article-body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+}
+
+/* 图标字体优化 */
+.zhihu-interaction-btn i {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 临界CSS提示 - 这些样式应该内联 */
+.zhihu-article-wrapper,
+.zhihu-article-header,
+.zhihu-article-title {
+    display: block;
+}
+
+/* 加载状态指示器 */
+.zhihu-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.8) 50%,
+        rgba(255,255,255,0) 100%);
+    animation: zhihu-loading 1.5s infinite;
+}
+
+@keyframes zhihu-loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
