@@ -10,24 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月28日</span>
-                    <span class="article-reading-time">9分钟阅读</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月28日</span>
+                        <span class="zhihu-article-reading">9分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">日本劳动合同法要点解析</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">日本劳动合同法要点解析</h1>
+                <div class="zhihu-article-excerpt">
                     <p>了解日本劳动合同的基本要求、解雇规定、员工权益保护等重要法律条款，帮助企业管理者合法合规地处理劳动关系。</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>📋 导读</h2>
                         <p>日本的劳动合同体系以《劳动基准法》为核心，结合多项劳动法规保护员工权益。对于在日中资企业而言，理解并遵守这些规定不仅是法律要求，更是建立稳定劳资关系的基础。</p>
 
@@ -89,454 +95,46 @@
                                 <li><input type="checkbox" disabled checked> 退职相关事项（解雇事由等）</li>
                             </ul>
                         </div>
-
-                        <div class="checklist">
-                            <h4>相对必要记载事项（适用时需记载）：</h4>
-                            <ul>
-                                <li><input type="checkbox" disabled> 退休及退休金制度</li>
-                                <li><input type="checkbox" disabled> 退职金制度</li>
-                                <li><input type="checkbox" disabled> 危害补偿及业务外伤病补偿</li>
-                                <li><input type="checkbox" disabled> 表扬、制裁制度</li>
-                                <li><input type="checkbox" disabled> 灾害补偿</li>
-                            </ul>
-                        </div>
-
-                        <h3>🔍 外国人雇员特别规定</h3>
-                        <div class="alert alert-warning">
-                            <h4>⚠️ 重要提醒</h4>
-                            <p>雇用外国人时，除一般劳动合同要求外，还需特别确认：</p>
-                            <ul>
-                                <li><strong>在留资格：</strong>确认员工的工作许可范围</li>
-                                <li><strong>劳动条件：</strong>不得歧视外国人</li>
-                                <li><strong>语言理解：</strong>确保员工理解劳动条件</li>
-                                <li><strong>社保加入：</strong>强制加入社会保险</li>
-                            </ul>
-                        </div>
-
-                        <h2>⏰ 工作时间和加班规定</h2>
-
-                        <h3>法定劳动时间</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>项目</th>
-                                    <th>标准</th>
-                                    <th>例外情况</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1日劳动时间</td>
-                                    <td>不超过8小时</td>
-                                    <td>36协定签订后可延长</td>
-                                </tr>
-                                <tr>
-                                    <td>1周劳动时间</td>
-                                    <td>不超过40小时</td>
-                                    <td>变形劳动时间制可调整</td>
-                                </tr>
-                                <tr>
-                                    <td>休息时间</td>
-                                    <td>45分钟以上（6小时劳动）</td>
-                                    <td>60分钟以上（8小时劳动）</td>
-                                </tr>
-                                <tr>
-                                    <td>休息日</td>
-                                    <td>每周1日或4周4日</td>
-                                    <td>代替休假制可能</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>加班限制规定（2019年4月施行）</h3>
-                        <div class="info-box">
-                            <h4>📅 加班时间上限</h4>
-                            <ul>
-                                <li><strong>单月：</strong>最多45小时（特殊情况除外）</li>
-                                <li><strong>年度：</strong>最多360小时</li>
-                                <li><strong>繁忙期：</strong>单月最多100小时，年度最多720小时</li>
-                                <li><strong>违法加班：</strong>最高6个月以下有期徒刑或30万日元罚款</li>
-                            </ul>
-                        </div>
-
-                        <h3>加班工资计算</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>加班类型</th>
-                                    <th>增加率</th>
-                                    <th>适用条件</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>普通加班</td>
-                                    <td>25%以上</td>
-                                    <td>超过法定劳动时间</td>
-                                </tr>
-                                <tr>
-                                    <td>深夜加班（22:00-5:00）</td>
-                                    <td>25%以上</td>
-                                    <td>22:00-5:00时段工作</td>
-                                </tr>
-                                <tr>
-                                    <td>休息日加班</td>
-                                    <td>35%以上</td>
-                                    <td>法定休息日工作</td>
-                                </tr>
-                                <tr>
-                                    <td>深夜休息日加班</td>
-                                    <td>60%以上</td>
-                                    <td>休息日深夜时段工作</td>
-                                </tr>
-                                <tr>
-                                    <td>月60小时以上加班</td>
-                                    <td>50%以上</td>
-                                    <td>月加班超过60小时部分</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h2>🚪 解雇和退职的法定要求</h2>
-
-                        <h3>解雇限制原则</h3>
-                        <p>日本劳动法遵循"解雇权滥用法理"，解雇必须满足以下条件：</p>
-
-                        <div class="criteria-box">
-                            <h4>✅ 合理解雇四要素</h4>
-                            <ol>
-                                <li><strong>业务上的必要性：</strong>经营困难、人员过剩等客观理由</li>
-                                <li><strong>解雇回避努力：</strong>配职、培训、降职等替代措施</li>
-                                <li><strong>人员选择的合理性：</strong>公平、客观的选拔标准</li>
-                                <li><strong>程序正当性：</strong>充分说明、协议等必要程序</li>
-                            </ol>
-                        </div>
-
-                        <h3>禁止解雇的情形</h3>
-                        <div class="alert alert-danger">
-                            <h4>🚫 绝对禁止解雇</h4>
-                            <ul>
-                                <li>产前产后的女性休业期间及休业后30天内</li>
-                                <li>因业务灾害疗养期间及休业后30天内</li>
-                                <li>因育儿护理休业期间及休业后30天内</li>
-                                <li>工会活动为理由的解雇</li>
-                                <li>国籍、信仰等为理由的差别对待</li>
-                            </ul>
-                        </div>
-
-                        <h3>解雇预告期和预告手当</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>预告期间</th>
-                                    <th>预告手当</th>
-                                    <th>适用条件</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>30日前</td>
-                                    <td>无需</td>
-                                    <td>标准解雇预告</td>
-                                </tr>
-                                <tr>
-                                    <td>未满30日</td>
-                                    <td>平均工资×不足天数</td>
-                                    <td>即时解雇</td>
-                                </tr>
-                                <tr>
-                                    <td>无预告</td>
-                                    <td>平均工资×30日分</td>
-                                    <td>完全即时解雇</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="example-box">
-                            <h4>💡 解雇预告手当计算示例</h4>
-                            <p><strong>条件：</strong>员工月薪30万日元，解雇预告10日</p>
-                            <p><strong>计算：</strong>(30万日元 ÷ 30日) × (30日 - 10日) = 20万日元</p>
-                            <p><strong>支付：</strong>需额外支付20万日元作为解雇预告手当</p>
-                        </div>
-
-                        <h2>🛡️ 员工权益保护机制</h2>
-
-                        <h3>工资保障制度</h3>
-                        <div class="info-box">
-                            <h4>💰 最低工资标准（2024年）</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>地区</th>
-                                        <th>小时最低工资</th>
-                                        <th>年度目标</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>东京都</td>
-                                        <td>1,113日元</td>
-                                        <td>1,200日元</td>
-                                    </tr>
-                                    <tr>
-                                        <td>神奈川县</td>
-                                        <td>1,112日元</td>
-                                        <td>1,200日元</td>
-                                    </tr>
-                                    <tr>
-                                        <td>大阪府</td>
-                                        <td>1,064日元</td>
-                                        <td>1,200日元</td>
-                                    </tr>
-                                    <tr>
-                                        <td>全国平均</td>
-                                        <td>1,004日元</td>
-                                        <td>1,100日元</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>休假制度</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>休假类型</th>
-                                    <th>取得条件</th>
-                                    <th>日数</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>年次有給休暇</td>
-                                    <td>雇用6个月后，出勤率80%以上</td>
-                                    <td>10-20天（按工龄递增）</td>
-                                </tr>
-                                <tr>
-                                    <td>产前产后休業</td>
-                                    <td>怀孕女性</td>
-                                    <td>产前6周+产后8周</td>
-                                </tr>
-                                <tr>
-                                    <td>育児休業</td>
-                                    <td>子女1岁未満</td>
-                                    <td>最長到2岁</td>
-                                </tr>
-                                <tr>
-                                    <td>介護休業</td>
-                                    <td>要介護家族</td>
-                                    <td>通算93天（分3次）</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>社保制度</h3>
-                        <div class="checklist">
-                            <h4>🏥 强制社会保险（5险）</h4>
-                            <ul>
-                                <li><input type="checkbox" disabled checked> <strong>健康保险：</strong>医疗费用报销</li>
-                                <li><input type="checkbox" disabled checked> <strong>厚生年金：</strong>养老保险制度</li>
-                                <li><input type="checkbox" disabled checked> <strong>雇佣保险：</strong>失业保险制度</li>
-                                <li><input type="checkbox" disabled checked> <strong>劳灾保险：</strong>工伤事故补偿</li>
-                                <li><input type="checkbox" disabled checked> <strong>介護保险：</strong>护理保险（40岁以上）</li>
-                            </ul>
-                        </div>
-
-                        <h2>👥 外国人雇员特别规定</h2>
-
-                        <h3>在留资格与工作的对应关系</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>在留资格</th>
-                                    <th>工作范围</th>
-                                    <th>限制事项</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>技术・人文知识・国际业务</td>
-                                    <td>技术、翻译、贸易等</td>
-                                    <td>单纯劳动禁止</td>
-                                </tr>
-                                <tr>
-                                    <td>特定技能</td>
-                                    <td>12个特定行业</td>
-                                    <td>行业内工作</td>
-                                </tr>
-                                <tr>
-                                    <td>永住者</td>
-                                    <td>职业无限制</td>
-                                    <td>无特别限制</td>
-                                </tr>
-                                <tr>
-                                    <td>定住者</td>
-                                    <td>指定活动</td>
-                                    <td>按指定内容</td>
-                                </tr>
-                                <tr>
-                                    <td>家族滞在</td>
-                                    <td>许可范围内工作</td>
-                                    <td>需资格外活动许可</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>外国人雇用时的注意事项</h3>
-                        <div class="alert alert-warning">
-                            <h4>⚠️ 重要确认事项</h4>
-                            <ol>
-                                <li><strong>在留卡确认：</strong>确认在留资格、期间、活动内容</li>
-                                <li><strong>劳动条件明示：</strong>用可理解的语言说明劳动条件</li>
-                                <li><strong>待遇平等：</strong>不得因国籍差别对待</li>
-                                <li><strong>社保加入：</strong>强制加入社会保险</li>
-                                <li><strong>雇用保险加入：</strong>向ハローワーク申报</li>
-                                <li><strong>在留期间更新：</strong>及时办理续签手续</li>
-                            </ol>
-                        </div>
-
-                        <h2>⚖️ 纠纷处理和救济途径</h2>
-
-                        <h3>劳动纠纷处理机构</h3>
-                        <div class="info-box">
-                            <h4>🏛️ 主要咨询解决机构</h4>
-                            <ul>
-                                <li><strong>劳动基准监督署：</strong>监督劳动法执行，处理违法案件</li>
-                                <li><strong>劳动局：</strong>提供个别劳动纷争解决援助</li>
-                                <li><strong>地方劳动委员会：</strong>处理不当劳动行为案件</li>
-                                <li><strong>劳动审判制度：</strong>法院的快速审判程序</li>
-                                <li><strong>劳动基准监督署长：</strong>指导解决紛争</li>
-                            </ul>
-                        </div>
-
-                        <h3>纠纷解决流程</h3>
-                        <div class="flowchart">
-                            <h4>🔄 标准解决步骤</h4>
-                            <ol>
-                                <li><strong>内部协商：</strong>企业内对话协商</li>
-                                <li><strong>外部介入：</strong>律师、工会等第三者协助</li>
-                                <li><strong>行政指导：</strong>劳动局等行政机关指导</li>
-                                <li><strong>劳动审判：</strong>法院快速审判（3个月内）</li>
-                                <li><strong>民事诉讼：</strong>正式法院诉讼程序</li>
-                            </ol>
-                        </div>
-
-                        <h2>📋 企业合规检查清单</h2>
-
-                        <div class="checklist">
-                            <h4>📊 劳动法合规自检表</h4>
-                            <ul>
-                                <li><input type="checkbox"> 劳动合同包含所有法定必要记载事项</li>
-                                <li><input type="checkbox"> 工作时间、休息时间符合法定标准</li>
-                                <li><input type="checkbox"> 加班工资按规定计算和支付</li>
-                                <li><input type="checkbox"> 所有员工加入社会保险</li>
-                                <li><input type="checkbox"> 36协定签订并向劳动基准署提交</li>
-                                <li><input type="checkbox"> 工资支付不低于最低工资标准</li>
-                                <li><input type="checkbox"> 年次有給休暇制度建立和实施</li>
-                                <li><input type="checkbox"> 安全卫生措施完善</li>
-                                <li><input type="checkbox"> 外国人雇员在留资格确认</li>
-                                <li><input type="checkbox"> 雇用保险、劳动保险手续完备</li>
-                                <li><input type="checkbox"> 解雇程序合法合规</li>
-                                <li><input type="checkbox"> 育儿、护理休假制度完善</li>
-                            </ul>
-                        </div>
-
-                        <h2>💡 常见问题与解答</h2>
-
-                        <div class="faq-section">
-                            <details>
-                                <summary><strong>Q: 试用期可以多长时间？</strong></summary>
-                                <p><strong>A:</strong> 试用期没有法定上限，但必须合理。一般认为：</p>
-                                <ul>
-                                    <li>一般员工：最长6个月（超过可能被视为违法）</li>
-                                    <li>管理人员：最长1年（需要合理理由）</li>
-                                    <li>试用期期间也应遵守劳动法规定</li>
-                                    <li>试用期内解雇也需满足解雇条件</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 兼职员工需要加入社会保险吗？</strong></summary>
-                                <p><strong>A:</strong> 满足以下条件必须加入：</p>
-                                <ul>
-                                    <li>每周工作20小时以上</li>
-                                    <li>月工资8.8万日元以上</li>
-                                    <li>雇用期间预计超过2个月</li>
-                                    <li>学生除外（收入不超过一定限度）</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 解雇时需要注意什么？</strong></summary>
-                                <p><strong>A:</strong> 必须遵守以下程序：</p>
-                                <ul>
-                                    <li>确认解雇的合理性和必要性</li>
-                                    <li>履行解雇预告义务（30日前或预告手当）</li>
-                                    <li>准备充分的解雇理由和证据</li>
-                                    <li>避免禁止解雇的情况</li>
-                                    <li>如可能，提供离职补偿方案</li>
-                                </ul>
-                            </details>
-                        </div>
-
-                        <h2>📞 专业支持服务</h2>
-
-                        <div class="service-box">
-                            <h4>🛠️ Mobius劳动法合规服务</h4>
-                            <div class="services-grid">
-                                <div class="service-item">
-                                    <i class="fas fa-file-contract"></i>
-                                    <h5>劳动合同制作</h5>
-                                    <p>根据日本劳动法定制劳动合同，确保合法合规</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <h5>合规检查</h5>
-                                    <p>全面审查劳动管理制度，识别和防范法律风险</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-users"></i>
-                                    <h5>外国人雇用支援</h5>
-                                    <p>在留资格确认、劳动条件设定、社保手续办理</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-balance-scale"></i>
-                                    <h5>纠纷应对</h5>
-                                    <p>劳动纠纷预防、协商解决、法律程序对应</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="conclusion">
-                            <h3>🎯 结论</h3>
-                            <p>日本劳动法体系复杂而完善，对员工权益保护力度较强。企业经营者必须充分理解并严格遵守相关规定，建立健全的劳动管理制度。特别是：</p>
-                            <ul>
-                                <li>完善劳动合同和就业规则</li>
-                                <li>正确管理工作时间和加班</li>
-                                <li>确保社保制度全覆盖</li>
-                                <li>慎重处理解雇和退职</li>
-                                <li>特别关注外国人雇员的特殊要求</li>
-                            </ul>
-                            <p>建议定期进行合规检查，必要时咨询专业律师或行政书士，确保企业劳动法务的持续合规。</p>
-                        </div>
-                    </div>
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
                 </div>
             </div>
-
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="article-tag">劳动法</span>
-                    <span class="article-tag">劳动合同</span>
-                    <span class="article-tag">员工权益</span>
                 </div>
-                <div class="article-back-link">
-                    <a href="../knowledge.html" class="back-link">
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                         <i class="fas fa-arrow-left"></i>
                         返回知识库
                     </a>
-                </div>
             </footer>
         </article>
     </div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
 </body>
 </html>

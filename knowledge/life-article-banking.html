@@ -10,25 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月26日</span>
-                    <span class="article-reading-time">8分钟阅读</span>
-                    <span class="article-difficulty beginner">初级</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月26日</span>
+                        <span class="zhihu-article-reading">8分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">日本银行账户开户指南</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">日本银行账户开户指南</h1>
+                <div class="zhihu-article-excerpt">
                     <p>详细介绍外国人在日本开设银行账户的流程、所需材料和注意事项...</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>📋 开户基本条件</h2>
 
                         <h3>必备条件</h3>
@@ -260,29 +265,46 @@
                             <h3>💡 专家建议</h3>
                             <p>作为在日外国人，选择银行时除了考虑便利性，还要关注银行的外国客户服务经验。三菱UFJ、三井住友、ゆうちょ银行通常对外国客户最友好。开户时要特别注意在留期限和住所证明的完整性，这是开户成功的关键因素。</p>
                         </div>
-
-                        <div class="warning-box">
-                            <h3>⚠️ 特别提醒</h3>
-                            <p>开户后请定期使用账户，避免6个月以上无活动被银行收取管理费或冻结账户。离开日本前，请确保账户余额清零并妥善处理相关手续。</p>
-                        </div>
-                    </div>
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
                 </div>
             </div>
-
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="article-tag">银行账户</span>
-<span class="article-tag">开户流程</span>
-<span class="article-tag">在留资格</span>
                 </div>
-                <div class="article-back-link">
-                    <a href="../knowledge.html" class="back-link">
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                         <i class="fas fa-arrow-left"></i>
                         返回知识库
                     </a>
-                </div>
             </footer>
         </article>
     </div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
 </body>
 </html>

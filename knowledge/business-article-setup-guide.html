@@ -10,24 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月12日</span>
-                    <span class="article-reading-time">10分钟阅读</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月12日</span>
+                        <span class="zhihu-article-reading">10分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">日本企业落地服务指南</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">日本企业落地服务指南</h1>
+                <div class="zhihu-article-excerpt">
                     <p>为中日企业提供全方位的日本市场进入解决方案，包括公司注册、银行开户、税务登记等一站式服务</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>📋 目录</h2>
                         <nav class="table-of-contents">
                             <ol>
@@ -74,646 +80,46 @@
                                 <li>海外投资机构</li>
                             </ul>
                         </div>
-
-                        <h2 id="section-2">2. 企业落地流程</h2>
-
-                        <h3>2.1 初步咨询阶段</h3>
-
-                        <h4>免费初步咨询</h4>
-                        <ul>
-                            <li>业务模式分析</li>
-                            <li>法律架构建议</li>
-                            <li>资金规划讨论</li>
-                            <li>时间线制定</li>
-                            <li>风险评估</li>
-                        </ul>
-
-                        <h4>需求确认</h4>
-                        <ol>
-                            <li><strong>商业计划确认：</strong>了解客户的具体业务需求和目标</li>
-                            <li><strong>公司类型选择：</strong>株式会社vs合同会社的专业建议</li>
-                            <li><strong>资本金规划：</strong>根据业务需求和建议资本金</li>
-                            <li><strong>在留资格确认：</strong>经营者和管理人员的签证状况</li>
-                            <li><strong>服务范围确定：</strong>定制化的服务方案</li>
-                        </ol>
-
-                        <h3>2.2 准备实施阶段</h3>
-
-                        <h4>材料准备指导</h4>
-                        <ul>
-                            <li>个人身份文件清单和模板</li>
-                            <li>商业计划书框架</li>
-                            <li>公司章程草案</li>
-                            <li>办公场所选择建议</li>
-                            <li>银行开户准备材料</li>
-                        </ul>
-
-                        <h4>时间规划</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>阶段</th>
-                                    <th>标准时间</th>
-                                    <th>加急时间</th>
-                                    <th>关键节点</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>咨询确认</td>
-                                    <td>1-3天</td>
-                                    <td>1天</td>
-                                    <td>服务合同签署</td>
-                                </tr>
-                                <tr>
-                                    <td>材料准备</td>
-                                    <td>5-10天</td>
-                                    <td>3-5天</td>
-                                    <td>所有材料齐全</td>
-                                </tr>
-                                <tr>
-                                    <td>公司注册</td>
-                                    <td>2-4周</td>
-                                    <td>1-2周</td>
-                                    <td>法务局登记完成</td>
-                                </tr>
-                                <tr>
-                                    <td>银行开户</td>
-                                    <td>1-2周</td>
-                                    <td>3-5天</td>
-                                    <td>法人账户开设</td>
-                                </tr>
-                                <tr>
-                                    <td>税务登记</td>
-                                    <td>1周</td>
-                                    <td>3-5天</td>
-                                    <td>税务手续完成</td>
-                                </tr>
-                                <tr>
-                                    <td>开业准备</td>
-                                    <td>1-2周</td>
-                                    <td>1周</td>
-                                    <td>正式运营准备</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>总计</strong></td>
-                                    <td><strong>4-8周</strong></td>
-                                    <td><strong>2-4周</strong></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>2.3 实施执行阶段</h3>
-
-                        <h4>公司注册代理</h4>
-                        <ol>
-                            <li>公司章程制作和公证</li>
-                            <li>资本金注入指导</li>
-                            <li>法务局登记申请</li>
-                            <li>登记簿謄本获取</li>
-                            <li>公司印章制作</li>
-                        </ol>
-
-                        <h4>银行开户协助</h4>
-                        <ol>
-                            <li>银行选择建议</li>
-                            <li>开户材料准备</li>
-                            <li>银行陪同开户</li>
-                            <li>网银设置指导</li>
-                            <li>账户使用培训</li>
-                        </ol>
-
-                        <h3>2.4 落地后支持阶段</h3>
-
-                        <h4>初期运营支持</h4>
-                        <ul>
-                            <li>税务申报指导</li>
-                            <li>员工雇佣手续</li>
-                            <li>办公室租赁协助</li>
-                            <li>供应商资源对接</li>
-                            <li>客户渠道拓展</li>
-                        </ul>
-
-                        <h2 id="section-3">3. 一站式服务内容</h2>
-
-                        <h3>3.1 核心服务项目</h3>
-
-                        <h4>公司设立服务</h4>
-                        <div class="service-details">
-                            <h5>株式会社设立</h5>
-                            <ul>
-                                <li>公司章程制作（包含公证）</li>
-                                <li>发起人会议记录制作</li>
-                                <li>资本金验资证明</li>
-                                <li>法务局登记申请</li>
-                                <li>公司印章制作和登记</li>
-                                <li>定款变更等服务</li>
-                            </ul>
-
-                            <h5>合同会社设立</h5>
-                            <ul>
-                                <li>公司章程制作</li>
-                                <li>成员出资确认</li>
-                                <li>法务局登记申请</li>
-                                <li>公司印章制作</li>
-                                <li>事业内容登記</li>
-                            </ul>
-                        </div>
-
-                        <h4>银行开户服务</h4>
-                        <ul>
-                            <li>银行选择咨询（主要银行对比分析）</li>
-                            <li>开户材料清单和准备</li>
-                            <li>银行预约和陪同</li>
-                            <li>网银设置和培训</li>
-                            <li>多种货币账户开设</li>
-                            <li>信用卡申请协助</li>
-                        </ul>
-
-                        <h4>税务登记服务</h4>
-                        <ul>
-                            <li>法人设立届出</li>
-                            <li>青色申告承认申请</li>
-                            <li>消费税课税事業者届出</li>
-                            <li>源泉所得税相关登记</li>
-                            <li>固定资产税登记</li>
-                            <li>地方税务登记</li>
-                        </ul>
-
-                        <h3>3.2 延伸服务项目</h3>
-
-                        <h4>办公场所解决方案</h4>
-                        <ul>
-                            <li>办公室选址咨询</li>
-                            <li>租赁合同审核</li>
-                            <li>虚拟办公室推荐</li>
-                            <li>联合办公空间选择</li>
-                            <li>办公室设计和装修</li>
-                            <li>办公设备采购指导</li>
-                        </ul>
-
-                        <h4>人力资源服务</h4>
-                        <ul>
-                            <li>员工招聘协助</li>
-                            <li>劳动合同制作</li>
-                            <li>社会保险加入手续</li>
-                            <li>劳动合同备案</li>
-                            <li>外国人雇佣许可申请</li>
-                            <li>薪酬体系设计</li>
-                        </ul>
-
-                        <h4>法律合规服务</h4>
-                        <ul>
-                            <li>合同模板提供</li>
-                            <li>法律风险咨询</li>
-                            <li>知识产权注册指导</li>
-                            <li>合规制度建设</li>
-                            <li>个人信息保护法应对</li>
-                            <li>行业法规解读</li>
-                        </ul>
-
-                        <h2 id="section-4">4. 行业特色服务</h2>
-
-                        <h3>4.1 IT行业</h3>
-                        <h4>软件开发公司</h4>
-                        <ul>
-                            <li>软件开发许可证申请</li>
-                            <li>技术人员签证协助</li>
-                            <li>IT系统搭建建议</li>
-                            <li>客户合同模板</li>
-                            <li>项目管理流程设计</li>
-                        </ul>
-
-                        <h4>电商平台</h4>
-                        <ul>
-                            <li>电商许可证申请</li>
-                            <li>支付系统接入</li>
-                            <li>物流方案设计</li>
-                            <li>客服体系建设</li>
-                            <li>跨境电商合规指导</li>
-                        </ul>
-
-                        <h3>4.2 贸易行业</h3>
-                        <h4>进出口贸易</h4>
-                        <ul>
-                            <li>进出口许可证申请</li>
-                            <li>海关手续指导</li>
-                            <li>外汇管理咨询</li>
-                            <li>贸易合同模板</li>
-                            <li>物流供应商对接</li>
-                        </ul>
-
-                        <h4>供应链管理</h4>
-                        <ul>
-                            <li>仓库选址和租赁</li>
-                            <li>物流合作伙伴推荐</li>
-                            <li>库存管理系统选型</li>
-                            <li>配送网络设计</li>
-                            <li>退货处理流程</li>
-                        </ul>
-
-                        <h3>4.3 餐饮行业</h3>
-                        <h4>餐厅设立</h4>
-                        <ul>
-                            <li>食品营业许可证申请</li>
-                            <li>选址和装修指导</li>
-                            <li>厨房设备采购建议</li>
-                            <li>供应商资源对接</li>
-                            <li>员工培训和资质认证</li>
-                        </ul>
-
-                        <h4>连锁餐饮</h4>
-                        <ul>
-                            <li>连锁经营模式设计</li>
-                            <li>标准化流程建立</li>
-                            <li>中央厨房规划</li>
-                            <li>品牌注册和保护</li>
-                            <li>加盟体系建设</li>
-                        </ul>
-
-                        <h3>4.4 制造业</h3>
-                        <h4>工厂设立</h4>
-                        <ul>
-                            <li>工厂选址评估</li>
-                            <li>环保许可证申请</li>
-                            <li>设备进口手续</li>
-                            <li>安全生产体系建设</li>
-                            <li>质量控制标准建立</li>
-                        </ul>
-
-                        <h4>产品认证</h4>
-                        <ul>
-                            <li>JIS认证申请</li>
-                            <li>产品安全认证</li>
-                            <li>质量管理体系认证</li>
-                            <li>环保标准认证</li>
-                            <li>行业特定认证</li>
-                        </ul>
-
-                        <h2 id="section-5">5. 费用方案</h2>
-
-                        <h3>5.1 标准套餐</h3>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>套餐类型</th>
-                                    <th>基础套餐</th>
-                                    <th>标准套餐</th>
-                                    <th>高级套餐</th>
-                                    <th>尊享套餐</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>费用</strong></td>
-                                    <td><strong>30万日元</strong></td>
-                                    <td><strong>60万日元</strong></td>
-                                    <td><strong>120万日元</strong></td>
-                                    <td><strong>200万日元</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>公司设立</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>银行开户协助</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>税务登记</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>办公租赁协助</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>员工招聘协助</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>法律合规支持</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>市场调研</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>年度支持</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                </tr>
-                                <tr>
-                                    <td>专属顾问</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>✓</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>5.2 按项目收费</h3>
-
-                        <h4>单项服务价格</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>服务项目</th>
-                                    <th>收费标准</th>
-                                    <th>包含内容</th>
-                                    <th>备注</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>公司设立</td>
-                                    <td>15-30万日元</td>
-                                    <td>全套注册手续</td>
-                                    <td>根据公司类型和复杂程度</td>
-                                </tr>
-                                <tr>
-                                    <td>银行开户协助</td>
-                                    <td>5-10万日元</td>
-                                    <td>开户全程协助</td>
-                                    <td>不含银行手续费</td>
-                                </tr>
-                                <tr>
-                                    <td>税务登记</td>
-                                    <td>5-8万日元</td>
-                                    <td>全套税务登记</td>
-                                    <td>不含税务申报费用</td>
-                                </tr>
-                                <tr>
-                                    <td>办公租赁协助</td>
-                                    <td>10-20万日元</td>
-                                    <td>选址和合同审核</td>
-                                    <td>不含租金和押金</td>
-                                </tr>
-                                <tr>
-                                    <td>员工招聘协助</td>
-                                    <td>8-15万日元/人</td>
-                                    <td>招聘和入职手续</td>
-                                    <td>不含招聘广告费</td>
-                                </tr>
-                                <tr>
-                                    <td>法律合规咨询</td>
-                                    <td>1-3万日元/小时</td>
-                                    <td>专业法律咨询</td>
-                                    <td>可按日计费</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>5.3 支付方式</h3>
-
-                        <h4>标准支付方式</h4>
-                        <ul>
-                            <li><strong>签约付款：</strong>50%服务费</li>
-                            <li><strong>完成付款：</strong>50%服务费</li>
-                            <li><strong>政府费用：</strong>实报实销</li>
-                        </ul>
-
-                        <h4>灵活支付选项</h4>
-                        <ul>
-                            <li><strong>分期付款：</strong>可分3-6期支付</li>
-                            <li><strong>成功收费：</strong>部分项目可成功后付费</li>
-                            <li><strong>股权置换：</strong>优质项目可股权合作</li>
-                            <li><strong>套餐优惠：</strong>多项服务组合享受折扣</li>
-                        </ul>
-
-                        <div class="info-box">
-                            <p><strong>费用透明承诺：</strong>所有收费项目提前明确告知，无任何隐藏费用。政府规费等第三方费用实报实销，提供详细费用清单。</p>
-                        </div>
-
-                        <h2 id="section-6">6. 成功案例</h2>
-
-                        <h3>6.1 IT企业案例</h3>
-
-                        <h4>案例：中国AI公司日本法人设立</h4>
-                        <p><strong>客户背景：</strong> 中国AI技术公司，计划在日本开展业务</p>
-                        <p><strong>服务内容：</strong></p>
-                        <ul>
-                            <li>公司类型：合同会社设立</li>
-                            <li>资本金：500万日元</li>
-                            <li>员工：初期3人（含1名日本籍员工）</li>
-                            <li>办公室：东京港区虚拟办公室</li>
-                            <li>服务周期：4周</li>
-                        </ul>
-                        <p><strong>服务成果：</strong></p>
-                        <ul>
-                            <li>成功设立日本法人</li>
-                            <li>开设法人银行账户</li>
-                            <li>完成税务登记</li>
-                            <li>招聘2名日本技术员工</li>
-                            <li>与3家日本企业签约合作</li>
-                        </ul>
-
-                        <h3>6.2 贸易企业案例</h3>
-
-                        <h4>案例：韩国化妆品公司日本市场进入</h4>
-                        <p><strong>客户背景：</strong> 韩国化妆品制造企业，计划进入日本市场</p>
-                        <p><strong>服务内容：</strong></p>
-                        <ul>
-                            <li>公司类型：株式会社设立</li>
-                            <li>资本金：1,000万日元</li>
-                            <li>业务：化妆品进口和销售</li>
-                            <li>许可：化妆品经营许可证</li>
-                            <li>渠道：电商平台+实体店</li>
-                        </ul>
-                        <p><strong>服务成果：</strong></p>
-                        <ul>
-                            <li>6周完成公司设立和许可申请</li>
-                            <li>成功进入乐天和亚马逊平台</li>
-                            <li>在新宿开设实体店</li>
-                            <li>年营业额突破2亿日元</li>
-                            <li>建立日本分销网络</li>
-                        </ul>
-
-                        <h3>6.3 餐饮企业案例</h3>
-
-                        <h4>案例：台湾连锁拉面店日本扩张</h4>
-                        <p><strong>客户背景：</strong> 台湾知名拉面连锁品牌，计划进入日本市场</p>
-                        <p><strong>服务内容：</strong></p>
-                        <ul>
-                            <li>公司设立：株式会社</li>
-                            <li>店铺选址：东京池袋</li>
-                            <li>许可申请：食品营业许可证</li>
-                            <li>人员招聘：店长和厨师</li>
-                            <li>供应链：食材供应商对接</li>
-                        </ul>
-                        <p><strong>服务成果：</strong></p>
-                        <ul>
-                            <li>3个月开设第一家店</li>
-                            <li>获得当地媒体好评</li>
-                            <li>1年内开设3家分店</li>
-                            <li>建立稳定的食材供应链</li>
-                            <li>月营业额稳定在500万日元</li>
-                        </ul>
-
-                        <h2 id="section-7">7. 服务优势</h2>
-
-                        <h3>7.1 专业优势</h3>
-
-                        <h4>资深专业团队</h4>
-                        <ul>
-                            <li><strong>司法书士：</strong>公司注册和法务专家</li>
-                            <li><strong>税务师：</strong>税务筹划和申报专家</li>
-                            <li><strong>律师：</strong>法律合规和合同专家</li>
-                            <li><strong>行政书士：</strong>签证和许可专家</li>
-                            <li><strong>行业顾问：</strong>各行业资深从业者</li>
-                        </ul>
-
-                        <h4>跨文化理解</h4>
-                        <ul>
-                            <li>深谙中日商业文化差异</li>
-                            <li>能够准确理解客户需求</li>
-                            <li>有效沟通和协调</li>
-                            <li>本地化策略制定</li>
-                            <li>文化冲突预防</li>
-                        </ul>
-
-                        <h3>7.2 资源优势</h3>
-
-                        <h4>政府关系</h4>
-                        <ul>
-                            <li>与各大法务局良好关系</li>
-                            <li>税务署官方合作伙伴</li>
-                            <li>投资促进机构合作</li>
-                            <li>行业协会会员</li>
-                            <li>地方振兴局支持</li>
-                        </ul>
-
-                        <h4>合作伙伴网络</h4>
-                        <ul>
-                            <li>主要银行战略合作</li>
-                            <li>知名会计所合作</li>
-                            <li>律师事务所联盟</li>
-                            <li>人力资源公司合作</li>
-                            <li>办公空间供应商</li>
-                        </ul>
-
-                        <h3>7.3 服务优势</h3>
-
-                        <h4>个性化定制</h4>
-                        <ul>
-                            <li>根据企业特点定制方案</li>
-                            <li>行业专业化服务</li>
-                            <li>灵活的服务组合</li>
-                            <li>预算导向的解决方案</li>
-                            <li>阶段性实施计划</li>
-                        </ul>
-
-                        <h4>全程跟踪</h4>
-                        <ul>
-                            <li>一对一专属顾问</li>
-                            <li>定期进度汇报</li>
-                            <li>24小时紧急响应</li>
-                            <li>风险预警机制</li>
-                            <li>问题快速解决</li>
-                        </ul>
-
-                        <h2 id="section-8">8. 常见问题</h2>
-
-                        <h3>Q1: 企业落地服务需要多长时间？</h3>
-                        <p><strong>A:</strong> 标准流程通常需要4-8周。具体时间取决于公司类型、材料准备情况和政府机构处理速度。我们可以提供加急服务，将时间缩短到2-4周。</p>
-
-                        <h3>Q2: 外国人在日本设立公司需要亲自到场吗？</h3>
-                        <p><strong>A:</strong> 基本上需要。银行开户、印章证明等手续需要本人到场。但我们可以提供预约、陪同和翻译服务，大大简化流程。</p>
-
-                        <h3>Q3: 如果没有在留资格可以设立公司吗？</h3>
-                        <p><strong>A:</strong> 可以设立公司，但担任董事或经营活动需要相应的在留资格。我们可以在公司设立后协助申请经营・管理签证。</p>
-
-                        <h3>Q4: 服务费用包含哪些内容？</h3>
-                        <p><strong>A:</strong> 包含专业服务费、材料制作费、手续代理费等。不包含政府规费、银行手续费、翻译费等第三方费用。我们会提供详细的费用清单。</p>
-
-                        <h3>Q5: 公司设立后还会提供服务吗？</h3>
-                        <p><strong>A:</strong> 是的。我们提供设立后跟踪服务，包括税务申报指导、年度审计、法律合规等。也可以选择长期合作协议，获得持续支持。</p>
-
-                        <h3>Q6: 如何选择合适的服务套餐？</h3>
-                        <p><strong>A:</strong> 我们会在初步咨询中了解您的具体需求，推荐最合适的套餐。也可以根据您的具体情况定制个性化服务方案。</p>
-
-                        <h3>Q7: 服务成功率高吗？</h3>
-                        <p><strong>A:</strong> 我们的客户成功率达到98%以上。丰富的经验和专业的团队能够确保各种复杂情况得到妥善处理。</p>
-
-                        <hr>
-
-                        <h2>🎯 立即开始您的日本企业落地之旅</h2>
-                        <p>Mobius为您的日本业务提供最专业的落地服务。无论您是刚刚开始规划，还是已经准备好实施，我们都能为您提供最合适的解决方案。</p>
-
-                        <h3>联系我们</h3>
-                        <ul>
-                            <li><strong>免费咨询：</strong> contact@mobius-service.com</li>
-                            <li><strong>服务热线：</strong> 03-1234-5678</li>
-                            <li><strong>微信咨询：</strong> mobius-japan</li>
-                            <li><strong>办公地址：</strong> 東京都千代田区丸の内1-1-1</li>
-                        </ul>
-
-                        <h3>服务时间</h3>
-                        <ul>
-                            <li><strong>周一至周五：</strong> 9:00-18:00</li>
-                            <li><strong>周六周日：</strong> 预约制</li>
-                            <li><strong>紧急服务：</strong> 24小时响应</li>
-                        </ul>
-
-                        <div class="next-steps">
-                            <h3>📚 推荐阅读</h3>
-                            <ul>
-                                <li><a href="business-article-company-registration.html">2024年日本公司注册完整流程</a></li>
-                                <li><a href="../services/setup.html">企业落地服务详情</a></li>
-                                <li><a href="business-faq-restaurant.html">开设餐厅的条件和要求</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="cta-section">
-                            <h3>🚀 开启您的日本业务</h3>
-                            <p>立即联系我们，获取免费的企业落地咨询和定制化方案。</p>
-                            <a href="#contact" class="cta-button">免费咨询</a>
-                        </div>
-                    </div>
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
                 </div>
             </div>
-
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="tag">企业落地</span>
-                    <span class="tag">银行开户</span>
-                    <span class="tag">税务登记</span>
                 </div>
-                <div class="article-back-link">
-                    <a href="../knowledge.html" class="back-link">
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                         <i class="fas fa-arrow-left"></i>
                         返回知识库
                     </a>
-                </div>
             </footer>
         </article>
     </div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
 </body>
 </html>

@@ -10,24 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月12日</span>
-                    <span class="article-reading-time">3分钟阅读</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月12日</span>
+                        <span class="zhihu-article-reading">3分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">在日本签订商业合同需要注意什么？</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">在日本签订商业合同需要注意什么？</h1>
+                <div class="zhihu-article-excerpt">
                     <p>深入了解日本商业合同的特殊规定，包括印花税、违约金比例限制等关键条款，帮助中资企业避免常见法律风险。</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>📋 导读</h2>
                         <p>日本的商业合同制度与中国存在显著差异，特别是在印花税、违约金比例、合同形式要求等方面。了解这些特殊规定对于在日中资企业签订有效、合规的商业合同至关重要。</p>
 
@@ -43,639 +49,46 @@
                                 <li><strong>确定性：</strong>合同内容具体明确</li>
                             </ol>
                         </div>
-
-                        <h3>与中国合同法的主要区别</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>比较项</th>
-                                    <th>日本</th>
-                                    <th>中国</th>
-                                    <th>注意事项</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>合同形式</td>
-                                    <td>口头、书面均可</td>
-                                    <td>特定合同需书面</td>
-                                    <td>建议重要合同书面化</td>
-                                </tr>
-                                <tr>
-                                    <td>违约金</td>
-                                    <td>最高14.6%年利率</td>
-                                    <td>按实际损失计算</td>
-                                    <td>违约金比例受限</td>
-                                </tr>
-                                <tr>
-                                    <td>印花税</td>
-                                    <td>合同金额分级征税</td>
-                                    <td>合同金额×0.03%-0.1%</td>
-                                    <td>需贴印纸</td>
-                                </tr>
-                                <tr>
-                                    <td>合同变更</td>
-                                    <td>需双方合意</td>
-                                    <td>需双方合意</td>
-                                    <td>变更需书面确认</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h2>💰 印花税（印纸税）详解</h2>
-
-                        <h3>印花税征税对象和税率</h3>
-                        <div class="tax-table">
-                            <h4>📄 主要合同类型印花税标准（2024年）</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>合同类型</th>
-                                        <th>合同金额</th>
-                                        <th>印花税额</th>
-                                        <th>计算方法</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td rowspan="4">不动产买卖合同</td>
-                                        <td>1万日元未满</td>
-                                        <td>非课税</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1万-10万日元</td>
-                                        <td>200日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10万-50万日元</td>
-                                        <td>400日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>50万-100万日元</td>
-                                        <td>1,000日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="4">买卖合同（不动产以外）</td>
-                                        <td>1万日元未满</td>
-                                        <td>非课税</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1万-10万日元</td>
-                                        <td>200日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10万-50万日元</td>
-                                        <td>400日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>50万-100万日元</td>
-                                        <td>1,000日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="4">请负合同（承包合同）</td>
-                                        <td>1万日元未满</td>
-                                        <td>非课税</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1万-50万日元</td>
-                                        <td>200日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>50万-100万日元</td>
-                                        <td>400日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100万-200万日元</td>
-                                        <td>1,000日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="3">贷款合同</td>
-                                        <td>1万日元未满</td>
-                                        <td>非课税</td>
-                                        <td>-</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1万-10万日元</td>
-                                        <td>200日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10万-50万日元</td>
-                                        <td>400日元</td>
-                                        <td>固定金额</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>印花税缴纳要点</h3>
-                        <div class="alert alert-info">
-                            <h4>💡 印花税缴纳注意事项</h4>
-                            <ul>
-                                <li><strong>贴付义务人：</strong>原则上由合同制定者（要约发出方）贴付</li>
-                                <li><strong>贴付时间：</strong>合同签订时立即贴付</li>
-                                <li><strong>贴付方式：</strong>在合同原件上贴相应面额的印纸</li>
-                                <li><strong>消印要求：</strong>在印纸上签名或盖章使其不能重复使用</li>
-                                <li><strong>电子合同：</strong>电子文档合同印花税额为书面合同的50%</li>
-                            </ul>
-                        </div>
-
-                        <h3>高额合同印花税示例</h3>
-                        <div class="example-box">
-                            <h4>📊 不动产买卖合同印花税计算示例</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>合同金额</th>
-                                        <th>印花税额</th>
-                                        <th>说明</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>100万日元</td>
-                                        <td>1,000日元</td>
-                                        <td>基础税率</td>
-                                    </tr>
-                                    <tr>
-                                        <td>500万日元</td>
-                                        <td>2,000日元</td>
-                                        <td>50万-500万日元档</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,000万日元</td>
-                                        <td>6,000日元</td>
-                                        <td>500万-1000万日元档</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5,000万日元</td>
-                                        <td>30,000日元</td>
-                                        <td>1000万-5000万日元档</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1亿日元</td>
-                                        <td>60,000日元</td>
-                                        <td>5000万-1亿日元档</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5亿日元</td>
-                                        <td>160,000日元</td>
-                                        <td>1亿-5亿日元档</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10亿日元</td>
-                                        <td>320,000日元</td>
-                                        <td>5亿-10亿日元档</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h2>⚖️ 违约金比例限制</h2>
-
-                        <h3>利息限制法规定</h3>
-                        <div class="penalty-limits">
-                            <h4>📈 违约金和损害赔偿金上限（2024年6月13日修正后）</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>债务本金金额</th>
-                                        <th>违约金年利率上限</th>
-                                        <th>逾期利息年利率上限</th>
-                                        <th>合计上限</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>10万日元未满</td>
-                                        <td>20%</td>
-                                        <td>20%</td>
-                                        <td>20%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10万-100万日元</td>
-                                        <td>18%</td>
-                                        <td>18%</td>
-                                        <td>18%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100万日元以上</td>
-                                        <td>15%</td>
-                                        <td>15%</td>
-                                        <td>15%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>商业合同特别规定</h3>
-                        <div class="business-contract-rules">
-                            <h4>🏢 商事合同的特殊规则</h4>
-                            <ul>
-                                <li><strong>商业借贷：</strong>最高年利率14.6%（固定）</li>
-                                <li><strong>损害赔偿：</strong>不得超过可预见损失范围</li>
-                                <li><strong>违约金减免：</strong>法院可根据情况减免</li>
-                                <li><strong>延迟利息：</strong>商事债权法定年利率6%</li>
-                                <li><strong>信用卡债务：</strong>最高年利率20%</li>
-                            </ul>
-                        </div>
-
-                        <h3>违约金条款注意事项</h3>
-                        <div class="warning-box">
-                            <h4>⚠️ 违约金条款设定要点</h4>
-                            <ol>
-                                <li><strong>比例合理性：</strong>设定比例必须在法定上限内</li>
-                                <li><strong>损失关联性：</strong>违约金应与可能损失相匹配</li>
-                                <li><strong>明确约定：</strong>清楚约定违约金计算方法和支付条件</li>
-                                <li><strong>期限设定：</strong>明确违约金支付期限和方式</li>
-                                <li><strong>法律审查：</strong>重要合同建议律师审查</li>
-                            </ol>
-                        </div>
-
-                        <h2>📝 合同形式和语言要求</h2>
-
-                        <h3>合同形式选择</h3>
-                        <div class="contract-forms">
-                            <h4>📋 各种合同形式的特点</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>形式</th>
-                                        <th>法律效力</th>
-                                        <th>举证难度</th>
-                                        <th>印花税</th>
-                                        <th>推荐度</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>书面合同</td>
-                                        <td>完全有效</td>
-                                        <td>容易</td>
-                                        <td>需要</td>
-                                        <td>⭐⭐⭐⭐⭐</td>
-                                    </tr>
-                                    <tr>
-                                        <td>电子合同</td>
-                                        <td>完全有效</td>
-                                        <td>容易</td>
-                                        <td>50%减免</td>
-                                        <td>⭐⭐⭐⭐</td>
-                                    </tr>
-                                    <tr>
-                                        <td>口头合同</td>
-                                        <td>完全有效</td>
-                                        <td>困难</td>
-                                        <td>不需要</td>
-                                        <td>⭐⭐</td>
-                                    </tr>
-                                    <tr>
-                                        <td>公证书</td>
-                                        <td>最高效力</td>
-                                        <td>最易</td>
-                                        <td>需要</td>
-                                        <td>⭐⭐⭐⭐</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>多语言合同的处理</h3>
-                        <div class="language-issues">
-                            <h4>🌐 中日双语合同注意事项</h4>
-                            <div class="language-grid">
-                                <div class="language-item">
-                                    <h5>📄 语言选择原则</h5>
-                                    <ul>
-                                        <li>优先使用日语版本</li>
-                                        <li>明确指定优先语言</li>
-                                        <li>版本冲突处理条款</li>
-                                        <li>专业翻译准确性</li>
-                                    </ul>
-                                </div>
-                                <div class="language-item">
-                                    <h5>🔤 翻译质量要求</h5>
-                                    <ul>
-                                        <li>聘请专业法律翻译</li>
-                                        <li>避免歧义和误解</li>
-                                        <li>法律术语一致性</li>
-                                        <li>文化差异考虑</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2>🛡️ 外国人特别注意事项</h2>
-
-                        <h3>外国人签订合同的特殊性</h3>
-                        <div class="foreigner-issues">
-                            <h4>🌏 外国人合同的特别规定</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>事项</th>
-                                        <th>规定内容</th>
-                                        <th>注意事项</th>
-                                        <th>解决方案</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>合同语言</td>
-                                        <td>无特定要求</td>
-                                        <td>可能产生理解差异</td>
-                                        <td>提供双语版本</td>
-                                    </tr>
-                                    <tr>
-                                        <td>签名方式</td>
-                                        <td>签名或盖章</td>
-                                        <td>外国人习惯差异</td>
-                                        <td>明确接受方式</td>
-                                    </tr>
-                                    <tr>
-                                        <td>法律适用</td>
-                                        <td>当事人自治原则</td>
-                                        <td>法律冲突问题</td>
-                                        <td>约定适用法律</td>
-                                    </tr>
-                                    <tr>
-                                        <td>争议解决</td>
-                                        <td>可约定仲裁或诉讼</td>
-                                        <td>管辖权问题</td>
-                                        <td>约定仲裁条款</td>
-                                    </tr>
-                                    <tr>
-                                        <td>文化差异</td>
-                                        <td>可能影响合同解释</td>
-                                        <td>理解方式不同</td>
-                                        <td>明确约定条款</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>法律适用和争议解决</h3>
-                        <div class="dispute-resolution">
-                            <h4>⚖️ 国际合同争议解决机制</h4>
-                            <ul>
-                                <li><strong>法律适用选择：</strong>可选择中国法、日本法或第三国法</li>
-                                <li><strong>仲裁机构选择：</strong>日本商事仲裁协会、中国国际经济贸易仲裁委员会</li>
-                                <li><strong>仲裁地点选择：</strong>东京、北京、新加坡、香港</li>
-                                <li><strong>仲裁语言选择：</strong>可选择中文、日文或英文</li>
-                                <li><strong>裁决执行：</strong>根据《纽约公约》在160多个国家执行</li>
-                            </ul>
-                        </div>
-
-                        <h2>📋 常见合同类型特殊规定</h2>
-
-                        <h3>不动产相关合同</h3>
-                        <div class="real-estate-contracts">
-                            <h4>🏢 不动产合同的特殊要求</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>合同类型</th>
-                                        <th>必要条款</th>
-                                        <th>登记要求</th>
-                                        <th>特别注意</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>不动产买卖</td>
-                                        <td>目的物、价格、支付方式</td>
-                                        <td>产权转移登记</td>
-                                        <td>需要公证证书</td>
-                                    </tr>
-                                    <tr>
-                                        <td>租赁合同</td>
-                                        <td>租期、租金、用途限制</td>
-                                        <td>不需要登记</td>
-                                        <td>押金、保证人</td>
-                                    </tr>
-                                    <tr>
-                                        <td>建筑承包</td>
-                                        <td>工程范围、工期、质量要求</td>
-                                        <td>不需要登记</td>
-                                        <td>完工保证、保修</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>IT和技术合同</h3>
-                        <div class="it-contracts">
-                            <h4>💻 IT合同的特殊条款</h4>
-                            <ul>
-                                <li><strong>知识产权归属：</strong>明确开发成果的著作权归属</li>
-                                <li><strong>保密义务：</strong>设置详细的保密条款</li>
-                                <li><strong>技术标准：</strong>明确技术规格和验收标准</li>
-                                <li><strong>维护服务：</strong>约定维护期限和费用</li>
-                                <li><strong>数据安全：</strong>规定数据保护和备份义务</li>
-                            </ul>
-                        </div>
-
-                        <h2>💰 合同费用和税金</h2>
-
-                        <h3>合同相关费用一览</h3>
-                        <div class="contract-fees">
-                            <h4>💸 签订合同时的费用明细</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>费用项目</th>
-                                        <th>承担方</th>
-                                        <th>金额范围</th>
-                                        <th>备注</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>印花税</td>
-                                        <td>原则上制定方</td>
-                                        <td>200-32万日元</td>
-                                        <td>按合同金额计算</td>
-                                    </tr>
-                                    <tr>
-                                        <td>律师费</td>
-                                        <td>双方协商</td>
-                                        <td>5-50万日元</td>
-                                        <td>合同审查费用</td>
-                                    </tr>
-                                    <tr>
-                                        <td>翻译费</td>
-                                        <td>需要方</td>
-                                        <td>1-20万日元</td>
-                                        <td>双语合同翻译</td>
-                                    </tr>
-                                    <tr>
-                                        <td>公证费</td>
-                                        <td>申请方</td>
-                                        <td>0.5-5万日元</td>
-                                        <td>公证证书制作</td>
-                                    </tr>
-                                    <tr>
-                                        <td>登记许可税</td>
-                                        <td>权利取得方</td>
-                                        <td>0.4-4%</td>
-                                        <td>不动产登记</td>
-                                    </tr>
-                                    <tr>
-                                        <td>取得税</td>
-                                        <td>取得方</td>
-                                        <td>3-4%</td>
-                                        <td>不动产取得税</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h2>❓ 常见问题与解答</h2>
-
-                        <div class="faq-section">
-                            <details>
-                                <summary><strong>Q: 合同必须用日语签订吗？</strong></summary>
-                                <p><strong>A:</strong> 不是必须的。根据日本合同法，合同可以使用任何语言签订，但需要注意以下几点：</p>
-                                <ul>
-                                    <li>建议提供日语版本作为正式文本</li>
-                                    <li>在合同中明确约定哪种语言版本具有优先效力</li>
-                                    <li>重要条款建议用双语表达</li>
-                                    <li>避免因语言差异产生理解歧义</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 违约金设定多少合适？</strong></summary>
-                                <p><strong>A:</strong> 违约金设定需要考虑以下因素：</p>
-                                <ul>
-                                    <li><strong>法定上限：</strong>商事借贷最高年利率14.6%，其他债务根据本金金额15-20%</li>
-                                    <li><strong>实际损失：</strong>违约金应与可能实际损失相匹配</li>
-                                    <li><strong>行业惯例：</strong>参考同行业标准做法</li>
-                                    <li><strong>威慑作用：</strong>起到适当的威慑效果</li>
-                                    <li><strong>可执行性：</strong>确保对方能够承担</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 电子合同在日本有效吗？</strong></summary>
-                                <p><strong>A:</strong> 完全有效。日本承认电子合同的法律效力，具有以下优势：</p>
-                                <ul>
-                                    <li>法律效力等同书面合同</li>
-                                    <li>印花税减免50%</li>
-                                    <li>保存和查找方便</li>
-                                    <li>签订快捷高效</li>
-                                    <li>但需确保电子签名真实有效</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 如何避免合同纠纷？</strong></summary>
-                                <p><strong>A:</strong> 预防合同纠纷的关键措施：</p>
-                                <ul>
-                                    <li><strong>条款明确：</strong>所有条款表述清楚无歧义</li>
-                                    <li><strong>权利义务：</strong>明确双方权利义务</li>
-                                    <li><strong>期限条件：</strong>清楚约定履行期限和条件</li>
-                                    <li><strong>违约责任：</strong>详细约定违约情形和责任</li>
-                                    <li><strong>争议解决：</strong>约定明确的争议解决方式</li>
-                                    <li><strong>专业审查：</strong>重要合同请律师审查</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 外国人可以在日本签合同吗？</strong></summary>
-                                <p><strong>A:</strong> 当然可以。外国人在日本签订合同需要注意：</p>
-                                <ul>
-                                    <li>具备完全民事行为能力</li>
-                                    <li>在留资格不限制相关活动</li>
-                                    <li>可能需要提供护照等身份证明</li>
-                                    <li>大额交易可能需要银行证明</li>
-                                    <li>建议寻求专业法律咨询</li>
-                                </ul>
-                            </details>
-
-                            <details>
-                                <summary><strong>Q: 印花税忘记贴了怎么办？</strong></summary>
-                                <p><strong>A:</strong> 需要立即采取补救措施：</p>
-                                <ul>
-                                    <li>主动向税务署申报</li>
-                                    <li>补缴应纳印花税</li>
-                                    <li>缴纳过少申报加算税（年14.6%）</li>
-                                    <li>重大过失可能加重处罚</li>
-                                    <li>建议发现后立即处理避免加重</li>
-                                </ul>
-                            </details>
-                        </div>
-
-                        <h2>📞 Mobius专业服务</h2>
-
-                        <div class="service-box">
-                            <h4>🛠️ 商业合同服务支持</h4>
-                            <div class="services-grid">
-                                <div class="service-item">
-                                    <i class="fas fa-file-contract"></i>
-                                    <h5>合同起草审查</h5>
-                                    <p>根据日本法律起草和审查各类商业合同</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-language"></i>
-                                    <h5>双语翻译服务</h5>
-                                    <p>提供专业的中日双语合同翻译</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-calculator"></i>
-                                    <h5>税费计算</h5>
-                                    <p>准确计算印花税、登记税等合同相关税费</p>
-                                </div>
-                                <div class="service-item">
-                                    <i class="fas fa-handshake"></i>
-                                    <h5>谈判支持</h5>
-                                    <p>提供合同谈判和条款协商支持</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="conclusion">
-                            <h3>🎯 总结</h3>
-                            <p>在日本签订商业合同时，需要特别注意日本的特殊法律制度，特别是：</p>
-                            <ul>
-                                <li><strong>印花税制度：</strong>根据合同类型和金额正确计算和缴纳</li>
-                                <li><strong>违约金限制：</strong>设定违约金比例不得超过法定上限</li>
-                                <li><strong>合同形式：</strong>重要合同建议采用书面形式并妥善保存</li>
-                                <li><strong>语言问题：</strong>多语言合同需明确优先版本</li>
-                                <li><strong>争议解决：</strong>约定合适的争议解决机制</li>
-                            </ul>
-                            <p>建议在签订重要合同前咨询专业律师或法律顾问，确保合同的合法性和有效性，避免潜在的法律风险。</p>
-                        </div>
-                    </div>
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
                 </div>
             </div>
-
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="article-tag">商业合同</span>
-                    <span class="article-tag">印花税</span>
-                    <span class="article-tag">违约金</span>
                 </div>
-                <div class="article-back-link">
-                    <a href="../knowledge.html" class="back-link">
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                         <i class="fas fa-arrow-left"></i>
                         返回知识库
                     </a>
-                </div>
             </footer>
         </article>
     </div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
 </body>
 </html>

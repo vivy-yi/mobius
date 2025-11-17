@@ -10,24 +10,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月15日</span>
-                    <span class="article-reading-time">3分钟阅读</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月15日</span>
+                        <span class="zhihu-article-reading">3分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">外国人在日本开公司需要办理哪些税务手续？</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">外国人在日本开公司需要办理哪些税务手续？</h1>
+                <div class="zhihu-article-excerpt">
                     <p>外国人在日本设立公司需要办理一系列税务手续，包括法人设立登记、税务登记、开业申报等。本文详细介绍完整的税务流程、必要文件和注意事项，帮助外国经营者顺利完成公司设立的税务相关手续。</p>
                 </div>
             </header>
 
             <div class="article-content">
                 <div class="content-wrapper">
-                    <div class="markdown-content">
+                    <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         ## 📋 目录
 
                         - [税务手续概览](#税务手续概览)
@@ -659,5 +667,50 @@
                                 <p><strong>💡 最後に：</strong></p>
                                 <p>外国人在日本开公司虽然在税务手续上有一些特殊要求，但只要按照正确的流程和期限进行，完全可以顺利完成。不要被复杂的程序吓到，一步一步认真推进，必要时寻求专业帮助，你的日本创业之旅一定能成功开始！</p>
                             </div>
-                        </div>
+                        
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
+                </div>
+            </div>
+                </div></div>
                         ```
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            <footer class="zhihu-back-link">
+                <a href="../knowledge.html" class="zhihu-back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    返回知识库
+                </a>
+            </footer>
+        </article>
+    </div>
+                </div>
+            </div></div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
+</body>
+</html></article>

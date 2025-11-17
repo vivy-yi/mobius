@@ -10,25 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月23日</span>
-                    <span class="article-reading-time">12分钟阅读</span>
-                    <span class="article-difficulty beginner">初级</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月23日</span>
+                        <span class="zhihu-article-reading">12分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">日本租房全攻略</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">日本租房全攻略</h1>
+                <div class="zhihu-article-excerpt">
                     <p>从找房到签约，详细解读日本租房的各个环节、费用结构和注意事项...</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>🏠 日本租房市场特点</h2>
 
                         <h3>日本租房的独特性</h3>
@@ -379,29 +384,46 @@
                             <h3>💡 专家建议</h3>
                             <p>作为在日外国人租房，最重要的是充分准备和耐心。建议提前3-6个月开始找房，准备所有必要的文件，选择有外国人服务经验的中介公司。初期费用虽然较高，但可以通过寻找优惠房源来降低成本。记住，良好的沟通和遵守日本租房文化是成功租房的关键。</p>
                         </div>
-
-                        <div class="warning-box">
-                            <h3>⚠️ 特别提醒</h3>
-                            <p>租房前一定要仔细阅读和理解合同条款，特别是关于解约、押金返还、设备维修等条款。建议在签约前寻求专业人士或有经验朋友的帮助。入住时详细记录房屋状况并拍照留存，避免退房时发生纠纷。</p>
-                        </div>
-                    </div>
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
                 </div>
             </div>
-
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="article-tag">租房</span>
-<span class="article-tag">礼金敷金</span>
-<span class="article-tag">保证人</span>
                 </div>
-                <div class="article-back-link">
-                    <a href="../knowledge.html" class="back-link">
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                         <i class="fas fa-arrow-left"></i>
                         返回知识库
                     </a>
-                </div>
             </footer>
         </article>
     </div>
+
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
 </body>
 </html>

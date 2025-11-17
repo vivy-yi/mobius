@@ -10,24 +10,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../components/zhihu-article.css">
 </head>
 <body>
     <div class="container">
-        <article class="knowledge-article">
-            <header class="article-header">
-                <div class="article-meta">
-                    <span class="article-date">2024年1月30日</span>
-                    <span class="article-reading-time">6分钟阅读</span>
+        <article class="zhihu-article-wrapper">
+            <header class="zhihu-article-header">
+            <div class="zhihu-author-info">
+                <div class="zhihu-author-avatar">M</div>
+                <div class="zhihu-author-details">
+                    <div class="zhihu-author-name">Mobius专业团队</div>
+                    <div class="zhihu-article-meta">
+                        <span class="zhihu-article-date">2024年1月30日</span>
+                        <span class="zhihu-article-reading">6分钟阅读</span>
+                    </div>
                 </div>
-                <h1 class="article-title">2024年IT化补助金申请指南</h1>
-                <div class="article-excerpt">
+            </div>
+                <h1 class="zhihu-article-title">2024年IT化补助金申请指南</h1>
+                <div class="zhihu-article-excerpt">
                     <p>全面解析IT化补助金的申请条件、流程和成功案例，助力您的企业实现数字化转型。本文涵盖中小企业IT化重点分摊税制、IT导入补贴、数字化转型支援政策等多项补助金政策。</p>
                 </div>
             </header>
 
-            <div class="article-content">
-                <div class="content-wrapper">
-                    <div class="markdown-content">
+            <div class="zhihu-content-layout">
+                <div class="zhihu-main-content"><div class="zhihu-article-body">
                         <h2>📋 概述</h2>
                         <p>日本政府为推动中小企业数字化转型，设立了多种IT化补助金政策。2024年的政策重点支持企业在云计算、网络安全、远程办公、AI应用等领域的投资，最高可获得500万日元的补助金支持。</p>
 
@@ -277,23 +283,46 @@
 
                                 <p><strong>联系我们：</strong>让Mobius的专业团队助您成功获得IT化补助金，实现企业数字化转型！</p>
                             </div>
-                        </div>
-                    </div>
-
-                    <footer class="article-footer">
-                        <div class="article-tags">
-                            <span class="article-tag">IT化补助</span>
-                            <span class="article-tag">数字化转型</span>
-                            <span class="article-tag">申请指南</span>
-                        </div>
-                        <div class="article-back-link">
-                            <a href="../knowledge.html" class="back-link">
+            <div class="zhihu-interaction-bar">
+                <div class="zhihu-interaction-buttons">
+                    <button class="zhihu-interaction-btn zhihu-like-btn" data-count="0">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="zhihu-interaction-count">赞同</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-collect-btn" data-count="0">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="zhihu-interaction-count">收藏</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-comment-btn" data-count="0">
+                        <i class="fas fa-comment"></i>
+                        <span class="zhihu-interaction-count">评论</span>
+                    </button>
+                    <button class="zhihu-interaction-btn zhihu-share-btn">
+                        <i class="fas fa-share"></i>
+                        <span class="zhihu-interaction-count">分享</span>
+                    </button>
+                </div>
+            </div>
+                </div>
+            <aside class="zhihu-sidebar">
+                <nav class="zhihu-toc">
+                    <h3 class="zhihu-toc-title">文章目录</h3>
+                    <ul class="zhihu-toc-list" id="toc-list">
+                        <!-- 目录项将通过JavaScript动态生成 -->
+                    </ul>
+                </nav>
+            </aside>
+            </div>
+            <footer class="zhihu-back-link"><a href="../knowledge.html" class="back-link">
                                 <i class="fas fa-arrow-left"></i>
                                 返回知识库
                             </a>
-                        </div>
-                    </footer>
+            </footer>
                 </article>
             </div>
-        </body>
+        
+    <script src="../components/zhihu-article-interactions.js"></script>
+    <script src="../components/related-articles.js"></script>
+    <script src="../components/toc-generator.js"></script>
+</body>
         </html>
