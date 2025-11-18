@@ -140,56 +140,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics 4 - 仅在生产环境且有有效ID时加载 -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        // Google Analytics 配置 - 在此设置您的GA测量ID
+        const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // 替换为您的实际GA ID
 
-        // Google Analytics配置
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            // 自定义维度追踪
-            custom_map: {'custom_parameter_1': 'page_category'}
-        });
+        // 仅在有有效GA ID时加载Google Analytics
+        if (GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX') {
+            // 动态加载Google Analytics脚本
+            (function() {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+                document.head.appendChild(script);
 
-        // 性能监控设置
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            // 启用增强型测量
-            enhanced_measurement: true,
-            // 页面加载时间追踪
-            page_load_timeout: 1000,
-            // 自定义事件追踪
-            send_page_view: true
-        });
+                script.onload = function() {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
 
-        // Core Web Vitals监控
-        function sendToAnalytics(metric) {
-            gtag('event', metric.name, {
-                event_category: 'Web Vitals',
-                event_label: metric.id,
-                value: Math.round(metric.value),
-                non_interaction: true
-            });
+                    // Google Analytics配置
+                    gtag('js', new Date());
+                    gtag('config', GA_MEASUREMENT_ID, {
+                        // 自定义维度追踪
+                        custom_map: {'custom_parameter_1': 'page_category'},
+                        // 启用增强型测量
+                        enhanced_measurement: true,
+                        // 页面加载时间追踪
+                        page_load_timeout: 1000,
+                        // 自定义事件追踪
+                        send_page_view: true,
+                        // 开发环境下设置debug_mode
+                        debug_mode: window.location.hostname === 'localhost'
+                    });
+
+                    // Core Web Vitals监控
+                    function sendToAnalytics(metric) {
+                        gtag('event', metric.name, {
+                            event_category: 'Web Vitals',
+                            event_label: metric.id,
+                            value: Math.round(metric.value),
+                            non_interaction: true
+                        });
+                    }
+
+                    // 导出性能监控函数供其他脚本使用
+                    window.webPerformanceTracker = {
+                        trackEvent: function(action, category, label, value) {
+                            gtag('event', action, {
+                                event_category: category,
+                                event_label: label,
+                                value: value,
+                                non_interaction: true
+                            });
+                        },
+                        trackPageView: function(pagePath, pageTitle) {
+                            gtag('config', GA_MEASUREMENT_ID, {
+                                page_path: pagePath,
+                                page_title: pageTitle
+                            });
+                        }
+                    };
+                };
+            })();
+        } else {
+            // 创建空的分析追踪函数以避免错误
+            // console.info('Google Analytics未配置 - 要启用分析，请在index.html中设置有效的GA_MEASUREMENT_ID');
+            window.webPerformanceTracker = {
+                trackEvent: function() {},
+                trackPageView: function() {}
+            };
         }
-
-        // 导出性能监控函数供其他脚本使用
-        window.webPerformanceTracker = {
-            trackEvent: function(action, category, label, value) {
-                gtag('event', action, {
-                    event_category: category,
-                    event_label: label,
-                    value: value,
-                    non_interaction: true
-                });
-            },
-            trackPageView: function(pagePath, pageTitle) {
-                gtag('config', 'GA_MEASUREMENT_ID', {
-                    page_path: pagePath,
-                    page_title: pageTitle
-                });
-            }
-        };
     </script>
 
     <!-- 性能监控和优化脚本 -->
