@@ -31,6 +31,26 @@ function initMobileMenuToggle() {
             navMenu.classList.toggle('active');
         });
     }
+
+    // Add scroll listener to close mobile menu when scrolling
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768) {
+            // Only close menu if it's open
+            if (hamburger && hamburger.classList.contains('active')) {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+
+                    // Reset flag after scroll ends
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 150);
+                }
+            }
+        }
+    }, { passive: true });
 }
 
 // Mobile menu toggle will be initialized by initializeAllFeatures()
