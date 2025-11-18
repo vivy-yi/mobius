@@ -95,4 +95,5 @@ doc*
 skill*
 plandoc*
 
-# GitHub Pages deployment timestamp
+# GitHub Pages deployment timestamp# 测试文件夹 - 所有测试、验证、性能和调试文件
+test/
