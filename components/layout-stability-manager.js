@@ -492,7 +492,7 @@ class LayoutStabilityManager {
                         this.layoutShiftScore += entry.value;
 
                         if (this.layoutShiftScore > this.CRITICAL_CLS) {
-                            console.warn(`⚠️ 严重布局偏移检测: CLS = ${this.layoutShiftScore.toFixed(3)}`);
+                            // console.warn(`⚠️ 严重布局偏移检测: CLS = ${this.layoutShiftScore.toFixed(3)}`);
                         }
                     }
                 }

@@ -180,7 +180,7 @@ class KnowledgePreviewManager {
     generateKnowledgeGrid(containerId, categoriesToShow = ['business', 'visa', 'tax']) {
         const container = document.getElementById(containerId);
         if (!container) {
-            console.warn(`Container ${containerId} not found`);
+            // console.warn(`Container ${containerId} not found`);
             return;
         }
 

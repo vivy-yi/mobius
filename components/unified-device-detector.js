@@ -709,7 +709,7 @@ class UnifiedDeviceDetector {
      */
     setBreakpoint(breakpoint) {
         if (!this.breakpoints[breakpoint]) {
-            console.warn(`Unknown breakpoint: ${breakpoint}`);
+            // console.warn(`Unknown breakpoint: ${breakpoint}`);
             return;
         }
 

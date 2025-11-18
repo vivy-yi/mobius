@@ -324,7 +324,7 @@ class ComponentManager {
             existingFeatures.innerHTML = this.createFeaturesGridContent(); // 只填充内容
             // console.log('✅ Features Grid 内容已填充');
         } else {
-            console.warn('⚠️ 未找到现有的 features-grid');
+            // console.warn('⚠️ 未找到现有的 features-grid');
         }
     }
 

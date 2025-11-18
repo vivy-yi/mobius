@@ -180,7 +180,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
                 lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
                 this.observers.set('lcp', lcpObserver);
             } catch (e) {
-                console.warn('LCP monitoring not supported:', e);
+                // // console.warn('LCP monitoring not supported:', e);
             }
 
             // First Input Delay (FID)
@@ -198,7 +198,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
                 fidObserver.observe({ entryTypes: ['first-input'] });
                 this.observers.set('fid', fidObserver);
             } catch (e) {
-                console.warn('FID monitoring not supported:', e);
+                // // console.warn('FID monitoring not supported:', e);
             }
 
             // Cumulative Layout Shift (CLS)
@@ -217,7 +217,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
                 clsObserver.observe({ entryTypes: ['layout-shift'] });
                 this.observers.set('cls', clsObserver);
             } catch (e) {
-                console.warn('CLS monitoring not supported:', e);
+                // // console.warn('CLS monitoring not supported:', e);
             }
         }
     }
@@ -480,7 +480,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
             };
 
             this.alertHistory.push(alert);
-            console.warn(`⚠️ 性能警报: ${metric} (${value}) 超过阈值 (${threshold})`);
+            // // console.warn(`⚠️ 性能警报: ${metric} (${value}) 超过阈值 (${threshold})`);
 
             this.showPerformanceAlert(alert);
         }

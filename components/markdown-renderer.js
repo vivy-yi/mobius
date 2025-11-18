@@ -400,7 +400,7 @@ class MarkdownRenderer {
         const renderTime = endTime - startTime;
 
         if (renderTime > 100) {
-            console.warn(`Markdown渲染耗时过长: ${renderTime}ms`);
+            // console.warn(`Markdown渲染耗时过长: ${renderTime}ms`);
         }
 
         return result;

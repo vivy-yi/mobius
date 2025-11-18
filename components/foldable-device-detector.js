@@ -571,7 +571,7 @@ class FoldableDeviceDetector {
                     seg.width > 0 && seg.height > 0
                 );
             } catch (e) {
-                console.warn('无法获取窗口段落:', e);
+                // console.warn('无法获取窗口段落:', e);
             }
         }
     }

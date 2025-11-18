@@ -308,7 +308,7 @@ class SafeDOMOperations {
      */
     static sanitizeHTML(html) {
         // 如果可能，避免使用HTML字符串
-        console.warn('sanitizeHTML已弃用，请使用安全的DOM操作方法');
+        // console.warn('sanitizeHTML已弃用，请使用安全的DOM操作方法');
 
         // 基本的HTML清理（仅用于特殊情况）
         return html

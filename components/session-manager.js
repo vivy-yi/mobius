@@ -146,7 +146,7 @@ class SessionManager {
             };
             sessionStorage.setItem(this.sessionKey, JSON.stringify(data));
         } catch (error) {
-            console.warn('保存到 sessionStorage 失败:', error);
+            // console.warn('保存到 sessionStorage 失败:', error);
         }
     }
 
@@ -162,7 +162,7 @@ class SessionManager {
                 // console.log('📦 从 sessionStorage 加载状态');
             }
         } catch (error) {
-            console.warn('从 sessionStorage 加载失败:', error);
+            // console.warn('从 sessionStorage 加载失败:', error);
         }
     }
 

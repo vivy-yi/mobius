@@ -196,7 +196,7 @@ class ArticleCardManager {
      * 降级处理：加载默认文章数据
      */
     loadDefaultArticles() {
-        console.warn('⚠️ 使用默认文章数据');
+        // console.warn('⚠️ 使用默认文章数据');
         this.articles = {
             business: [
                 {
@@ -245,7 +245,7 @@ class ArticleCardManager {
             // 超时处理
             setTimeout(() => {
                 clearInterval(checkData);
-                console.warn('⚠️ 数据加载超时，使用默认数据');
+                // console.warn('⚠️ 数据加载超时，使用默认数据');
                 resolve();
             }, 5000);
         });
@@ -542,7 +542,7 @@ class ArticleCardManager {
     async generatePaginatedArticleGrid(category, containerId, currentPage = 1, useContainer1 = false) {
         const container = document.getElementById(containerId);
         if (!container) {
-            console.warn(`Container ${containerId} not found`);
+            // console.warn(`Container ${containerId} not found`);
             return;
         }
 
@@ -590,7 +590,7 @@ class ArticleCardManager {
     async generatePaginatedAllArticleGrid(containerId, currentPage = 1, useContainer1 = false) {
         const container = document.getElementById(containerId);
         if (!container) {
-            console.warn(`Container ${containerId} not found`);
+            // console.warn(`Container ${containerId} not found`);
             return;
         }
 
@@ -674,7 +674,7 @@ class ArticleCardManager {
     async generateArticleGrid(category, containerId) {
         const container = document.getElementById(containerId);
         if (!container) {
-            console.warn(`Container ${containerId} not found`);
+            // console.warn(`Container ${containerId} not found`);
             return;
         }
 
@@ -852,7 +852,7 @@ class ArticleCardManager {
         // console.log(`🎯 从数据容器2生成${category}分类文章网格到${containerId}`);
 
         if (!this.hasFilteredData) {
-            console.warn('⚠️ 数据容器2不存在，回退到常规方法');
+            // console.warn('⚠️ 数据容器2不存在，回退到常规方法');
             return this.generateArticleGrid(category, containerId);
         }
 
@@ -905,7 +905,7 @@ class ArticleCardManager {
 
         const container = document.getElementById('all-articles');
         if (!container) {
-            console.warn('❌ 找不到all-articles容器');
+            // console.warn('❌ 找不到all-articles容器');
             return;
         }
 
@@ -999,7 +999,7 @@ class ArticleCardManager {
         this.stateManager.updateFilter('search', eventData.value);
         break;
       default:
-        console.warn('未知的过滤器类型:', eventData.type);
+        // console.warn('未知的过滤器类型:', eventData.type);
     }
   }
 
@@ -1132,7 +1132,7 @@ class ArticleCardManager {
   renderArticlesToContainer(articles, containerId) {
     const container = document.getElementById(containerId);
     if (!container) {
-      console.warn(`⚠️ 找不到容器: ${containerId}`);
+      // console.warn(`⚠️ 找不到容器: ${containerId}`);
       return;
     }
 
@@ -1394,7 +1394,7 @@ class ArticleCardManager {
         // 从articleElement的数据属性获取文章ID
         const articleId = articleElement.dataset.articleId;
         if (!articleId) {
-            console.warn('⚠️ 文章元素缺少articleId');
+            // console.warn('⚠️ 文章元素缺少articleId');
             return null;
         }
 
@@ -1586,7 +1586,7 @@ class ArticleCardManager {
 
         // 错误处理：验证页码有效性
         if (page < 1) {
-            console.warn(`⚠️ 无效页码: ${page}, 使用页码1`);
+            // console.warn(`⚠️ 无效页码: ${page}, 使用页码1`);
             page = 1;
         }
 

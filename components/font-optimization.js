@@ -218,7 +218,7 @@ class FontOptimizationManager {
                     resolve();
                 };
                 link.onerror = () => {
-                    console.warn('⚠️ Font Awesome加载失败，使用emoji回退');
+                    // console.warn('⚠️ Font Awesome加载失败，使用emoji回退');
                     resolve(); // 继续执行，使用emoji回退
                 };
 
@@ -245,7 +245,7 @@ class FontOptimizationManager {
                     el.classList.remove('font-loading');
                 });
             }).catch(err => {
-                console.warn('⚠️ 字体加载监控失败:', err);
+                // console.warn('⚠️ 字体加载监控失败:', err);
             });
         }
     }

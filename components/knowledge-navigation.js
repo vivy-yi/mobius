@@ -150,7 +150,7 @@ class KnowledgeNavigation {
 
         const container = document.getElementById(containerId);
         if (!container) {
-            console.warn(`导航容器 ${containerId} 未找到`);
+            // console.warn(`导航容器 ${containerId} 未找到`);
             return;
         }
 
@@ -265,7 +265,7 @@ class KnowledgeNavigation {
 
         if (this.navData.quickFilters) {
                     } else {
-            console.warn('⚠️ 快速筛选数据未加载');
+            // console.warn('⚠️ 快速筛选数据未加载');
             return section;
         }
 
@@ -471,7 +471,7 @@ class KnowledgeNavigation {
 
         const category = this.navData.structure.find(c => c.id === categoryId);
         if (!category) {
-            console.warn(`⚠️ 未找到分类: ${categoryId}`);
+            // console.warn(`⚠️ 未找到分类: ${categoryId}`);
             return;
         }
 
@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // console.log('🧭 自动初始化导航组件...');
                 await window.knowledgeNavigation.initializeNavigation();
             } catch (error) {
-                console.warn('⚠️ 自动初始化导航失败:', error);
+                // console.warn('⚠️ 自动初始化导航失败:', error);
             }
         }
     }, 500);

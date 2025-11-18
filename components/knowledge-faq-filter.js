@@ -128,7 +128,7 @@ class KnowledgeFAQFilter {
         const faqItems = this.findFAQItems(container);
 
         if (faqItems.length === 0) {
-            console.warn('FAQ容器中未找到FAQ项目');
+            // console.warn('FAQ容器中未找到FAQ项目');
             return;
         }
 

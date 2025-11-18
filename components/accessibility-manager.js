@@ -355,7 +355,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
      */
     initSpeechRecognition() {
         if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-            console.warn('浏览器不支持语音识别');
+            // console.warn('浏览器不支持语音识别');
             return;
         }
 
@@ -381,7 +381,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
      */
     initSpeechSynthesis() {
         if (!('speechSynthesis' in window)) {
-            console.warn('浏览器不支持语音合成');
+            // console.warn('浏览器不支持语音合成');
             return;
         }
 
@@ -1124,7 +1124,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
         try {
             localStorage.setItem('mobius-font-size', this.state.currentFontSize);
         } catch (error) {
-            console.warn('无法保存字体大小偏好:', error);
+            // console.warn('无法保存字体大小偏好:', error);
         }
     }
 
@@ -1141,7 +1141,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
                 }
             }
         } catch (error) {
-            console.warn('无法加载字体大小偏好:', error);
+            // console.warn('无法加载字体大小偏好:', error);
         }
     }
 
@@ -1152,7 +1152,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
         try {
             localStorage.setItem('mobius-high-contrast', this.state.highContrastMode);
         } catch (error) {
-            console.warn('无法保存高对比度偏好:', error);
+            // console.warn('无法保存高对比度偏好:', error);
         }
     }
 
@@ -1166,7 +1166,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
                 this.state.highContrastMode = saved === 'true';
             }
         } catch (error) {
-            console.warn('无法加载高对比度偏好:', error);
+            // console.warn('无法加载高对比度偏好:', error);
         }
     }
 

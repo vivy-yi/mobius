@@ -62,7 +62,7 @@ class EventBus {
 
     // 检查监听器数量限制
     if (listeners.length >= this.maxListeners) {
-      console.warn(`Event "${event}" has reached maximum listeners (${this.maxListeners})`);
+      // console.warn(`Event "${event}" has reached maximum listeners (${this.maxListeners})`);
     }
 
     const listener = {
@@ -105,7 +105,7 @@ class EventBus {
    */
   off(event, callbackOrId) {
     if (!this.events.has(event)) {
-      console.warn(`Event "${event}" has no listeners`);
+      // console.warn(`Event "${event}" has no listeners`);
       return false;
     }
 
@@ -152,7 +152,7 @@ class EventBus {
 
     if (!this.events.has(event)) {
       if (options.warnIfNoListeners !== false) {
-        console.warn(`Event "${event}" has no listeners`);
+        // console.warn(`Event "${event}" has no listeners`);
       }
       return false;
     }

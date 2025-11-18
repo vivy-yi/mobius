@@ -171,13 +171,13 @@ class SmartScriptLoader {
             // 错误处理
             script.onload = () => resolve();
             script.onerror = () => {
-                console.warn(`⚠️ 脚本加载失败，继续执行: ${src}`);
+                // console.warn(`⚠️ 脚本加载失败，继续执行: ${src}`);
                 resolve(); // 非关键脚本失败不阻塞
             };
 
             // 添加错误监控
             script.addEventListener('error', (e) => {
-                console.warn(`⚠️ 脚本执行错误: ${src}`, e);
+                // console.warn(`⚠️ 脚本执行错误: ${src}`, e);
                 // 对于SEO组件等非关键脚本，不抛出异常
                 if (!src.includes('seo-accessibility')) {
                     reject(new Error(`Script execution failed: ${src}`));
