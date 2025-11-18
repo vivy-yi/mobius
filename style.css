@@ -1809,32 +1809,7 @@ p {
         background: rgba(59, 130, 246, 0.1);
     }
 
-    /* Mobile Dropdown Menu */
-    .dropdown-menu {
-        position: static;
-        transform: none;
-        opacity: 1;
-        visibility: visible;
-        box-shadow: none;
-        background: rgba(59, 130, 246, 0.05);
-        margin-top: var(--spacing-xs);
-        margin-left: var(--spacing-md);
-        border-radius: var(--radius-md);
-    }
-
-    .dropdown-item {
-        padding: var(--spacing-sm);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .item-title {
-        font-size: 1rem; /* 16px - 移动端标题 */
-    }
-
-    .item-desc {
-        font-size: 0.875rem; /* 14px - 移动端描述 */
-    }
-
+    
     /* Features Grid 响应式 */
     .features-grid {
         grid-template-columns: 1fr;
@@ -2003,14 +1978,7 @@ p {
         margin-bottom: var(--spacing-xs);
     }
 
-    .item-title {
-        font-size: 0.9375rem; /* 15px - 超小屏幕 */
-    }
-
-    .item-desc {
-        font-size: 0.8125rem; /* 13px - 超小屏幕 */
-    }
-
+    
     .services-grid,
     .features-grid {
         grid-template-columns: 1fr;
