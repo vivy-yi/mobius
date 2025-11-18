@@ -132,7 +132,8 @@ p {
 /* 品牌文字特殊样式 */
 .brand-link {
     font-weight: var(--font-weight-bold);
-    font-size: inherit;
+    font-size: 1.25rem; /* 20px - 品牌名称比导航链接稍大 */
+    line-height: 1.2;
 }
 
 .brand-link:hover {
@@ -350,11 +351,14 @@ p {
     text-decoration: none;
     color: var(--dark-text);
     font-weight: var(--font-weight-medium);
+    font-size: 1rem; /* 16px - Web标准导航栏字体大小 */
     position: relative;
     transition: color 0.3s ease;
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
 }
 
 .nav-link::after {
@@ -370,6 +374,7 @@ p {
 
 .nav-link:hover {
     color: var(--tech-blue);
+    background: rgba(59, 130, 246, 0.05);
 }
 
 .nav-link:hover::after {
@@ -383,7 +388,7 @@ p {
 
 .dropdown-toggle .fas {
     transition: transform 0.3s ease;
-    font-size: 0.875rem;
+    font-size: 0.875rem; /* 14px - 适合下拉箭头 */
 }
 
 .nav-dropdown:hover .dropdown-toggle .fas,
@@ -486,13 +491,14 @@ p {
 
 .item-title {
     font-weight: var(--font-weight-semibold);
+    font-size: 0.9375rem; /* 15px - 适合下拉菜单标题 */
     color: var(--dark-text);
     display: block;
     margin-bottom: 2px;
 }
 
 .item-desc {
-    font-size: 0.875rem;
+    font-size: 0.8125rem; /* 13px - 适合描述文字 */
     color: var(--light-text);
     line-height: 1.4;
 }
@@ -1787,6 +1793,48 @@ p {
         display: flex;
     }
 
+    /* Mobile Navigation Typography */
+    .nav-link {
+        font-size: 1.125rem; /* 18px - 移动端更大的触摸目标 */
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .brand-link {
+        font-size: 1.125rem; /* 18px - 移动端品牌名称稍小 */
+    }
+
+    .nav-link:hover {
+        background: rgba(59, 130, 246, 0.1);
+    }
+
+    /* Mobile Dropdown Menu */
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        background: rgba(59, 130, 246, 0.05);
+        margin-top: var(--spacing-xs);
+        margin-left: var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+
+    .dropdown-item {
+        padding: var(--spacing-sm);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .item-title {
+        font-size: 1rem; /* 16px - 移动端标题 */
+    }
+
+    .item-desc {
+        font-size: 0.875rem; /* 14px - 移动端描述 */
+    }
+
     /* Features Grid 响应式 */
     .features-grid {
         grid-template-columns: 1fr;
@@ -1946,6 +1994,21 @@ p {
 
     .hero-title {
         font-size: 2.5rem;
+    }
+
+    /* Ultra-small screen navigation */
+    .nav-link {
+        font-size: 1rem; /* 16px - 超小屏幕适中的字体大小 */
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .item-title {
+        font-size: 0.9375rem; /* 15px - 超小屏幕 */
+    }
+
+    .item-desc {
+        font-size: 0.8125rem; /* 13px - 超小屏幕 */
     }
 
     .services-grid,
