@@ -193,11 +193,11 @@ p {
 
 /* Brand Container内的Features Grid特殊样式 */
 .brand-container .features-grid {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
     margin-top: var(--spacing-lg);
-    flex-wrap: nowrap;
+    align-items: start;
 }
 
 /* Brand Container内的Feature Card增强样式 */
@@ -723,6 +723,66 @@ p {
     align-items: stretch;
 }
 
+/* Brand Visual - 数据展示区域样式 */
+.brand-visual {
+    background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent-red) 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.stat-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: var(--font-weight-black);
+    color: white;
+    margin-bottom: var(--spacing-xs);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--font-weight-medium);
+}
+
 .brand-description {
     font-size: 1.125rem;
     margin-bottom: var(--spacing-lg);
@@ -921,22 +981,6 @@ p {
 }
 
 
-.stats-grid {
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-md);
-    position: relative;
-    z-index: 2;
-    flex-wrap: nowrap;
-}
-
-.stat-item {
-    text-align: center;
-    padding: var(--spacing-lg);
-    background: var(--light-bg);
-    border-radius: var(--radius-lg);
-    flex: 1;
-}
 
 .stat-number {
     font-size: 3rem;
@@ -1656,7 +1700,7 @@ p {
 
     /* Brand Container 移动端响应式样式 */
     .brand-container {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
         gap: var(--spacing-md);
     }
 
@@ -1685,6 +1729,29 @@ p {
 
     .brand-container .feature-details li {
         font-size: 0.9rem;
+    }
+
+    /* Brand Visual 移动端响应式样式 */
+    .brand-visual {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .stat-item {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
     }
 
     .community-content {
@@ -1884,6 +1951,51 @@ p {
     .services-grid,
     .features-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Brand Container 超小屏幕优化 */
+    .brand-container {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+        margin: var(--spacing-sm) 0;
+    }
+
+    .brand-container .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .brand-container .feature-card {
+        padding: var(--spacing-sm);
+    }
+
+    .brand-container .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .brand-container .feature-card h3 {
+        font-size: 1.1rem;
+        margin: var(--spacing-sm) 0 var(--spacing-xs);
+    }
+
+    .brand-container .feature-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Brand Visual 超小屏幕优化 */
+    .brand-visual {
+        padding: var(--spacing-sm);
+        margin: var(--spacing-sm) 0;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
     }
 }
 
