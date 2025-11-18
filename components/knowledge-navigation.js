@@ -27,14 +27,14 @@ class KnowledgeNavigation {
         this.handleDifficultyClick = this.handleDifficultyClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
 
-        console.log('🧭 KnowledgeNavigation initialized with event bus');
+        // console.log('🧭 KnowledgeNavigation initialized with event bus');
     }
 
     /**
      * 刷新缓存数据
      */
     async refreshCache() {
-        console.log('🔄 手动刷新导航缓存...');
+        // console.log('🔄 手动刷新导航缓存...');
         try {
             const jsonUrl = `${this.baseUrl}data/articles.json`;
             const result = await this.cacheManager.forceRefresh(jsonUrl);
@@ -42,7 +42,7 @@ class KnowledgeNavigation {
             if (result.data) {
                 this.navData = result.data.navigation;
                 this.isNavigationInitialized = true;
-                console.log('✅ 缓存刷新完成');
+                // console.log('✅ 缓存刷新完成');
                 return true;
             }
             return false;
@@ -69,15 +69,15 @@ class KnowledgeNavigation {
     async initializeNavigation() {
         // 防止重复初始化
         if (this.isNavigationInitialized) {
-            console.log('🔄 导航已初始化，跳过重复加载');
+            // console.log('🔄 导航已初始化，跳过重复加载');
             return true;
         }
 
         try {
-            console.log('🚀 开始初始化导航系统...');
+            // console.log('🚀 开始初始化导航系统...');
 
             const jsonUrl = `${this.baseUrl}data/articles.json`;
-            console.log(`📡 加载导航数据（智能缓存）...`);
+            // console.log(`📡 加载导航数据（智能缓存）...`);
 
             // 使用缓存管理器加载数据
             const result = await this.cacheManager.loadData(jsonUrl);
@@ -90,10 +90,10 @@ class KnowledgeNavigation {
 
             // 显示缓存信息
             const cacheInfo = this.cacheManager.getCacheInfo();
-            console.log(`📊 缓存信息: ${result.fromCache ? '命中缓存' : '网络加载'}, 版本: ${cacheInfo.version}, 大小: ${cacheInfo.sizeKB}KB`);
+            // console.log(`📊 缓存信息: ${result.fromCache ? '命中缓存' : '网络加载'}, 版本: ${cacheInfo.version}, 大小: ${cacheInfo.sizeKB}KB`);
 
             if (result.expired) {
-                console.log('⚠️ 使用的是过期缓存数据');
+                // console.log('⚠️ 使用的是过期缓存数据');
             }
 
             // 初始化展开状态
@@ -104,7 +104,7 @@ class KnowledgeNavigation {
             });
 
             this.isNavigationInitialized = true;
-            console.log('🎉 导航系统初始化完成');
+            // console.log('🎉 导航系统初始化完成');
             return true;
 
         } catch (error) {
@@ -144,7 +144,7 @@ class KnowledgeNavigation {
     renderNavigation(containerId) {
         // 防止重复渲染
         if (this.isRendering) {
-            console.log('⏸️ 导航正在渲染中，跳过重复调用');
+            // console.log('⏸️ 导航正在渲染中，跳过重复调用');
             return;
         }
 
@@ -165,12 +165,12 @@ class KnowledgeNavigation {
 
         // 如果状态没有变化，跳过渲染
         if (this.lastRenderedState === currentState) {
-            console.log('🔄 导航状态未变化，跳过重新渲染');
+            // console.log('🔄 导航状态未变化，跳过重新渲染');
             return;
         }
 
         this.isRendering = true;
-        console.log('🎨 开始渲染导航...');
+        // console.log('🎨 开始渲染导航...');
 
         try {
             container.innerHTML = '';
@@ -194,7 +194,7 @@ class KnowledgeNavigation {
 
             // 缓存当前状态
             this.lastRenderedState = currentState;
-            console.log('✅ 导航渲染完成');
+            // console.log('✅ 导航渲染完成');
 
         } catch (error) {
             console.error('❌ 导航渲染失败:', error);
@@ -450,7 +450,7 @@ class KnowledgeNavigation {
      * 处理分类点击 - 重构为纯事件发送
      */
     handleCategoryClick(categoryId) {
-        console.log(`🧭 分类点击: ${categoryId}`);
+        // console.log(`🧭 分类点击: ${categoryId}`);
 
         // 特殊处理"全部"分类
         if (categoryId === 'all') {
@@ -514,7 +514,7 @@ class KnowledgeNavigation {
      * 仅更新展开状态，不触发完整重新渲染
      */
     updateExpandedStateOnly() {
-        console.log('📁 仅更新展开状态');
+        // console.log('📁 仅更新展开状态');
 
         // 更新展开/折叠图标
         this.navData.structure.forEach(category => {
@@ -535,7 +535,7 @@ class KnowledgeNavigation {
      * 处理子分类点击 - 重构为纯事件发送
      */
     handleSubcategoryClick(categoryId, subcategoryId) {
-        console.log(`🧭 子分类点击: ${categoryId}/${subcategoryId}`);
+        // console.log(`🧭 子分类点击: ${categoryId}/${subcategoryId}`);
 
         // 发送子分类点击事件
         this.eventBus.emit(EVENT_TYPES.NAV_CATEGORY_CLICK, {
@@ -553,7 +553,7 @@ class KnowledgeNavigation {
      * 处理快速筛选点击 - 重构为纯事件发送
      */
     handleQuickFilterClick(filterId) {
-        console.log(`🧭 快速筛选点击: ${filterId}`);
+        // console.log(`🧭 快速筛选点击: ${filterId}`);
 
         // 发送快速筛选点击事件
         this.eventBus.emit(EVENT_TYPES.NAV_TAG_CLICK, {
@@ -602,7 +602,7 @@ class KnowledgeNavigation {
      * 处理难度筛选点击 - 重构为纯事件发送
      */
     handleDifficultyClick(difficultyId) {
-        console.log(`🧭 难度筛选点击: ${difficultyId}`);
+        // console.log(`🧭 难度筛选点击: ${difficultyId}`);
 
         // 发送难度筛选点击事件
         this.eventBus.emit(EVENT_TYPES.NAV_DIFFICULTY_CLICK, {
@@ -623,7 +623,7 @@ class KnowledgeNavigation {
      * 处理搜索 - 重构为纯事件发送
      */
     handleSearch(searchTerm) {
-        console.log(`🧭 搜索: "${searchTerm}"`);
+        // console.log(`🧭 搜索: "${searchTerm}"`);
 
         // 发送搜索事件
         this.eventBus.emit(EVENT_TYPES.NAV_SEARCH, {
@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(async () => {
         if (window.knowledgeNavigation && window.knowledgeNavigation.isNavigationInitialized === false) {
             try {
-                console.log('🧭 自动初始化导航组件...');
+                // console.log('🧭 自动初始化导航组件...');
                 await window.knowledgeNavigation.initializeNavigation();
             } catch (error) {
                 console.warn('⚠️ 自动初始化导航失败:', error);
@@ -944,7 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         if (!window.knowledgeNavigationDrawer) {
             window.knowledgeNavigationDrawer = new KnowledgeNavigationDrawer();
-            console.log('✅ 知识库导航移动端抽屉功能已初始化');
+            // console.log('✅ 知识库导航移动端抽屉功能已初始化');
         }
     }, 500);
 });

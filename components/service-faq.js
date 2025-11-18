@@ -62,7 +62,7 @@ class ServiceFAQ {
             await this.loadFAQData();
             this.renderFAQ();
             this.bindEvents();
-            console.log(`✅ FAQ组件初始化完成: ${this.category}`);
+            // console.log(`✅ FAQ组件初始化完成: ${this.category}`);
         } catch (error) {
             console.error('❌ FAQ组件初始化失败:', error);
             this.renderErrorState();

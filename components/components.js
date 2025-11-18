@@ -9,7 +9,7 @@ class ComponentManager {
         this.currentPage = this.getCurrentPage();
 
         // 立即显示版本信息
-        // console.log(`🚀 ComponentManager v${this.version} 已加载 - Logo已更新为图片!`);
+        // // console.log(`🚀 ComponentManager v${this.version} 已加载 - Logo已更新为图片!`);
     }
 
     /**
@@ -322,7 +322,7 @@ class ComponentManager {
         const existingFeatures = document.querySelector('.features-grid');
         if (existingFeatures) {
             existingFeatures.innerHTML = this.createFeaturesGridContent(); // 只填充内容
-            console.log('✅ Features Grid 内容已填充');
+            // console.log('✅ Features Grid 内容已填充');
         } else {
             console.warn('⚠️ 未找到现有的 features-grid');
         }
@@ -368,6 +368,6 @@ window.componentManager = new ComponentManager();
 window.componentManager.init();
 
 // 调试信息 - 确认logo更新
-// console.log('📝 Mobius Components.js v2.0 - Logo已更新为图片版本');
-// console.log('📱 当前时间:', new Date().toLocaleString());
-// console.log('🖼️ Logo图片路径测试:', window.componentManager.baseUrl + 'assets/imgs/logo.png');
+// // console.log('📝 Mobius Components.js v2.0 - Logo已更新为图片版本');
+// // console.log('📱 当前时间:', new Date().toLocaleString());
+// // console.log('🖼️ Logo图片路径测试:', window.componentManager.baseUrl + 'assets/imgs/logo.png');

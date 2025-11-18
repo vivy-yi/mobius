@@ -32,7 +32,7 @@ class SessionManager {
         // 存储到 sessionStorage
         this.saveToSessionStorage();
 
-        console.log('💾 页面状态已保存:', pageUrl);
+        // console.log('💾 页面状态已保存:', pageUrl);
     }
 
     /**
@@ -58,11 +58,11 @@ class SessionManager {
         const pageState = this.getPageState(pageUrl);
 
         if (!pageState) {
-            console.log('⚠️ 没有找到页面状态，使用默认状态');
+            // console.log('⚠️ 没有找到页面状态，使用默认状态');
             return false;
         }
 
-        console.log('🔄 恢复页面状态:', pageUrl);
+        // console.log('🔄 恢复页面状态:', pageUrl);
 
         try {
             // 恢复滚动位置
@@ -117,7 +117,7 @@ class SessionManager {
         for (const [url, state] of this.pageStates.entries()) {
             if (now - state.timestamp > maxAge) {
                 this.pageStates.delete(url);
-                console.log('🗑️ 清理过期页面状态:', url);
+                // console.log('🗑️ 清理过期页面状态:', url);
             }
         }
 
@@ -159,7 +159,7 @@ class SessionManager {
             if (data) {
                 const parsed = JSON.parse(data);
                 this.pageStates = new Map(parsed.pageStates || []);
-                console.log('📦 从 sessionStorage 加载状态');
+                // console.log('📦 从 sessionStorage 加载状态');
             }
         } catch (error) {
             console.warn('从 sessionStorage 加载失败:', error);
@@ -180,7 +180,7 @@ class SessionManager {
         // 监听 pageshow 事件（处理浏览器返回键）
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
-                console.log('🔙 检测到浏览器返回键，pageshow事件触发');
+                // console.log('🔙 检测到浏览器返回键，pageshow事件触发');
                 this.handlePageShow(true);
             }
         });
@@ -194,7 +194,7 @@ class SessionManager {
         const previousPage = sessionStorage.getItem(this.currentPageKey);
 
         if (isReturnNavigation && previousPage && previousPage !== currentPage) {
-            console.log('🔙 从其他页面返回，尝试恢复状态');
+            // console.log('🔙 从其他页面返回，尝试恢复状态');
 
             // 如果是从其他页面返回，不恢复状态
             sessionStorage.setItem(this.currentPageKey, currentPage);
@@ -204,13 +204,13 @@ class SessionManager {
         // 检查是否是刷新页面
         const navigationType = performance.getEntriesByType("navigation")[0]?.type;
         if (navigationType === 'reload') {
-            console.log('🔄 页面刷新，不恢复状态');
+            // console.log('🔄 页面刷新，不恢复状态');
             return;
         }
 
         const pageState = this.getPageState(currentPage);
         if (pageState) {
-            console.log('✅ 找到页面状态，进行恢复');
+            // console.log('✅ 找到页面状态，进行恢复');
             this.restorePageState(currentPage);
         }
 
@@ -221,7 +221,7 @@ class SessionManager {
      * 初始化会话管理器
      */
     init() {
-        console.log('🚀 初始化会话管理器');
+        // console.log('🚀 初始化会话管理器');
 
         // 加载已保存的状态
         this.loadFromSessionStorage();
@@ -260,7 +260,7 @@ class SessionManager {
         this.pageStates.clear();
         sessionStorage.removeItem(this.sessionKey);
         sessionStorage.removeItem(this.currentPageKey);
-        console.log('🗑️ 所有页面状态已清除');
+        // console.log('🗑️ 所有页面状态已清除');
     }
 
     /**

@@ -412,6 +412,6 @@ window.markdownRenderer = new MarkdownRenderer();
 
 // 开发环境下的调试信息
 if (typeof config !== 'undefined' && config.development && config.debug) {
-    console.log('Markdown渲染器版本:', window.markdownRenderer.version);
-    console.log('缓存状态:', window.markdownRenderer.getCacheSize());
+    // console.log('Markdown渲染器版本:', window.markdownRenderer.version);
+    // console.log('缓存状态:', window.markdownRenderer.getCacheSize());
 }

@@ -29,7 +29,7 @@ class ResourcePreloader {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🎯 初始化资源预加载管理器...');
+        // console.log('🎯 初始化资源预加载管理器...');
 
         // 1. 预加载关键资源
         this.preloadCriticalResources();
@@ -47,7 +47,7 @@ class ResourcePreloader {
         this.preloadData();
 
         this.isInitialized = true;
-        console.log('✅ 资源预加载管理器初始化完成');
+        // console.log('✅ 资源预加载管理器初始化完成');
     }
 
     /**
@@ -112,7 +112,7 @@ class ResourcePreloader {
             // 立即加载
             document.head.appendChild(link);
             this.preloadedResources.add(resource.href);
-            console.log(`⚡ 关键资源预加载: ${resource.href}`);
+            // console.log(`⚡ 关键资源预加载: ${resource.href}`);
         } else {
             // 延迟加载
             this.schedulePreload(link, resource);
@@ -127,7 +127,7 @@ class ResourcePreloader {
             if (!this.preloadedResources.has(resource.href)) {
                 document.head.appendChild(link);
                 this.preloadedResources.add(resource.href);
-                console.log(`📦 资源预加载: ${resource.href}`);
+                // console.log(`📦 资源预加载: ${resource.href}`);
             }
         };
 
@@ -256,12 +256,12 @@ class ResourcePreloader {
 
             // 根据网络状况调整预加载策略
             if (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-                console.log('📶 检测到慢速网络，减少预加载');
+                // console.log('📶 检测到慢速网络，减少预加载');
                 this.reducePreloading();
             }
 
             connection.addEventListener('change', () => {
-                console.log('📶 网络状态变化:', connection.effectiveType);
+                // console.log('📶 网络状态变化:', connection.effectiveType);
                 if (connection.effectiveType === '4g') {
                     this.increasePreloading();
                 }
@@ -374,7 +374,7 @@ class ResourcePreloader {
         link.rel = 'prefetch';
         link.href = href;
         document.head.appendChild(link);
-        console.log(`📄 页面预取: ${href}`);
+        // console.log(`📄 页面预取: ${href}`);
     }
 
     /**
@@ -405,7 +405,7 @@ class ResourcePreloader {
             })
             .then(data => {
                 window.articlesData = data;
-                console.log('📊 文章数据预加载完成');
+                // console.log('📊 文章数据预加载完成');
             })
             .catch(error => {
                 console.warn('⚠️ 文章数据预加载失败:', error);
@@ -428,7 +428,7 @@ class ResourcePreloader {
      */
     increasePreloading() {
         // 恢复正常的预加载策略
-        console.log('📶 恢复正常预加载策略');
+        // console.log('📶 恢复正常预加载策略');
     }
 
     /**

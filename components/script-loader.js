@@ -37,7 +37,7 @@ class SmartScriptLoader {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🚀 初始化智能脚本加载器...');
+        // console.log('🚀 初始化智能脚本加载器...');
 
         // 按优先级加载脚本
         await this.loadCriticalScripts();
@@ -45,14 +45,14 @@ class SmartScriptLoader {
         await this.loadNonCriticalScripts();
 
         this.isInitialized = true;
-        console.log('✅ 所有脚本加载完成');
+        // console.log('✅ 所有脚本加载完成');
     }
 
     /**
      * 加载关键脚本（同步，必须首先加载）
      */
     async loadCriticalScripts() {
-        console.log('⚡ 加载关键脚本...');
+        // console.log('⚡ 加载关键脚本...');
 
         for (const script of this.criticalScripts) {
             await this.loadScript(script, { priority: 'critical', async: false });
@@ -63,7 +63,7 @@ class SmartScriptLoader {
      * 加载重要脚本（高优先级异步）
      */
     async loadImportantScripts() {
-        console.log('🔥 加载重要脚本...');
+        // console.log('🔥 加载重要脚本...');
 
         // 使用Promise.all并行加载重要脚本
         const promises = this.importantScripts.map(script =>
@@ -77,7 +77,7 @@ class SmartScriptLoader {
      * 加载非关键脚本（低优先级，延迟加载）
      */
     async loadNonCriticalScripts() {
-        console.log('📦 加载非关键脚本...');
+        // console.log('📦 加载非关键脚本...');
 
         // 等待页面空闲后加载
         if ('requestIdleCallback' in window) {
@@ -106,25 +106,25 @@ class SmartScriptLoader {
         return new Promise((resolve, reject) => {
             // 检查是否已加载
             if (this.loadedScripts.has(src)) {
-                console.log(`📋 脚本已加载: ${src}`);
+                // console.log(`📋 脚本已加载: ${src}`);
                 resolve();
                 return;
             }
 
             // 检查是否正在加载
             if (this.loadingScripts.has(src)) {
-                console.log(`⏳ 等待脚本加载: ${src}`);
+                // console.log(`⏳ 等待脚本加载: ${src}`);
                 this.loadingScripts.get(src).then(resolve).catch(reject);
                 return;
             }
 
-            console.log(`📥 加载脚本: ${src} (优先级: ${options.priority})`);
+            // console.log(`📥 加载脚本: ${src} (优先级: ${options.priority})`);
 
             const loadPromise = this.createScriptElement(src, options)
                 .then(() => {
                     this.loadedScripts.add(src);
                     this.loadingScripts.delete(src);
-                    console.log(`✅ 脚本加载成功: ${src}`);
+                    // console.log(`✅ 脚本加载成功: ${src}`);
                     resolve();
                 })
                 .catch(err => {
@@ -133,7 +133,7 @@ class SmartScriptLoader {
 
                     // 关键脚本失败时重试
                     if (options.priority === 'critical') {
-                        console.log(`🔄 重试加载关键脚本: ${src}`);
+                        // console.log(`🔄 重试加载关键脚本: ${src}`);
                         setTimeout(() => {
                             this.loadScript(src, options).then(resolve).catch(reject);
                         }, 1000);
@@ -223,7 +223,7 @@ class SmartScriptLoader {
         link.href = this.addVersion(src);
         document.head.appendChild(link);
 
-        console.log(`🎯 预加载脚本: ${src}`);
+        // console.log(`🎯 预加载脚本: ${src}`);
     }
 
     /**
@@ -231,9 +231,9 @@ class SmartScriptLoader {
      */
     async loadModule(moduleName, src) {
         try {
-            console.log(`📦 加载模块: ${moduleName}`);
+            // console.log(`📦 加载模块: ${moduleName}`);
             await this.loadScript(src, { priority: 'low', async: true });
-            console.log(`✅ 模块加载成功: ${moduleName}`);
+            // console.log(`✅ 模块加载成功: ${moduleName}`);
             return true;
         } catch (error) {
             console.error(`❌ 模块加载失败: ${moduleName}`, error);

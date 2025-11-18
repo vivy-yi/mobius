@@ -25,7 +25,7 @@ class LayoutStabilityManager {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🔧 初始化布局稳定性管理器...');
+        // console.log('🔧 初始化布局稳定性管理器...');
 
         // 1. 预留图片空间
         this.reserveImageSpaces();
@@ -43,7 +43,7 @@ class LayoutStabilityManager {
         this.reserveDynamicContentSpaces();
 
         this.isInitialized = true;
-        console.log('✅ 布局稳定性管理器初始化完成');
+        // console.log('✅ 布局稳定性管理器初始化完成');
     }
 
     /**
@@ -79,7 +79,7 @@ class LayoutStabilityManager {
                 // 标记为已处理
                 img.setAttribute('data-reserved', 'true');
 
-                console.log(`📐 图片空间预留: ${width}x${height}`);
+                // console.log(`📐 图片空间预留: ${width}x${height}`);
             }
         });
 
@@ -334,7 +334,7 @@ class LayoutStabilityManager {
         this.reservedSpaces.set(selector, fragment);
         container.appendChild(skeleton);
 
-        console.log(`🦴 骨架屏设置: ${selector}`);
+        // console.log(`🦴 骨架屏设置: ${selector}`);
 
         // 设置自动移除（模拟加载时间）
         setTimeout(() => {
@@ -437,7 +437,7 @@ class LayoutStabilityManager {
                 skeleton.remove();
                 container.appendChild(reservedContent);
                 this.reservedSpaces.delete(selector);
-                console.log(`✅ 骨架屏移除: ${selector}`);
+                // console.log(`✅ 骨架屏移除: ${selector}`);
             }, 300);
         }
     }
@@ -503,7 +503,7 @@ class LayoutStabilityManager {
             // 定期报告CLS分数
             setInterval(() => {
                 if (this.layoutShiftScore > 0) {
-                    console.log(`📊 当前CLS分数: ${this.layoutShiftScore.toFixed(3)}`);
+                    // console.log(`📊 当前CLS分数: ${this.layoutShiftScore.toFixed(3)}`);
                 }
             }, 5000);
         }
@@ -516,7 +516,7 @@ class LayoutStabilityManager {
         // 字体加载时保持布局稳定
         if ('fonts' in document) {
             document.fonts.ready.then(() => {
-                console.log('🔤 所有字体加载完成');
+                // console.log('🔤 所有字体加载完成');
                 document.documentElement.classList.add('fonts-loaded');
             });
         }
@@ -525,7 +525,7 @@ class LayoutStabilityManager {
         const fontFaces = document.fonts;
         fontFaces.forEach(fontFace => {
             fontFace.load().then(() => {
-                console.log(`🔤 字体加载完成: ${fontFace.family}`);
+                // console.log(`🔤 字体加载完成: ${fontFace.family}`);
             });
         });
     }
@@ -551,7 +551,7 @@ class LayoutStabilityManager {
                 if (currentHeight < reservedHeight) {
                     element.style.minHeight = reservedHeight + 'px';
                     element.setAttribute('data-reserved', 'true');
-                    console.log(`📏 动态内容空间预留: ${area.selector} = ${reservedHeight}px`);
+                    // console.log(`📏 动态内容空间预留: ${area.selector} = ${reservedHeight}px`);
                 }
             }
         });
@@ -577,7 +577,7 @@ class LayoutStabilityManager {
      */
     resetCLSScore() {
         this.layoutShiftScore = 0;
-        console.log('📊 CLS分数已重置');
+        // console.log('📊 CLS分数已重置');
     }
 }
 

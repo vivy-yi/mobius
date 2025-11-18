@@ -150,7 +150,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
     initEnhanced() {
         if (this.isMonitoring) return;
 
-        console.log('🚀 启动增强性能监控系统...');
+        // console.log('🚀 启动增强性能监控系统...');
 
         this.initCoreWebVitals();
         this.initUserBehaviorTracking();
@@ -160,7 +160,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
         this.createPerformanceDashboard();
 
         this.isMonitoring = true;
-        console.log('✅ 增强性能监控已启动');
+        // console.log('✅ 增强性能监控已启动');
     }
 
     /**
@@ -439,7 +439,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
         const analysis = this.analyzePerformance();
 
         if (analysis.recommendations.length > 0) {
-            console.log('🔧 性能优化建议:', analysis.recommendations);
+            // console.log('🔧 性能优化建议:', analysis.recommendations);
 
             // 自动应用某些优化
             this.applyAutoOptimizations(analysis.recommendations);
@@ -726,12 +726,12 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
     // 增强功能方法
     enableResourcePreloading() {
         // 预加载关键资源
-        console.log('🚀 启用资源预加载优化');
+        // console.log('🚀 启用资源预加载优化');
     }
 
     enhanceLazyLoading() {
         // 增强懒加载功能
-        console.log('🖼️ 启用增强懒加载优化');
+        // console.log('🖼️ 启用增强懒加载优化');
     }
 
     optimizeMemoryUsage() {
@@ -741,7 +741,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
             this.performanceHistory = this.performanceHistory.slice(-20);
             this.userBehavior.clicks = this.userBehavior.clicks.slice(-50);
         }
-        console.log('🧠 启用内存优化');
+        // console.log('🧠 启用内存优化');
     }
 
     /**
@@ -840,7 +840,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
         this.observers.clear();
         this.isMonitoring = false;
 
-        console.log('⏹️ 性能监控已停止');
+        // console.log('⏹️ 性能监控已停止');
     }
 
     /**
@@ -854,7 +854,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
             dashboard.remove();
         }
 
-        console.log('🗑️ 增强性能监控器已销毁');
+        // console.log('🗑️ 增强性能监控器已销毁');
     }
 }
 
@@ -896,4 +896,4 @@ window.mobiusPerformance = {
     getGrade: () => window.EnhancedPerformanceMonitor.getPerformanceGrade()
 };
 
-console.log('📊 增强性能监控器已加载，使用 Ctrl+Shift+P 显示性能面板');
+// console.log('📊 增强性能监控器已加载，使用 Ctrl+Shift+P 显示性能面板');

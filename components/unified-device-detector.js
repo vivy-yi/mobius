@@ -666,7 +666,7 @@ class UnifiedDeviceDetector {
      */
     debug(message, data = null) {
         if (this.options.enableDebug) {
-            console.log(`[UnifiedDeviceDetector] ${message}`, data || '');
+            // console.log(`[UnifiedDeviceDetector] ${message}`, data || '');
         }
     }
 
@@ -755,6 +755,6 @@ if (document.readyState === 'loading') {
     window.UnifiedDeviceDetector.init();
 }
 
-console.log('📱 统一设备检测器已加载');
-console.log('🎯 使用 mobiusDevice API 进行调试');
-console.log('📋 事件监听: mobiusDevice.on("change", callback)');
+// console.log('📱 统一设备检测器已加载');
+// console.log('🎯 使用 mobiusDevice API 进行调试');
+// console.log('📋 事件监听: mobiusDevice.on("change", callback)');

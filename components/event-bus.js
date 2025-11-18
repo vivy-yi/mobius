@@ -77,7 +77,7 @@ class EventBus {
     // 按优先级排序（高优先级先执行）
     listeners.sort((a, b) => b.priority - a.priority);
 
-    console.log(`📡 Event listener added: ${event} (ID: ${listener.id})`);
+    // console.log(`📡 Event listener added: ${event} (ID: ${listener.id})`);
 
     return listener.id;
   }
@@ -137,7 +137,7 @@ class EventBus {
       this.events.delete(event);
     }
 
-    console.log(`📡 Event listeners removed: ${event} (${removedCount} removed)`);
+    // console.log(`📡 Event listeners removed: ${event} (${removedCount} removed)`);
     return removedCount > 0;
   }
 
@@ -148,7 +148,7 @@ class EventBus {
    * @param {Object} options - 选项
    */
   emit(event, data = null, options = {}) {
-    console.log(`📡 Emitting event: ${event}`, data);
+    // console.log(`📡 Emitting event: ${event}`, data);
 
     if (!this.events.has(event)) {
       if (options.warnIfNoListeners !== false) {
@@ -217,11 +217,11 @@ class EventBus {
   removeAllListeners(event = null) {
     if (event) {
       this.events.delete(event);
-      console.log(`📡 All listeners removed for event: ${event}`);
+      // console.log(`📡 All listeners removed for event: ${event}`);
     } else {
       this.events.clear();
       this.onceEvents.clear();
-      console.log('📡 All event listeners removed');
+      // console.log('📡 All event listeners removed');
     }
   }
 
@@ -258,12 +258,12 @@ class EventBus {
    */
   debug() {
     console.group('📡 EventBus Debug Info');
-    console.log('Total events:', this.events.size);
+    // console.log('Total events:', this.events.size);
 
     this.events.forEach((listeners, event) => {
-      console.log(`${event}: ${listeners.length} listeners`);
+      // console.log(`${event}: ${listeners.length} listeners`);
       listeners.forEach(listener => {
-        console.log(`  - ID: ${listener.id}, Priority: ${listener.priority}`);
+        // console.log(`  - ID: ${listener.id}, Priority: ${listener.priority}`);
       });
     });
 

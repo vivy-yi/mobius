@@ -54,7 +54,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
         // 先初始化基础SEO和可访问性功能
         super.init();
 
-        console.log('🔧 初始化高级无障碍管理器...');
+        // console.log('🔧 初始化高级无障碍管理器...');
 
         // 初始化新功能
         this.initFontSizeControl();
@@ -69,7 +69,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
         this.setupResponsiveAccessibility();
 
         this.isInitialized = true;
-        console.log('✅ 高级无障碍管理器初始化完成');
+        // console.log('✅ 高级无障碍管理器初始化完成');
     }
 
     /**
@@ -1376,7 +1376,7 @@ class AccessibilityManager extends SeoAccessibilityOptimizer {
         }
 
         super.destroy();
-        console.log('🔧 高级无障碍管理器已销毁');
+        // console.log('🔧 高级无障碍管理器已销毁');
     }
 }
 

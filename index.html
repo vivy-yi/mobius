@@ -201,11 +201,11 @@
                 const observer = new PerformanceObserver((list) => {
                     for (const entry of list.getEntries()) {
                         if (entry.entryType === 'largest-contentful-paint') {
-                            console.log(`LCP: ${entry.startTime}ms`);
+                            // console.log(`LCP: ${entry.startTime}ms`);
                             window.webPerformanceTracker.trackEvent('LCP', 'Performance', window.location.pathname, Math.round(entry.startTime));
                         }
                         if (entry.entryType === 'first-input') {
-                            console.log(`FID: ${entry.processingStart - entry.startTime}ms`);
+                            // console.log(`FID: ${entry.processingStart - entry.startTime}ms`);
                             window.webPerformanceTracker.trackEvent('FID', 'Performance', window.location.pathname, Math.round(entry.processingStart - entry.startTime));
                         }
                     }
@@ -216,7 +216,7 @@
             // 监控页面加载时间
             const navigation = performance.getEntriesByType('navigation')[0];
             const loadTime = Math.round(navigation.loadEventEnd - navigation.loadEventStart);
-            console.log(`Page Load Time: ${loadTime}ms`);
+            // console.log(`Page Load Time: ${loadTime}ms`);
             window.webPerformanceTracker.trackEvent('Page Load', 'Performance', window.location.pathname, loadTime);
         });
 
@@ -224,12 +224,12 @@
         window.addEventListener('DOMContentLoaded', function() {
             // 检查是否启用了gzip压缩
             const compressedSize = document.head.innerHTML.length;
-            console.log(`HTML Head Size: ${compressedSize} characters`);
+            // console.log(`HTML Head Size: ${compressedSize} characters`);
 
             // 跟踪字体加载状态
             if (document.fonts && document.fonts.ready) {
                 document.fonts.ready.then(() => {
-                    console.log('All fonts loaded');
+                    // console.log('All fonts loaded');
                     window.webPerformanceTracker.trackEvent('Fonts Loaded', 'Performance', window.location.pathname, 1);
                 });
             }

@@ -53,7 +53,7 @@ class KnowledgeFilter {
                 });
             });
 
-            console.log(`✅ 筛选器初始化完成，共 ${this.allArticles.length} 篇文章`);
+            // console.log(`✅ 筛选器初始化完成，共 ${this.allArticles.length} 篇文章`);
             return true;
 
         } catch (error) {

@@ -70,7 +70,7 @@ class KnowledgeStateManager {
     this.updateState = this.updateState.bind(this);
     this.getState = this.getState.bind(this);
 
-    console.log('🗃️ KnowledgeStateManager initialized');
+    // console.log('🗃️ KnowledgeStateManager initialized');
   }
 
   /**
@@ -95,12 +95,12 @@ class KnowledgeStateManager {
       this.notifySubscriber(subscriber, this.state);
     }
 
-    console.log(`📝 State subscriber added: ${subscriber.id}`);
+    // console.log(`📝 State subscriber added: ${subscriber.id}`);
 
     // 返回取消订阅函数
     return () => {
       this.subscribers.delete(subscriber.id);
-      console.log(`📝 State subscriber removed: ${subscriber.id}`);
+      // console.log(`📝 State subscriber removed: ${subscriber.id}`);
     };
   }
 
@@ -138,7 +138,7 @@ class KnowledgeStateManager {
       timestamp
     });
 
-    console.log('🗃️ State updated:', newUpdates);
+    // console.log('🗃️ State updated:', newUpdates);
 
     return this.state;
   }
@@ -176,7 +176,7 @@ class KnowledgeStateManager {
       this.eventBus.emit(EVENT_TYPES.FILTER_RESET, { timestamp: Date.now() });
     }
 
-    console.log('🗃️ State reset');
+    // console.log('🗃️ State reset');
   }
 
   /**
@@ -366,11 +366,11 @@ class KnowledgeStateManager {
    */
   debug() {
     console.group('🗃️ State Manager Debug Info');
-    console.log('Current State:', this.state);
-    console.log('Filter Hash:', this.calculateFilterHash());
-    console.log('Cache Valid:', this.isCacheValid());
-    console.log('Subscribers:', this.subscribers.size);
-    console.log('History:', this.getHistory(5));
+    // console.log('Current State:', this.state);
+    // console.log('Filter Hash:', this.calculateFilterHash());
+    // console.log('Cache Valid:', this.isCacheValid());
+    // console.log('Subscribers:', this.subscribers.size);
+    // console.log('History:', this.getHistory(5));
     console.groupEnd();
   }
 

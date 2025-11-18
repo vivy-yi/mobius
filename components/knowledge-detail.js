@@ -1271,7 +1271,7 @@ class KnowledgeDetail {
                 text: this.currentArticle.description,
                 url: window.location.href
             }).catch(err => {
-                console.log('分享失败:', err);
+                // console.log('分享失败:', err);
                 this.fallbackShare();
             });
         } else {

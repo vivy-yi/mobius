@@ -34,7 +34,7 @@ class FontOptimizationManager {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🎨 初始化字体优化管理器...');
+        // console.log('🎨 初始化字体优化管理器...');
 
         // 立即应用字体回退策略
         this.applyFontFallbacks();
@@ -49,7 +49,7 @@ class FontOptimizationManager {
         this.monitorFontLoading();
 
         this.isInitialized = true;
-        console.log('✅ 字体优化管理器初始化完成');
+        // console.log('✅ 字体优化管理器初始化完成');
     }
 
     /**
@@ -153,7 +153,7 @@ class FontOptimizationManager {
             });
         }
 
-        console.log('📋 应用字体回退策略');
+        // console.log('📋 应用字体回退策略');
     }
 
     /**
@@ -190,7 +190,7 @@ class FontOptimizationManager {
             }
         });
 
-        console.log('⚡ 预加载关键字体');
+        // console.log('⚡ 预加载关键字体');
     }
 
     /**
@@ -200,7 +200,7 @@ class FontOptimizationManager {
         return new Promise((resolve) => {
             // 检查是否已经加载了Font Awesome
             if (document.querySelector('link[href*="font-awesome"]')) {
-                console.log('📦 Font Awesome已加载，跳过重复加载');
+                // console.log('📦 Font Awesome已加载，跳过重复加载');
                 resolve();
                 return;
             }
@@ -212,7 +212,7 @@ class FontOptimizationManager {
                 link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
                 link.crossOrigin = 'anonymous';
                 link.onload = () => {
-                    console.log('✅ Font Awesome加载完成');
+                    // console.log('✅ Font Awesome加载完成');
                     this.fontsLoaded = true;
                     document.documentElement.classList.add('fonts-loaded');
                     resolve();
@@ -236,7 +236,7 @@ class FontOptimizationManager {
                 document.fonts.load('400 1em Inter'),
                 document.fonts.load('400 1em "Noto Sans SC"')
             ]).then(() => {
-                console.log('🎉 关键字体加载完成');
+                // console.log('🎉 关键字体加载完成');
                 this.fontsLoaded = true;
                 document.documentElement.classList.add('fonts-loaded');
 
@@ -314,7 +314,7 @@ class FontOptimizationManager {
             }
         });
 
-        console.log('🧹 字体使用分析:', Array.from(usedFonts));
+        // console.log('🧹 字体使用分析:', Array.from(usedFonts));
         return Array.from(usedFonts);
     }
 }

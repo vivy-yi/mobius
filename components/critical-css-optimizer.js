@@ -15,7 +15,7 @@ class CriticalCSSOptimizer {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🎯 初始化关键CSS优化器...');
+        // console.log('🎯 初始化关键CSS优化器...');
 
         // 内联关键CSS
         this.inlineCriticalCSS();
@@ -24,7 +24,7 @@ class CriticalCSSOptimizer {
         await this.loadNonCriticalCSS();
 
         this.isInitialized = true;
-        console.log('✅ 关键CSS优化器初始化完成');
+        // console.log('✅ 关键CSS优化器初始化完成');
     }
 
     /**
@@ -394,7 +394,7 @@ body {
         }
 
         criticalStyle.textContent = this.criticalCSS;
-        console.log('📋 关键CSS已内联');
+        // console.log('📋 关键CSS已内联');
     }
 
     /**
@@ -409,7 +409,7 @@ body {
             'components/knowledge-navigation.css'
         ];
 
-        console.log('📦 开始异步加载CSS文件...');
+        // console.log('📦 开始异步加载CSS文件...');
 
         cssFiles.forEach((cssFile, index) => {
             setTimeout(() => {
@@ -427,7 +427,7 @@ body {
             link.rel = 'stylesheet';
             link.href = href;
             link.onload = () => {
-                console.log(`✅ CSS文件加载完成: ${href}`);
+                // console.log(`✅ CSS文件加载完成: ${href}`);
                 resolve();
             };
             link.onerror = () => {

@@ -69,7 +69,7 @@ class FoldableDeviceDetector {
     init() {
         if (this.isMonitoring) return;
 
-        console.log('📱 初始化折叠屏设备检测器...');
+        // console.log('📱 初始化折叠屏设备检测器...');
 
         this.detectFoldableDevice();
         this.setupScreenMonitoring();
@@ -78,9 +78,9 @@ class FoldableDeviceDetector {
 
         if (this.deviceState.isFoldable) {
             this.startMonitoring();
-            console.log('✅ 检测到折叠屏设备，启动增强模式');
+            // console.log('✅ 检测到折叠屏设备，启动增强模式');
         } else {
-            console.log('ℹ️ 未检测到折叠屏设备，保持标准模式');
+            // console.log('ℹ️ 未检测到折叠屏设备，保持标准模式');
         }
     }
 
@@ -124,7 +124,7 @@ class FoldableDeviceDetector {
             const value = style.getPropertyValue(varName);
             if (value && value !== 'none' && value !== '0px') {
                 this.deviceState.isFoldable = true;
-                console.log(`检测到CSS环境变量: ${varName} = ${value}`);
+                // console.log(`检测到CSS环境变量: ${varName} = ${value}`);
             }
         });
 
@@ -147,18 +147,18 @@ class FoldableDeviceDetector {
         // 检测非常规比例 (可能的双屏设备)
         if (aspectRatio > 3 || aspectRatio < 0.33) {
             this.deviceState.isFoldable = true;
-            console.log('检测到非常规屏幕比例:', aspectRatio);
+            // console.log('检测到非常规屏幕比例:', aspectRatio);
         }
 
         // 检测大面积屏幕 (可能的可折叠设备)
         if (width > 2000 || height > 2000) {
             this.deviceState.isFoldable = true;
-            console.log('检测到大面积屏幕:', { width, height });
+            // console.log('检测到大面积屏幕:', { width, height });
         }
 
         // 检测高DPI设备
         if (devicePixelRatio > 3) {
-            console.log('检测到高DPI设备:', devicePixelRatio);
+            // console.log('检测到高DPI设备:', devicePixelRatio);
         }
     }
 
@@ -169,7 +169,7 @@ class FoldableDeviceDetector {
         // 检查Window Segments API (实验性)
         if ('getWindowSegments' in window) {
             this.deviceState.isFoldable = true;
-            console.log('支持Window Segments API');
+            // console.log('支持Window Segments API');
         }
 
         // 检查Screen Orientation API
@@ -192,7 +192,7 @@ class FoldableDeviceDetector {
                 const mq = window.matchMedia(query);
                 if (mq.matches) {
                     this.deviceState.isFoldable = true;
-                    console.log('匹配折叠屏媒体查询:', query);
+                    // console.log('匹配折叠屏媒体查询:', query);
                 }
             });
         }
@@ -216,7 +216,7 @@ class FoldableDeviceDetector {
             if (userAgent.includes(keyword)) {
                 this.deviceState.isFoldable = true;
                 this.deviceState.deviceType = keyword;
-                console.log('用户代理检测到折叠屏设备:', keyword);
+                // console.log('用户代理检测到折叠屏设备:', keyword);
             }
         });
     }
@@ -256,7 +256,7 @@ class FoldableDeviceDetector {
 
         this.deviceState.isFoldable = foldableScore >= 40;
 
-        console.log(`折叠屏评估得分: ${foldableScore}/100`, this.deviceState);
+        // console.log(`折叠屏评估得分: ${foldableScore}/100`, this.deviceState);
     }
 
     /**
@@ -526,7 +526,7 @@ class FoldableDeviceDetector {
         if (this.isMonitoring) return;
 
         this.isMonitoring = true;
-        console.log('📱 开始监控折叠屏设备状态...');
+        // console.log('📱 开始监控折叠屏设备状态...');
 
         // 启动实时监控
         this.monitoringInterval = setInterval(() => {
@@ -696,14 +696,14 @@ class FoldableDeviceDetector {
             }
         }
 
-        console.log(`应用布局模式: ${this.deviceState.layoutMode} (${currentLayoutClass})`);
+        // console.log(`应用布局模式: ${this.deviceState.layoutMode} (${currentLayoutClass})`);
     }
 
     /**
      * 处理屏幕变化
      */
     handleScreenChange() {
-        console.log('屏幕尺寸发生变化');
+        // console.log('屏幕尺寸发生变化');
         this.updateDeviceState();
     }
 
@@ -711,7 +711,7 @@ class FoldableDeviceDetector {
      * 处理方向变化
      */
     handleOrientationChange() {
-        console.log('屏幕方向发生变化:', screen.orientation.angle);
+        // console.log('屏幕方向发生变化:', screen.orientation.angle);
         this.updateDeviceState();
     }
 
@@ -719,22 +719,22 @@ class FoldableDeviceDetector {
      * 手势处理方法
      */
     handleSwipeLeft() {
-        console.log('检测到向左滑动');
+        // console.log('检测到向左滑动');
         this.triggerEvent('swipe-left');
     }
 
     handleSwipeRight() {
-        console.log('检测到向右滑动');
+        // console.log('检测到向右滑动');
         this.triggerEvent('swipe-right');
     }
 
     handleSwipeUp() {
-        console.log('检测到向上滑动');
+        // console.log('检测到向上滑动');
         this.triggerEvent('swipe-up');
     }
 
     handleSwipeDown() {
-        console.log('检测到向下滑动');
+        // console.log('检测到向下滑动');
         this.triggerEvent('swipe-down');
     }
 
@@ -742,7 +742,7 @@ class FoldableDeviceDetector {
      * 状态变化处理
      */
     handleStateChange(previousState, currentState) {
-        console.log('设备状态发生变化:', {
+        // console.log('设备状态发生变化:', {
             previous: previousState,
             current: currentState
         });
@@ -785,7 +785,7 @@ class FoldableDeviceDetector {
      * 双屏优化
      */
     optimizeForDualScreen() {
-        console.log('优化双屏显示');
+        // console.log('优化双屏显示');
 
         // 将主要内容分配到左屏
         const mainContent = document.querySelector('main, .main-content');
@@ -804,7 +804,7 @@ class FoldableDeviceDetector {
      * 笔记本模式优化
      */
     optimizeForLaptopMode() {
-        console.log('优化笔记本模式显示');
+        // console.log('优化笔记本模式显示');
 
         // 上屏显示主要内容
         const mainContent = document.querySelector('main, .main-content');
@@ -823,7 +823,7 @@ class FoldableDeviceDetector {
      * 书本模式优化
      */
     optimizeForBookMode() {
-        console.log('优化书本模式显示');
+        // console.log('优化书本模式显示');
 
         // 模拟书本翻页效果
         const content = document.querySelector('.content, article');
@@ -836,7 +836,7 @@ class FoldableDeviceDetector {
      * 帐篷模式优化
      */
     optimizeForTentMode() {
-        console.log('优化帐篷模式显示');
+        // console.log('优化帐篷模式显示');
 
         // 居中显示内容，适合展示
         const mainContent = document.querySelector('main, .main-content');
@@ -849,7 +849,7 @@ class FoldableDeviceDetector {
      * 单屏优化
      */
     optimizeForSingleScreen() {
-        console.log('优化单屏显示');
+        // console.log('优化单屏显示');
 
         // 移除所有多屏相关的类
         const multiScreenClasses = [
@@ -989,7 +989,7 @@ class FoldableDeviceDetector {
         }
 
         this.isMonitoring = false;
-        console.log('⏹️ 折叠屏设备监控已停止');
+        // console.log('⏹️ 折叠屏设备监控已停止');
     }
 
     /**
@@ -1004,7 +1004,7 @@ class FoldableDeviceDetector {
             style.remove();
         }
 
-        console.log('🗑️ 折叠屏设备检测器已销毁');
+        // console.log('🗑️ 折叠屏设备检测器已销毁');
     }
 }
 
@@ -1029,7 +1029,7 @@ window.mobiusFoldable = {
     startMonitoring: () => window.FoldableDeviceDetector.startMonitoring()
 };
 
-console.log('📱 折叠屏设备检测器已加载');
+// console.log('📱 折叠屏设备检测器已加载');
 
 // 页面加载完成后确保初始化
 if (document.readyState === 'loading') {

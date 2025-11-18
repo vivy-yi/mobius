@@ -40,7 +40,7 @@ class ArticleCardManager {
         // 数据加载将由外部调用，避免重复加载
         // this.loadArticlesFromJSON();
 
-        console.log('📄 ArticleCardManager initialized with event-driven architecture');
+        // console.log('📄 ArticleCardManager initialized with event-driven architecture');
     }
 
     /**
@@ -69,7 +69,7 @@ class ArticleCardManager {
       immediate: false // 不立即执行，等待数据加载完成
     });
 
-    console.log('🎧 Event listeners initialized for content rendering');
+    // console.log('🎧 Event listeners initialized for content rendering');
   }
 
   /**
@@ -578,7 +578,7 @@ class ArticleCardManager {
         // 添加动画效果
         this.addAnimationEffects(container);
 
-        console.log(`✅ 已生成分页内容: ${category}, 页面 ${currentPage}, ${paginationData.items.length} 篇文章`);
+        // console.log(`✅ 已生成分页内容: ${category}, 页面 ${currentPage}, ${paginationData.items.length} 篇文章`);
     }
 
     /**
@@ -624,21 +624,21 @@ class ArticleCardManager {
         container.insertAdjacentHTML('afterend', paginationControls);
 
         // 调试信息：确认分页控件已插入
-        console.log('📄 分页控件HTML:', paginationControls.substring(0, 100) + '...');
-        console.log('📄 容器ID:', containerId);
-        console.log('📄 容器的下一个兄弟元素:', container.nextElementSibling);
+        // console.log('📄 分页控件HTML:', paginationControls.substring(0, 100) + '...');
+        // console.log('📄 容器ID:', containerId);
+        // console.log('📄 容器的下一个兄弟元素:', container.nextElementSibling);
 
         // 添加动画效果
         this.addAnimationEffects(container);
 
-        console.log(`✅ 已生成分页内容: 全部内容, 页面 ${currentPage}, ${paginationData.items.length} 篇文章`);
+        // console.log(`✅ 已生成分页内容: 全部内容, 页面 ${currentPage}, ${paginationData.items.length} 篇文章`);
     }
 
     /**
      * 处理卡片点击事件
      */
     handleCardClick(article) {
-        console.log('🔍 卡片点击调试信息:', {
+        // console.log('🔍 卡片点击调试信息:', {
             id: article.id,
             url: article.url,
             title: article.title
@@ -646,7 +646,7 @@ class ArticleCardManager {
 
         // 优先使用URL直接跳转（最可靠）
         if (article.url) {
-            console.log('✅ 使用URL直接跳转:', article.url);
+            // console.log('✅ 使用URL直接跳转:', article.url);
             window.location.href = article.url;
             return;
         }
@@ -660,7 +660,7 @@ class ArticleCardManager {
 
         // 跳转到知识详情页面
         if (articleId) {
-            console.log('⚠️ 使用ID跳转（不推荐）:', articleId);
+            // console.log('⚠️ 使用ID跳转（不推荐）:', articleId);
             window.location.href = `./knowledge-detail.html?id=${encodeURIComponent(articleId)}`;
         } else {
             console.error('❌ 无法获取文章信息:', article);
@@ -849,7 +849,7 @@ class ArticleCardManager {
      * 从数据容器2生成文章网格
      */
     async generateArticleGridFromContainer(category, containerId) {
-        console.log(`🎯 从数据容器2生成${category}分类文章网格到${containerId}`);
+        // console.log(`🎯 从数据容器2生成${category}分类文章网格到${containerId}`);
 
         if (!this.hasFilteredData) {
             console.warn('⚠️ 数据容器2不存在，回退到常规方法');
@@ -868,7 +868,7 @@ class ArticleCardManager {
         // 从数据容器2获取分类数据
         const categoryArticles = this.filteredArticles[category] || [];
 
-        console.log(`📊 数据容器2中${category}分类有 ${categoryArticles.length} 篇文章`);
+        // console.log(`📊 数据容器2中${category}分类有 ${categoryArticles.length} 篇文章`);
 
         if (categoryArticles.length === 0) {
             const noResults = document.createElement('div');
@@ -887,7 +887,7 @@ class ArticleCardManager {
         });
 
         this.addAnimationEffects(container);
-        console.log(`✅ 已从数据容器2生成 ${categoryArticles.length} 篇${category}分类文章`);
+        // console.log(`✅ 已从数据容器2生成 ${categoryArticles.length} 篇${category}分类文章`);
     }
 
     /**
@@ -901,7 +901,7 @@ class ArticleCardManager {
      * 生成所有文章的网格
      */
     async generateAllArticlesGrid() {
-        console.log('🎯 生成所有文章网格到all-articles容器');
+        // console.log('🎯 生成所有文章网格到all-articles容器');
 
         const container = document.getElementById('all-articles');
         if (!container) {
@@ -944,7 +944,7 @@ class ArticleCardManager {
                     container.appendChild(element);
                 });
 
-                console.log(`✅ all-articles容器渲染完成，共 ${allArticles.length} 篇文章`);
+                // console.log(`✅ all-articles容器渲染完成，共 ${allArticles.length} 篇文章`);
             } else {
                 // 显示空状态
                 const emptyState = this.createElement('div', 'empty-state');
@@ -966,7 +966,7 @@ class ArticleCardManager {
      * 处理数据加载完成事件
      */
   handleDataLoaded(eventData) {
-    console.log('📚 数据加载完成:', eventData);
+    // console.log('📚 数据加载完成:', eventData);
     this.dataLoaded = true;
 
     // 触发初始渲染 - 显示所有文章
@@ -979,7 +979,7 @@ class ArticleCardManager {
      * 处理过滤变化事件 - 新的事件驱动架构
      */
   handleFilterChange(eventData) {
-    console.log('🔄 处理过滤变化:', eventData);
+    // console.log('🔄 处理过滤变化:', eventData);
 
     // 更新状态管理器中的过滤器
     switch (eventData.type) {
@@ -1007,10 +1007,10 @@ class ArticleCardManager {
      * 渲染方法 - 根据当前状态渲染内容
      */
   render(state) {
-    console.log('🎨 渲染内容:', state);
+    // console.log('🎨 渲染内容:', state);
 
     if (!this.dataLoaded) {
-      console.log('⏳ 数据未加载完成，跳过渲染');
+      // console.log('⏳ 数据未加载完成，跳过渲染');
       return;
     }
 
@@ -1034,7 +1034,7 @@ class ArticleCardManager {
       page: pagination.page
     });
 
-    console.log(`✅ 渲染完成: ${paginatedData.items.length} 篇文章到容器 ${targetContainer}`);
+    // console.log(`✅ 渲染完成: ${paginatedData.items.length} 篇文章到容器 ${targetContainer}`);
   }
 
     /**
@@ -1305,7 +1305,7 @@ class ArticleCardManager {
      * 设置数据容器2（导航栏筛选后的数据）
      */
     setFilteredData(categories, categoryData = null) {
-        console.log('🗂️ 设置数据容器2:', categories);
+        // console.log('🗂️ 设置数据容器2:', categories);
         this.filteredArticles = {};
         this.hasFilteredData = true;
 
@@ -1450,7 +1450,7 @@ class ArticleCardManager {
         // 更新类中的分页状态
         this.pagination = { ...paginationData };
 
-        console.log('📄 分页计算结果:', paginationData);
+        // console.log('📄 分页计算结果:', paginationData);
         return paginationData;
     }
 
@@ -1463,7 +1463,7 @@ class ArticleCardManager {
      */
     getCategoryPaginatedData(category, currentPage = 1, useContainer1 = false) {
         const allData = this.getCategoryDataSafely(category, useContainer1);
-        console.log(`📄 获取${category}分类分页数据，总数: ${allData.length}`);
+        // console.log(`📄 获取${category}分类分页数据，总数: ${allData.length}`);
 
         return this.calculatePagination(allData, currentPage);
     }
@@ -1490,7 +1490,7 @@ class ArticleCardManager {
             return scoreB - scoreA;
         });
 
-        console.log(`📄 获取所有分类分页数据，总数: ${allData.length}`);
+        // console.log(`📄 获取所有分类分页数据，总数: ${allData.length}`);
         return this.calculatePagination(allData, currentPage);
     }
 
@@ -1576,7 +1576,7 @@ class ArticleCardManager {
      * @param {boolean} useContainer1 - 是否使用数据容器1
      */
     goToPage(containerId, page, category = null, useContainer1 = true) {
-        console.log(`📄 跳转到页面: ${page}, 容器: ${containerId}, 分类: ${category}`);
+        // console.log(`📄 跳转到页面: ${page}, 容器: ${containerId}, 分类: ${category}`);
 
         // 错误处理：验证容器存在
         if (!document.getElementById(containerId)) {
@@ -1620,7 +1620,7 @@ class ArticleCardManager {
     removeExistingPaginationControls(containerId) {
         // 查找该容器相关的所有分页控件
         const existingControls = document.querySelectorAll(`.pagination-controls[data-container="${containerId}"]`);
-        console.log(`🧹 清理 ${existingControls.length} 个现有分页控件: ${containerId}`);
+        // console.log(`🧹 清理 ${existingControls.length} 个现有分页控件: ${containerId}`);
 
         existingControls.forEach(control => {
             control.remove();
@@ -1637,7 +1637,7 @@ class ArticleCardManager {
             this.currentPageStates = {};
         }
         this.currentPageStates[category] = page;
-        console.log(`📄 更新${category}分类分页状态: 第${page}页`);
+        // console.log(`📄 更新${category}分类分页状态: 第${page}页`);
     }
 
     /**
@@ -1646,7 +1646,7 @@ class ArticleCardManager {
      */
     setItemsPerPage(itemsPerPage) {
         this.pagination.itemsPerPage = itemsPerPage;
-        console.log(`📄 设置每页显示数量: ${itemsPerPage}`);
+        // console.log(`📄 设置每页显示数量: ${itemsPerPage}`);
 
         // 触发配置变化事件
         const configEvent = new CustomEvent('paginationConfigChanged', {
@@ -1664,7 +1664,7 @@ class ArticleCardManager {
      */
     resetPagination() {
         this.pagination.currentPage = 1;
-        console.log('📄 分页已重置到第一页');
+        // console.log('📄 分页已重置到第一页');
     }
 }
 

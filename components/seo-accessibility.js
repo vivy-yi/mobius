@@ -20,7 +20,7 @@ class SeoAccessibilityOptimizer {
     init() {
         if (this.isInitialized) return;
 
-        console.log('初始化SEO和可访问性优化器...');
+        // console.log('初始化SEO和可访问性优化器...');
 
         this.detectLanguage();
         this.addStructuredData();
@@ -33,7 +33,7 @@ class SeoAccessibilityOptimizer {
         this.addReadingTime();
 
         this.isInitialized = true;
-        console.log('SEO和可访问性优化器初始化完成');
+        // console.log('SEO和可访问性优化器初始化完成');
     }
 
     /**
@@ -79,7 +79,7 @@ class SeoAccessibilityOptimizer {
             this.insertStructuredData(organizationData);
         }
 
-        console.log('结构化数据已添加');
+        // console.log('结构化数据已添加');
     }
 
     /**

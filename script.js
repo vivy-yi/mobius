@@ -435,7 +435,7 @@ function initContactForm() {
         contactForm.reset();
 
         // In a real implementation, you would send this data to a server
-        console.log('Form submitted:', data);
+        // console.log('Form submitted:', data);
 
         // Example of sending to a server (commented out):
         /*
@@ -772,6 +772,6 @@ if (document.readyState === 'loading') {
 }
 
 // ===== Console branding =====
-console.log('%c🌉 Mobius Bridge - 中日企业无缝连接桥梁', 'font-size: 20px; font-weight: bold; color: #3b82f6;');
-console.log('%cConnecting opportunities between China and Japan', 'font-size: 14px; color: #dc2626;');
-console.log('%c🚀 Start your Japanese business journey with us!', 'font-size: 12px; color: #64748b;');
+// console.log('%c🌉 Mobius Bridge - 中日企业无缝连接桥梁', 'font-size: 20px; font-weight: bold; color: #3b82f6;');
+// console.log('%cConnecting opportunities between China and Japan', 'font-size: 14px; color: #dc2626;');
+// console.log('%c🚀 Start your Japanese business journey with us!', 'font-size: 12px; color: #64748b;');

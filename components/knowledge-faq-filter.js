@@ -18,7 +18,7 @@ class KnowledgeFAQFilter {
     init() {
         this.findFAQElements();
         this.bindEvents();
-        console.log('✅ 知识库FAQ过滤器初始化完成');
+        // console.log('✅ 知识库FAQ过滤器初始化完成');
     }
 
     /**
@@ -48,7 +48,7 @@ class KnowledgeFAQFilter {
             });
         });
 
-        console.log(`找到 ${this.filterControls.length} 个FAQ控制面板和 ${this.faqContainers.length} 个FAQ容器`);
+        // console.log(`找到 ${this.filterControls.length} 个FAQ控制面板和 ${this.faqContainers.length} 个FAQ容器`);
     }
 
     /**
@@ -108,7 +108,7 @@ class KnowledgeFAQFilter {
         this.activeFilter = filterType;
         this.applyFilter();
 
-        console.log(`FAQ筛选器: ${filterType}`);
+        // console.log(`FAQ筛选器: ${filterType}`);
     }
 
     /**
