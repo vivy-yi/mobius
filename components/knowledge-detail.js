@@ -18,7 +18,7 @@ class KnowledgeDetail {
      */
     getBaseUrl() {
         const path = window.location.pathname;
-        if (path.includes('/knowledge/')) {
+        if (path.includes('/data/knowledgeCard/')) {
             return '../';
         }
         return './';
@@ -162,42 +162,42 @@ class KnowledgeDetail {
                 id: 'business-registration-01',
                 title: '日本公司注册指南',
                 description: '详细介绍在日本注册公司的完整流程和法律要求',
-                url: '/knowledge/business-registration-01.html',
+                url: '/data/knowledgeCard/business-registration-01.html',
                 categoryName: '企业落地'
             },
             'business-registration': {
                 id: 'business-registration-01',
                 title: '日本公司注册指南',
                 description: '详细介绍在日本注册公司的完整流程和法律要求',
-                url: '/knowledge/business-registration-01.html',
+                url: '/data/knowledgeCard/business-registration-01.html',
                 categoryName: '企业落地'
             },
             'business-setupguide-01': {
                 id: 'business-setupguide-01',
                 title: '日本企业落地服务指南',
                 description: '一站式企业落地解决方案和服务流程',
-                url: '/knowledge/business-setupguide-01.html',
+                url: '/data/knowledgeCard/business-setupguide-01.html',
                 categoryName: '企业落地'
             },
             'business-setupguide': {
                 id: 'business-setupguide-01',
                 title: '日本企业落地服务指南',
                 description: '一站式企业落地解决方案和服务流程',
-                url: '/knowledge/business-setupguide-01.html',
+                url: '/data/knowledgeCard/business-setupguide-01.html',
                 categoryName: '企业落地'
             },
             'business-faq-01': {
                 id: 'business-faq-01',
                 title: '开店咨询常见问题',
                 description: '餐厅、美容院、贸易公司开店咨询',
-                url: '/knowledge/business-faq-01.html',
+                url: '/data/knowledgeCard/business-faq-01.html',
                 categoryName: '企业落地'
             },
             'business-faq': {
                 id: 'business-faq-01',
                 title: '开店咨询常见问题',
                 description: '餐厅、美容院、贸易公司开店咨询',
-                url: '/knowledge/business-faq-01.html',
+                url: '/data/knowledgeCard/business-faq-01.html',
                 categoryName: '企业落地'
             },
 
@@ -206,28 +206,28 @@ class KnowledgeDetail {
                 id: 'visa-guide-01',
                 title: '日本签证申请指南',
                 description: '经营管理签证和高级人才签证申请流程',
-                url: '/knowledge/visa-guide-01.html',
+                url: '/data/knowledgeCard/visa-guide-01.html',
                 categoryName: '签证政策'
             },
             'visa-guide': {
                 id: 'visa-guide-01',
                 title: '日本签证申请指南',
                 description: '经营管理签证和高级人才签证申请流程',
-                url: '/knowledge/visa-guide-01.html',
+                url: '/data/knowledgeCard/visa-guide-01.html',
                 categoryName: '签证政策'
             },
             'visa-faq-01': {
                 id: 'visa-faq-01',
                 title: '签证申请常见问题',
                 description: '签证申请、在留资格和续签问题解答',
-                url: '/knowledge/visa-faq-01.html',
+                url: '/data/knowledgeCard/visa-faq-01.html',
                 categoryName: '签证政策'
             },
             'visa-faq': {
                 id: 'visa-faq-01',
                 title: '签证申请常见问题',
                 description: '签证申请、在留资格和续签问题解答',
-                url: '/knowledge/visa-faq-01.html',
+                url: '/data/knowledgeCard/visa-faq-01.html',
                 categoryName: '签证政策'
             },
 
@@ -236,56 +236,56 @@ class KnowledgeDetail {
                 id: 'tax-article-01',
                 title: '税务筹划指南',
                 description: '日本税务制度和节税策略详解',
-                url: '/knowledge/tax-article-01.html',
+                url: '/data/knowledgeCard/tax-article-01.html',
                 categoryName: '税务筹划'
             },
             'tax-article': {
                 id: 'tax-article-01',
                 title: '税务筹划指南',
                 description: '日本税务制度和节税策略详解',
-                url: '/knowledge/tax-article-01.html',
+                url: '/data/knowledgeCard/tax-article-01.html',
                 categoryName: '税务筹划'
             },
             'tax-consumption-01': {
                 id: 'tax-consumption-01',
                 title: '消费税申报指南',
                 description: '消费税计算和申报流程详解',
-                url: '/knowledge/tax-consumption-01.html',
+                url: '/data/knowledgeCard/tax-consumption-01.html',
                 categoryName: '税务筹划'
             },
             'tax-consumption': {
                 id: 'tax-consumption-01',
                 title: '消费税申报指南',
                 description: '消费税计算和申报流程详解',
-                url: '/knowledge/tax-consumption-01.html',
+                url: '/data/knowledgeCard/tax-consumption-01.html',
                 categoryName: '税务筹划'
             },
             'tax-faq-02': {
                 id: 'tax-faq-02',
                 title: '税务申报常见问题',
                 description: '税务申报过程中的常见问题解答',
-                url: '/knowledge/tax-faq-02.html',
+                url: '/data/knowledgeCard/tax-faq-02.html',
                 categoryName: '税务筹划'
             },
             'tax-faq': {
                 id: 'tax-faq-02',
                 title: '税务申报常见问题',
                 description: '税务申报过程中的常见问题解答',
-                url: '/knowledge/tax-faq-02.html',
+                url: '/data/knowledgeCard/tax-faq-02.html',
                 categoryName: '税务筹划'
             },
             'tax-guide-02': {
                 id: 'tax-guide-02',
                 title: '节税实用指南',
                 description: '企业节税策略和实用技巧',
-                url: '/knowledge/tax-guide-02.html',
+                url: '/data/knowledgeCard/tax-guide-02.html',
                 categoryName: '税务筹划'
             },
             'tax-guide': {
                 id: 'tax-guide-02',
                 title: '节税实用指南',
                 description: '企业节税策略和实用技巧',
-                url: '/knowledge/tax-guide-02.html',
+                url: '/data/knowledgeCard/tax-guide-02.html',
                 categoryName: '税务筹划'
             },
 
@@ -294,49 +294,49 @@ class KnowledgeDetail {
                 id: 'legal-dataprotection-02',
                 title: '个人信息保护法指南',
                 description: '日本个人信息保护法合规要求',
-                url: '/knowledge/legal-dataprotection-02.html',
+                url: '/data/knowledgeCard/legal-dataprotection-02.html',
                 categoryName: '法务・合同'
             },
             'legal-dataprotection': {
                 id: 'legal-dataprotection-02',
                 title: '个人信息保护法指南',
                 description: '日本个人信息保护法合规要求',
-                url: '/knowledge/legal-dataprotection-02.html',
+                url: '/data/knowledgeCard/legal-dataprotection-02.html',
                 categoryName: '法务・合同'
             },
             'legal-faq-01': {
                 id: 'legal-faq-01',
                 title: '法务合同常见问题',
                 description: '合同审核和法律风险防范',
-                url: '/knowledge/legal-faq-01.html',
+                url: '/data/knowledgeCard/legal-faq-01.html',
                 categoryName: '法务・合同'
             },
             'legal-faq': {
                 id: 'legal-faq-01',
                 title: '法务合同常见问题',
                 description: '合同审核和法律风险防范',
-                url: '/knowledge/legal-faq-01.html',
+                url: '/data/knowledgeCard/legal-faq-01.html',
                 categoryName: '法务・合同'
             },
             'legal-labor-01': {
                 id: 'legal-labor-01',
                 title: '日本劳动法指南',
                 description: '雇佣关系和劳动合同法详解',
-                url: '/knowledge/legal-labor-01.html',
+                url: '/data/knowledgeCard/legal-labor-01.html',
                 categoryName: '法务・合同'
             },
             'legal-labor': {
                 id: 'legal-labor-01',
                 title: '日本劳动法指南',
                 description: '雇佣关系和劳动合同法详解',
-                url: '/knowledge/legal-labor-01.html',
+                url: '/data/knowledgeCard/legal-labor-01.html',
                 categoryName: '法务・合同'
             },
             'legal-faq-02': {
                 id: 'legal-faq-02',
                 title: '法务常见问题(第2部分)',
                 description: '更多法务合同相关问题解答',
-                url: '/knowledge/legal-faq-02.html',
+                url: '/data/knowledgeCard/legal-faq-02.html',
                 categoryName: '法务・合同'
             },
 
@@ -345,35 +345,35 @@ class KnowledgeDetail {
                 id: 'life-banking-01',
                 title: '日本银行开户指南',
                 description: '外国人银行账户开设流程和注意事项',
-                url: '/knowledge/life-banking-01.html',
+                url: '/data/knowledgeCard/life-banking-01.html',
                 categoryName: '生活支援'
             },
             'life-banking': {
                 id: 'life-banking-01',
                 title: '日本银行开户指南',
                 description: '外国人银行账户开设流程和注意事项',
-                url: '/knowledge/life-banking-01.html',
+                url: '/data/knowledgeCard/life-banking-01.html',
                 categoryName: '生活支援'
             },
             'life-housing-02': {
                 id: 'life-housing-02',
                 title: '日本住房租赁指南',
                 description: '外国人住房租赁流程和注意事项',
-                url: '/knowledge/life-housing-02.html',
+                url: '/data/knowledgeCard/life-housing-02.html',
                 categoryName: '生活支援'
             },
             'life-housing': {
                 id: 'life-housing-02',
                 title: '日本住房租赁指南',
                 description: '外国人住房租赁流程和注意事项',
-                url: '/knowledge/life-housing-02.html',
+                url: '/data/knowledgeCard/life-housing-02.html',
                 categoryName: '生活支援'
             },
             'life-faq-01': {
                 id: 'life-faq-01',
                 title: '生活常见问题(第1部分)',
                 description: '在日本生活的常见问题解答',
-                url: '/knowledge/life-faq-01.html',
+                url: '/data/knowledgeCard/life-faq-01.html',
                 categoryName: '生活支援'
             },
 
@@ -382,21 +382,21 @@ class KnowledgeDetail {
                 id: 'subsidy-guide-02',
                 title: '补助金申请指南',
                 description: '各类政府补助金申请流程详解',
-                url: '/knowledge/subsidy-guide-02.html',
+                url: '/data/knowledgeCard/subsidy-guide-02.html',
                 categoryName: '补助金申请'
             },
             'subsidy-guide': {
                 id: 'subsidy-guide-02',
                 title: '补助金申请指南',
                 description: '各类政府补助金申请流程详解',
-                url: '/knowledge/subsidy-guide-02.html',
+                url: '/data/knowledgeCard/subsidy-guide-02.html',
                 categoryName: '补助金申请'
             },
             'subsidy-greengift-01': {
                 id: 'subsidy-greengift-01',
                 title: '绿色环保补助金',
                 description: '环保相关补助金申请指南',
-                url: '/knowledge/subsidy-greengift-01.html',
+                url: '/data/knowledgeCard/subsidy-greengift-01.html',
                 categoryName: '补助金申请'
             },
 
@@ -405,7 +405,7 @@ class KnowledgeDetail {
                 id: 'business-registration-01',
                 title: '日本公司注册指南',
                 description: '详细介绍在日本注册公司的完整流程和法律要求',
-                url: '/knowledge/business-registration-01.html',
+                url: '/data/knowledgeCard/business-registration-01.html',
                 categoryName: '企业落地'
             }
         };
@@ -500,10 +500,10 @@ class KnowledgeDetail {
                 contentUrl = `${this.baseUrl}content/articles/${this.currentArticle.fileName}`;
             } else if (this.currentArticle.source === 'mapped') {
                 // 使用映射后的URL
-                contentUrl = `${this.baseUrl}knowledge/${this.currentArticle.id}.html`;
+                contentUrl = `${this.baseUrl}data/knowledgeCard/${this.currentArticle.id}.html`;
             } else {
                 // 默认使用文章ID
-                contentUrl = `${this.baseUrl}knowledge/${this.articleId}.html`;
+                contentUrl = `${this.baseUrl}data/knowledgeCard/${this.articleId}.html`;
             }
 
             const response = await fetch(contentUrl);
@@ -1341,7 +1341,7 @@ class KnowledgeDetail {
         successDiv.style.position = 'fixed';
         successDiv.style.top = '20px';
         successDiv.style.right = '20px';
-        successDiv.style.background = 'var(--article-accent-red, #dc2626)';
+        successDiv.style.background = 'var(--accent-red, #dc2626)';
         successDiv.style.color = 'white';
         successDiv.style.padding = '1rem 1.5rem';
         successDiv.style.borderRadius = '8px';

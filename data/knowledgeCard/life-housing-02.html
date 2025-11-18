@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在日住房解决方案 - Mobius 知识库</title>
+    <meta name="description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+    <meta name="keywords" content="日本租房,外国人住房,租房保证人, housing in Japan">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="在日住房解决方案 - Mobius 知识库">
+    <meta property="og:description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mobius-service.com/knowledge/life-article-housing">
+    <meta property="og:site_name" content="Mobius 知识库">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="在日住房解决方案 - Mobius 知识库">
+    <meta name="twitter:description" content="为在日外国人提供全面的住房指导，包括租房流程、注意事项、区域选择等。">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/favicon.ico">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../styles/css/components/knowledge-detail.css">
+
+    <!-- Critical CSS Inline -->
+    <style>
+        /* 防止页面闪烁的关键CSS */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .nav-breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .breadcrumb a {
+            color: var(--tech-blue, #3b82f6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb a:hover, .breadcrumb a:focus {
+            color: #1e40af;
+            text-decoration: underline;
+            outline: 2px solid var(--tech-blue, #3b82f6);
+            outline-offset: 2px;
+        }
+        .error-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--accent-red, #dc2626);
+        }
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-red, #dc2626);
+        }
+        .error-message h2 {
+            color: var(--accent-red, #dc2626);
+            margin-bottom: 1rem;
+        }
+        .error-message a {
+            color: var(--tech-blue, #3b82f6);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .error-message a:hover, .error-message a:focus {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将由动态加载 -->
+    <div id="navbar-container"></div>
+
+    <!-- 面包屑导航 -->
+    <nav class="nav-breadcrumb" role="navigation" aria-label="面包屑导航">
+        <div class="breadcrumb-container">
+            <div class="breadcrumb">
+                <a href="../index.html" aria-label="返回首页">
+                    <i class="fas fa-home"></i>
+                </a>
+                <span aria-hidden="true">/</span>
+                <a href="../knowledge.html" aria-label="知识库首页">知识库</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">生活支援</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 文章容器 -->
+    <main class="article-container" role="main">
+        <article id="article-content">
+            <!-- 文章内容将通过JavaScript动态加载 -->
+            <div class="loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span style="margin-left: 0.5rem;"><h2>💰 详细费用结构解析</h2>
+
+                        <h3>初期费用明细（以月租10万日元为例）</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>费用项目</th>
+                                    <th>日语</th>
+                                    <th>金额（日元）</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>礼金</strong></td>
+                                    <td>礼金（れいきん）</td>
+                                    <td>100,000</td>
+                                    <td>房东感谢金，不退还</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>押金</strong></td>
+                                    <td>敷金（しききん）</td>
+                                    <td>100,000</td>
+                                    <td>保证金，退房时扣除费用后退还</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>中介费</strong></td>
+                                    <td>仲介手数料</td>
+                                    <td>54,000</td>
+                                    <td>月租的0.5倍+消费税</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>保证费</strong></td>
+                                    <td>保証会社利用料</td>
+                                    <td>30,000-50,000</td>
+                                    <td>保证公司年费</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>保险费</strong></td>
+                                    <td>火災保険料</td>
+                                    <td>15,000-20,000</td>
+                                    <td>2年期间的火灾保险</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>前月房租</strong></td>
+                                    <td>前家賃</td>
+                                    <td>100,000</td>
+                                    <td>第一个月房租</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>换锁费</strong></td>
+                                    <td>鍵交換費用</td>
+                                    <td>16,500-22,000</td>
+                                    <td>安全考虑，更换门锁</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>清扫费</strong></td>
+                                    <td>清掃費用</td>
+                                    <td>20,000-30,000</td>
+                                    <td>退房时预付的清扫费</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>合计</strong></td>
+                                    <td>-</td>
+                                    <td><strong>435,500-486,000</strong></td>
+                                    <td>约为月租的4.3-4.8倍</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>月度固定费用</h3>
+                        <ul>
+                            <li><strong>房租</strong>：根据合同确定</li>
+                            <li><strong>管理费/公共费</strong>：2,000-8,000日元</li>
+                            <li><strong>保证公司月费</strong>：1,000-2,000日元</li>
+                            <li><strong>停车费</strong>：10,000-30,000日元（如需要）</li>
+                        </ul>
+
+                        <h3>每月变动费用</h3>
+                        <ul>
+                            <li><strong>电费</strong>：夏季5,000-10,000，冬季3,000-6,000日元</li>
+                            <li><strong>煤气费</strong>：3,000-8,000日元</li>
+                            <li><strong>水费</strong>：2,000-4,000日元</li>
+                            <li><strong>网络费</strong>：3,000-6,000日元</li>
+                            <li><strong>电视费</strong>：1,300-2,200日元（如需要）</li>
+                        </ul>
+
+                        <h2>🔍 找房渠道和方法</h2>
+
+                        <h3>在线找房平台</h3>
+                        <ul>
+                            <li><strong>SUUMO</strong>：最大找房网站，房源最全面</li>
+                            <li><strong>Homes</strong>：界面友好，筛选功能强大</li>
+                            <li><strong>athome</strong>：详细信息丰富，照片质量高</li>
+                            <li><strong>LIFULL HOME'S</strong>：覆盖面广，更新及时</li>
+                        </ul>
+
+                        <h3>传统找房方法</h3>
+                        <ul>
+                            <li><strong>不动产中介</strong>：实地服务，专业建议</li>
+                            <li><strong>房屋租赁杂志</strong>：信息集中，便于比较</li>
+                            <li><strong>朋友介绍</strong>：可靠信息，可能免中介费</li>
+                            <li><strong>直接找房东</strong>：可能节省中介费</li>
+                        </ul>
+
+                        <h3>外国人专用找房服务</h3>
+                        <ul>
+                            <li><strong>foreigners.jp</strong>：专门服务外国人</li>
+                            <li><strong>GaijinPot Housing</strong>：英语服务，外国人友好</li>
+                            <li><strong>City Realty</strong>：东京地区外国人租房专家</li>
+                            <li><strong>KEN Corporation</strong>：高端房源，多语言服务</li>
+                        </ul>
+
+                        <h2>📋 租房申请流程详解</h2>
+
+                        <h3>第一阶段：前期准备</h3>
+                        <ol>
+                            <li><strong>确定预算</strong>：房租控制在收入的25-30%</li>
+                            <li><strong>选择区域</strong>：考虑通勤时间、生活便利性</li>
+                            <li><strong>准备材料</strong>：
+                                <ul>
+                                    <li>在留卡复印件</li>
+                                    <li>护照复印件</li>
+                                    <li>收入证明（在职证明、学生证）</li>
+                                    <li>银行流水（3-6个月）</li>
+                                    <li>印章（认印）</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3>第二阶段：看房选择</h3>
+                        <ol>
+                            <li><strong>预约看房</strong>：提前1-2天预约</li>
+                            <li><strong>实地考察</strong>：
+                                <ul>
+                                    <li>房屋结构和面积</li>
+                                    <li>采光和通风情况</li>
+                                    <li>周边环境和生活设施</li>
+                                    <li>交通便利性</li>
+                                    <li>噪音情况</li>
+                                </ul>
+                            </li>
+                            <li><strong>询问细节</strong>：
+                                <ul>
+                                    <li>租金是否包含管理费</li>
+                                    <li>允许饲养宠物</li>
+                                    <li>可以放置钢琴等大型物品</li>
+                                    <li>可以入住外国人</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3>第三阶段：申请审查</h3>
+                        <ol>
+                            <li><strong>填写申请书</strong>：准确填写个人信息</li>
+                            <li><strong>提交材料</strong>：准备齐全的申请材料</li>
+                            <li><strong>保证人安排</strong>：
+                                <ul>
+                                    <li>找日本朋友或同事作保证人</li>
+                                    <li>使用保证公司服务</li>
+                                    <li>公司担保（企业派遣人员）</li>
+                                </ul>
+                            </li>
+                            <li><strong>等待审查结果</strong>：通常2-5个工作日</li>
+                        </ol>
+
+                        <h3>第四阶段：签约入住</h3>
+                        <ol>
+                            <li><strong>审查通过</strong>：通知签约时间和地点</li>
+                            <li><strong>支付初期费用</strong>：准备足够的现金或银行卡</li>
+                            <li><strong>签订合同</strong>：仔细阅读条款，确认理解</li>
+                            <li><strong>领取钥匙</strong>：确认房屋交接</li>
+                            <li><strong>入住登记</strong>：到区役所办理住民票变更</li>
+                        </ol>
+
+                        <h2>🛡️ 保证人制度和解决方案</h2>
+
+                        <h3>传统保证人要求</h3>
+                        <ul>
+                            <li><strong>日本国籍</strong>：大多数房东要求日本人保证人</li>
+                            <li><strong>稳定收入</strong>：年收入通常要求房租的4-5倍</li>
+                            <li><strong>良好信用</strong>：无不良信用记录</li>
+                            <li><strong>亲属关系</strong>：最好是直系亲属</li>
+                        </ul>
+
+                        <h3>保证公司服务对比</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>保证公司</th>
+                                    <th>年费</th>
+                                    <th>审查标准</th>
+                                    <th>外国人友好度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Global Trust</strong></td>
+                                    <td>月租的50-100%</td>
+                                    <td>宽松</td>
+                                    <td>⭐⭐⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Aflac</strong></td>
+                                    <td>月租的40-80%</td>
+                                    <td>中等</td>
+                                    <td>⭐⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CLEAF</strong></td>
+                                    <td>月租的30-60%</td>
+                                    <td>严格</td>
+                                    <td>⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日本保证机构</strong></td>
+                                    <td>月租的50%</td>
+                                    <td>中等</td>
+                                    <td>⭐⭐⭐⭐</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>其他解决方案</h3>
+                        <ul>
+                            <li><strong>企业担保</strong>：公司出面担保</li>
+                            <li><strong>高额押金</strong>：用额外押金替代保证人</li>
+                            <li><strong>外国人友好房东</strong>：直接联系接受外国人的房东</li>
+                            <li><strong>短期租赁转长期</strong>：先短租建立信任</li>
+                        </ul>
+
+                        <h2>⚠️ 外国人特别注意事项</h2>
+
+                        <h3>常见拒绝原因</h3>
+                        <ol>
+                            <li><strong>语言沟通障碍</strong>：无法理解契约内容</li>
+                            <li><strong>居住期限短</strong>：签证剩余时间不足</li>
+                            <li><strong>收入不稳定</strong>：自由职业或收入不固定</li>
+                            <li><strong>无保证人</strong>：找不到合适的保证人</li>
+                            <li><strong>文化差异</strong>：生活习惯不同</li>
+                        </ol>
+
+                        <h3>提高成功率的策略</h3>
+                        <ul>
+                            <li><strong>准备日语简历</strong>：展示语言能力</li>
+                            <li><strong>提供详细收入证明</strong>：展示经济能力</li>
+                            <li><strong>选择外国人经验丰富的中介</strong></li>
+                            <li><strong>准备推荐信</strong>：前房东或雇主推荐</li>
+                            <li><strong>提前学习日本租房礼仪</strong></li>
+                        </ul>
+
+                        <h3>租房礼仪和文化差异</h3>
+                        <ul>
+                            <li><strong>垃圾处理</strong>：严格按照规定时间和方式处理垃圾</li>
+                            <li><strong>噪音控制</strong>：晚上10点后保持安静</li>
+                            <li><strong>访客管理</strong>：避免频繁邀请朋友过夜</li>
+                            <li><strong>宠物饲养</strong>：必须事先获得许可</li>
+                            <li><strong>房屋维护</strong>：定期清洁，保持房屋整洁</li>
+                        </ul>
+
+                        <h2>🔧 租房纠纷处理</h2>
+
+                        <h3>常见纠纷类型</h3>
+                        <ul>
+                            <li><strong>押金返还问题</strong>：退房时押金扣除过多</li>
+                            <li><strong>设备维修责任</strong>：房东和租客责任划分不清</li>
+                            <li><strong>提前解约</strong>：违约金计算争议</li>
+                            <li><strong>噪音投诉</strong>：邻里关系问题</li>
+                        </ul>
+
+                        <h3>纠纷解决途径</h3>
+                        <ol>
+                            <li><strong>直接协商</strong>：首先与房东或中介沟通</li>
+                            <li><strong>第三方调解</strong>：寻求民间调解机构帮助</li>
+                            <li><strong>行政指导</strong>：向当地住宅保证机构投诉</li>
+                            <li><strong>法律诉讼</strong>：最后手段，咨询律师</li>
+                        </ol>
+
+                        <h2>💡 节省租房费用技巧</h2>
+
+                        <h3>初期费用节省</h3>
+                        <ul>
+                            <li><strong>寻找0礼金房源</strong>：礼金ゼロ物件</li>
+                            <li><strong>敷金免除房源</strong>：敷金ゼロ物件</li>
+                            <li><strong>仲介费减免</strong>：寻找中介费0或半价的房源</li>
+                            <li><strong>保证费优惠</strong>：比较不同保证公司费用</li>
+                            <li><strong>谈判技巧</strong>：适当的谈判可能获得优惠</li>
+                        </ul>
+
+                        <h3>月度费用优化</h3>
+                        <ul>
+                            <li><strong>选择公共设施齐全的区域</strong>：减少交通成本</li>
+                            <li><strong>节能房屋</strong>：节省水电费用</li>
+                            <li><strong>合理使用空调</strong>：控制电费支出</li>
+                            <li><strong>网络服务选择</strong>：比较不同运营商价格</li>
+                        </ul>
+
+                        <div class="info-box">
+                            <h3>💡 专家建议</h3>
+                            <p>作为在日外国人租房，最重要的是充分准备和耐心。建议提前3-6个月开始找房，准备所有必要的文件，选择有外国人服务经验的中介公司。初期费用虽然较高，但可以通过寻找优惠房源来降低成本。记住，良好的沟通和遵守日本租房文化是成功租房的关键。</p>
+                        </div></span>
+            </div>
+        </article>
+    </main>
+
+    <!-- 页脚将由动态加载 -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="../components/components.js" defer></script>
+    <script src="../components/knowledge-detail.js" defer></script>
+
+    <!-- 文章特定脚本 -->
+    <script>
+        // 安全的DOM操作工具函数
+        function safeCreateElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
+
+        // 安全地设置元素内容
+        function safeSetContent(element, content) {
+            // 清空现有内容
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+
+            if (typeof content === 'string') {
+                element.textContent = content;
+            } else if (content instanceof Node) {
+                element.appendChild(content);
+            }
+        }
+
+        // 错误处理 - 使用安全的DOM操作方法
+        window.addEventListener('error', function(e) {
+            console.error('文章页面加载错误:', e.error);
+            const articleContent = document.getElementById('article-content');
+            if (articleContent) {
+                // 清空现有内容
+                while (articleContent.firstChild) {
+                    articleContent.removeChild(articleContent.firstChild);
+                }
+
+                // 创建错误消息容器
+                const errorDiv = safeCreateElement('div', 'error-message');
+                errorDiv.setAttribute('role', 'alert');
+
+                // 创建图标
+                const icon = safeCreateElement('i', 'fas fa-exclamation-triangle');
+                icon.setAttribute('aria-hidden', 'true');
+                errorDiv.appendChild(icon);
+
+                // 创建标题
+                const title = safeCreateElement('h2', '', '文章加载失败');
+                errorDiv.appendChild(title);
+
+                // 创建描述段落
+                const paragraph = safeCreateElement('p', '', '抱歉，文章内容加载失败。请尝试刷新页面或');
+
+                // 创建链接
+                const link = safeCreateElement('a', '', '返回知识库首页');
+                link.href = '../knowledge.html';
+                link.setAttribute('aria-label', '返回知识库首页');
+
+                paragraph.appendChild(link);
+                errorDiv.appendChild(paragraph);
+
+                articleContent.appendChild(errorDiv);
+            }
+        });
+
+        // 页面性能监控
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`文章页面加载时间: ${loadTime}ms`);
+            }
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            // ESC键返回知识库
+            if (e.key === 'Escape') {
+                window.location.href = '../knowledge.html';
+            }
+        });
+    </script>
+</body>
+</html>

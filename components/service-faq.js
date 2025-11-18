@@ -489,7 +489,7 @@ class ServiceFAQ {
         if (show && !messageElement) {
             messageElement = this.createElement('div', 'no-results-message');
             messageElement.innerHTML = `
-                <div style="text-align: center; padding: 60px 20px; color: #6b7280;">
+                <div style="text-align: center; padding: 60px 20px; color: var(--light-text, #6b7280);">
                     <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
                     <h3 style="font-size: 1.5rem; margin-bottom: 10px;">未找到相关问题</h3>
                     <p>尝试调整搜索关键词或筛选条件</p>
@@ -513,7 +513,7 @@ class ServiceFAQ {
         }
 
         const errorDiv = this.createElement('div');
-        errorDiv.style.cssText = 'text-align: center; padding: 60px 20px; color: #dc2626;';
+        errorDiv.style.cssText = 'text-align: center; padding: 60px 20px; color: var(--accent-red, #dc2626);';
         errorDiv.innerHTML = `
             <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
             <h3 style="font-size: 1.5rem; margin-bottom: 10px;">加载失败</h3>
@@ -538,7 +538,7 @@ if (!document.querySelector('#faq-highlight-styles')) {
                 transform: scale(1);
             }
             50% {
-                background: #fef3c7;
+                background: var(--warning-yellow-light, #fef3c7);
                 transform: scale(1.02);
             }
         }

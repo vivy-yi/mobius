@@ -46,7 +46,7 @@ class ComponentManager {
         nav.id = 'navbar';
 
         const container = document.createElement('div');
-        container.className = 'container';
+        container.className = 'container nav-container';
 
         // Logo部分
         const brand = document.createElement('div');
@@ -87,6 +87,7 @@ class ComponentManager {
         return nav;
     }
 
+    
     /**
      * 生成导航菜单项
      */
@@ -179,7 +180,7 @@ class ComponentManager {
         footer.className = 'footer';
 
         const container = document.createElement('div');
-        container.className = 'container';
+        container.className = 'container nav-container';
 
         // 创建footer内容
         const footerContent = document.createElement('div');
@@ -309,7 +310,7 @@ class ComponentManager {
      */
     createFeaturesGrid(baseUrl = this.getBaseUrl()) {
         const featuresContainer = document.createElement('div');
-        featuresContainer.className = 'features-grid';
+        featuresContainer.className = 'features-grid features-grid-container';
         featuresContainer.innerHTML = this.createFeaturesGridContent(baseUrl);
         return featuresContainer;
     }

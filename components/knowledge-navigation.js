@@ -387,7 +387,7 @@ class KnowledgeNavigation {
         }
 
         const icon = this.createElement('div', 'nav-subcategory-icon');
-        icon.style.color = '#64748b';
+        icon.style.color = 'var(--text-hint, #64748b)';
         icon.appendChild(this.createIcon(subcategory.icon));
 
         const info = this.createElement('div', 'nav-subcategory-info');
@@ -914,7 +914,7 @@ if (!document.querySelector('#knowledge-nav-drawer-styles')) {
 
         /* 确保在移动端的知识库文章内容不重叠 */
         @media (max-width: 768px) {
-            .zhihu-article-wrapper {
+            .mobius-article-wrapper {
                 margin-left: 0 !important;
                 padding: 20px !important;
             }

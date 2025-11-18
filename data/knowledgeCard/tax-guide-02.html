@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>税务申报完整指南 - Mobius 知识库</title>
+    <meta name="description" content="为外国企业主提供详细的日本税务申报指导，包括时间节点、所需材料等。">
+    <meta name="keywords" content="税务申报,法人税,确定申告,税务顾问">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="税务申报完整指南 - Mobius 知识库">
+    <meta property="og:description" content="为外国企业主提供详细的日本税务申报指导，包括时间节点、所需材料等。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mobius-service.com/knowledge/tax-article-declaration-guide">
+    <meta property="og:site_name" content="Mobius 知识库">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="税务申报完整指南 - Mobius 知识库">
+    <meta name="twitter:description" content="为外国企业主提供详细的日本税务申报指导，包括时间节点、所需材料等。">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/favicon.ico">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../styles/css/components/knowledge-detail.css">
+
+    <!-- Critical CSS Inline -->
+    <style>
+        /* 防止页面闪烁的关键CSS */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: 100vh;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .nav-breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .breadcrumb a {
+            color: var(--tech-blue, #3b82f6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb a:hover, .breadcrumb a:focus {
+            color: #1e40af;
+            text-decoration: underline;
+            outline: 2px solid var(--tech-blue, #3b82f6);
+            outline-offset: 2px;
+        }
+        .error-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--accent-red, #dc2626);
+        }
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-red, #dc2626);
+        }
+        .error-message h2 {
+            color: var(--accent-red, #dc2626);
+            margin-bottom: 1rem;
+        }
+        .error-message a {
+            color: var(--tech-blue, #3b82f6);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .error-message a:hover, .error-message a:focus {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将由动态加载 -->
+    <div id="navbar-container"></div>
+
+    <!-- 面包屑导航 -->
+    <nav class="nav-breadcrumb" role="navigation" aria-label="面包屑导航">
+        <div class="breadcrumb-container">
+            <div class="breadcrumb">
+                <a href="../index.html" aria-label="返回首页">
+                    <i class="fas fa-home"></i>
+                </a>
+                <span aria-hidden="true">/</span>
+                <a href="../knowledge.html" aria-label="知识库首页">知识库</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">税务筹划</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 文章容器 -->
+    <main class="article-container" role="main">
+        <article id="article-content">
+            <!-- 文章内容将通过JavaScript动态加载 -->
+            <div class="loading" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span style="margin-left: 0.5rem;"><div class="container">
+        <article class="mobius-article-wrapper">
+            <header class="mobius-article-header">
+            <div class="mobius-author-info">
+                <div class="mobius-author-avatar">M</div>
+                <div class="mobius-author-details">
+                    <div class="mobius-author-name">Mobius专业团队</div>
+                    <div class="mobius-article-meta">
+                        <span class="mobius-article-date">2024年1月25日</span>
+                        <span class="mobius-article-reading">18分钟阅读</span>
+                    </div>
+                </div>
+            </div>
+                <h1 class="mobius-article-title">2024年日本税务申报指南</h1>
+                <div class="mobius-article-excerpt">
+                    <p>详细解析2024年日本法人税、消费税、源泉税等各类税务申报流程、时间节点和注意事项。特别针对外国企业经营者的税务需求，提供完整的申报策略和实务操作指导。</p>
+                </div>
+            </header>
+
+            <div class="article-content">
+                <div class="content-wrapper">
+
+                        ## 📋 目录
+
+                        - [税务申报概览](#税务申报概览)
+                        - [法人税申报详解](#法人税申报详解)
+                        - [消费税申报详解](#消费税申报详解)
+                        - [源泉征收税详解](#源泉征收税详解)
+                        - [2024年重要税制变更](#2024年重要税制变更)
+                        - [外国人经营者特别注意事项](#外国人经营者特别注意事项)
+                        - [税务筹划优化建议](#税务筹划优化建议)
+                        - [常见错误与避坑指南](#常见错误与避坑指南)
+                        - [专业服务支持](#专业服务支持)
+
+                        ## 🔍 税务申报概览
+
+                        ### 主要税种及申报期限
+
+                        | 税种 | 申报期限 | 主要对象 | 2024年税率 |
+                        |------|----------|----------|------------|
+                        | **法人税** | 事业年度结束后2个月内 | 法人企业 | 15.0%-23.2% |
+                        | **法人住民税** | 同法人税 | 法人企业 | 0.7%-4.0% |
+                        | **法人事业税** | 同法人税 | 法人企业 | 3.4%-7.2% |
+                        | **消费税** | 个人：3月15日<br>法人：事业年度结束后2个月 | 课税事業者 | 10%（7.8%+2.2%） |
+                        | **源泉所得税** | 支付月的翌月10日 | 给与支付者 | 10.21%-23.48% |
+
+                        ### 2024年申报时间表
+
+                        ```mermaid
+                        gantt
+                            title 2024年主要税务申报时间表
+                            dateFormat  YYYY-MM-DD
+                            section 个人申报
+                            消费税确定申报    :active, 2024-03-15, 1d
+                            所得税确定申报    :2024-03-15, 1d
+                            复兴特别所得税    :2024-03-15, 1d
+
+                            section 法人申报
+                            3月決算法人申告   :2024-05-31, 1d
+                            源泉税納付       :monthly, 2024-01-10, 12d
+
+                            section その他
+                            固定资产税       :2024-04-01, 1d
+                            印纸税          :2024-04-01, 1d
+                        ```
+
+                        ## 💼 法人税申报详解
+
+                        ### 法人税率结构（2024年）
+
+                        ```javascript
+                        // 2024年法人税率计算
+                        function calculateCorporateTax(income) {
+                            let taxRate = 0;
+
+                            if (income <= 200万日元) {
+                                taxRate = 15.0%;  // 轻课税率
+                            } else if (income <= 800万日元) {
+                                // 复数税率适用
+                                const baseTax = 200万 * 15.0%;
+                                const additionalTax = (income - 200万) * 19.59%;
+                                taxRate = (baseTax + additionalTax) / income;
+                            } else {
+                                taxRate = 23.2%;   // 标准税率
+                            }
+
+                            return taxRate;
+                        }
+                        ```
+
+                        ### 申报必要文件清单
+
+                        #### 📄 基础申报文件
+                        - **法人税确定申告书（第一表、第二表）**
+                        - **所得の金額の計算に関する明細書**
+                        - **同族会社等の判定に関する明細書**
+                        - **所得の金額に関する明細書（別表一）**
+                        - **租税公課の納付状況等に関する明細書（別表二）**
+
+                        #### 📊 财务相关文件
+                        - **貸借対照表（B/S）**
+                        - **損益計算書（P/L）**
+                        - **勘定科目内訳書**
+                        - **棚卸資産評価額明細書**
+                        - **減価償却資産明細書**
+
+                        #### 🔍 特别文件
+                        - **税務申告への関与に関する明細書**（税理士委托时）
+                        - **外国子会社合算税制に関する明細書**（有海外子公司时）
+                        - **欠損金の繰越控除に関する明細書**（有欠损金时）
+
+                        ### 申报流程详解
+
+                        #### 步骤1：财务数据整理
+                        ```python
+                        # 财务整理检查清单
+                        def prepare_financial_data():
+                            checklist = [
+                                "确认银行账户余额与账面一致",
+                                "核对应收应付账款",
+                                "确认固定资产台账",
+                                "检查库存盘点结果",
+                                "验证费用凭证完整性",
+                                "确认关联交易记录",
+                                "检查外汇差损益计算"
+                            ]
+                            return checklist
+                        ```
+
+                        #### 步骤2：税务调整计算
+                        主要调整项目包括：
+
+                        | 项目 | 会计处理 | 税务处理 | 调整额 |
+                        |------|----------|----------|--------|
+                        | 交際費 | 全额费用 | 800万日元×65% | 差额加算 |
+                        | 寄附金 | 条件性费用 | 专门规定 | 差额加算 |
+                        | 減価償却 | 任意方法 | 定率法/定額法 | 差额调整 |
+                        | 貸倒引当金 | 发生主义 | 基准限度额 | 差额调整 |
+
+                        #### 步骤3：申报书填写要点
+
+                        **重要填写注意事项：**
+                        1. **法人番号**：确保准确无误
+                        2. **事业年度**：正确标注起止日期
+                        3. **住所・所在地**：登记本店地址
+                        4. **業種**：使用日本标准产业分类
+                        5. **資本金等の額**：登记时的资本金额
+
+                        ## 💰 消费税申报详解
+
+                        ### 消费税率结构（2024年）
+
+                        ```html
+                        <table class="tax-rate-table">
+                            <thead>
+                                <tr>
+                                    <th>品目</th>
+                                    <th>税率</th>
+                                    <th>内訳</th>
+                                    <th>適用例</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>一般商品・服务</td>
+                                    <td>10%</td>
+                                    <td>7.8% + 2.2%</td>
+                                    <td>餐饮、零售、服务等</td>
+                                </tr>
+                                <tr>
+                                    <td>食品・饮料</td>
+                                    <td>8%</td>
+                                    <td>6.24% + 1.76%</td>
+                                    <td>超市食品、外卖等</td>
+                                </tr>
+                                <tr>
+                                    <td>报纸发行</td>
+                                    <td>8%</td>
+                                    <td>6.24% + 1.76%</td>
+                                    <td>定期报纸订购</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        ```
+
+                        ### 课税事業者判定标准
+
+                        ```javascript
+                        // 消费税课税事業者判定フローチャート
+                        function checkTaxableEntity(baseYearSales, previousYears) {
+                            // 基準期間（2年前）の売上高
+                            if (baseYearSales > 1000万) {
+                                return "課税事業者（原則課税）";
+                            }
+
+                            // 特定期間（前年の1月～6月）の判定
+                            if (previousYears.specialPeriod > 1000万) {
+                                return "課税事業者（原則課税）";
+                            }
+
+                            // 相続・合併等の場合
+                            if (previousYears.specialConditions) {
+                                return "特例判定要";
+                            }
+
+                            return "免税事業者";
+                        }
+                        ```
+
+                        ### 申告方式选择
+
+                        #### 原则课税方式 vs 简易课税方式
+
+                        | 比较项目 | 原则课税方式 | 简易课税方式 |
+                        |----------|--------------|--------------|
+                        | **适用条件** | 无限制 | 基準期间売上≤5億日元 |
+                        | **计算方法** | 实际进项税额抵扣 | 事业区分别みなし进项税率 |
+                        | **优势** | 精确反映税负担 | 计算简单，事务成本低 |
+                        | **劣势** | 账簿保管义务严格 | みなし进项税率可能不利 |
+                        | **推荐对象** | 进项税比例高的事业 | 贩売费率低的事业 |
+
+                        #### 事业区分别简易课税みなし进项税率
+
+                        | 事业区分 | 内容 | みなし进项税率 |
+                        |----------|------|----------------|
+                        | 第一種 | 卸売业 | 90% |
+| 第二種 | 小売业 | 80% |
+| 第三種 | 制造业 | 70% |
+| 第四種 | 饮食店业 | 60% |
+| 第五種 | 金融、保险业 | 50% |
+| 第六種 | 服务业 | 50% |
+
+                        ### 消费税申告书填写要点
+
+                        **主な申告書類：**
+                        - **消費税及び地方消費税の確定申告書**
+                        - **課税売上割合等に関する明細書**
+                        - **仕入控除税額に関する明細書**（原則課税）
+                        - **特定課税仕入に関する明細書**（原則課税）
+
+                        **重要チェックポイント：**
+                        1. **インボイス制度対応**：2023年10月1日より適用
+                        2. **適格請求書の保管**：必要記載事项の完全性
+                        3. **課税期間の特例**：任意選択の適否確認
+                        4. **中間申告の要否**：前年実績による判定
+
+                        ## 💸 源泉征收税详解
+
+                        ### 主要源泉征收対象与税率
+
+                        ```html
+                        <div class="withholding-tax-rates">
+                            <h4>給与所得の源泉税率（2024年）</h4>
+                            <table class="rate-table">
+                                <thead>
+                                    <tr>
+                                        <th>月额給与</th>
+                                        <th>甲欄税率</th>
+                                        <th>乙欄税率</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>～88,000円</td><td>0.0%</td><td>3.063%</td></tr>
+                                    <tr><td>88,001～100,000円</td><td>2.055%</td><td>4.063%</td></tr>
+                                    <tr><td>100,001～150,000円</td><td>3.125%</td><td>5.063%</td></tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        ```
+
+                        ### 報酬・料金の源泉徴収税率（2024年）
+
+                        | 支払対象 | 税率 | 主な例 |
+                        |----------|------|--------|
+                        | **原稿料・デザイン料** | 10.21% | ライター、デザイナー |
+                        | **弁護士・税理士報酬** | 10.21% | 法务、税务咨询 |
+| **外交員报酬** | 10.21% | 销售代理 |
+| | **演艺人员报酬** | 10.21% | 演员、音乐家 |
+| | **プロフェッショナル** | 10.21% | 讲师、顾问 |
+| | **退职所得** | 10.21%～23.48% | 根据退职所得控除额 |
+
+### 源泉征收事务流程
+
+```mermaid
+flowchart TD
+    A[支払明細作成] --> B[源泉税計算]
+    B --> C[税额徴収]
+    C --> D[支払調书作成]
+    D --> E[法定調書合計表]
+    E --> F[税務署提出]
+    F --> G[税金納付]
+
+    G --> H{納付期限}
+    H --> I[通常：翌月10日]
+    H --> J[特例：年2回納付]
+```
+
+## 🔄 2024年重要税制变更
+
+### 消费税インボイス制度
+
+**重要变更点：**
+- **適格請求書発行事業者**：登録申告が必要
+- **請求書要件の強化**：登録番号、適用税率等の明記
+- **免税事業者への影響**：インボイス発行不可
+
+**対応方針：**
+```javascript
+// インボイス制度対応チェックリスト
+const invoiceChecklist = {
+    registration: "適格請求書発行事業者の登録申告",
+    systems: "請求書システムの改修対応",
+    training: "経理担当者のインボイス研修",
+    suppliers: "取引先登録番号の確認",
+    recordkeeping: "インボイス保管体制の整備"
+};
+```
+
+### 法人税関連変更
+
+**主要変更点：**
+- **賃上げ促進税制**：賃上げ要件の拡充
+- **デジタル化投資促進税制**：税控除割合の引上げ
+- **カーボンニュートラル推進税制**：新設された措置
+- **中小企業経営強化税制**：対象設備の拡大
+
+### 国際税制の変更
+
+**重要ポイント：**
+- **外国子会社合算税制（CFCルール）**：適用范围拡大
+- **移転価格税制**：文書化要件の強化
+- **税務条約ネットワーク**：新規締結・改正の動向
+- **BEPSプロジェクト対応**：国際的な税務コンプライアンス強化
+
+## 🌏 外国人经营者特别注意事项
+
+### 税務上の留意点
+
+#### 1. **永住者・非永住者の判定**
+
+```html
+<table class="tax-residence-status">
+    <thead>
+        <tr>
+            <th>課税地位</th>
+            <th>判定基準</th>
+            <th>課税所得範囲</th>
+            <th>主要留意点</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>永住者</td>
+            <td>日本に住所がある<br>または現在まで1年以上</td>
+            <td>全世界所得</td>
+            <td>海外資産の申告義務</td>
+        </tr>
+        <tr>
+            <td>非永住者</td>
+            <td>日本に住所があるが<br>永住意図がない</td>
+            <td>国内所得 +<br>国外源泉所得で国内支払分</td>
+            <td>国内外所得区分の正確性</td>
+        </tr>
+        <tr>
+            <td>非居住者</td>
+            <td>日本に住所がない<br>かつ1年以上滞在していない</td>
+            <td>国内源泉所得のみ</td>
+            <td>源泉徴収義務の確認</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+#### 2. **出国税（タックス・エグジット税）**
+
+**適用要件：**
+- 日本国外に移住する個人
+- 保有資産価額1億円超
+- 課税資産の評価と申告義務
+
+**対象資産：**
+```python
+# 出国税対象資産リスト
+exit_tax_assets = [
+    "有価証券（株式・債券等）",
+    "未決済デリバティブ契約",
+    "信託受益権",
+    "匿名組合出資持分",
+    "特定資産（不動産等）"
+]
+```
+
+#### 3. **国外財産調書制度**
+
+**提出義務：**
+- 12月31日時点で国外資産価額5000万円超
+- 翌年3月15日までに提出
+- 非提出・虚偽記載の罰則あり
+
+#### 4. **海外送金に関する規制**
+
+**主要規制：**
+- **外為法**：一定額以上の報告義務
+- **犯収法（犯罪収益移転防止法）**：本人確認義務
+- **海外送金理由**：合理的な事業目的の説明
+
+### 言語と文化の障壁対応
+
+#### **税務申告書の言語対応**
+- **申告書類**：原則日本語のみ（翻訳不可）
+- **添付書類**：外国語の場合は翻訳文必要
+- **税務署対応**：英語対応可能な税務署は限定的
+
+#### **税理士选任的重要性**
+
+```html
+<div class="tax-advisor-benefits">
+    <h4>外国人経営者のための税理士の価値</h4>
+    <ul>
+        <li>🏦 <strong>言語サポート</strong>：多言語対応可能な税理士選定</li>
+        <li>🌐 <strong>国際税務専門</strong>：海外資産・移転価格対応</li>
+        <li>📊 <strong>帳簿作成支援</strong>：日本の会計基準に基づく作成</li>
+        <li>📋 <strong>申告代理</strong>：税務署との代理交渉・対応</li>
+        <li>🔄 <strong>タックスプランニング</strong>：最適な税務戦略の立案</li>
+        <li>🎯 <strong>実務指導</strong>：経理実務の日本式対応</li>
+    </ul>
+</div>
+```
+
+## 📈 税务筹划优化建议
+
+### 中小企业节税策略
+
+#### 1. **経費計上の最適化**
+
+**主要経費項目と節税ポイント：**
+
+| 経費項目 | 節税活用方法 | 注意点 |
+|----------|--------------|--------|
+| **接待交際費** | 800万円×65%まで損金算入 | 使途目的の明確化 |
+| **広告宣伝費** | 全額損金算入可能 | 広告宣伝性の立証 |
+| **福利厚生費** | 一定条件下で全額損金 | 従業員平等性の確保 |
+| **研究開発費** | 特別税控除の適用 | R&D要件の充足 |
+| **役員報酬** | 過大と判断されない設定 | 同業他社との比較 |
+
+#### 2. **減価償却の戦略的活用**
+
+```javascript
+// 減価償却方法選択シミュレーション
+function simulateDepreciation() {
+    const methods = {
+        '定額法': {
+            '特徴': '毎期均等償却',
+            '適用': '安定した利益の企業',
+            'メリット': '節税効果の予測容易'
+        },
+        '定率法': {
+            '特徴': '初期多め償却',
+            '適用': '初期に大きな節税効果',
+            'メリット': 'キャッシュフロー改善'
+        }
+    };
+
+    return methods;
+}
+```
+
+#### 3. **税控除の積極活用**
+
+**主要税控除制度：**
+
+```html
+<div class="tax-deduction-list">
+    <h4>積極活用すべき税控除</h4>
+    <ul>
+        <li><strong>中小企業経営強化税制</strong><br>
+        ・設備投資額の7%または即時償却<br>
+        ・対象：機械装置、工具器具備品等</li>
+
+        <li><strong>賃上げ促進税制</strong><br>
+        ・賃上げ額の最大40%を税控除<br>
+        ・適用要件：給与支給額増加率1.5%以上</li>
+
+        <li><strong>デジタル化投資税制</strong><br>
+        ・デジタル機器の即時償却<br>
+        ・対象：PC、ソフト、通信機器等</li>
+
+        <li><strong>カーボンニュートラル推進税制</strong><br>
+        ・環境投資の最大30%税控除<br>
+        ・対象：太陽光発電設備、EV充電設備等</li>
+    </ul>
+</div>
+```
+
+### 持続的な税務管理体制
+
+#### **月次税務チェックリスト**
+
+```python
+# 月次税務管理チェック項目
+def monthly_tax_checklist():
+    checks = [
+        "売上・仕入の正確な計上",
+        "請求書・領収書の適切な保管",
+        "源泉徴収税の計算と納付",
+        "消費税のインボイス要件確認",
+        "固定資産の管理状況",
+        "役員報酬の適正性検証",
+        "海外取引の文書化",
+        "税務上の重要書類更新"
+    ]
+    return checks
+```
+
+#### **年度別税務カレンダー**
+
+```html
+<div class="tax-calendar">
+    <h4>年度別税務スケジュール</h4>
+
+    <div class="quarter">
+        <h5>Q1（1-3月）</h5>
+        <ul>
+            <li>消費税確定申告（3月15日）</li>
+            <li>所得税確定申告（3月15日）</li>
+            <li>年末調整再提出</li>
+        </ul>
+    </div>
+
+    <div class="quarter">
+        <h5>Q2（4-6月）</h5>
+        <ul>
+            <li>固定資産税納付（4月）</li>
+            <li>法人事業税中間申告</li>
+            <li>給与所得者扶養控除申告書受付</li>
+        </ul>
+    </div>
+
+    <div class="quarter">
+        <h5>Q3（7-9月）</h5>
+        <ul>
+            <li>源泉税中間納付</li>
+            <li>前半期業績評価</li>
+            <li>税務調整検討</li>
+        </ul>
+    </div>
+
+    <div class="quarter">
+        <h5>Q4（10-12月）</h5>
+        <ul>
+            <li>年末調整開始</li>
+            <li>減価償却見直し</li>
+            <li>繰越欠損金活用検討</li>
+            <li>国外財産調書準備</li>
+        </ul>
+    </div>
+</div>
+```
+
+## ⚠️ 常见错误与避坑指南
+
+### 初期设立時の税務ミス
+
+#### **❌ よくある間違い**
+
+```html
+<div class="common-mistakes">
+    <h4>初心者が犯しやすい税務ミス</h4>
+
+    <div class="mistake-item">
+        <h5>1. 消費税の免税事業者誤認</h5>
+        <p>基準期間の売上高を正確に把握せず、免税事業者と誤認するケース</p>
+        <p><strong>対策：</strong>設立1年目も特定期間（半年）の売上で判定</p>
+    </div>
+
+    <div class="mistake-item">
+        <h5>2. 役員報酬の過大設定</h5>
+        <p>市場価値より大幅に高い役員報酬設定で損金不算入になるケース</p>
+        <p><strong>対策：</strong>同業他社比較表を作成し適正額を設定</p>
+    </div>
+
+    <div class="mistake-item">
+        <h5>3. 交際費の全額経費処理</h5>
+        <p>限度額超過分を全額損金算入し、税務調査で指摘されるケース</p>
+        <p><strong>対策：</strong>交際費台帳で区分管理し限度額内に抑える</p>
+    </div>
+
+    <div class="mistake-item">
+        <h5>4. 源泉徴収の未納付</h5>
+        <p>納付期限を過ぎ、延滞税・不納付加算税が発生するケース</p>
+        <p><strong>対策：</strong>カレンダーで納付日を明確に管理</p>
+    </div>
+</div>
+```
+
+#### **🛡️ 税務リスク管理**
+
+**税務調査準備チェックリスト：**
+```javascript
+const taxAuditPreparation = {
+    '帳簿関係': [
+        '総勘定元帳の整備',
+        '仕訳帳の整合性確認',
+        '勘定科目内訳書の作成',
+        '現金過不足の説明準備'
+    ],
+
+    '証憑関係': [
+        '請求書・領収書の保管',
+        '契約書の整理',
+        '銀行取引明細の照合',
+        '伝票の裏付け資料確認'
+    ],
+
+    '税務計算': [
+        '税務調整理由書の作成',
+        '別表計算の妥当性確認',
+        '繰越欠損金の確認',
+        '特例措置の適用検証'
+    ],
+
+    '法務関係': [
+        '定款の最新版確認',
+        '株主名簿の整備',
+        '議事録の整理',
+        '許認可の有効性確認'
+    ]
+};
+```
+
+### 税務トラブル対応策
+
+#### **延滞・延納の手続き**
+
+**延滞税計算式：**
+```html
+<table class="late-tax-calculation">
+    <thead>
+        <tr>
+            <th>期間</th>
+            <th>延滞税率</th>
+            <th>計算方法</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>納期限から2ヶ月以内</td>
+            <td>年7.3%または特例基準割合</td>
+            <td>滞納税額 × 日数 × 延滞税率 ÷ 365</td>
+        </tr>
+        <tr>
+            <td>納期限から2ヶ月超</td>
+            <td>年14.6%または特例基準割合×2</td>
+            <td>滞納税額 × 日数 × 延滞税率 ÷ 365</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+#### **更正の請求と修正申告**
+
+| 手続き | 内容 | 期限 | 効果 |
+|--------|------|------|------|
+| **更正の請求** | 申告額が過大な場合 | 申告期限から5年間 | 税金還付 |
+| **修正申告** | 申告額が過少な場合 | 発覚後速やかに | 追徴税対応 |
+| **再更正の請求** | 修正申告後の更正 | 修正申告後5年間 | 再検討 |
+
+## 🤝 专业服务支持
+
+### Mobius税务服务内容
+
+#### **📋 税务申报支持服务**
+
+```html
+<div class="tax-services">
+    <h4>包括的税务支持服务</h4>
+
+    <div class="service-category">
+        <h5>🏢 法人设立税务サポート</h5>
+        <ul>
+            <li>法人設立届出書の作成・提出</li>
+            <li>青色申告承認申請書</li>
+            <li>消費税課税事業者選択届出書</li>
+            <li>源泉所得税の徴収義務者届出書</li>
+            <li>給与支払事務所等の開設届出書</li>
+        </ul>
+    </div>
+
+    <div class="service-category">
+        <h5>📊 月次税务管理</h5>
+        <ul>
+            <li>経理帳簿の作成・管理</li>
+            <li>消費税の中間申告・納付対応</li>
+            <li>源泉所得税の計算・納付代行</li>
+            <li>法定調書の作成・提出</li>
+            <li>税務当局との折衝代行</li>
+        </ul>
+    </div>
+
+    <div class="service-category">
+        <h5>📈 年次税务申告</h5>
+        <ul>
+            <li>法人税確定申告書の作成</li>
+            <li>消費税確定申告書の作成</li>
+            <li>法人事業税・住民税の申告</li>
+            <li>税務調整の最適化</li>
+            <li>税務対策のご提案</li>
+        </ul>
+    </div>
+
+    <div class="service-category">
+        <h5>🌏 国際税务サポート</h5>
+        <ul>
+            <li>外国法人の日本進出支援</li>
+            <li>海外子会社関連税務対応</li>
+            <li>移転価格税制への対応</li>
+            <li>国外財産調書の作成支援</li>
+            <li>タックスヘイブン税制対応</li>
+        </ul>
+    </div>
+</div>
+```
+
+#### **💼 特化サービス**
+
+```html
+<div class="specialized-services">
+    <h4>外国人経営者向け特化サービス</h4>
+
+    <div class="service-grid">
+        <div class="service-item">
+            <h5>🌐 多言語対応</h5>
+            <p>中国語、英語での税務相談・申告サポート</p>
+        </div>
+
+        <div class="service-item">
+            <h5>📋 ビザ連携</h5>
+            <p>税務状況とビザ更新の連携支援</p>
+        </div>
+
+        <div class="service-item">
+            <h5>💰 資金移動サポート</h5>
+            <p>海外送金・両替に関する税務相談</p>
+        </div>
+
+        <div class="service-item">
+            <h5>🎯 国際相続</h5>
+            <p>国際相続・贈与税の専門的対応</p>
+        </div>
+    </div>
+
+    </div>
+                </div>
+            </div></div>
+
+</article></span>
+            </div>
+        </article>
+    </main>
+
+    <!-- 页脚将由动态加载 -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="../components/components.js" defer></script>
+    <script src="../components/knowledge-detail.js" defer></script>
+
+    <!-- 文章特定脚本 -->
+    <script>
+        // 安全的DOM操作工具函数
+        function safeCreateElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
+
+        // 安全地设置元素内容
+        function safeSetContent(element, content) {
+            // 清空现有内容
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+
+            if (typeof content === 'string') {
+                element.textContent = content;
+            } else if (content instanceof Node) {
+                element.appendChild(content);
+            }
+        }
+
+        // 错误处理 - 使用安全的DOM操作方法
+        window.addEventListener('error', function(e) {
+            console.error('文章页面加载错误:', e.error);
+            const articleContent = document.getElementById('article-content');
+            if (articleContent) {
+                // 清空现有内容
+                while (articleContent.firstChild) {
+                    articleContent.removeChild(articleContent.firstChild);
+                }
+
+                // 创建错误消息容器
+                const errorDiv = safeCreateElement('div', 'error-message');
+                errorDiv.setAttribute('role', 'alert');
+
+                // 创建图标
+                const icon = safeCreateElement('i', 'fas fa-exclamation-triangle');
+                icon.setAttribute('aria-hidden', 'true');
+                errorDiv.appendChild(icon);
+
+                // 创建标题
+                const title = safeCreateElement('h2', '', '文章加载失败');
+                errorDiv.appendChild(title);
+
+                // 创建描述段落
+                const paragraph = safeCreateElement('p', '', '抱歉，文章内容加载失败。请尝试刷新页面或');
+
+                // 创建链接
+                const link = safeCreateElement('a', '', '返回知识库首页');
+                link.href = '../knowledge.html';
+                link.setAttribute('aria-label', '返回知识库首页');
+
+                paragraph.appendChild(link);
+                errorDiv.appendChild(paragraph);
+
+                articleContent.appendChild(errorDiv);
+            }
+        });
+
+        // 页面性能监控
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`文章页面加载时间: ${loadTime}ms`);
+            }
+        });
+
+        // 键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            // ESC键返回知识库
+            if (e.key === 'Escape') {
+                window.location.href = '../knowledge.html';
+            }
+        });
+    </script>
+</body>
+</html>

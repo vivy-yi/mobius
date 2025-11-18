@@ -208,7 +208,7 @@ class ArticleCardManager {
                     views: '1,245',
                     icon: 'fas fa-building',
                     tags: ['公司注册', '株式会社'],
-                    url: 'knowledge/japan-company-registration-2024.html'
+                    url: 'data/knowledgeCard/japan-company-registration-2024.html'
                 }
             ]
         };
@@ -266,7 +266,7 @@ class ArticleCardManager {
                     views: '1,245',
                     icon: 'fas fa-building',
                     tags: ['公司注册', '株式会社', '合同公司'],
-                    url: 'knowledge/japan-company-registration-2024.html'
+                    url: 'data/knowledgeCard/japan-company-registration-2024.html'
                 },
                 {
                     id: 'japan-business-setup-guide',
@@ -277,7 +277,7 @@ class ArticleCardManager {
                     views: '892',
                     icon: 'fas fa-university',
                     tags: ['企业落地', '银行开户', '税务登记'],
-                    url: 'knowledge/japan-business-setup-guide.html'
+                    url: 'data/knowledgeCard/japan-business-setup-guide.html'
                 }
             ],
             visa: [
@@ -290,7 +290,7 @@ class ArticleCardManager {
                     views: '892',
                     icon: 'fas fa-passport',
                     tags: ['经营管理签证', '日本投资', '在留资格'],
-                    url: 'knowledge/japan-visa-guide-2024.html'
+                    url: 'data/knowledgeCard/japan-visa-guide-2024.html'
                 },
                 {
                     id: 'japan-high-talent-visa',
@@ -314,7 +314,7 @@ class ArticleCardManager {
                     views: '756',
                     icon: 'fas fa-coins',
                     tags: ['税务申报', '法人税', '消费税'],
-                    url: 'knowledge/japan-tax-guide-2024.html'
+                    url: 'data/knowledgeCard/japan-tax-guide-2024.html'
                 },
                 {
                     id: 'japan-consumption-tax',
@@ -711,7 +711,7 @@ class ArticleCardManager {
             <div style="display: flex; justify-content: center; align-items: center; height: 200px; color: var(--primary-blue);">
                 <div style="text-align: center;">
                     <div class="loading-spinner" style="
-                        border: 3px solid #f3f3f3;
+                        border: 3px solid var(--light-bg, #f3f3f3);
                         border-top: 3px solid var(--primary-blue);
                         border-radius: 50%;
                         width: 40px;
@@ -1182,7 +1182,7 @@ class ArticleCardManager {
      */
   renderEmptyState(container) {
     const emptyState = this.createElement('div');
-    emptyState.style.cssText = 'text-align: center; padding: 40px; color: #6b7280;';
+    emptyState.style.cssText = 'text-align: center; padding: 40px; color: var(--light-text, #6b7280);';
 
     const icon = this.createIcon('fas fa-inbox');
     icon.style.cssText = 'font-size: 3rem; margin-bottom: 15px; opacity: 0.5; display: block;';

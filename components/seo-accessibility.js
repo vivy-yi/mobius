@@ -88,8 +88,8 @@ class SeoAccessibilityOptimizer {
     createArticleStructuredData() {
         const title = document.querySelector('title')?.textContent;
         const author = document.querySelector('.zhihu-author-name')?.textContent;
-        const publishDate = document.querySelector('.zhihu-article-date')?.textContent;
-        const articleBody = document.querySelector('.zhihu-article-body')?.textContent;
+        const publishDate = document.querySelector('.mobius-article-date')?.textContent;
+        const articleBody = document.querySelector('.mobius-article-body')?.textContent;
 
         if (!title) return null;
 
@@ -132,7 +132,7 @@ class SeoAccessibilityOptimizer {
             }
         ];
 
-        const title = document.querySelector('.zhihu-article-title')?.textContent;
+        const title = document.querySelector('.mobius-article-title')?.textContent;
         if (title) {
             breadcrumbItems.push({
                 name: title,
@@ -220,14 +220,14 @@ class SeoAccessibilityOptimizer {
     optimizeColorContrast() {
         const style = document.createElement('style');
         style.textContent = `
-            .zhihu-interaction-btn:hover,
-            .zhihu-interaction-btn:focus {
+            .mobius-interaction-btn:hover,
+            .mobius-interaction-btn:focus {
                 outline: 2px solid #0084FF;
                 outline-offset: 2px;
             }
 
             @media (prefers-contrast: high) {
-                .zhihu-article-wrapper {
+                .mobius-article-wrapper {
                     border: 1px solid #000;
                 }
             }
@@ -242,7 +242,7 @@ class SeoAccessibilityOptimizer {
         const style = document.createElement('style');
         style.textContent = `
             @media (min-resolution: 120dpi) {
-                .zhihu-article-body {
+                .mobius-article-body {
                     font-size: 17px;
                 }
             }
@@ -320,7 +320,7 @@ class SeoAccessibilityOptimizer {
         }
 
         // 为互动按钮添加键盘事件
-        const interactiveButtons = document.querySelectorAll('.zhihu-interaction-btn');
+        const interactiveButtons = document.querySelectorAll('.mobius-interaction-btn');
         interactiveButtons.forEach((button, index) => {
             button.setAttribute('tabindex', '0');
             button.setAttribute('role', 'button');
@@ -351,7 +351,7 @@ class SeoAccessibilityOptimizer {
      * 设置目录键盘导航
      */
     setupTocKeyboardNavigation() {
-        const tocLinks = document.querySelectorAll('.zhihu-toc-link');
+        const tocLinks = document.querySelectorAll('.mobius-toc-link');
         tocLinks.forEach((link, index) => {
             link.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -378,21 +378,21 @@ class SeoAccessibilityOptimizer {
         if (!this.options.enableAriaLabels) return;
 
         // 文章区域
-        const article = document.querySelector('.zhihu-article-wrapper');
+        const article = document.querySelector('.mobius-article-wrapper');
         if (article) {
             article.setAttribute('role', 'main');
             article.setAttribute('aria-label', '文章内容');
         }
 
         // 侧边栏
-        const sidebar = document.querySelector('.zhihu-sidebar');
+        const sidebar = document.querySelector('.mobius-sidebar');
         if (sidebar) {
             sidebar.setAttribute('role', 'complementary');
             sidebar.setAttribute('aria-label', '相关内容');
         }
 
         // 导航区域
-        const nav = document.querySelector('.zhihu-toc');
+        const nav = document.querySelector('.mobius-toc');
         if (nav) {
             nav.setAttribute('role', 'navigation');
             nav.setAttribute('aria-label', '文章目录');
@@ -536,7 +536,7 @@ class SeoAccessibilityOptimizer {
             }
 
             button:focus,
-            .zhihu-interaction-btn:focus {
+            .mobius-interaction-btn:focus {
                 outline: 3px solid #0084FF;
                 outline-offset: 2px;
             }
@@ -556,7 +556,7 @@ class SeoAccessibilityOptimizer {
      * 优化图片SEO和可访问性
      */
     optimizeImages() {
-        const images = document.querySelectorAll('.zhihu-article-body img');
+        const images = document.querySelectorAll('.mobius-article-body img');
         images.forEach((img, index) => {
             // 添加alt属性
             if (!img.alt) {
@@ -624,7 +624,7 @@ class SeoAccessibilityOptimizer {
      * 添加阅读时间估算
      */
     addReadingTime() {
-        const content = document.querySelector('.zhihu-article-body');
+        const content = document.querySelector('.mobius-article-body');
         if (!content) return;
 
         const text = content.textContent;
@@ -633,7 +633,7 @@ class SeoAccessibilityOptimizer {
         const readingTime = Math.ceil(wordCount / wordsPerMinute);
 
         // 查找现有的阅读时间显示
-        const readingTimeElement = document.querySelector('.zhihu-article-reading');
+        const readingTimeElement = document.querySelector('.mobius-article-reading');
         if (readingTimeElement) {
             readingTimeElement.textContent = `${readingTime} 分钟阅读`;
         }
@@ -644,7 +644,7 @@ class SeoAccessibilityOptimizer {
      */
     optimizePageTitle() {
         const title = document.querySelector('title');
-        const articleTitle = document.querySelector('.zhihu-article-title');
+        const articleTitle = document.querySelector('.mobius-article-title');
 
         if (title && articleTitle) {
             const siteName = 'Mobius';
@@ -658,7 +658,7 @@ class SeoAccessibilityOptimizer {
      */
     optimizeMetaDescription() {
         const description = document.querySelector('meta[name="description"]');
-        const content = document.querySelector('.zhihu-article-excerpt p');
+        const content = document.querySelector('.mobius-article-excerpt p');
 
         if (description && content) {
             const text = content.textContent.trim();

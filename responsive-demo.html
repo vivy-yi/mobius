@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobius 响应式设计演示 - 使用外部库</title>
+    <style>
+        body {
+            font-family: Inter, 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* 设备类型背景色 */
+        body.device-nano-mobile { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
+        body.device-small-mobile { background: linear-gradient(135deg, #ffd93d, #6bcf7f); }
+        body.device-tablet { background: linear-gradient(135deg, #6bcf7f, #4d96ff); }
+        body.device-small-laptop { background: linear-gradient(135deg, #4d96ff, #c56cf0); }
+        body.device-standard-desktop { background: linear-gradient(135deg, #c56cf0, #ff6b9d); }
+        body.device-large-desktop { background: linear-gradient(135deg, #ff6b9d, #ff9a9e); }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .device-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+
+        .info-card.active {
+            transform: scale(1);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .capability-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .capability-badge.active {
+            background: #4caf50;
+            transform: translateY(-2px);
+        }
+
+        .breakpoint-display {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 16px;
+            color: white;
+            margin: 2rem 0;
+        }
+
+        .breakpoint-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .breakpoint-range {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+        }
+
+        /* 设备特定样式演示 */
+        body.device-mobile .mobile-only {
+            display: block;
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        body:not(.device-mobile) .mobile-only {
+            display: none;
+        }
+
+        body.device-tablet .tablet-only {
+            display: block;
+            background: #2196f3;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        body:not(.device-tablet) .tablet-only {
+            display: none;
+        }
+
+        /* 响应式容器查询演示 */
+        .responsive-grid {
+            container-type: inline-size;
+            display: grid;
+            gap: 1rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @container (max-width: 400px) {
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @container (min-width: 401px) and (max-width: 800px) {
+            .responsive-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @container (min-width: 801px) {
+            .responsive-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .installation-code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .usage-instruction {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .usage-instruction h3 {
+            margin: 0 0 1rem 0;
+        }
+
+        .usage-instruction ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .usage-instruction li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🚀 Mobius 响应式设计演示</h1>
+        <p>使用外部库的"一键式"响应式解决方案</p>
+
+        <div class="breakpoint-display">
+            <div class="breakpoint-name" id="currentBreakpoint">检测中...</div>
+            <div class="breakpoint-range" id="currentRange">...</div>
+        </div>
+
+        <div class="usage-instruction">
+            <h3>📦 安装方法</h3>
+            <div class="installation-code">
+&lt;!-- 方式1: CDN引入 (推荐) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/responsive-js@latest/dist/responsive.min.js"&gt;&lt;/script&gt;
+&lt;script src="responsive-device-detector-simplified.js"&gt;&lt;/script&gt;
+
+&lt;!-- 方式2: NPM安装 --&gt;
+npm install responsive-js
+
+&lt;!-- 方式3: 仅使用这个HTML文件 --&gt;
+&lt;!-- 库会自动从CDN加载 --&gt;
+            </div>
+
+            <h3>💡 使用说明</h3>
+            <ul>
+                <li>自动添加设备类型类：device-nano-mobile, device-small-mobile, device-tablet, device-small-laptop, device-standard-desktop, device-large-desktop</li>
+                <li>自动添加设备能力类：device-touch, device-hover, device-fine-pointer, device-hybrid</li>
+                <li>触发deviceChange事件：可以监听设备变化</li>
+                <li>支持我们的6断点系统</li>
+                <li>自动检测设备输入能力</li>
+            </ul>
+        </div>
+
+        <div class="device-info">
+            <div class="info-card" id="nano-mobile">
+                <h3>📱 Nano Mobile</h3>
+                <p>≤ 475px</p>
+                <p>小屏手机</p>
+            </div>
+            <div class="info-card" id="small-mobile">
+                <h3>📱 Small Mobile</h3>
+                <p>476px - 768px</p>
+                <p>大屏手机</p>
+            </div>
+            <div class="info-card" id="tablet">
+                <h3>📱 Tablet</h3>
+                <p>769px - 1024px</p>
+                <p>平板设备</p>
+            </div>
+            <div class="info-card" id="small-laptop">
+                <h3>💻 Small Laptop</h3>
+                <p>1025px - 1366px</p>
+                <p>小笔记本</p>
+            </div>
+            <div class="info-card" id="standard-desktop">
+                <h3>💻 Standard Desktop</h3>
+                <p>1367px - 1920px</p>
+                <p>标准桌面</p>
+            </div>
+            <div class="info-card" id="large-desktop">
+                <h3>💻 Large Desktop</h3>
+                <p>≥ 1921px</p>
+                <p>大屏显示器</p>
+            </div>
+        </div>
+
+        <div class="capabilities">
+            <h3>🔧 设备能力检测</h3>
+            <span class="capability-badge" id="touch-badge">
+                <i class="fas fa-hand-pointer"></i> Touch (触摸)
+            </span>
+            <span class="capability-badge" id="hover-badge">
+                <i class="fas fa-mouse-pointer"></i> Hover (悬停)
+            </span>
+            <span class="capability-badge" id="fine-pointer-badge">
+                <i class="fas fa-pen"></i> Fine Pointer (精确指针)
+            </span>
+            <span class="capability-badge" id="hybrid-badge">
+                <i class="fas fa-retweet"></i> Hybrid Tablet (混合设备)
+            </span>
+        </div>
+
+        <div class="responsive-grid">
+            <div class="grid-item">🎯 容器查询项目 1</div>
+            <div class="grid-item">🎯 容器查询项目 2</div>
+            <div class="grid-item">🎯 容器查询项目 3</div>
+            <div class="grid-item">🎯 容器查询项目 4</div>
+            <div class="grid-item">🎯 容器查询项目 5</div>
+            <div class="grid-item">🎯 容器查询项目 6</div>
+        </div>
+
+        <div class="mobile-only">
+            📱 仅在移动设备上显示的内容
+        </div>
+
+        <div class="tablet-only">
+            📱 仅在平板设备上显示的内容
+        </div>
+
+        <h3>📊 实时监控</h3>
+        <div id="monitor-log" style="background: #f5f5f5; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.875rem; max-height: 200px; overflow-y: auto;">
+            <div>🔄 等待设备变化...</div>
+        </div>
+    </div>
+
+    <!-- 加载响应式检测器 -->
+    <script src="responsive-device-detector-simplified.js"></script>
+
+    <script>
+        // 设备变化监听
+        document.addEventListener('deviceChange', (event) => {
+            const { deviceType, capabilities } = event.detail;
+
+            // 更新显示
+            document.getElementById('currentBreakpoint').textContent = deviceType.replace('-', ' ');
+
+            // 更新范围显示
+            const ranges = {
+                'nano-mobile': '≤ 475px',
+                'small-mobile': '476px - 768px',
+                'tablet': '769px - 1024px',
+                'small-laptop': '1025px - 1366px',
+                'standard-desktop': '1367px - 1920px',
+                'large-desktop': '≥ 1921px'
+            };
+            document.getElementById('currentRange').textContent = ranges[deviceType] || '未知';
+
+            // 更新设备卡片状态
+            document.querySelectorAll('.info-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById(deviceType)?.classList.add('active');
+
+            // 更新能力徽章
+            updateCapabilityBadges(capabilities);
+
+            // 记录日志
+            logDeviceChange(deviceType, capabilities);
+        });
+
+        function updateCapabilityBadges(capabilities) {
+            const badges = {
+                'touch-badge': capabilities.touch,
+                'hover-badge': capabilities.hover,
+                'fine-pointer-badge': capabilities.finePointer,
+                'hybrid-badge': capabilities.hybrid
+            };
+
+            Object.entries(badges).forEach(([id, active]) => {
+                const badge = document.getElementById(id);
+                if (active) {
+                    badge.classList.add('active');
+                } else {
+                    badge.classList.remove('active');
+                }
+            });
+        }
+
+        function logDeviceChange(deviceType, capabilities) {
+            const log = document.getElementById('monitor-log');
+            const time = new Date().toLocaleTimeString();
+            const message = `[${time}] 📱 设备变化: ${deviceType} | 能力: ${Object.entries(capabilities).filter(([_, active]) => active).map(([name]) => name).join(', ')}`;
+
+            const logEntry = document.createElement('div');
+            logEntry.textContent = message;
+            log.appendChild(logEntry);
+
+            // 保持日志在最新
+            log.scrollTop = log.scrollHeight;
+
+            // 限制日志条目数量
+            const entries = log.children;
+            if (entries.length > 10) {
+                log.removeChild(entries[0]);
+            }
+        }
+
+        // 窗口大小变化监听
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                console.log('🔄 窗口大小变化，重新检测设备类型...');
+            }, 150);
+        });
+    </script>
+</body>
+</html>

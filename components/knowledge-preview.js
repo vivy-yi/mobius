@@ -52,7 +52,7 @@ class KnowledgePreviewManager {
                 id: 'business',
                 title: '日本企业落地指南',
                 icon: 'fas fa-book-open',
-                color: '#3b82f6',
+                color: 'var(--tech-blue, #3b82f6)',
                 items: [
                     '日本公司设立图解',
                     '合同会社 vs 株式会社对比',
@@ -66,7 +66,7 @@ class KnowledgePreviewManager {
                 id: 'visa',
                 title: '签证攻略',
                 icon: 'fas fa-passport',
-                color: '#dc2626',
+                color: 'var(--accent-red, #dc2626)',
                 items: [
                     '经营管理签证常见拒签理由',
                     '日本永住权申请条件',
@@ -80,7 +80,7 @@ class KnowledgePreviewManager {
                 id: 'tax',
                 title: '税务・补助金',
                 icon: 'fas fa-coins',
-                color: '#16a34a',
+                color: 'var(--success-green, #16a34a)',
                 items: [
                     '日本补助金申请攻略',
                     '税务调查常见问题',
@@ -94,7 +94,7 @@ class KnowledgePreviewManager {
                 id: 'subsidy',
                 title: '补助金申请',
                 icon: 'fas fa-gift',
-                color: '#ea580c',
+                color: 'var(--warning-orange, #ea580c)',
                 items: [
                     'IT化补助金申请指南',
                     '绿色环保补助金策略',
@@ -108,7 +108,7 @@ class KnowledgePreviewManager {
                 id: 'legal',
                 title: '法务合规',
                 icon: 'fas fa-balance-scale',
-                color: '#7c3aed',
+                color: 'var(--tech-purple, #7c3aed)',
                 items: [
                     '劳动合同法要点解析',
                     '个人情报保护法合规',
@@ -295,7 +295,7 @@ class KnowledgePreviewManager {
             const noResults = this.createElement('div', 'no-results');
             noResults.style.textAlign = 'center';
             noResults.style.padding = '2rem';
-            noResults.style.color = '#64748b';
+            noResults.style.color = 'var(--light-text, #64748b)';
 
             const icon = this.createIcon('fas fa-search');
             icon.style.fontSize = '2rem';

@@ -1,0 +1,43 @@
+{
+  "name": "mobius-cms",
+  "version": "1.0.0",
+  "description": "Mobius知识库内容管理系统",
+  "main": "scripts/build-articles.js",
+  "scripts": {
+    "build": "node scripts/build-articles.js",
+    "build:watch": "node scripts/watch-and-build.js",
+    "validate": "node scripts/validate-content.js",
+    "serve": "node server.js",
+    "dev": "concurrently \"npm run serve\" \"npm run build:watch\"",
+    "clean": "rm -rf knowledge/* content/metadata/*.json",
+    "deploy": "npm run build && npm run validate && echo 'Ready for deployment'",
+    "init": "npm install && mkdir -p content/articles/{2024,2025,2026} content/metadata knowledge build/scripts build/templates"
+  },
+  "keywords": [
+    "cms",
+    "markdown",
+    "static-site-generator",
+    "mobius",
+    "knowledge-base"
+  ],
+  "author": "Mobius团队",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^9.1.6",
+    "chokidar": "^3.5.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobius/mobius-cms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mobius/mobius-cms/issues"
+  },
+  "homepage": "https://mobius-service.com"
+}

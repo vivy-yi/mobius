@@ -1,0 +1,146 @@
+/* 字体优化CSS - 解决CLS和FCP问题 */
+
+/* 1. 系统字体回退策略 */
+body {
+    /* 系统字体栈 - 无需加载，立即可用 */
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif,
+                 "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--dark-text, #1f2937);
+    /* 防止布局偏移的关键属性 */
+    font-display: swap;
+    visibility: visible;
+}
+
+/* 2. 自定义字体加载策略 */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Inter Regular'), local('Inter-Regular'),
+         url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Inter SemiBold'), local('Inter-SemiBold'),
+         url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7W0Q5nw.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Noto Sans SC Regular'), local('NotoSansSC-Regular'),
+         url('https://fonts.gstatic.com/s/notosanssc/v39/k3kXo84MPvpLmixcA63oeALhLIiP-Q-87KaAaH7rzeAODp22mF0qmF4CSjmPC6A0Rg5g1igg1w.118.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Noto Sans SC SemiBold'), local('NotoSansSC-SemiBold'),
+         url('https://fonts.gstatic.com/s/notosanssc/v39/k3kXo84MPvpLmixcA63oeALZTYKL2S24UEg-2_c.woff2') format('woff2');
+}
+
+/* 3. 字体加载类管理 */
+.fonts-loading {
+    /* 加载期间使用系统字体，确保布局稳定 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.fonts-loaded {
+    /* 字体加载完成后切换到自定义字体 */
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 4. 防止布局偏移的关键元素样式 */
+h1, h2, h3, h4, h5, h6 {
+    /* 预设尺寸防止字体加载时的布局跳动 */
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    height: auto;
+    min-height: 1.2em; /* 最小高度防止塌陷 */
+}
+
+/* 5. 文本容器防CLS */
+.text-container {
+    /* 为文本内容预留空间 */
+    min-height: 1em;
+    margin-bottom: 1rem;
+}
+
+/* 6. 关键内容区域的字体优化 */
+.above-the-fold {
+    /* 首屏内容使用系统字体优先 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.fonts-loaded .above-the-fold {
+    /* 字体加载后无缝切换 */
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 7. 字体加载进度指示器 */
+.font-loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary, linear-gradient(135deg, #3b82f6, #dc2626));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+    z-index: 10000;
+}
+
+.font-loading-indicator.loading {
+    animation: fontLoadingProgress 2s ease-in-out;
+}
+
+@keyframes fontLoadingProgress {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(0.7); }
+    100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* 8. 减少字体变体 - 只加载必要的weights */
+.weight-400 { font-weight: 400; }
+.weight-600 { font-weight: 600; }
+
+/* 避免使用 font-weight: 700, 800 等未加载的字重 */
+.weight-700 {
+    font-weight: 600; /* 回退到已加载的字重 */
+}
+
+/* 9. 字体缓存策略 */
+.cached-font {
+    /* 标记已缓存的字体 */
+    font-display: fallback;
+}
+
+/* 10. 紧急回退方案 */
+@supports not (font-display: swap) {
+    /* 不支持font-display的浏览器回退 */
+    @font-face {
+        font-family: 'Inter-fallback';
+        src: local('Arial'), local('Helvetica');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    body {
+        font-family: 'Inter-fallback', Arial, sans-serif;
+    }
+}

@@ -20,24 +20,41 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ===== Mobile Menu Toggle =====
+// ===== Enhanced Mobile Menu Toggle =====
 function initMobileMenuToggle() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.contains('active');
+
+            // Toggle hamburger and menu
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+
+            // Add device-specific behaviors
+            if (deviceDetector) {
+                const interactionMode = deviceDetector.getInteractionMode();
+
+                // For tablets, also close any open dropdowns when opening mobile menu
+                if (interactionMode === 'hybrid' && !isOpen) {
+                    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active', 'touch-active');
+                    });
+                }
+            }
         });
     }
 
-    // Add scroll listener to close mobile menu when scrolling
+    // Enhanced scroll listener to close mobile menu
     let isScrolling = false;
     window.addEventListener('scroll', () => {
-        if (window.innerWidth <= 768) {
-            // Only close menu if it's open
-            if (hamburger && hamburger.classList.contains('active')) {
+        if (deviceDetector) {
+            const shouldCloseOnScroll = deviceDetector.isMobile ||
+                (deviceDetector.isTablet && deviceDetector.hasTouch);
+
+            if (shouldCloseOnScroll && hamburger && hamburger.classList.contains('active')) {
                 if (!isScrolling) {
                     isScrolling = true;
                     hamburger.classList.remove('active');
@@ -49,36 +66,196 @@ function initMobileMenuToggle() {
                     }, 150);
                 }
             }
+        } else {
+            // Fallback to original logic if device detector not initialized
+            if (window.innerWidth <= 768 && hamburger && hamburger.classList.contains('active')) {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 150);
+                }
+            }
         }
     }, { passive: true });
+
+    // Close menu when clicking outside on mobile/tablet
+    document.addEventListener('click', (e) => {
+        if (deviceDetector && (deviceDetector.isMobile || deviceDetector.isTablet)) {
+            if (!e.target.closest('.navbar') && hamburger && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        }
+    });
+
+    // Handle window resize - close mobile menu if switching to desktop
+    window.addEventListener('resize', () => {
+        let resizeTimer;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (deviceDetector && deviceDetector.isDesktop && hamburger && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        }, 150);
+    });
 }
 
 // Mobile menu toggle will be initialized by initializeAllFeatures()
 
-// ===== Dropdown Menu Interactive =====
+// ===== Device Capability Detector =====
+class DeviceCapabilityDetector {
+    constructor() {
+        this.updateCapabilities();
+        this.setupResizeListener();
+    }
+
+    updateCapabilities() {
+        const width = window.innerWidth;
+
+        // Determine device category based on our 6-breakpoint system
+        if (width <= 475) {
+            this.deviceCategory = 'nano-mobile';
+            this.isMobile = true;
+            this.isTablet = false;
+            this.isDesktop = false;
+        } else if (width <= 768) {
+            this.deviceCategory = 'small-mobile';
+            this.isMobile = true;
+            this.isTablet = false;
+            this.isDesktop = false;
+        } else if (width <= 1024) {
+            this.deviceCategory = 'tablet';
+            this.isMobile = false;
+            this.isTablet = true;
+            this.isDesktop = false;
+        } else if (width <= 1366) {
+            this.deviceCategory = 'small-laptop';
+            this.isMobile = false;
+            this.isTablet = false;
+            this.isDesktop = true;
+        } else if (width <= 1920) {
+            this.deviceCategory = 'standard-desktop';
+            this.isMobile = false;
+            this.isTablet = false;
+            this.isDesktop = true;
+        } else {
+            this.deviceCategory = 'large-desktop';
+            this.isMobile = false;
+            this.isTablet = false;
+            this.isDesktop = true;
+        }
+
+        // Detect input capabilities
+        this.hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        this.hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+        this.hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        this.supportsHover = window.matchMedia('(hover: hover)').matches;
+
+        // Tablet-specific: hybrid interaction support
+        this.isHybridTablet = this.isTablet && this.hasTouch && this.hasFinePointer;
+
+        // Add device classes to body for CSS targeting (if unified detector is not present)
+        this.updateBodyClasses();
+    }
+
+    updateBodyClasses() {
+        // Check if unified device detector is managing body classes
+        if (window.UnifiedDeviceDetector && window.unifiedDeviceDetector) {
+            return; // Skip body class management - unified detector handles it
+        }
+
+        document.body.classList.remove('device-mobile', 'device-tablet', 'device-desktop',
+                                     'device-touch', 'device-hover', 'device-hybrid');
+
+        if (this.isMobile) document.body.classList.add('device-mobile');
+        if (this.isTablet) document.body.classList.add('device-tablet');
+        if (this.isDesktop) document.body.classList.add('device-desktop');
+        if (this.hasTouch) document.body.classList.add('device-touch');
+        if (this.supportsHover) document.body.classList.add('device-hover');
+        if (this.isHybridTablet) document.body.classList.add('device-hybrid');
+    }
+
+    setupResizeListener() {
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.updateCapabilities();
+            }, 150);
+        });
+    }
+
+    // Get interaction mode for dropdowns
+    getInteractionMode() {
+        if (this.isMobile) {
+            return 'touch-only';
+        } else if (this.isHybridTablet) {
+            return 'hybrid'; // Both touch and hover
+        } else if (this.isDesktop) {
+            return 'hover-only';
+        }
+        return 'touch-only';
+    }
+}
+
+// Global device detector instance
+let deviceDetector;
+
+// ===== Enhanced Dropdown Menu Interactive =====
 function initDropdownMenus() {
     const navDropdowns = document.querySelectorAll('.nav-dropdown');
+
+    // Initialize device detector if not already done
+    if (!deviceDetector) {
+        deviceDetector = new DeviceCapabilityDetector();
+    }
 
     navDropdowns.forEach(dropdown => {
         const toggle = dropdown.querySelector('.dropdown-toggle');
 
-        // Click to toggle dropdown on mobile
+        // Handle click interactions for mobile and tablet touch
         if (toggle) {
             toggle.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
+                const interactionMode = deviceDetector.getInteractionMode();
+
+                if (interactionMode === 'touch-only' || interactionMode === 'hybrid') {
                     e.preventDefault();
-                    dropdown.classList.toggle('active');
+
+                    // For hybrid tablets, toggle differently
+                    if (interactionMode === 'hybrid') {
+                        // On tablets, clicking toggle should close other dropdowns
+                        navDropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('active');
+                                otherDropdown.classList.remove('touch-active');
+                            }
+                        });
+
+                        // Add touch-active class for tablet-specific styling
+                        dropdown.classList.toggle('active');
+                        dropdown.classList.toggle('touch-active');
+                    } else {
+                        // Mobile: simple toggle
+                        dropdown.classList.toggle('active');
+                    }
                 }
             });
         }
 
-        // Handle mouse enter/leave for desktop
+        // Handle mouse interactions for desktop and tablet hover
         dropdown.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 768) {
-                // Close other dropdowns
-                document.querySelectorAll('.nav-dropdown').forEach(otherDropdown => {
+            const interactionMode = deviceDetector.getInteractionMode();
+
+            if (interactionMode === 'hover-only' || interactionMode === 'hybrid') {
+                // Close other dropdowns first
+                navDropdowns.forEach(otherDropdown => {
                     if (otherDropdown !== dropdown) {
                         otherDropdown.classList.remove('active');
+                        otherDropdown.classList.remove('touch-active');
                     }
                 });
                 dropdown.classList.add('active');
@@ -86,17 +263,58 @@ function initDropdownMenus() {
         });
 
         dropdown.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) {
+            const interactionMode = deviceDetector.getInteractionMode();
+
+            if (interactionMode === 'hover-only' || interactionMode === 'hybrid') {
+                // For hybrid tablets, don't remove if touch-active
+                if (interactionMode === 'hybrid' && dropdown.classList.contains('touch-active')) {
+                    return; // Keep open if touch-activated on tablet
+                }
                 dropdown.classList.remove('active');
             }
         });
+
+        // Handle touch interactions for tablets
+        dropdown.addEventListener('touchstart', (e) => {
+            const interactionMode = deviceDetector.getInteractionMode();
+
+            if (interactionMode === 'hybrid') {
+                // Add touch feedback for tablets
+                dropdown.style.transform = 'scale(0.98)';
+            }
+        }, { passive: true });
+
+        dropdown.addEventListener('touchend', (e) => {
+            const interactionMode = deviceDetector.getInteractionMode();
+
+            if (interactionMode === 'hybrid') {
+                setTimeout(() => {
+                    dropdown.style.transform = '';
+                }, 150);
+            }
+        }, { passive: true });
     });
 
-    // Close dropdowns when clicking outside
+    // Enhanced click outside handling
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.nav-dropdown')) {
-            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            const interactionMode = deviceDetector.getInteractionMode();
+
+            navDropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
+                if (interactionMode === 'hybrid') {
+                    dropdown.classList.remove('touch-active');
+                }
+            });
+        }
+    });
+
+    // Close dropdowns on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            navDropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+                dropdown.classList.remove('touch-active');
             });
         }
     });
@@ -501,8 +719,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== Unified Initialization =====
 function initializeAllFeatures() {
-    // Initialize DOM elements
+    // Initialize DOM elements first
     initializeDOMElements();
+
+    // Check if unified device detector is available (from unified-device-detector.js)
+    if (window.UnifiedDeviceDetector && window.unifiedDeviceDetector) {
+        // Use unified device detector data
+        deviceDetector = {
+            isMobile: window.unifiedDeviceDetector.deviceState.isMobile,
+            isTablet: window.unifiedDeviceDetector.deviceState.isTablet,
+            isDesktop: window.unifiedDeviceDetector.deviceState.isDesktop,
+            hasTouch: window.unifiedDeviceDetector.deviceState.hasTouch,
+            getInteractionMode: function() {
+                if (this.isMobile) return 'touch-only';
+                if (this.isTablet && this.hasTouch) return 'hybrid';
+                return 'mouse-only';
+            }
+        };
+    } else {
+        // Fallback to local device detector
+        if (!deviceDetector) {
+            deviceDetector = new DeviceCapabilityDetector();
+        }
+    }
 
     // Initialize all features that depend on DOM elements
     initMobileMenuToggle();

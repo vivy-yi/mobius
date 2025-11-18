@@ -355,7 +355,7 @@
           "株式会社",
           "合同公司"
         ],
-        "url": "knowledge/business-registration-01.html",
+        "url": "data/knowledgeCard/business-registration-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "企业落地",
@@ -382,7 +382,7 @@
           "银行开户",
           "税务登记"
         ],
-        "url": "knowledge/business-setupguide-01.html",
+        "url": "data/knowledgeCard/business-setupguide-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "企业落地",
@@ -409,7 +409,7 @@
           "在留资格",
           "食品卫生"
         ],
-        "url": "knowledge/business-restaurant-02.html",
+        "url": "data/knowledgeCard/business-restaurant-02.html",
         "featured": true,
         "difficulty": "中级",
         "category": "开店咨询",
@@ -436,7 +436,7 @@
           "资质申请",
           "营业许可"
         ],
-        "url": "knowledge/business-faq-01.html",
+        "url": "data/knowledgeCard/business-faq-01.html",
         "featured": false,
         "difficulty": "中级",
         "category": "开店咨询",
@@ -465,7 +465,7 @@
           "日本投资",
           "在留资格"
         ],
-        "url": "knowledge/visa-guide-01.html",
+        "url": "data/knowledgeCard/visa-guide-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证政策",
@@ -492,7 +492,7 @@
           "积分计算",
           "永住权"
         ],
-        "url": "knowledge/visa-faq-01.html",
+        "url": "data/knowledgeCard/visa-faq-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证FAQ",
@@ -519,7 +519,7 @@
           "经营要求",
           "材料准备"
         ],
-        "url": "knowledge/visa-guide-02.html",
+        "url": "data/knowledgeCard/visa-guide-02.html",
         "featured": true,
         "difficulty": "中级",
         "category": "签证FAQ",
@@ -548,7 +548,7 @@
           "法人税",
           "消费税"
         ],
-        "url": "knowledge/tax-guide-02.html",
+        "url": "data/knowledgeCard/tax-guide-02.html",
         "featured": true,
         "difficulty": "高级",
         "category": "税务筹划",
@@ -575,7 +575,7 @@
           "中小企业",
           "节税策略"
         ],
-        "url": "knowledge/tax-consumption-01.html",
+        "url": "data/knowledgeCard/tax-consumption-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "税务FAQ",
@@ -602,7 +602,7 @@
           "法人设立",
           "开业申报"
         ],
-        "url": "knowledge/tax-faq-02.html",
+        "url": "data/knowledgeCard/tax-faq-02.html",
         "featured": true,
         "difficulty": "初级",
         "category": "税务FAQ",
@@ -629,7 +629,7 @@
           "申请条件",
           "申请流程"
         ],
-        "url": "knowledge/tax-faq-03.html",
+        "url": "data/knowledgeCard/tax-faq-03.html",
         "featured": true,
         "difficulty": "中级",
         "category": "补助金申请",
@@ -658,7 +658,7 @@
           "数字化转型",
           "申请指南"
         ],
-        "url": "knowledge/subsidy-guide-02.html",
+        "url": "data/knowledgeCard/subsidy-guide-02.html",
         "featured": false,
         "difficulty": "中级",
         "category": "补助金申请",
@@ -685,7 +685,7 @@
           "绿色项目",
           "申请策略"
         ],
-        "url": "knowledge/subsidy-greengift-01.html",
+        "url": "data/knowledgeCard/subsidy-greengift-01.html",
         "featured": false,
         "difficulty": "高级",
         "category": "补助金申请",
@@ -712,7 +712,7 @@
           "成功率",
           "材料准备"
         ],
-        "url": "knowledge/subsidy-faq-01.html",
+        "url": "data/knowledgeCard/subsidy-faq-01.html",
         "featured": false,
         "difficulty": "中级",
         "category": "补助金FAQ",
@@ -741,7 +741,7 @@
           "劳动合同",
           "员工权益"
         ],
-        "url": "knowledge/legal-labor-01.html",
+        "url": "data/knowledgeCard/legal-labor-01.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务合规",
@@ -768,7 +768,7 @@
           "数据保护",
           "合规指南"
         ],
-        "url": "knowledge/legal-dataprotection-02.html",
+        "url": "data/knowledgeCard/legal-dataprotection-02.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务合规",
@@ -795,7 +795,7 @@
           "印花税",
           "违约金"
         ],
-        "url": "knowledge/legal-faq-01.html",
+        "url": "data/knowledgeCard/legal-faq-01.html",
         "featured": true,
         "difficulty": "中级",
         "category": "法务FAQ",
@@ -822,7 +822,7 @@
           "商标注册",
           "专利申请"
         ],
-        "url": "knowledge/legal-faq-02.html",
+        "url": "data/knowledgeCard/legal-faq-02.html",
         "featured": false,
         "difficulty": "高级",
         "category": "法务FAQ",
@@ -851,7 +851,7 @@
           "开户流程",
           "在留资格"
         ],
-        "url": "knowledge/life-banking-01.html",
+        "url": "data/knowledgeCard/life-banking-01.html",
         "featured": false,
         "difficulty": "初级",
         "category": "生活支援",
@@ -878,7 +878,7 @@
           "礼金敷金",
           "保证人"
         ],
-        "url": "knowledge/life-housing-02.html",
+        "url": "data/knowledgeCard/life-housing-02.html",
         "featured": true,
         "difficulty": "初级",
         "category": "生活支援",
@@ -905,7 +905,7 @@
           "在留资格",
           "住所证明"
         ],
-        "url": "knowledge/life-faq-01.html",
+        "url": "data/knowledgeCard/life-faq-01.html",
         "featured": true,
         "difficulty": "初级",
         "category": "生活FAQ",

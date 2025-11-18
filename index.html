@@ -242,7 +242,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content hero-content-container">
                 <div class="hero-text">
                     <h1 class="hero-title">
                         中日企业<span class="highlight">无缝连接桥梁</span>
@@ -296,8 +296,8 @@
                 
                 <div class="brand-container">
                   
-                    <div class="features-grid">
-                        <div class="feature-card">
+                    <div class="features-grid features-grid-container">
+                        <div class="feature-card card-container">
                             <div class="feature-icon">
                                 <i class="fas fa-language"></i>
                             </div>
@@ -312,7 +312,7 @@
                             </div>
                             <div class="feature-badge">语言优势</div>
                         </div>
-                        <div class="feature-card">
+                        <div class="feature-card card-container">
                             <div class="feature-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
@@ -327,7 +327,7 @@
                             </div>
                             <div class="feature-badge">全程服务</div>
                         </div>
-                        <div class="feature-card">
+                        <div class="feature-card card-container">
                             <div class="feature-icon">
                                 <i class="fas fa-globe-asia"></i>
                             </div>
@@ -371,8 +371,8 @@
                 <h2 class="section-title">核心服务</h2>
                 <p class="section-subtitle">六大服务模块，全方位支持您的跨境业务</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card" data-service="setup">
+            <div class="services-grid service-grid-container">
+                <div class="service-card card-container" data-service="setup">
                     <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
@@ -387,7 +387,7 @@
                     <a href="services/setup.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="service-card" data-service="visa">
+                <div class="service-card card-container" data-service="visa">
                     <div class="service-icon">
                         <i class="fas fa-passport"></i>
                     </div>
@@ -402,7 +402,7 @@
                     <a href="services/visa.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="service-card" data-service="tax">
+                <div class="service-card card-container" data-service="tax">
                     <div class="service-icon">
                         <i class="fas fa-coins"></i>
                     </div>
@@ -417,7 +417,7 @@
                     <a href="services/tax.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="service-card" data-service="legal">
+                <div class="service-card card-container" data-service="legal">
                     <div class="service-icon">
                         <i class="fas fa-balance-scale"></i>
                     </div>
@@ -432,7 +432,7 @@
                     <a href="services/legal.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="service-card" data-service="life">
+                <div class="service-card card-container" data-service="life">
                     <div class="service-icon">
                         <i class="fas fa-home"></i>
                     </div>
@@ -447,7 +447,7 @@
                     <a href="services/life.html" class="service-btn">了解详情 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="service-card" data-service="business">
+                <div class="service-card card-container" data-service="business">
                     <div class="service-icon">
                         <i class="fas fa-store"></i>
                     </div>
@@ -575,7 +575,7 @@
                 <h2 class="section-title">知识库</h2>
                 <p class="section-subtitle">日本落地百科，专业解答您的疑问</p>
             </div>
-            <div class="knowledge-grid" id="homepage-knowledge-grid">
+            <div class="knowledge-grid knowledge-grid-container" id="homepage-knowledge-grid">
                 <!-- 知识分类卡片将通过 knowledgePreviewManager 动态生成 -->
             </div>
         </div>
@@ -721,8 +721,16 @@
     </section>
 
     <!-- 优化的JavaScript加载策略 -->
-    <script src="components/components.js?v=2.1" defer></script>
-    <script src="components/knowledge-preview.js?v=1.0" defer></script>
-    <script src="script.js" defer></script>
+    <!-- 统一样式系统 -->
+  <link rel="stylesheet" href="styles/unified-responsive.css">
+
+    <script src="components/unified-device-detector.js" defer></script>
+
+  <!-- 核心组件脚本 -->
+  <script src="components/components.js?v=2.1" defer></script>
+  <script src="components/knowledge-preview.js?v=1.0" defer></script>
+  <script src="components/enhanced-performance-monitor.js" defer></script>
+  <script src="components/foldable-device-detector.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

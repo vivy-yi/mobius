@@ -646,6 +646,263 @@
                 height: auto;
             }
         }
+
+        /* ===== 知识库页面容器查询支持 ===== */
+
+        /* Knowledge Grid Container Queries */
+        @container component-grid (max-width: 400px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+
+            .article-card {
+                padding: var(--spacing-md);
+                text-align: center;
+                min-height: auto;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-base);
+                line-height: 1.3;
+            }
+
+            .article-card .article-meta {
+                font-size: var(--font-size-xs);
+            }
+
+            .category-tabs {
+                flex-wrap: wrap;
+                gap: var(--spacing-xs);
+            }
+
+            .category-tab {
+                flex: 1 1 calc(50% - var(--spacing-xs));
+                min-width: 120px;
+                font-size: var(--font-size-sm);
+                padding: var(--spacing-sm);
+            }
+        }
+
+        @container component-grid (min-width: 401px) and (max-width: 800px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-md);
+            }
+
+            .article-card {
+                padding: var(--spacing-lg);
+                min-height: 200px;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-lg);
+            }
+
+            .category-tabs {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .category-tab {
+                flex: 0 1 auto;
+                min-width: 140px;
+            }
+        }
+
+        @container component-grid (min-width: 801px) {
+            .articles-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-lg);
+            }
+
+            .article-card {
+                padding: var(--spacing-xl);
+                min-height: 280px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-xl);
+                flex-grow: 1;
+            }
+
+            .category-tabs {
+                justify-content: center;
+            }
+        }
+
+        /* Article Card Container Queries */
+        @container card-component (max-width: 250px) {
+            .article-card {
+                padding: var(--spacing-sm);
+                text-align: center;
+            }
+
+            .article-card .article-image {
+                height: 120px;
+                font-size: 2rem;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-sm);
+                margin-bottom: var(--spacing-xs);
+            }
+
+            .article-card .article-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+            }
+        }
+
+        @container card-component (min-width: 251px) and (max-width: 350px) {
+            .article-card .article-image {
+                height: 140px;
+                font-size: 2.5rem;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-base);
+            }
+
+            .article-card .article-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @container card-component (min-width: 351px) {
+            .article-card .article-image {
+                height: 160px;
+                font-size: 3rem;
+            }
+
+            .article-card h3 {
+                font-size: var(--font-size-lg);
+                line-height: 1.4;
+            }
+
+            .article-card .article-meta {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        /* Knowledge Layout Container Queries */
+        @container layout-component (max-width: 600px) {
+            .knowledge-layout {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .knowledge-navigation {
+                display: none;
+            }
+
+            .knowledge-hero h1 {
+                font-size: 2rem;
+            }
+
+            .knowledge-hero p {
+                font-size: var(--font-size-base);
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .category-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--spacing-sm);
+            }
+        }
+
+        @container layout-component (min-width: 601px) and (max-width: 900px) {
+            .knowledge-layout {
+                grid-template-columns: 250px 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .knowledge-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-tabs {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @container layout-component (min-width: 901px) {
+            .knowledge-layout {
+                grid-template-columns: 300px 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .knowledge-hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        /* Enhanced Tablet Support */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            @container component-grid (min-width: 500px) {
+                .articles-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: var(--spacing-lg);
+                }
+            }
+
+            @container layout-component (min-width: 700px) {
+                .knowledge-layout {
+                    grid-template-columns: 280px 1fr;
+                }
+
+                .category-tabs {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: var(--spacing-sm);
+                }
+            }
+        }
+
+        /* Device-Specific Knowledge Container Enhancements */
+        @supports (container-type: inline-size) {
+            .device-tablet .article-card {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .device-tablet .article-card:active {
+                transform: scale(0.98);
+            }
+
+            .device-tablet .category-tab {
+                transition: all 0.2s ease;
+            }
+
+            .device-tablet .category-tab:active {
+                transform: scale(0.95);
+            }
+
+            .device-hybrid .article-card {
+                cursor: pointer;
+            }
+
+            .device-hybrid .article-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .device-hybrid .category-tab:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
+            }
+        }
     </style>
 </head>
 <body>
@@ -716,29 +973,29 @@
 
             <!-- 全部内容 -->
             <div class="category-content active" id="all-content">
-                <div class="articles-grid" id="all-articles">
+                <div class="articles-grid knowledge-grid-container" id="all-articles">
                     <!-- 文章卡片将通过JavaScript动态生成 -->
                 </div>
             </div>
 
             <!-- 其他分类内容 -->
             <div class="category-content" id="business-content">
-                <div class="articles-grid" id="business-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="business-articles"></div>
             </div>
             <div class="category-content" id="visa-content">
-                <div class="articles-grid" id="visa-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="visa-articles"></div>
             </div>
             <div class="category-content" id="tax-content">
-                <div class="articles-grid" id="tax-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="tax-articles"></div>
             </div>
             <div class="category-content" id="legal-content">
-                <div class="articles-grid" id="legal-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="legal-articles"></div>
             </div>
             <div class="category-content" id="subsidy-content">
-                <div class="articles-grid" id="subsidy-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="subsidy-articles"></div>
             </div>
             <div class="category-content" id="life-content">
-                <div class="articles-grid" id="life-articles"></div>
+                <div class="articles-grid knowledge-grid-container" id="life-articles"></div>
             </div>
         </main>
     </div>
@@ -803,8 +1060,16 @@
     <!-- FontAwesome 图标库 -->
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/js/all.min.js"></script>
 
-    <!-- 组件脚本 - 使用defer确保在DOM加载后生成导航栏 -->
+    <!-- 统一样式系统 -->
+    <link rel="stylesheet" href="styles/unified-responsive.css">
+
+    <!-- 优先加载：主题管理器必须最先初始化 -->
+      <script src="components/unified-device-detector.js" defer></script>
+
+    <!-- 组件脚本 - 依赖主题系统初始化 -->
     <script src="components/components.js?v=2.2" defer></script>
+    <script src="components/enhanced-performance-monitor.js" defer></script>
+    <script src="components/foldable-device-detector.js" defer></script>
 
     <!-- 主要功能脚本 -->
     <script>
@@ -1070,7 +1335,7 @@
                 const hotScore = popularity.hotScore || 0;
 
                 return `
-                    <div class="article-card ${article.featured ? 'featured' : ''}" onclick="window.openArticle('${article.url || '#'}')">
+                    <div class="article-card card-container ${article.featured ? 'featured' : ''}" onclick="window.openArticle('${article.url || '#'}')">
                         <div class="article-image" style="background: linear-gradient(135deg, ${color}, ${this.adjustColor(color, -20)});">
                             ${article.featured ? '<div class="featured-badge"><i class="fas fa-star"></i>精选</div>' : ''}
                             <i class="${article.icon || icons[article.categoryId] || 'fas fa-file-alt'}"></i>
@@ -1182,11 +1447,11 @@
         
         function openArticle(url) {
             if (url && url !== '#') {
-                // 从URL中提取完整文章ID (例如: "knowledge/business-registration-01.html" -> "business-registration-01")
-                const articleId = url.replace(/^knowledge\//, '').replace(/\.html$/, '');
+                // 从URL中提取完整文章ID (例如: "data/knowledgeCard/business-registration-01.html" -> "business-registration-01")
+                const articleId = url.replace(/^data\/knowledgeCard\//, '').replace(/\.html$/, '');
 
                 // 跳转到新的详情页，并传递文章ID参数
-                window.location.href = `knowledge-detail-new.html?id=${articleId}`;
+                window.location.href = `knowledge-detail.html?id=${articleId}`;
             }
         }
 
