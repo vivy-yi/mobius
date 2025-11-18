@@ -743,9 +743,9 @@ class FoldableDeviceDetector {
      */
     handleStateChange(previousState, currentState) {
         // console.log('设备状态发生变化:', {
-            previous: previousState,
-            current: currentState
-        });
+        //     previous: previousState,
+        //     current: currentState
+        // });
 
         this.triggerEvent('state-change', { previousState, currentState });
 

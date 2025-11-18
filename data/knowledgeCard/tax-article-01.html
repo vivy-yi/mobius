@@ -35,7 +35,6 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../../styles/css/components/knowledge-detail.css">
 
     <!-- Critical CSS Inline -->
     <style>
@@ -370,8 +369,8 @@
 
                         // 実例：1000万円投資の場合
                         const result = calculateManagementTaxCredit(10000000, 2000000);
-                        console.log(`税控除額: ${result.applicableCredit.toLocaleString()}円`);
-                        console.log(`実効税率: ${(result.effectiveTaxRate * 100).toFixed(1)}%`);
+                        // console.log(`税控除額: ${result.applicableCredit.toLocaleString()}円`);
+                        // console.log(`実効税率: ${(result.effectiveTaxRate * 100).toFixed(1)}%`);
                         ```
 
                         ### 2. 賃上げ促進税制
@@ -559,11 +558,11 @@ function chooseDepreciationMethod(assets) {
     // 最適な方法の選択
     assets.forEach(asset => {
         if (asset.cost <= 300000) {
-            console.log(`${asset.name}: 少額即時費用が有利`);
+            // console.log(`${asset.name}: 少額即時費用が有利`);
         } else if (asset.cost <= 200000) {
-            console.log(`${asset.name}: 一括償却も選択肢`);
+            // console.log(`${asset.name}: 一括償却も選択肢`);
         } else {
-            console.log(`${asset.name}: 通常償却`);
+            // console.log(`${asset.name}: 通常償却`);
         }
     });
 }
@@ -1225,7 +1224,7 @@ def quarterly_assessment():
         window.addEventListener('load', function() {
             if ('performance' in window) {
                 const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-                console.log(`文章页面加载时间: ${loadTime}ms`);
+                // console.log(`文章页面加载时间: ${loadTime}ms`);
             }
         });
 
