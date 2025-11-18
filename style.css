@@ -1811,6 +1811,50 @@ p {
     .services-grid,
     .knowledge-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .service-card {
+        padding: var(--spacing-md);
+        text-align: center;
+        position: relative;
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .service-title {
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .service-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    /* Mobile touch feedback for service cards */
+    .service-card {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .service-card:active {
+        transform: translateY(-2px) scale(0.98);
+        transition: all 0.1s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
     }
 
     .footer-content {

@@ -112,6 +112,37 @@ function handleServiceButtonClick(e) {
     }
 }
 
+// ===== Mobile-Optimized Service Cards =====
+function initMobileServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceCards.forEach(card => {
+        // Add touch feedback for mobile
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+
+        card.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+
+        // Add visual feedback for click
+        card.addEventListener('click', function() {
+            // Remove active class from all cards
+            serviceCards.forEach(c => c.classList.remove('active'));
+            // Add active class to clicked card
+            this.classList.add('active');
+
+            // Remove active class after animation
+            setTimeout(() => {
+                this.classList.remove('active');
+            }, 300);
+        });
+    });
+}
+
 // ===== Smooth Scroll for Navigation Links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -346,11 +377,23 @@ style.textContent = `
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s ease-out;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .service-card.animate-in {
         opacity: 1;
         transform: translateY(0);
+    }
+
+    .service-card:active {
+        transform: translateY(-2px) scale(0.98);
+    }
+
+    .service-card.active {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
+        border: 2px solid #3b82f6;
     }
 
     .timeline-item {
@@ -406,15 +449,18 @@ style.textContent = `
 
 document.head.appendChild(style);
 
-// ===== Add hover effects to cards =====
+// ===== Add hover effects to cards (desktop only) =====
 document.querySelectorAll('.service-card, .knowledge-card, .feature-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-5px) scale(1.02)';
-    });
+    // Only add hover effects on devices that support hover (not mobile)
+    if (window.matchMedia('(hover: hover)').matches) {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px) scale(1.02)';
+        });
 
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    }
 });
 
 // ===== Initialize page animations =====
@@ -442,6 +488,7 @@ function initializeAllFeatures() {
     initMobileMenuToggle();
     initDropdownMenus();
     initContactForm();
+    initMobileServiceCards();
 
     // Initialize with delay for component system
     setTimeout(() => {
