@@ -1,0 +1,419 @@
+/**
+ * 知识库导航栏样式
+ */
+
+/* 主导航容器 */
+.knowledge-navigation {
+    width: 280px;
+    height: 100%;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+/* 搜索区域 */
+.nav-search-section {
+    padding: 20px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #f8fafc;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 45px;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.search-clear {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.search-clear:hover {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+/* 快速筛选区域 */
+.nav-quick-filters {
+    padding: 20px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: #4b5563;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.filter-button:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.filter-button.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.filter-button i {
+    font-size: 12px;
+}
+
+/* 主导航区域 */
+.nav-main-navigation {
+    padding: 16px;
+}
+
+.nav-tree {
+    margin-top: 12px;
+}
+
+/* 分类节点 */
+.nav-category {
+    margin-bottom: 4px;
+}
+
+.nav-category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.nav-category-header:hover {
+    background: #f9fafb;
+}
+
+.nav-category.active .nav-category-header {
+    background: #eff6ff;
+    border-left: 3px solid #3b82f6;
+}
+
+.nav-expand-icon {
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.nav-category-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.nav-category-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-category-name {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.nav-category-count {
+    background: #e5e7eb;
+    color: #6b7280;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nav-category.active .nav-category-count {
+    background: #3b82f6;
+    color: white;
+}
+
+/* 子分类节点 */
+.nav-children {
+    margin-left: 16px;
+    margin-top: 4px;
+    border-left: 1px solid #e5e7eb;
+    padding-left: 12px;
+    display: none;
+}
+
+.nav-subcategory {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-subcategory:hover {
+    background: #f9fafb;
+}
+
+.nav-subcategory.active {
+    background: #dbeafe;
+    border-left: 2px solid #3b82f6;
+}
+
+.nav-subcategory-icon {
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.nav-subcategory-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-subcategory-name {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.nav-subcategory-count {
+    background: #f3f4f6;
+    color: #9ca3af;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.nav-subcategory.active .nav-subcategory-name {
+    color: #3b82f6;
+    font-weight: 500;
+}
+
+.nav-subcategory.active .nav-subcategory-count {
+    background: #3b82f6;
+    color: white;
+}
+
+/* 难度筛选区域 */
+.nav-difficulty-filters {
+    padding: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.difficulty-filters {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.difficulty-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: white;
+    color: #4b5563;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.difficulty-button:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.difficulty-button.active {
+    background: var(--difficulty-color);
+    border-color: var(--difficulty-color);
+    color: white;
+}
+
+.difficulty-button i {
+    font-size: 12px;
+}
+
+/* 章节标题 */
+.nav-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-section-title i {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+/* 滚动条样式 */
+.knowledge-navigation::-webkit-scrollbar {
+    width: 6px;
+}
+
+.knowledge-navigation::-webkit-scrollbar-track {
+    background: #f9fafb;
+}
+
+.knowledge-navigation::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.knowledge-navigation::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* 加载状态 */
+.nav-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #6b7280;
+}
+
+.nav-loading i {
+    margin-right: 8px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .difficulty-filters {
+        flex-direction: column;
+    }
+
+    .difficulty-button {
+        justify-content: center;
+    }
+}
+
+/* 动画效果 */
+.nav-category-header,
+.nav-subcategory {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-category-header::before,
+.nav-subcategory::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.3s ease;
+}
+
+.nav-category-header:hover::before,
+.nav-subcategory:hover::before {
+    left: 100%;
+}
+
+/* 空状态 */
+.nav-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+}
+
+.nav-empty-state i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: #d1d5db;
+}
+
+.nav-empty-state h4 {
+    margin: 8px 0 4px 0;
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.nav-empty-state p {
+    font-size: 14px;
+    line-height: 1.5;
+}

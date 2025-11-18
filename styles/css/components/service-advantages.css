@@ -1,0 +1,125 @@
+/**
+ * 服务页面优势组件通用样式
+ * 适用于所有服务页面的"选择我们的优势"部分
+ */
+
+/* 优势网格布局 */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* 优势卡片基础样式 */
+.advantage-card {
+    background: var(--white, #ffffff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: var(--radius-md, 12px);
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+.advantage-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.1));
+    border-color: var(--tech-blue, #3b82f6);
+}
+
+/* 优势图标 */
+.advantage-icon {
+    background: linear-gradient(135deg, #3b82f6, #1e40af); /* 默认蓝色渐变 */
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1.5rem;
+    transition: all 0.4s ease;
+}
+
+.advantage-card:hover .advantage-icon {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* 优势标题和内容 */
+.advantage-card h3 {
+    color: #3b82f6; /* 默认蓝色 */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.advantage-card p {
+    color: #1f2937;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* 页面特定主题色 */
+/* 税务页面 - 绿色 */
+.tax-advantages .advantage-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+.tax-advantages .advantage-card h3 {
+    color: #10b981;
+}
+.tax-advantages .advantage-card:hover {
+    border-color: #10b981;
+}
+
+/* 法务页面 - 紫色 */
+.legal-advantages .advantage-icon {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+}
+.legal-advantages .advantage-card h3 {
+    color: #8b5cf6;
+}
+.legal-advantages .advantage-card:hover {
+    border-color: #8b5cf6;
+}
+
+/* 生活支援页面 - 粉红色 */
+.life-advantages .advantage-icon {
+    background: linear-gradient(135deg, #ec4899, #be185d);
+}
+.life-advantages .advantage-card h3 {
+    color: #ec4899;
+}
+.life-advantages .advantage-card:hover {
+    border-color: #ec4899;
+}
+
+/* 开店咨询页面 - 青色 */
+.business-advantages .advantage-icon {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+}
+.business-advantages .advantage-card h3 {
+    color: #0891b2;
+}
+.business-advantages .advantage-card:hover {
+    border-color: #0891b2;
+}
+
+/* 签证页面 - 蓝色（默认） */
+.visa-advantages .advantage-card:hover {
+    border-color: var(--tech-blue, #3b82f6);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .advantage-card {
+        padding: 30px 20px;
+    }
+}

@@ -1,0 +1,534 @@
+/* ==========================================================================
+   Mobius知识库文章样式 - 专业企业服务设计系统
+   ========================================================================== */
+
+:root {
+    /* Mobius品牌色彩系统 */
+    --article-primary-blue: var(--primary-blue, #1e3a8a);
+    --article-tech-blue: var(--tech-blue, #3b82f6);
+    --article-accent-red: var(--accent-red, #dc2626);
+    --article-light-bg: var(--light-bg, #f0f9ff);
+    --article-dark-text: var(--dark-text, #1f2937);
+    --article-light-text: var(--light-text, #374151);
+    --article-muted-text: var(--muted-text, #6b7280);
+    --article-white: var(--white, #ffffff);
+
+    /* 渐变系统 */
+    --article-gradient-primary: var(--gradient-primary, linear-gradient(135deg, #3b82f6, #dc2626));
+    --article-gradient-blue: var(--gradient-blue, linear-gradient(135deg, #3b82f6, #1e40af));
+
+    /* 间距系统 */
+    --article-spacing-xs: var(--spacing-xs, 0.5rem);
+    --article-spacing-sm: var(--spacing-sm, 1rem);
+    --article-spacing-md: var(--spacing-md, 2rem);
+    --article-spacing-lg: var(--spacing-lg, 3rem);
+    --article-spacing-xl: var(--spacing-xl, 4rem);
+
+    /* 圆角系统 */
+    --article-radius-sm: var(--radius-sm, 8px);
+    --article-radius-md: var(--radius-md, 12px);
+    --article-radius-lg: var(--radius-lg, 16px);
+    --article-radius-xl: var(--radius-xl, 24px);
+
+    /* 阴影系统 */
+    --article-shadow-sm: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.05));
+    --article-shadow-md: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+    --article-shadow-lg: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.1));
+    --article-shadow-xl: var(--shadow-xl, 0 20px 25px rgba(0, 0, 0, 0.1));
+
+    /* 字体系统 */
+    --article-font-family: var(--font-family, 'Inter', 'Noto Sans SC', sans-serif);
+    --article-font-weight-light: var(--font-weight-light, 300);
+    --article-font-weight-normal: var(--font-weight-normal, 400);
+    --article-font-weight-medium: var(--font-weight-medium, 500);
+    --article-font-weight-semibold: var(--font-weight-semibold, 600);
+    --article-font-weight-bold: var(--font-weight-bold, 700);
+    --article-font-weight-black: var(--font-weight-black, 800);
+
+    /* 布局系统 */
+    --article-content-max-width: 1000px;
+    --article-main-width: 690px;
+    --article-sidebar-width: 290px;
+    --article-header-height: 60px;
+
+    /* 文章特定色彩 */
+    --article-heading-color: var(--article-dark-text);
+    --article-text-color: var(--article-light-text);
+    --article-meta-color: var(--article-muted-text);
+    --article-border-color: #e5e7eb;
+    --article-bg-secondary: #f9fafb;
+    --article-bg-tertiary: #f3f4f6;
+}
+
+/* ==========================================================================
+   主容器布局
+   ========================================================================== */
+
+.mobius-article-wrapper {
+    max-width: var(--article-content-max-width);
+    margin: 0 auto;
+    background: var(--article-white);
+    border-radius: var(--article-radius-lg);
+    box-shadow: var(--article-shadow-md);
+    overflow: hidden;
+    font-family: var(--article-font-family);
+}
+
+/* ==========================================================================
+   文章头部
+   ========================================================================== */
+
+.mobius-article-header {
+    background: var(--article-gradient-blue);
+    color: var(--article-white);
+    padding: var(--article-spacing-xl) var(--article-spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobius-article-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.mobius-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--article-spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.mobius-author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--article-white);
+    color: var(--article-primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--article-font-weight-bold);
+    font-size: 18px;
+    margin-right: var(--article-spacing-sm);
+    box-shadow: var(--article-shadow-sm);
+}
+
+.mobius-author-details {
+    flex: 1;
+}
+
+.mobius-author-name {
+    font-size: 16px;
+    font-weight: var(--article-font-weight-semibold);
+    margin-bottom: 4px;
+    color: var(--article-white);
+}
+
+.mobius-article-meta {
+    display: flex;
+    gap: var(--article-spacing-sm);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mobius-article-title {
+    font-size: 32px;
+    font-weight: var(--article-font-weight-bold);
+    line-height: 1.2;
+    margin: 0 0 var(--article-spacing-md);
+    color: var(--article-white);
+    position: relative;
+    z-index: 1;
+}
+
+.mobius-article-excerpt {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   文章内容布局
+   ========================================================================== */
+
+.mobius-content-layout {
+    display: grid;
+    grid-template-columns: 1fr var(--article-sidebar-width);
+    gap: var(--article-spacing-lg);
+    padding: var(--article-spacing-lg);
+}
+
+.mobius-main-content {
+    min-width: 0;
+}
+
+.mobius-article-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--article-text-color);
+}
+
+.mobius-article-body h1,
+.mobius-article-body h2,
+.mobius-article-body h3,
+.mobius-article-body h4,
+.mobius-article-body h5,
+.mobius-article-body h6 {
+    color: var(--article-heading-color);
+    font-weight: var(--article-font-weight-semibold);
+    margin-top: var(--article-spacing-lg);
+    margin-bottom: var(--article-spacing-sm);
+    line-height: 1.3;
+}
+
+.mobius-article-body h1 { font-size: 28px; font-weight: var(--article-font-weight-bold); }
+.mobius-article-body h2 { font-size: 24px; }
+.mobius-article-body h3 { font-size: 20px; }
+.mobius-article-body h4 { font-size: 18px; }
+.mobius-article-body h5 { font-size: 16px; }
+.mobius-article-body h6 { font-size: 14px; }
+
+.mobius-article-body p {
+    margin-top: 0;
+    margin-bottom: var(--article-spacing-sm);
+}
+
+.mobius-article-body ul,
+.mobius-article-body ol {
+    padding-left: var(--article-spacing-lg);
+    margin-bottom: var(--article-spacing-sm);
+}
+
+.mobius-article-body li {
+    margin-bottom: var(--article-spacing-xs);
+}
+
+.mobius-article-body a {
+    color: var(--article-tech-blue);
+    text-decoration: none;
+    font-weight: var(--article-font-weight-medium);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.mobius-article-body a:hover {
+    border-bottom-color: var(--article-tech-blue);
+}
+
+.mobius-article-body strong {
+    color: var(--article-heading-color);
+    font-weight: var(--article-font-weight-semibold);
+}
+
+.mobius-article-body blockquote {
+    border-left: 4px solid var(--article-tech-blue);
+    padding-left: var(--article-spacing-md);
+    margin: var(--article-spacing-md) 0;
+    color: var(--article-muted-text);
+    background: var(--article-light-bg);
+    padding: var(--article-spacing-sm) var(--article-spacing-md);
+    border-radius: var(--article-radius-sm);
+}
+
+.mobius-article-body code {
+    background: var(--article-bg-tertiary);
+    padding: 2px 6px;
+    border-radius: var(--article-radius-sm);
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--article-accent-red);
+}
+
+.mobius-article-body pre {
+    background: var(--article-heading-color);
+    color: var(--article-white);
+    padding: var(--article-spacing-md);
+    border-radius: var(--article-radius-md);
+    overflow-x: auto;
+    margin: var(--article-spacing-md) 0;
+}
+
+.mobius-article-body pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* ==========================================================================
+   侧边栏目录
+   ========================================================================== */
+
+.mobius-sidebar {
+    position: sticky;
+    top: var(--article-spacing-lg);
+    height: fit-content;
+}
+
+.mobius-toc {
+    background: var(--article-bg-secondary);
+    border-radius: var(--article-radius-md);
+    padding: var(--article-spacing-md);
+    border: 1px solid var(--article-border-color);
+}
+
+.mobius-toc-title {
+    font-size: 16px;
+    font-weight: var(--article-font-weight-semibold);
+    color: var(--article-heading-color);
+    margin: 0 0 var(--article-spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--article-spacing-xs);
+}
+
+.mobius-toc-title::before {
+    content: '📋';
+}
+
+.mobius-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobius-toc-list li {
+    margin-bottom: var(--article-spacing-xs);
+}
+
+.mobius-toc-list a {
+    color: var(--article-text-color);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.5;
+    display: block;
+    padding: var(--article-spacing-xs) var(--article-spacing-sm);
+    border-radius: var(--article-radius-sm);
+    transition: all 0.2s ease;
+}
+
+.mobius-toc-list a:hover {
+    background: var(--article-light-bg);
+    color: var(--article-primary-blue);
+}
+
+.mobius-toc-list a.active {
+    background: var(--article-tech-blue);
+    color: var(--article-white);
+    font-weight: var(--article-font-weight-medium);
+}
+
+/* ==========================================================================
+   社交互动组件
+   ========================================================================== */
+
+.mobius-interactions {
+    border-top: 1px solid var(--article-border-color);
+    padding: var(--article-spacing-lg) var(--article-spacing-md);
+    background: var(--article-bg-secondary);
+}
+
+.mobius-interactions-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--article-spacing-lg);
+    flex-wrap: wrap;
+}
+
+.mobius-interaction-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--article-spacing-xs);
+    padding: var(--article-spacing-sm) var(--article-spacing-md);
+    border: 1px solid var(--article-border-color);
+    background: var(--article-white);
+    border-radius: var(--article-radius-md);
+    color: var(--article-text-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: var(--article-font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.mobius-interaction-btn:hover {
+    border-color: var(--article-tech-blue);
+    color: var(--article-tech-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--article-shadow-md);
+}
+
+.mobius-interaction-btn i {
+    font-size: 16px;
+}
+
+.mobius-interaction-count {
+    font-weight: var(--article-font-weight-normal);
+}
+
+/* 特定按钮样式 */
+.mobius-upvote-btn:hover {
+    border-color: var(--article-tech-blue);
+    background: var(--article-light-bg);
+}
+
+.mobius-comment-btn:hover {
+    border-color: var(--article-primary-blue);
+    background: rgba(30, 58, 138, 0.05);
+}
+
+.mobius-share-btn:hover {
+    border-color: var(--article-accent-red);
+    background: rgba(220, 38, 38, 0.05);
+}
+
+.mobius-collect-btn:hover {
+    border-color: var(--article-tech-blue);
+    background: var(--article-light-bg);
+}
+
+/* ==========================================================================
+   返回链接
+   ========================================================================== */
+
+.mobius-back-link {
+    text-align: center;
+    padding: var(--article-spacing-lg) 0;
+}
+
+.mobius-back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--article-spacing-sm);
+    color: var(--article-muted-text);
+    text-decoration: none;
+    font-weight: var(--article-font-weight-medium);
+    transition: color 0.2s ease;
+}
+
+.mobius-back-link a:hover {
+    color: var(--article-tech-blue);
+}
+
+/* ==========================================================================
+   内容卡片样式
+   ========================================================================== */
+
+.mobius-content-card {
+    background: var(--article-white);
+    border: 1px solid var(--article-border-color);
+    border-radius: var(--article-radius-md);
+    padding: var(--article-spacing-md);
+    margin: var(--article-spacing-md) 0;
+    box-shadow: var(--article-shadow-sm);
+}
+
+.mobius-content-card h4 {
+    color: var(--article-primary-blue);
+    margin-top: 0;
+    margin-bottom: var(--article-spacing-sm);
+    font-size: 18px;
+}
+
+/* ==========================================================================
+   响应式设计
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .mobius-content-layout {
+        grid-template-columns: 1fr;
+        gap: var(--article-spacing-md);
+    }
+
+    .mobius-sidebar {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobius-article-wrapper {
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .mobius-article-header {
+        padding: var(--article-spacing-md);
+    }
+
+    .mobius-article-title {
+        font-size: 24px;
+    }
+
+    .mobius-article-excerpt {
+        font-size: 16px;
+    }
+
+    .mobius-content-layout {
+        padding: var(--article-spacing-md);
+    }
+
+    .mobius-interactions-stats {
+        gap: var(--article-spacing-sm);
+    }
+
+    .mobius-interaction-btn {
+        min-width: 80px;
+        padding: var(--article-spacing-xs) var(--article-spacing-sm);
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobius-article-meta {
+        flex-direction: column;
+        gap: var(--article-spacing-xs);
+    }
+
+    .mobius-interactions-stats {
+        flex-direction: column;
+        gap: var(--article-spacing-sm);
+    }
+
+    .mobius-interaction-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* ==========================================================================
+   打印样式
+   ========================================================================== */
+
+@media print {
+    .mobius-article-wrapper {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .mobius-interactions,
+    .mobius-sidebar {
+        display: none;
+    }
+
+    .mobius-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .mobius-article-body a {
+        color: #000;
+        text-decoration: underline;
+    }
+}

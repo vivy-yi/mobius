@@ -69,7 +69,6 @@ skills/
 scripts/
 
 # 样式和构建目录（保留主要文件）
-styles/css/
 styles/scss/
 
 # 临时数据文件

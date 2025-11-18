@@ -1,0 +1,423 @@
+/**
+ * 服务页面FAQ组件统一样式
+ * 支持热度显示、分类筛选、响应式设计
+ */
+
+/* FAQ主容器 */
+.service-faq {
+    padding: var(--spacing-xl, 80px) 0;
+    background: white;
+}
+
+.faq-section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.faq-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-text, #1f2937);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.faq-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--tech-blue, #3b82f6);
+    border-radius: 2px;
+}
+
+.faq-section-subtitle {
+    color: var(--light-text, #64748b);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ网格布局 */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* FAQ卡片样式 */
+.faq-item {
+    background: white;
+    border-radius: var(--radius-lg, 12px);
+    padding: 30px;
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl, 0 20px 25px rgba(0, 0, 0, 0.1));
+    border-color: var(--tech-blue, #3b82f6);
+}
+
+/* 热门问题标记 */
+.faq-item.featured {
+    border-color: #f59e0b;
+    background: linear-gradient(135deg, #fff9ed 0%, #ffffff 100%);
+}
+
+.faq-item.featured::before {
+    content: '🔥 热门';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #f59e0b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.faq-item.hot {
+    border-color: #dc2626;
+    background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+}
+
+.faq-item.hot::before {
+    content: '🔥 超热门';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #dc2626;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* FAQ问题标题 */
+.faq-item h3 {
+    color: var(--dark-text, #1f2937);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.faq-item h3 i {
+    color: var(--tech-blue, #3b82f6);
+    font-size: 1.1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.faq-item.featured h3 i {
+    color: #f59e0b;
+}
+
+.faq-item.hot h3 i {
+    color: #dc2626;
+}
+
+/* FAQ答案内容 */
+.faq-item p {
+    color: var(--light-text, #64748b);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0 0 15px 0;
+}
+
+/* 热度指标 */
+.faq-popularity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.popularity-metric {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.popularity-metric i {
+    font-size: 0.9rem;
+}
+
+.popularity-score {
+    background: linear-gradient(135deg, var(--tech-blue, #3b82f6), #1e40af);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.popularity-score.high {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.popularity-score.medium {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.popularity-score.low {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* 难度标签 */
+.faq-difficulty {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.faq-difficulty.beginner {
+    background: #10b981;
+    color: white;
+}
+
+.faq-difficulty.intermediate {
+    background: #f59e0b;
+    color: white;
+}
+
+.faq-difficulty.advanced {
+    background: #dc2626;
+    color: white;
+}
+
+/* 标签系统 */
+.faq-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.faq-tag {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.faq-tag:hover {
+    background: var(--tech-blue, #3b82f6);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* 分类主题色调整 */
+.tax-faq .faq-item h3 i { color: #10b981; }
+.tax-faq .faq-item:hover { border-color: #10b981; }
+
+.legal-faq .faq-item h3 i { color: #8b5cf6; }
+.legal-faq .faq-item:hover { border-color: #8b5cf6; }
+
+.business-faq .faq-item h3 i { color: #0891b2; }
+.business-faq .faq-item:hover { border-color: #0891b2; }
+
+.life-faq .faq-item h3 i { color: #f59e0b; }
+.life-faq .faq-item:hover { border-color: #f59e0b; }
+
+/* 热门问题榜单 */
+.hot-questions-banner {
+    background: linear-gradient(135deg, #fef3c7 0%, #fef2f2 100%);
+    border: 2px solid #f59e0b;
+    border-radius: var(--radius-lg, 12px);
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.hot-questions-title {
+    color: #d97706;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hot-questions-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.hot-question-item {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    color: #374151;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.hot-question-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #f59e0b;
+}
+
+.hot-rank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: #f59e0b;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .faq-item {
+        padding: 20px;
+    }
+
+    .faq-item h3 {
+        font-size: 1rem;
+    }
+
+    .hot-questions-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .faq-popularity {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* 加载动画 */
+.faq-item.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.faq-item.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f4f6;
+    border-top: 2px solid var(--tech-blue, #3b82f6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 搜索和筛选功能 */
+.faq-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.faq-search {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+}
+
+.faq-search input {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.faq-search input:focus {
+    outline: none;
+    border-color: var(--tech-blue, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.faq-search i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.faq-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.faq-filter-btn {
+    padding: 8px 16px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.faq-filter-btn.active {
+    background: var(--tech-blue, #3b82f6);
+    color: white;
+    border-color: var(--tech-blue, #3b82f6);
+}
+
+.faq-filter-btn:hover {
+    transform: translateY(-1px);
+}
