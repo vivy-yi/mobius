@@ -78,6 +78,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
             enableAutoOptimization: true,
             enableAlerts: true,
             reportingInterval: 30000, // 30秒
+            disableAlerts: true, // 禁用所有性能警报弹窗
             alertThresholds: {
                 lcp: 2500, // Largest Contentful Paint
                 fid: 100,  // First Input Delay
@@ -467,7 +468,7 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
      * 阈值检查和警报
      */
     checkThreshold(metric, value) {
-        if (!this.enhancedOptions.enableAlerts) return;
+        if (!this.enhancedOptions.enableAlerts || this.enhancedOptions.disableAlerts) return;
 
         const threshold = this.enhancedOptions.alertThresholds[metric];
         if (threshold && value > threshold) {
@@ -679,38 +680,15 @@ class EnhancedPerformanceMonitor extends SafePerformanceOptimizer {
     }
 
     showPerformanceAlert(alert) {
-        // 创建临时通知
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            background: ${alert.severity === 'critical' ? '#dc3545' : '#ffc107'};
-            color: ${alert.severity === 'critical' ? 'white' : 'black'};
-            padding: 10px 15px;
-            border-radius: 5px;
-            z-index: 10001;
-            max-width: 300px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        `;
+        // 性能警报已禁用 - 不显示弹窗以避免用户干扰
+        // // console.warn(`性能警报: ${alert.metric} (${alert.value}) 超过阈值 (${alert.threshold})`);
+        // 仅在开发环境中记录警报
+        if (window.location.hostname === 'localhost') {
+            // console.warn(`🚨 性能警报 [${alert.severity.toUpperCase()}]: ${alert.metric} = ${this.formatMetric(alert.value, this.getMetricUnit(alert.metric))} (阈值: ${this.formatMetric(alert.threshold, this.getMetricUnit(alert.metric))})`);
+        }
 
-        const titleDiv = document.createElement('div');
-        titleDiv.style.fontWeight = 'bold';
-        titleDiv.textContent = '性能警报';
-
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = `${alert.metric}: ${this.formatMetric(alert.value, this.getMetricUnit(alert.metric))}`;
-
-        notification.appendChild(titleDiv);
-        notification.appendChild(messageDiv);
-        document.body.appendChild(notification);
-
-        // 3秒后自动消失
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 3000);
+        // 不显示弹窗，避免干扰用户体验
+        return;
     }
 
     getMetricUnit(metric) {
