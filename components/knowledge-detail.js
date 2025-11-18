@@ -75,19 +75,11 @@ class KnowledgeDetail {
      * 加载文章数据
      */
     async loadArticleData() {
-        // 首先尝试从新的CMS数据加载
-        try {
-            await this.loadFromCMSData();
-            return;
-        } catch (error) {
-            console.log('CMS数据加载失败，尝试从旧数据源加载:', error.message);
-        }
-
-        // 如果CMS加载失败，尝试从旧的数据结构加载
+        // 直接从旧的数据结构加载，因为我们使用静态文章文件
         try {
             await this.loadFromLegacyData();
         } catch (legacyError) {
-            throw new Error(`无法从任何数据源加载文章: ${this.articleId}`);
+            throw new Error(`无法从数据源加载文章: ${this.articleId}`);
         }
     }
 
